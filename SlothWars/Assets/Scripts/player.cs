@@ -9,7 +9,6 @@ public class player : MonoBehaviour {
 
 	private float inputH;
 	private float inputV;
-	private int k = 0;
 
 	// Use this for initialization
 	void Start () 
@@ -36,6 +35,17 @@ public class player : MonoBehaviour {
 
 		float moveZ = inputH * 50f * Time.deltaTime;
 
-		rbody.velocity = new Vector3 (0f, 0f, moveZ);
+		if (inputH > 0) 
+		{
+			transform.eulerAngles = new Vector3(0, 0, 0);
+			Debug.Log (transform.rotation);
+			rbody.velocity = new Vector3 (0f, 0f, moveZ);
+		}
+		else if (inputH < 0)
+		{
+			transform.eulerAngles = new Vector3(0, 180, 0);
+			Debug.Log (transform.rotation);
+			rbody.velocity = new Vector3 (0f, 0f, moveZ);
+		}
 	}
 }
