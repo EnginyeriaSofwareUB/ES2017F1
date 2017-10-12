@@ -33,19 +33,19 @@ public class player : MonoBehaviour {
 
 		anim.SetFloat ("inputH", inputH);
 
-		float moveZ = inputH * 50f * Time.deltaTime;
+		float moveX = inputH * 50f * Time.deltaTime;
 
 		if (inputH > 0) 
 		{
-			transform.eulerAngles = new Vector3(0, 0, 0);
+			transform.eulerAngles = new Vector3(0, 90, 0);
 			Debug.Log (transform.rotation);
-			rbody.velocity = new Vector3 (0f, 0f, moveZ);
+			rbody.velocity = new Vector3 (moveX, 0f, 0f);
 		}
 		else if (inputH < 0)
 		{
-			transform.eulerAngles = new Vector3(0, 180, 0);
+			transform.eulerAngles = new Vector3(0, -90, 0);
 			Debug.Log (transform.rotation);
-			rbody.velocity = new Vector3 (0f, 0f, moveZ);
+			rbody.velocity = new Vector3 (moveX, 0f, 0f);
 		}
 	}
 }
