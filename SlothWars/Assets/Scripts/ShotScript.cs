@@ -6,6 +6,7 @@ public class ShotScript : MonoBehaviour {
     public GameObject Projectile;
     public GameObject ForceBar;
     private Transform gun;
+    private int rotate = 0;
     private float baseForce= 700;
     bool shotLoad = false;
     ForceBarScript st;
@@ -17,6 +18,15 @@ public class ShotScript : MonoBehaviour {
 	// creates a force bar with the first Q , shoots with the second Q and aims with the vertical axis 
 	void Update () {
         gun.Rotate(0 , 0, Time.deltaTime * Input.GetAxis("Vertical")*100);
+        float inputH = Input.GetAxis("Horizontal");
+        if (inputH > 0)
+        {
+            rotate = 0;
+        }
+        if (inputH < 0)
+        {
+            rotate = 1;
+        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!shotLoad)
@@ -39,9 +49,10 @@ public class ShotScript : MonoBehaviour {
     // creates a projectile and shoots it then destroys de force bar
     private void ShootAfterBar()
     {
-        GameObject shot = (GameObject)Instantiate(Projectile, gun.position, gun.rotation);
-        float radAngle = gun.eulerAngles[2] * Mathf.Deg2Rad;
-        shot.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Cos(radAngle),Mathf.Sin(radAngle),0)* st.getForce() * baseForce);
+        float radAngle = (gun.eulerAngles[2]*(1-rotate) + rotate*(180- gun.eulerAngles[2]) )* Mathf.Deg2Rad;
+        Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
+        GameObject shot = (GameObject)Instantiate(Projectile, gun.position + AimVector * 1.15f , gun.rotation);
+        shot.GetComponent<Rigidbody>().AddForce(AimVector* st.getForce() * baseForce);
         st.Destroy();
         shotLoad = false;
     }
