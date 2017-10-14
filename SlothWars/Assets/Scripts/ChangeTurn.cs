@@ -108,7 +108,7 @@ public class ChangeTurn : MonoBehaviour
             DeactivateSloth(slothTeamB[slothTurnB], gunSlothTeamA[slothTurnB]);
             ActivateSloth(slothTeamA[slothTurnA], gunSlothTeamA[slothTurnA]);
             slothTurnB += 1;
-            if(slothTurnB == 4)
+            if(slothTurnB == slothTeamB.Count)
             {
                 slothTurnB = 0;
             }
@@ -123,7 +123,7 @@ public class ChangeTurn : MonoBehaviour
             DeactivateSloth(slothTeamA[slothTurnA], gunSlothTeamA[slothTurnA]);
             ActivateSloth(slothTeamB[slothTurnB], gunSlothTeamB[slothTurnB]);
             slothTurnA += 1;
-            if (slothTurnA == 4)
+            if (slothTurnA == slothTeamA.Count)
             {
                 slothTurnA = 0;
             }
