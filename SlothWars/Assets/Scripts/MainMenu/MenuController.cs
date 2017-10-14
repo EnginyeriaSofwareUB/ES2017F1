@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class MenuController : MonoBehaviour {
 
@@ -78,10 +80,11 @@ public class MenuController : MonoBehaviour {
 	}
 	//this should go to new screen
 	void playSoloSelected(){
+		SceneManager.LoadScene ("default_scene");
 	}
 	//this should go 
 	void playFriendSelected(){
-		
+		SceneManager.LoadScene ("default_scene");
 	}
 	void goBackPlay(){
 		panelMain.gameObject.SetActive (true);
