@@ -31,7 +31,36 @@ public class CreateSloth : MonoBehaviour {
         gunSlothTeamB = GameObject.Find("gunSlothTeamB");
         gunsTeamB.Add(gunSlothTeamB);
 
+
+		CreateTeamA ();
+		CreateTeamB ();
     }
+
+	public void CreateTeamA(){
+		for (int i = 0; i < 3; i++) {
+			GameObject newSlothTeamA = Instantiate(slothTeamA);
+			GameObject newGunTeamA = Instantiate(gunSlothTeamA);
+
+			newSlothTeamA.transform.position = new Vector3 (-teamA.Count - 1, 0.5F, 0);
+			newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
+
+			teamA.Add (newSlothTeamA);
+			gunsTeamA.Add(newGunTeamA);
+		}
+	}
+
+	public void CreateTeamB(){
+		for (int i = 0; i < 3; i++) {
+			GameObject newSlothTeamB = Instantiate(slothTeamB);
+			GameObject newGunTeamB = Instantiate(gunSlothTeamB);
+
+			newSlothTeamB.transform.position = new Vector3 (teamB.Count + 1, 0.5F, 0);
+			newGunTeamB.transform.position = new Vector3(+gunsTeamB.Count + 1, 0.5F, 0);
+
+			teamB.Add (newSlothTeamB);
+			gunsTeamB.Add(newGunTeamB);
+		}
+	}
 
     // Use this for initialization
     public void CreateSlothTeamA () {
