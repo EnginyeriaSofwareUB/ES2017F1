@@ -13,6 +13,9 @@ public class Sloth
     private string idAb1;
     private string idAb2;
     private string idAb3;
+    Ability ab1;
+    Ability ab2;
+    Ability ab3;
 
 
 	public Sloth(string name)
