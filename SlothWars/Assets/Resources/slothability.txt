@@ -1,0 +1,142 @@
+{
+  "M0": {
+    "elem": "fire",
+    "onHit": "burnt",
+    "oHitProb": 0.1,
+    "dmg": 20,
+    "distance": "ranged",
+    "alterTerrain": true,
+    "reach": 10
+  },
+  
+   "M1": {
+    "elem": "ice",
+    "onHit": "freeze",
+    "oHitProb": 0.2,
+    "dmg": 20,
+    "distance": "ranged",
+    "alterTerrain": true,
+    "reach": 10
+  },
+  
+   "M2": {
+    "elem": "water",
+    "onHit": "None",
+    "oHitProb": 0,
+    "dmg": 30,
+    "distance": "ranged",
+    "alterTerrain": false,
+    "reach": 15
+  },
+  
+  "T0": {
+    "shield": true,
+    "boostDef": 30,
+    "durBoostDef": 5,
+    "boostHp": 0,
+    "durBoostHp": 0,
+    "hpShield": 40,
+    "blockAb": false
+  },
+  
+   "T1": {
+    "shield": false,
+    "boostDef": 0,
+    "durBoostDef": 0,
+    "boostHp": 100,
+    "durBoostHp": 10,
+    "hpShield": 0,
+    "blockAb": false
+  },
+  
+   "T2": {
+    "shield": true,
+    "boostDef": 0,
+    "durBoostDef": 0,
+    "boostHp": 0,
+    "durBoostHp": 0,
+    "hpShield": 40,
+    "blockAb": true
+  },
+  
+  "P0": {
+    "dmg": 50,
+    "reach": 15
+  },
+  
+  "P1": {
+    "dmg": 60,
+    "reach": 30
+
+  },
+  
+  "P2": {
+    "dmg": 10,
+    "reach": 20
+  },
+
+  "H0": {
+    "shield": 40,
+    "durShield": 5,
+    "healHp": 0,
+    "healEffects": false,
+    "boostDef": 0,
+    "durBoostDef": 0
+  },
+  
+  "H1": {
+    "shield": 0,
+    "durShield": 0,
+    "healHp": 50,
+    "healEffects": false,
+    "boostDef": 0,
+    "durBoostDef": 0
+
+  },
+  
+  "H2": {
+    "shield": 0,
+    "durShield": 0,
+    "healHp": 0,
+    "healEffects": true,
+    "boostDef": 50,
+    "durBoostDef": 5
+  },
+  
+  "U0": {
+    "buildTerrain": true,
+    "terrainType": "Tree",
+    "terrainSize": 4,
+    "alterTerrain": false,
+    "durAlterTerrain": 0,
+    "alterationSize": 0,
+    "boostAp": 4,
+    "boostAtt": 30,
+    "durBoostAtt": 5
+  },
+  
+  "U1": {
+    "buildTerrain": false,
+    "terrainType": "None",
+    "terrainSize": 0,
+    "alterTerrain": true,
+    "durAlterTerrain": 5,
+    "alterationSize": 4,
+    "boostAp": 4,
+    "boostAtt": 30,
+    "durBoostAtt": 5
+
+  },
+  
+  "U2": {
+    "buildTerrain": false,
+    "terrainType": "None",
+    "terrainSize": 0,
+    "alterTerrain": false,
+    "durAlterTerrain": 0,
+    "alterationSize": 0,
+    "boostAp": 4,
+    "boostAtt": 50,
+    "durBoostAtt": 5
+  }
+}
