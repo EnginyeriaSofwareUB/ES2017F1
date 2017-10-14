@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using SimpleJSON;
 
 public class AbilityFactory
 {
@@ -22,27 +24,31 @@ public class AbilityFactory
 
     public Ability getAbility(string abilityID)
     {
+
+        string s = ((TextAsset)Resources.Load("slothability")).text;
+        JSONNode n = JSON.Parse(s);
+
         if (abilityID[0] == 'M')
         {
-            return new MagicAbility();
+            return new MagicAbility(abilityID, s);
 
         }
         else if (abilityID[0] == 'T')
         {
-            return new TankAbility();
+            return new TankAbility(abilityID, s);
 
         }
         else if (abilityID[0] == 'P')
         {
-            return new ProjectileAbility();
+            return new ProjectileAbility(abilityID, s);
         }
         else if (abilityID[0] == 'H')
         {
-            return new HealingAbility();
+            return new HealingAbility(abilityID, s);
         }
         else if (abilityID[0] == 'U')
         {
-            return new UtilityAbility();
+            return new UtilityAbility(abilityID, s);
         }
 
         return null;

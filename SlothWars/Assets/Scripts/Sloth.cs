@@ -17,6 +17,8 @@ public class Sloth
     Ability ab2;
     Ability ab3;
 
+    AbilityFactory factory = AbilityFactory.Instance;
+
 
 	public Sloth(string name)
 	{
@@ -42,6 +44,10 @@ public class Sloth
             }
             i++;
         }
+
+        this.ab1 = factory.getAbility(idAb1);
+        this.ab2 = factory.getAbility(idAb2);
+        this.ab3 = factory.getAbility(idAb3);
     }
 
     public Sloth(int numId)
@@ -59,6 +65,10 @@ public class Sloth
         this.idAb1 = n[id]["idAb1"];
         this.idAb2 = n[id]["idAb2"];
         this.idAb3 = n[id]["idAb3"];
+
+        this.ab1 = factory.getAbility(idAb1);
+        this.ab2 = factory.getAbility(idAb2);
+        this.ab3 = factory.getAbility(idAb3);
     }
 
     public string getType()
