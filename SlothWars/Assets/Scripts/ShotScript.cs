@@ -9,33 +9,37 @@ public class ShotScript : MonoBehaviour {
     private int rotate = 0;
     private float baseForce= 700;
     bool shotLoad = false;
+    bool mov = false;
     ForceBarScript st;
 	//initialization
 	void Start () {
-        gun = GetComponent<Transform>();
+        gun = this.GetComponentInChildren<Transform>().Find("GUN");
 
     }
 	// creates a force bar with the first Q , shoots with the second Q and aims with the vertical axis 
 	void Update () {
-        gun.Rotate(0 , 0, Time.deltaTime * Input.GetAxis("Vertical")*100);
-        float inputH = Input.GetAxis("Horizontal");
-        if (inputH > 0)
+        if (!mov)
         {
-            rotate = 0;
-        }
-        if (inputH < 0)
-        {
-            rotate = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (!shotLoad)
+            gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
+            float inputH = Input.GetAxis("Horizontal");
+            if (inputH > 0)
             {
-                Bar();
+                rotate = 0;
             }
-            else
+            if (inputH < 0)
             {
-                ShootAfterBar();
+                rotate = 1;
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (!shotLoad)
+                {
+                    Bar();
+                }
+                else
+                {
+                    ShootAfterBar();
+                }
             }
         }
 	}
@@ -55,5 +59,13 @@ public class ShotScript : MonoBehaviour {
         shot.GetComponent<Rigidbody>().AddForce(AimVector* st.getForce() * baseForce);
         st.Destroy();
         shotLoad = false;
+    }
+    public void IsMoving()
+    {
+        mov = true;
+    }
+    public void IsNotMoving()
+    {
+        mov = false;
     }
 }

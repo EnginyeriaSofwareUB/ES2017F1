@@ -13,23 +13,23 @@ public class CreateSloth : MonoBehaviour {
 	void Start(){
 
 		teamA = new List<GameObject>();
-        gunsTeamA = new List<GameObject>();
+        //gunsTeamA = new List<GameObject>();
 
 		teamB = new List<GameObject>();
-        gunsTeamB = new List<GameObject>();
+        //gunsTeamB = new List<GameObject>();
 
         slothTeamA = GameObject.Find ("avatarSlothTeamA");
         teamA.Add(slothTeamA);
        
-        gunSlothTeamA = GameObject.Find("gunSlothTeamA");
-        gunsTeamA.Add(gunSlothTeamA);
+        //gunSlothTeamA = GameObject.Find("gunSlothTeamA");
+        //gunsTeamA.Add(gunSlothTeamA);
 
 
         slothTeamB = GameObject.Find ("avatarSlothTeamB");
         teamB.Add(slothTeamB);
 
-        gunSlothTeamB = GameObject.Find("gunSlothTeamB");
-        gunsTeamB.Add(gunSlothTeamB);
+        //gunSlothTeamB = GameObject.Find("gunSlothTeamB");
+        //gunsTeamB.Add(gunSlothTeamB);
 
 
 		CreateTeamA ();
@@ -39,26 +39,26 @@ public class CreateSloth : MonoBehaviour {
 	public void CreateTeamA(){
 		for (int i = 0; i < 3; i++) {
 			GameObject newSlothTeamA = Instantiate(slothTeamA);
-			GameObject newGunTeamA = Instantiate(gunSlothTeamA);
+			//GameObject newGunTeamA = Instantiate(gunSlothTeamA);
 
 			newSlothTeamA.transform.position = new Vector3 (-teamA.Count - 1, 0.5F, 0);
-			newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
+			//newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
 
 			teamA.Add (newSlothTeamA);
-			gunsTeamA.Add(newGunTeamA);
+			//gunsTeamA.Add(newGunTeamA);
 		}
 	}
 
 	public void CreateTeamB(){
 		for (int i = 0; i < 3; i++) {
 			GameObject newSlothTeamB = Instantiate(slothTeamB);
-			GameObject newGunTeamB = Instantiate(gunSlothTeamB);
+			//GameObject newGunTeamB = Instantiate(gunSlothTeamB);
 
 			newSlothTeamB.transform.position = new Vector3 (teamB.Count + 1, 0.5F, 0);
-			newGunTeamB.transform.position = new Vector3(+gunsTeamB.Count + 1, 0.5F, 0);
+			//newGunTeamB.transform.position = new Vector3(+gunsTeamB.Count + 1, 0.5F, 0);
 
 			teamB.Add (newSlothTeamB);
-			gunsTeamB.Add(newGunTeamB);
+			//gunsTeamB.Add(newGunTeamB);
 		}
 	}
 
@@ -68,13 +68,13 @@ public class CreateSloth : MonoBehaviour {
         {
 
 			GameObject newSlothTeamA = Instantiate(slothTeamA);
-            GameObject newGunTeamA = Instantiate(gunSlothTeamA);
+            //GameObject newGunTeamA = Instantiate(gunSlothTeamA);
 
 			newSlothTeamA.transform.position = new Vector3 (-teamA.Count - 1, 0.5F, 0);
-            newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
+            //newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
 
             teamA.Add (newSlothTeamA);
-            gunsTeamA.Add(newGunTeamA);
+            //gunsTeamA.Add(newGunTeamA);
 		}
 
 	}
@@ -98,13 +98,13 @@ public class CreateSloth : MonoBehaviour {
         {
 
 			GameObject newSlothTeamB = Instantiate(slothTeamB);
-            GameObject newGunTeamB = Instantiate(gunSlothTeamB);
+            //GameObject newGunTeamB = Instantiate(gunSlothTeamB);
 
 			newSlothTeamB.transform.position = new Vector3 (+teamB.Count + 1, 0.5F, 0);
-            newGunTeamB.transform.position = new Vector3(-gunsTeamB.Count - 1, 0.5F, 0);
+            //newGunTeamB.transform.position = new Vector3(-gunsTeamB.Count - 1, 0.5F, 0);
 
             teamB.Add (newSlothTeamB);
-            gunsTeamB.Add(newGunTeamB);
+            //gunsTeamB.Add(newGunTeamB);
 
         }
 

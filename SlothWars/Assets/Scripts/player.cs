@@ -12,11 +12,14 @@ public class player : MonoBehaviour {
 
 	private bool move = false;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
-
+    ShotScript ss;
+    HealthScript hs;
 	// Use this for initialization
 	void Start () 
 	{
-		anim = GetComponent<Animator> ();
+        ss = GetComponentInChildren<ShotScript>();
+        hs = GetComponentInChildren<HealthScript>();
+        anim = GetComponent<Animator> ();
 		rbody = GetComponent<Rigidbody> ();
 	}
 	
@@ -60,6 +63,8 @@ public class player : MonoBehaviour {
                 inputH = 1;
                 newPosition = transform.position + new Vector3(1f, 0f, 0f);
                 transform.eulerAngles = new Vector3(0, 90, 0);
+                ss.IsMoving();
+                hs.turnRight();
             }
             if (inputH < -0.1)
             {
@@ -67,6 +72,8 @@ public class player : MonoBehaviour {
                 inputH = -1;
                 newPosition = transform.position + new Vector3(-1f, 0f, 0f);
                 transform.eulerAngles = new Vector3(0, -90, 0);
+                ss.IsMoving();
+                hs.turnLeft();
             }
         }
         else
@@ -81,6 +88,7 @@ public class player : MonoBehaviour {
             {
                 inputH = 0;
                 move = false;
+                ss.IsNotMoving();
             }
         }
 	}
