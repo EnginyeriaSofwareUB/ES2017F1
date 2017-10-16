@@ -80,11 +80,11 @@ public class MenuController : MonoBehaviour {
 	}
 	//this should go to new screen
 	void playSoloSelected(){
-		SceneManager.LoadScene ("default_scene");
+		SceneManager.LoadScene ("TeamSelection");
 	}
 	//this should go 
 	void playFriendSelected(){
-		SceneManager.LoadScene ("default_scene");
+		SceneManager.LoadScene ("TeamSelection");
 	}
 	void goBackPlay(){
 		panelMain.gameObject.SetActive (true);

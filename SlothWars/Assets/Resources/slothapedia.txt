@@ -5,7 +5,7 @@
     "att": 50,
     "def": 20,
     "ap": 5,
-    "photo": "slothWizard.png"
+    "photo": "slothWizard"
     "idAb1": "M1"
     "idAb2": "M2"
     "idAb3": "M3"
@@ -17,7 +17,7 @@
     "att": 20,
     "def": 60,
     "ap": 3,
-    "photo": "slothTank.png"
+    "photo": "slothTank"
     "idAb1": "T1"
     "idAb2": "T2"
     "idAb3": "T3"
@@ -29,7 +29,7 @@
     "att": 120,
     "def": 20,
     "ap": 5,
-    "photo": "slothArcher.png"
+    "photo": "slothArcher"
     "idAb1": "P1"
     "idAb2": "P2"
     "idAb3": "P3"
@@ -41,7 +41,7 @@
     "att": 20,
     "def": 50,
     "ap": 4,
-    "photo": "slothHealer.png"
+    "photo": "slothHealer"
     "idAb1": "H1"
     "idAb2": "H2"
     "idAb3": "H3"
@@ -53,7 +53,7 @@
     "att": 10,
     "def": 50,
     "ap": 6,
-    "photo": "slothUtility.png"
+    "photo": "slothUtility"
     "idAb1": "U1"
     "idAb2": "U2"
     "idAb3": "U3"

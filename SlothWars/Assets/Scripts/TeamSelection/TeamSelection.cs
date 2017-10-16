@@ -13,6 +13,10 @@ public class TeamSelection : MonoBehaviour {
 	private Button prevPage;
 	private Button nextPage;
 
+	private GameObject slot1;
+	private GameObject slot2;
+	private GameObject slot3;
+	
 	private Text slot1Type;
 	private Button slot1Pic;
 	private Text slot1Health;
@@ -58,6 +62,10 @@ public class TeamSelection : MonoBehaviour {
 
 		currentPageText = GameObject.Find("currentPage").GetComponent<Text>();
 		numPlayer = GameObject.Find("playerValue").GetComponent<Text>();
+
+		slot1 = GameObject.Find ("slot1");
+		slot2 = GameObject.Find ("slot2");
+		slot3 = GameObject.Find ("slot3");
 
 		slot1Type = GameObject.Find("type1Value").GetComponent<Text>();
 		slot1Health = GameObject.Find("health1Value").GetComponent<Text>();
@@ -117,11 +125,15 @@ public class TeamSelection : MonoBehaviour {
 		// Number of aviable pages to select a sloth.
 		lastPage = (slothModule == 0) ? (lenJson/slothPerPage)-1 : (int) lenJson/slothPerPage;
 		// Number of the last active slot in the last page.
-		lastPageActiveSlot = (slothModule == 0) ? 3 : lenJson % slothModule;
+		lastPageActiveSlot = (slothModule == 0) ? 3 : slothModule;
+		Debug.Log ("Last page active slot: "+lastPageActiveSlot);
 		prevPage.gameObject.SetActive (false);
 		currentPageText.text = "1/"+(lastPage+1);
 		numPlayer.text = "1"; // This will later be selected randomly
 		lastPlayer = "2"; // This will later be selected randomly
+
+		Debug.Log ("Len of json: "+lenJson);
+		Debug.Log ("Last json element: "+node [lenJson-1] ["type"]);
 	}
 
 	void Start () {
@@ -132,25 +144,30 @@ public class TeamSelection : MonoBehaviour {
         string type = GetSlothType(slot);
 		if("1".Equals(numPlayer.text)){
 			if(GameControl.control.slothTeam1.Contains(type)){
+				Debug.Log ("Team 1 already has this sloth");
                 // ScreenMessage.showMessage("Your team already has this sloth");
             }
             else{
                 GameControl.control.slothTeam1.Add(type);
-				SetTeamSlotPic("1",slot,GameControl.control.slothTeam2.Count);
-					numPlayer.text = "2";
+				Debug.Log (type+" sloth added to team 1");
+				SetTeamSlotPic("1",slot,GameControl.control.slothTeam1.Count);
+			    numPlayer.text = "2";
             }
         }
         else{
 			if(GameControl.control.slothTeam2.Contains(type)){
+				Debug.Log ("Team 2 already has this sloth");
                 // ScreenMessage.showMessage("Your team already has this sloth");
             }
             else{
 				GameControl.control.slothTeam2.Add (type);
+				Debug.Log (type+" sloth added to team 2");
 				SetTeamSlotPic("2",slot,GameControl.control.slothTeam2.Count);
 				if(GameControl.control.slothTeam2.Count==GameControl.control.maxTeamSloths){
+					Debug.Log ("TEAM SELECTION FINISHED!");
                     //ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
                     //WaitAndLoadScene(3);
-                    //SceneManagement.LoadScene("partida");
+					SceneManager.LoadScene ("default_scene");
                 }
                 numPlayer.text = "1";
             }
@@ -230,8 +247,8 @@ public class TeamSelection : MonoBehaviour {
 	{
 		if(currentPage==lastPage){
 			nextPage.gameObject.SetActive (true);
-			// slot2.enabled(true);
-			// slot3.enabled(true);
+			slot2.SetActive (true);
+			slot3.SetActive (true);
 		}
 		currentPage--;
 		currentPageText.text = (currentPage+1) + "/" + (lastPage+1);
@@ -257,21 +274,22 @@ public class TeamSelection : MonoBehaviour {
 	void UpdateSlots()
 	{
 		int i = currentPage * 3;
+		string path;
 
 		slot1Type.text = node[i]["type"];
-		Sprite trythis = Resources.Load<Sprite>(node[i]["photo"]);
-		slot2Pic.transform.GetComponent<Image> ().sprite = trythis;
+		path = (string)node [i + 2] ["photo"];
+		slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("slothTank"); // ASI FUNCTIONA
 		slot1Health.text = node[i]["hp"];
 		slot1Attack.text = node[i]["att"];
 		slot1Defense.text = node[i]["def"];
 		slot1Action.text = node[i]["ap"];
 
 		if(currentPage==lastPage && lastPageActiveSlot<2){
-			// slot2.enabled(false);
+			slot2.SetActive (false);
 		}
 		else{
 			slot2Type.text = node[i + 1]["type"];
-			slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]);
+			slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node [i + 1] ["photo"]); // ASI NO :V
 			slot2Health.text = node[i + 1]["hp"];
 			slot2Attack.text = node[i + 1]["att"];
 			slot2Defense.text = node[i + 1]["def"];
@@ -279,11 +297,11 @@ public class TeamSelection : MonoBehaviour {
 		}
 
 		if(currentPage==lastPage && lastPageActiveSlot<3){
-			// slot3.enabled(false);
+			slot3.SetActive (false);
 		}
 		else{
 			slot3Type.text = node[i + 2]["type"];
-			slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 2]["photo"]);
+			slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node [i + 2] ["photo"]);
 			slot3Health.text = node[i + 2]["hp"];
 			slot3Attack.text = node[i + 2]["att"];
 			slot3Defense.text = node[i + 2]["def"];
