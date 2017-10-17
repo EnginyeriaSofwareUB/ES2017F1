@@ -274,11 +274,9 @@ public class TeamSelection : MonoBehaviour {
 	void UpdateSlots()
 	{
 		int i = currentPage * 3;
-		string path;
 
 		slot1Type.text = node[i]["type"];
-		path = (string)node [i + 2] ["photo"];
-		slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("slothTank"); // ASI FUNCTIONA
+		slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node [i] ["photo"]); // ASI FUNCTIONA
 		slot1Health.text = node[i]["hp"];
 		slot1Attack.text = node[i]["att"];
 		slot1Defense.text = node[i]["def"];
