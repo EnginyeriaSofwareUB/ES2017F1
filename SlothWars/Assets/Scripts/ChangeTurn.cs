@@ -26,10 +26,10 @@ public class ChangeTurn : MonoBehaviour
         slothTurnB = 0;
 
         slothTeamA = new List<GameObject>();
-        gunSlothTeamA = new List<GameObject>();
+        //gunSlothTeamA = new List<GameObject>();
 
         slothTeamB = new List<GameObject>();
-        gunSlothTeamB = new List<GameObject>();
+        //gunSlothTeamB = new List<GameObject>();
 
         managerTeam = GameObject.Find("managerTeam");
     }
@@ -37,10 +37,10 @@ public class ChangeTurn : MonoBehaviour
     private void Update()
     {
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
-        gunSlothTeamA = managerTeam.GetComponent<CreateSloth>().gunsTeamA;
+        //gunSlothTeamA = managerTeam.GetComponent<CreateSloth>().gunsTeamA;
 
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
-        gunSlothTeamB = managerTeam.GetComponent<CreateSloth>().gunsTeamB;
+        //gunSlothTeamB = managerTeam.GetComponent<CreateSloth>().gunsTeamB;
 
     }
 
@@ -51,43 +51,44 @@ public class ChangeTurn : MonoBehaviour
         {
             sloth.GetComponent<Animator>().enabled = false;
             sloth.GetComponent<player>().enabled = false;
-            
+            sloth.GetComponent<ShotScript>().enabled = false;
         }
 
-        foreach (GameObject gun in gunSlothTeamB)
+        /*foreach (GameObject gun in gunSlothTeamB)
         {
             gun.GetComponent<ShotScript>().enabled = false;
-        }
+        }*/
 
         for (int i = 1; i<slothTeamA.Count; i++)
         {
             slothTeamA[i].GetComponent<Animator>().enabled = false;
             slothTeamA[i].GetComponent<player>().enabled = false;
+            slothTeamA[i].GetComponent<ShotScript>().enabled = false;
         }
-
+        /*
         for (int i = 1; i < slothTeamA.Count; i++)
         {
             gunSlothTeamA[i].GetComponent<ShotScript>().enabled = false;
         
-        }
+        }*/
     }
 
     // Functions to activate and deactivate sloth's animations
-    private void ActivateSloth(GameObject slothTeam, GameObject gunTeamSloth)
+    private void ActivateSloth(GameObject slothTeam)
     {
         slothTeam.GetComponent<Animator>().enabled = true;
         slothTeam.GetComponent<player>().enabled = true;
-        gunTeamSloth.GetComponent<ShotScript>().enabled = true;
+        slothTeam.GetComponent<ShotScript>().enabled = true;
 
 
     }
 
-    private void DeactivateSloth(GameObject slothTeam, GameObject gunTeamSloth)
+    private void DeactivateSloth(GameObject slothTeam)
     {
         
         slothTeam.GetComponent<Animator>().enabled = false;
         slothTeam.GetComponent<player>().enabled = false;
-        gunTeamSloth.GetComponent<ShotScript>().enabled = false;
+        slothTeam.GetComponent<ShotScript>().enabled = false;
 
     
     }
@@ -105,8 +106,8 @@ public class ChangeTurn : MonoBehaviour
         if (endTurnOfSloth)
         {
             endTurnOfSloth = false;
-            DeactivateSloth(slothTeamB[slothTurnB], gunSlothTeamA[slothTurnB]);
-            ActivateSloth(slothTeamA[slothTurnA], gunSlothTeamA[slothTurnA]);
+            DeactivateSloth(slothTeamB[slothTurnB]); // DeactivateSloth(slothTeamB[slothTurnB], gunSlothTeamA[slothTurnB])
+            ActivateSloth(slothTeamA[slothTurnA]);
             slothTurnB += 1;
             if(slothTurnB == slothTeamB.Count)
             {
@@ -120,8 +121,8 @@ public class ChangeTurn : MonoBehaviour
         else
         {
             endTurnOfSloth = true;
-            DeactivateSloth(slothTeamA[slothTurnA], gunSlothTeamA[slothTurnA]);
-            ActivateSloth(slothTeamB[slothTurnB], gunSlothTeamB[slothTurnB]);
+            DeactivateSloth(slothTeamA[slothTurnA]);
+            ActivateSloth(slothTeamB[slothTurnB]);
             slothTurnA += 1;
             if (slothTurnA == slothTeamA.Count)
             {

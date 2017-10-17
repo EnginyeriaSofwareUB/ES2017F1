@@ -13,21 +13,21 @@ public class HealthScript : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-        float inputH = Input.GetAxis("Horizontal");
-        if (inputH > 0)
-        {
-            text.transform.eulerAngles = new Vector3(0, 0, 0);
-            text.transform.localPosition = new Vector3(0, 3, -0.5f);
-        }
-        if (inputH < 0)
-        {
-            text.transform.eulerAngles = new Vector3(0, 360,0);
-            text.transform.localPosition = new Vector3(0, 3, 0.5f);
-        }
+     
     }
     public void TakeDamage(int d)
     {
         health -= d;
         text.text = "" + health;
+    }
+    public void turnRight()
+    {
+        text.transform.eulerAngles = new Vector3(0, 0, 0);
+        text.transform.localPosition = new Vector3(0, 3, -0.5f);
+    }
+    public void turnLeft()
+    {
+        text.transform.eulerAngles = new Vector3(0, 360, 0);
+        text.transform.localPosition = new Vector3(0, 3, 0.5f);
     }
 }
