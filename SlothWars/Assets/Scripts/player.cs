@@ -63,7 +63,7 @@ public class player : MonoBehaviour {
                 inputH = 1;
                 newPosition = transform.position + new Vector3(1f, 0f, 0f);
                 transform.eulerAngles = new Vector3(0, 90, 0);
-                ss.IsMoving();
+                ss.IsMoving(0);
                 hs.turnRight();
             }
             if (inputH < -0.1)
@@ -72,7 +72,7 @@ public class player : MonoBehaviour {
                 inputH = -1;
                 newPosition = transform.position + new Vector3(-1f, 0f, 0f);
                 transform.eulerAngles = new Vector3(0, -90, 0);
-                ss.IsMoving();
+                ss.IsMoving(1);
                 hs.turnLeft();
             }
         }
