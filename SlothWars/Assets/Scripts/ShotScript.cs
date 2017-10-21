@@ -21,15 +21,6 @@ public class ShotScript : MonoBehaviour {
         if (!mov)
         {
             gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
-            float inputH = Input.GetAxis("Horizontal");
-            if (inputH > 0)
-            {
-                rotate = 0;
-            }
-            if (inputH < 0)
-            {
-                rotate = 1;
-            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 if (!shotLoad)
@@ -60,12 +51,20 @@ public class ShotScript : MonoBehaviour {
         st.Destroy();
         shotLoad = false;
     }
-    public void IsMoving()
+    // r = 0 when right moving , left moving r = 1
+    public void IsMoving(int r)
     {
         mov = true;
+        rotate = r;
+        gun.gameObject.SetActive(false);
     }
     public void IsNotMoving()
     {
         mov = false;
+        gun.gameObject.SetActive(true);
+    }
+    public void Active(bool b)
+    {
+        gun.gameObject.SetActive(b);
     }
 }
