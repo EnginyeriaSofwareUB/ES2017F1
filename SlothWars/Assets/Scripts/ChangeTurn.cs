@@ -9,14 +9,15 @@ public class ChangeTurn : MonoBehaviour
     private Button button;
 
     // Getting the sloths in the scene.
-    List<GameObject> slothTeamA;
-    List<GameObject> slothTeamB;
+    public List<GameObject> slothTeamA;
+    public List<GameObject> slothTeamB;
+    public bool isSlothTurnA;
 
     
     //GameObject with the script where the sloths are created
     GameObject managerTeam;
 
-    int slothTurnA, slothTurnB;
+    public int slothTurnA, slothTurnB;
 
     // Initially, the friendly sloth has not ended his turn.
     public bool endTurnOfSloth = false;
@@ -25,7 +26,7 @@ public class ChangeTurn : MonoBehaviour
     private void Start()
     {
         button = FindObjectOfType<Button>();
-
+        isSlothTurnA = false;
         // In order to know the different turns.
         slothTurnA = 0;
         slothTurnB = 0;
@@ -91,8 +92,6 @@ public class ChangeTurn : MonoBehaviour
         slothTeam.GetComponent<ShotScript>().enabled = true;
         slothTeam.GetComponent<ShotScript>().Active(true);
 
-
-
     }
 
     private void DeactivateSloth(GameObject slothTeam)
@@ -103,7 +102,6 @@ public class ChangeTurn : MonoBehaviour
         slothTeam.GetComponent<ShotScript>().Active(false);
         slothTeam.GetComponent<ShotScript>().enabled = false;
 
-    
     }
 
     // Function in order to change turns.
@@ -113,15 +111,19 @@ public class ChangeTurn : MonoBehaviour
         {
             DeactivateAllExceptOne(slothTeamA,slothTeamB);
             beginStopped = false;
+            isSlothTurnA = true;
             return;
         }
 
         // If he has ended, he will press the button, changing the variable to true.
         if (endTurnOfSloth)
         {
+            
             endTurnOfSloth = false;
             DeactivateSloth(slothTeamB[slothTurnB]); 
             ActivateSloth(slothTeamA[slothTurnA]);
+            isSlothTurnA = true;
+        
             slothTurnB += 1;
             if(slothTurnB == slothTeamB.Count)
             {
@@ -135,8 +137,11 @@ public class ChangeTurn : MonoBehaviour
         else
         {
             endTurnOfSloth = true;
+     
             DeactivateSloth(slothTeamA[slothTurnA]);
             ActivateSloth(slothTeamB[slothTurnB]);
+            isSlothTurnA = false;
+           
             slothTurnA += 1;
             if (slothTurnA == slothTeamA.Count)
             {
