@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeTurn : MonoBehaviour
 {
+    // Getting the endTurn Button in the scene.
     private Button button;
 
     // Getting the sloths in the scene.
@@ -24,22 +25,25 @@ public class ChangeTurn : MonoBehaviour
     private void Start()
     {
         button = FindObjectOfType<Button>();
+
+        // In order to know the different turns.
         slothTurnA = 0;
         slothTurnB = 0;
 
         slothTeamA = new List<GameObject>();
-
         slothTeamB = new List<GameObject>();
 
         managerTeam = GameObject.Find("managerTeam");
     }
 
+    // Getting the sloths in the scene. Apart from that, while one sloth is shooting, the player cannot end the turn. 
+    // Otherwise he/she can end the turn whenever he/she wants.
     private void Update()
     {
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
 
-        print("Hola");
+        
         if ((slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad() || slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad()))
         {
             button.GetComponent<Button>().interactable = false;
@@ -50,7 +54,7 @@ public class ChangeTurn : MonoBehaviour
 
     }
 
-
+    // A patch method in order to have only one sloth active.
     public void DeactivateAllExceptOne(List<GameObject> slothTeamA, List<GameObject> slothTeamB)
     {
         foreach (GameObject sloth in slothTeamB)
@@ -94,6 +98,7 @@ public class ChangeTurn : MonoBehaviour
     
     }
 
+    // Function in order to change turns.
     public void FinishTurn()
     {
         if (beginStopped)
