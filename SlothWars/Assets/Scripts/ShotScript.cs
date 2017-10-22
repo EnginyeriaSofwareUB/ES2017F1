@@ -67,4 +67,10 @@ public class ShotScript : MonoBehaviour {
     {
         gun.gameObject.SetActive(b);
     }
+
+    public bool GetShotLoad()
+    {
+        return this.shotLoad;
+    }
+
 }
