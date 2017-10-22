@@ -42,9 +42,17 @@ public class ChangeTurn : MonoBehaviour
     {
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
+        //print(slothTeamB[slothTurnB].GetComponent<Animator>().layerCount);
+        if (slothTeamA[slothTurnA].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || slothTeamB[slothTurnB].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
+        {
+            button.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
 
-        
-        if ((slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad() || slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad()))
+        if ((slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad() || slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad()))
         {
             button.GetComponent<Button>().interactable = false;
         } else
