@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangeTurn : MonoBehaviour
 {
+    private Button button;
 
     // Getting the sloths in the scene.
     List<GameObject> slothTeamA;
@@ -21,7 +23,7 @@ public class ChangeTurn : MonoBehaviour
 
     private void Start()
     {
-
+        button = FindObjectOfType<Button>();
         slothTurnA = 0;
         slothTurnB = 0;
 
@@ -35,8 +37,16 @@ public class ChangeTurn : MonoBehaviour
     private void Update()
     {
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
-
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
+
+        print("Hola");
+        if ((slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad() || slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad()))
+        {
+            button.GetComponent<Button>().interactable = false;
+        } else
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
 
     }
 
@@ -97,7 +107,7 @@ public class ChangeTurn : MonoBehaviour
         if (endTurnOfSloth)
         {
             endTurnOfSloth = false;
-            DeactivateSloth(slothTeamB[slothTurnB]); // DeactivateSloth(slothTeamB[slothTurnB], gunSlothTeamA[slothTurnB])
+            DeactivateSloth(slothTeamB[slothTurnB]); 
             ActivateSloth(slothTeamA[slothTurnA]);
             slothTurnB += 1;
             if(slothTurnB == slothTeamB.Count)
