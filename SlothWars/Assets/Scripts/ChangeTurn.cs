@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ChangeTurn : MonoBehaviour
 {
     // Getting the endTurn Button in the scene.
-    private Button button;
+    private GameObject endTurnButton;
 
     // Getting the sloths in the scene.
     public List<GameObject> slothTeamA;
@@ -25,7 +25,7 @@ public class ChangeTurn : MonoBehaviour
 
     private void Start()
     {
-        button = FindObjectOfType<Button>();
+        endTurnButton = GameObject.Find("EndTurnButton");
         isSlothTurnA = false;
         // In order to know the different turns.
         slothTurnA = 0;
@@ -37,33 +37,43 @@ public class ChangeTurn : MonoBehaviour
         managerTeam = GameObject.Find("managerTeam");
     }
 
-    // Getting the sloths in the scene. Apart from that, while one sloth is shooting, the player cannot end the turn. 
-    // Otherwise he/she can end the turn whenever he/she wants.
+    // Getting the sloths in the scene. 
     private void Update()
     {
+        
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
-        //print(slothTeamB[slothTurnB].GetComponent<Animator>().layerCount);
+
+        // if a sloth is walking, the player cannot end the turn (Disable the end turn button)
         if (slothTeamA[slothTurnA].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || slothTeamB[slothTurnB].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
         {
-            button.GetComponent<Button>().interactable = false;
+            endTurnButton.GetComponent<Button>().interactable = false;
         }
         else
         {
-            button.GetComponent<Button>().interactable = true;
+            endTurnButton.GetComponent<Button>().interactable = true;
         }
 
+        // if a sloth is shooting, the player cannot end the turn (Disable the end turn button) 
         if ((slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad() || slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad()))
         {
-            button.GetComponent<Button>().interactable = false;
+            endTurnButton.GetComponent<Button>().interactable = false;
         } else
         {
-            button.GetComponent<Button>().interactable = true;
+            endTurnButton.GetComponent<Button>().interactable = true;
+        }
+
+        // To have only one sloth moving in the beginning of the game.
+        if (beginStopped)
+        {
+            DeactivateAllExceptOne(slothTeamA, slothTeamB);
+            beginStopped = false;
+            isSlothTurnA = true;
         }
 
     }
 
-    // A patch method in order to have only one sloth active.
+    // Method in order to have only one sloth active.
     public void DeactivateAllExceptOne(List<GameObject> slothTeamA, List<GameObject> slothTeamB)
     {
         foreach (GameObject sloth in slothTeamB)
@@ -107,14 +117,6 @@ public class ChangeTurn : MonoBehaviour
     // Function in order to change turns.
     public void FinishTurn()
     {
-        if (beginStopped)
-        {
-            DeactivateAllExceptOne(slothTeamA,slothTeamB);
-            beginStopped = false;
-            isSlothTurnA = true;
-            return;
-        }
-
         // If he has ended, he will press the button, changing the variable to true.
         if (endTurnOfSloth)
         {
