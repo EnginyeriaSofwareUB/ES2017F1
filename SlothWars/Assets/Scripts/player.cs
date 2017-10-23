@@ -7,6 +7,7 @@ public class player : MonoBehaviour {
 	public Animator anim;
 	public Rigidbody rbody;
 
+
 	private float inputH;
 	private float inputV;
 
@@ -26,7 +27,7 @@ public class player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		Movement_Interpretation ();
+        Movement_Interpretation ();
 		Movement_Correction ();
 	}
 
