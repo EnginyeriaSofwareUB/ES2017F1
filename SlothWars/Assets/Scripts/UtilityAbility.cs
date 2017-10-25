@@ -26,4 +26,15 @@ public class UtilityAbility : Ability
         this.boostAtt = json[id]["boostAtt"];
         this.durBoostAtt = json[id]["durBoostAtt"];
     }
+
+    //Apply ability to another sloth
+    public void apply(Sloth target)
+    {
+
+    }
+
+    //WIP: apply ability to terrain
+    public void apply()
+    {
+    }
 }

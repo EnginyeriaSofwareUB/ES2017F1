@@ -22,4 +22,15 @@ public class TankAbility: Ability
         this.hpShield = json[id]["hpShield"];
         this.blockAb = json[id]["blockAb"];
 }
+
+    //Apply ability to another sloth
+    public void apply(Sloth target)
+    {
+
+    }
+
+    //WIP: apply ability to terrain
+    public void apply()
+    {
+    }
 }

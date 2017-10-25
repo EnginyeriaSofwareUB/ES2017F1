@@ -20,4 +20,16 @@ public class HealingAbility: Ability
         this.boostDef = json[id]["boostDef"];
         this.durBoostDef = json[id]["durBoostDef"];
 }
+
+    //Apply ability to another sloth
+    public void apply(Sloth target)
+    {
+
+    }
+
+    //WIP: apply ability to terrain
+    public void apply()
+    {
+    }
+
 }
