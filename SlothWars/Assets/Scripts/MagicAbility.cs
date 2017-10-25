@@ -22,4 +22,15 @@ public class MagicAbility: Ability
         this.alterTerrain = json[id]["alterTerrain"];
         this.reach = json[id]["reach"];
 }
+
+    //Apply ability to another sloth
+    public void apply(Sloth target)
+    {
+
+    }
+
+    //WIP: apply ability to terrain
+    public void apply()
+    {
+    }
 }
