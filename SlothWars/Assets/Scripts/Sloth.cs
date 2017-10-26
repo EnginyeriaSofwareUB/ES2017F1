@@ -44,10 +44,11 @@ public class Sloth
             }
             i++;
         }
-
+		/*
         this.ab1 = factory.getAbility(idAb1);
         this.ab2 = factory.getAbility(idAb2);
         this.ab3 = factory.getAbility(idAb3);
+        */
     }
 
     public Sloth(int numId)

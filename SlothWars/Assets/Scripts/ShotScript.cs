@@ -50,6 +50,9 @@ public class ShotScript : MonoBehaviour {
         shot.GetComponent<Rigidbody>().AddForce(AimVector* st.getForce() * baseForce);
         st.Destroy();
         shotLoad = false;
+		if (GetComponent<HealthScript> ().getHealth() <= 0) {
+			Destroy (GetComponentInChildren<Player>());
+		}
     }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)

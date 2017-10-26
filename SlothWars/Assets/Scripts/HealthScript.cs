@@ -30,4 +30,9 @@ public class HealthScript : MonoBehaviour {
         text.transform.eulerAngles = new Vector3(0, 360, 0);
         text.transform.localPosition = new Vector3(0, 3, 0.5f);
     }
+
+	public int getHealth(){
+		return health;
+	}
+
 }

@@ -11,14 +11,15 @@ public class GameControl : MonoBehaviour {
 
     // List of 'sloths' of each team. List of strings, which are the type of sloth.
     [HideInInspector]
-    public List<string> slothTeam1;
+    public List<Sloth> slothTeam1;
     [HideInInspector]
-    public List<string> slothTeam2;
+    public List<Sloth> slothTeam2;
 
     public readonly int maxTeamSloths = 4;
 
     private void Awake()
     {
+		
         if (control == null)
         {
             // if there is no GameControl created yet, makes it persistent between scenes and asigns it to itself
@@ -38,7 +39,7 @@ public class GameControl : MonoBehaviour {
 
     private void Start()
     {
-        slothTeam1 = new List<string>();
-        slothTeam2 = new List<string>();
+		slothTeam1 = new List<Sloth>();
+		slothTeam2 = new List<Sloth>();
     }
 }

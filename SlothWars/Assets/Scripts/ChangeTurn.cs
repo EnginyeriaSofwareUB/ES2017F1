@@ -79,7 +79,7 @@ public class ChangeTurn : MonoBehaviour
         foreach (GameObject sloth in slothTeamB)
         {
             sloth.GetComponent<Animator>().enabled = false;
-            sloth.GetComponent<player>().enabled = false;
+            sloth.GetComponent<Player>().enabled = false;
             sloth.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
             sloth.GetComponent<ShotScript>().enabled = false;
         }
@@ -87,7 +87,7 @@ public class ChangeTurn : MonoBehaviour
         for (int i = 1; i<slothTeamA.Count; i++)
         {
             slothTeamA[i].GetComponent<Animator>().enabled = false;
-            slothTeamA[i].GetComponent<player>().enabled = false;
+            slothTeamA[i].GetComponent<Player>().enabled = false;
             slothTeamA[i].GetComponent<ShotScript>().Active(false);
             slothTeamA[i].GetComponent<ShotScript>().enabled = false;
         }
@@ -98,7 +98,7 @@ public class ChangeTurn : MonoBehaviour
     private void ActivateSloth(GameObject slothTeam)
     {
         slothTeam.GetComponent<Animator>().enabled = true;
-        slothTeam.GetComponent<player>().enabled = true;
+        slothTeam.GetComponent<Player>().enabled = true;
         slothTeam.GetComponent<ShotScript>().enabled = true;
         slothTeam.GetComponent<ShotScript>().Active(true);
 
@@ -108,7 +108,7 @@ public class ChangeTurn : MonoBehaviour
     {
         
         slothTeam.GetComponent<Animator>().enabled = false;
-        slothTeam.GetComponent<player>().enabled = false;
+        slothTeam.GetComponent<Player>().enabled = false;
         slothTeam.GetComponent<ShotScript>().Active(false);
         slothTeam.GetComponent<ShotScript>().enabled = false;
 

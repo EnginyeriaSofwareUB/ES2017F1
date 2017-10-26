@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour {
+public class Player : MonoBehaviour {
 
 	public Animator anim;
 	public Rigidbody rbody;
-
+	private Sloth sloth;
 
 	private float inputH;
 	private float inputV;
@@ -16,6 +16,11 @@ public class player : MonoBehaviour {
     ShotScript ss;
     HealthScript hs;
 	// Use this for initialization
+
+	public Player(Sloth sloth){
+		this.sloth = sloth;
+	}
+
 	void Start () 
 	{
         ss = GetComponentInChildren<ShotScript>();
@@ -30,6 +35,7 @@ public class player : MonoBehaviour {
         Movement_Interpretation ();
 		Movement_Correction ();
 	}
+		
 
 	void Movement_Interpretation()
 	{
@@ -107,5 +113,9 @@ public class player : MonoBehaviour {
             move = false;
 			transform.position = new Vector3 (-9.5f, transform.position.y, transform.position.z);
 		}
+	}
+
+	void Die(){
+		Destroy (gameObject);
 	}
 }
