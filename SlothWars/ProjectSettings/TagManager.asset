@@ -6,6 +6,17 @@ TagManager:
   tags:
   - sloth
   - slothImage
+  - ActionPointsImage
+  - DefenseImage
+  - AttackImage
+  - LifeImage
+  - buttonAbility1
+  - buttonAbility2
+  - buttonAbility3
+  - lifeSlothText
+  - AttackSlothText
+  - DefenseSlothText
+  - ActionPointsSlothText
   layers:
   - Default
   - TransparentFX
