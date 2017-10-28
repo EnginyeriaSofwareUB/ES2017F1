@@ -17,6 +17,8 @@ TagManager:
   - AttackSlothText
   - DefenseSlothText
   - ActionPointsSlothText
+  - gameController
+  - endTurnButton
   layers:
   - Default
   - TransparentFX
