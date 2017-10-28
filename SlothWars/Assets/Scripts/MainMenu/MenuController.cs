@@ -100,8 +100,11 @@ public class MenuController : MonoBehaviour {
 		panelOpts.gameObject.SetActive (false);
 }
 
+    //Use this method to load any scene.
+    public void loadScene(string scene){
+        SceneManager.LoadScene(scene);
 
-
+    }
 	void exitGame(){
 		Application.Quit();
 	}
