@@ -9,7 +9,6 @@ public class ChangeTurnView: MonoBehaviour {
     private bool endTurnOfPlayer,beginStopped;
     private int playerTurn1, playerTurn2;
     private List<Player> playersTeam1, playersTeam2;
-    
 
     private void Awake()
     {

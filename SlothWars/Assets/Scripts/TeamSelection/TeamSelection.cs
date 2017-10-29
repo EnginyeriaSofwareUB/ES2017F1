@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class TeamSelection : MonoBehaviour {
 
     private static bool created = false;
-	public List<Sloth> slothTeam1;
-	public List<Sloth> slothTeam2;
+	//public List<Sloth> slothTeam1;
+	//public List<Sloth> slothTeam2;
 	private const int maxTeamSloths = 4;
 	private Text currentPageText;
 	private Text numPlayer;
@@ -62,19 +62,9 @@ public class TeamSelection : MonoBehaviour {
      
 	void Awake()
 	{
-        // Need the selected sloths for next scene.
-        if (!created)
-        {
-            DontDestroyOnLoad(transform.gameObject);
-            created = true;
-        }
-        else
-        {
-            Destroy(transform.gameObject);
-        }
-
-		slothTeam1 = new List<Sloth> ();
-		slothTeam2 = new List<Sloth> ();
+        
+		//slothTeam1 = new List<Sloth> ();
+		//slothTeam2 = new List<Sloth> ();
 
 
         // Dynamic elements
@@ -162,27 +152,29 @@ public class TeamSelection : MonoBehaviour {
 	void SlothSelect(string slot){
         string type = GetSlothType(slot);
 		if("1".Equals(numPlayer.text)){
-			if(CompareSloths(slothTeam1, type)){
+			if(CompareSloths(StorePersistentVariables.Instance.slothTeam1, type)){
 				Debug.Log ("Team 1 already has this sloth");
                 // ScreenMessage.showMessage("Your team already has this sloth");
             }
             else{
-				slothTeam1.Add(new Sloth(type));
+                StorePersistentVariables.Instance.slothTeam1.Add(new Sloth(type));
+                //slothTeam1.Add(new Sloth(type));
 				Debug.Log (type+" sloth added to team 1");
-				SetTeamSlotPic("1",slot,slothTeam1.Count);
+				SetTeamSlotPic("1",slot,StorePersistentVariables.Instance.slothTeam1.Count);
 			    numPlayer.text = "2";
             }
         }
         else{
-			if(CompareSloths(slothTeam2, type)){
+			if(CompareSloths(StorePersistentVariables.Instance.slothTeam2, type)){
 				Debug.Log ("Team 2 already has this sloth");
                 // ScreenMessage.showMessage("Your team already has this sloth");
             }
             else{
-				slothTeam2.Add (new Sloth(type));
+                StorePersistentVariables.Instance.slothTeam2.Add(new Sloth(type));
+				//slothTeam2.Add (new Sloth(type));
 				Debug.Log (type+" sloth added to team 2");
-				SetTeamSlotPic("2",slot,slothTeam2.Count);
-				if(slothTeam2.Count == maxTeamSloths){
+				SetTeamSlotPic("2",slot,StorePersistentVariables.Instance.slothTeam2.Count);
+				if(StorePersistentVariables.Instance.slothTeam2.Count == maxTeamSloths){
 					Debug.Log ("TEAM SELECTION FINISHED!");
                     //ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
                     //WaitAndLoadScene(3);

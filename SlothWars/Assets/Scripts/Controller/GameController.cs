@@ -10,8 +10,7 @@ public class GameController: MonoBehaviour{
     private static List<Player> playerTeam2;
 
     private static List<Sprite> teamSprite1, teamSprite2;
-    private static GameObject teamSelectionGameObject;
-
+    
     // Use this for initialization
 
     private void Awake()
@@ -21,9 +20,7 @@ public class GameController: MonoBehaviour{
         playerTeam2 = new List<Player>();
         teamSprite1 = new List<Sprite>();
         teamSprite2 = new List<Sprite>();
-
-        teamSelectionGameObject = GameObject.Find("sceneBehaviour");
-
+   
         CreateTeamsSetSprites();
     }
 
@@ -37,10 +34,6 @@ public class GameController: MonoBehaviour{
         return teamSprite2;
     }
 
-    public GameObject GetTeamSelectionGameObject()
-    {
-        return teamSelectionGameObject;
-    }
 
     public List<Player> GetPlayerTeam(int idTeam)
     {
@@ -54,13 +47,13 @@ public class GameController: MonoBehaviour{
     private void CreateTeamsSetSprites()
     {
 
-        foreach (Sloth sloth in teamSelectionGameObject.GetComponent<TeamSelection>().slothTeam1)
+        foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam1)
         {
             playerTeam1.Add(new Player(sloth));
             teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 
-        foreach (Sloth sloth in teamSelectionGameObject.GetComponent<TeamSelection>().slothTeam2)
+        foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam2)
         {
             playerTeam2.Add(new Player(sloth));
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));

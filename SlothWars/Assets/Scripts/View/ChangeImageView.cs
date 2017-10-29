@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class ChangeImageView : MonoBehaviour {
 
     private ChangeImageModel changeImageModel;
-    private Sprite newSprite;
-    void Awake () {
+    private static Sprite newSprite;
+
+    private void Awake () {
         changeImageModel = new ChangeImageModel();
         newSprite = GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Sprite>()[1];
     }
 	
-	void Update () {
+	private void Update () {
 
         ShowImage();
 
@@ -21,6 +22,6 @@ public class ChangeImageView : MonoBehaviour {
     // Method to show the image in the scene. Called by end turn Button in order to show the image corresponding to the sloth's turn.
     public void ShowImage()
     {
-       newSprite = changeImageModel.GetImage();
+       newSprite = changeImageModel.GetSprite();
     }
 }

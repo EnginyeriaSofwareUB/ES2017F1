@@ -21,7 +21,6 @@ public class TurnController: GameController{
     //Parametres need to change the values in the view.
     private bool isButtonPressed;
 
-    private static List<Sprite> team1Image, team2Image;
     private static bool endTurnOfPlayer;
     private static bool beginStopped;
     private static int turnPlayer1;
@@ -46,10 +45,6 @@ public class TurnController: GameController{
 
         //Get an instance of the end Turn Button in the scene.
         endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-
-
-        team1Image = new List<Sprite>();
-        team2Image = new List<Sprite>();
 
     }
 
@@ -112,24 +107,29 @@ public class TurnController: GameController{
    
     private void FixedBugs()
     {
+        // Now is the TurnController who interacts with buttons. This should be a job for View.
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
         if (GetPlayerTeam(1)[turnPlayer1].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || GetPlayerTeam(2)[turnPlayer2].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
         {
             changeTurnModel.SetEndTurnButton(false);
+            endTurnButton.interactable = false;
         }
         else
         {
             changeTurnModel.SetEndTurnButton(true);
+            endTurnButton.interactable = true;
         }
 
         // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
         if ((GetPlayerTeam(1)[turnPlayer1].GetComponent<ShotScript>().GetShotLoad() || GetPlayerTeam(2)[turnPlayer2].GetComponent<ShotScript>().GetShotLoad()))
         {
             changeTurnModel.SetEndTurnButton(false);
+            endTurnButton.interactable = false;
         }
         else
         {
             changeTurnModel.SetEndTurnButton(true);
+            endTurnButton.interactable = true;
         }
     }
     //Method to update the values from turnPlayer1 and turnPlayer2.
