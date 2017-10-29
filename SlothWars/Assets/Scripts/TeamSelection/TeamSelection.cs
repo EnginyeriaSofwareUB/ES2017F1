@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class TeamSelection : MonoBehaviour {
 
+    private static bool created = false;
 	public List<Sloth> slothTeam1;
 	public List<Sloth> slothTeam2;
 	private const int maxTeamSloths = 4;
@@ -60,11 +61,22 @@ public class TeamSelection : MonoBehaviour {
 	int lastPage;
 	int lastPageActiveSlot;
 	string lastPlayer;
-
+     
 	void Awake()
 	{
         // Need the selected sloths for next scene.
-        DontDestroyOnLoad(transform.gameObject);
+        if (!created)
+        {
+            DontDestroyOnLoad(transform.gameObject);
+            created = true;
+        }
+        else
+        {
+            Destroy(transform.gameObject);
+        }
+
+        team1SlothImages = new List<Image>();
+        team2SlothImages = new List<Image>();
 
 		slothTeam1 = new List<Sloth> ();
 		slothTeam2 = new List<Sloth> ();
@@ -242,8 +254,8 @@ public class TeamSelection : MonoBehaviour {
 			default:
 				// throw Exception
 				break;
-			} 
-		}
+			}
+        }
 	}
 
 	Sprite GetSlothSprite(string slot){

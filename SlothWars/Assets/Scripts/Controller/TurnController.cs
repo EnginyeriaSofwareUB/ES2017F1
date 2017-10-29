@@ -20,6 +20,8 @@ public class TurnController: GameController{
 
     //Parametres need to change the values in the view.
     private bool isButtonPressed;
+
+    private static List<Image> team1Image, team2Image;
     private static bool endTurnOfPlayer;
     private static bool beginStopped;
     private static int turnPlayer1;
@@ -44,11 +46,11 @@ public class TurnController: GameController{
 
         //Get an instance of the end Turn Button in the scene.
         endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        
-        //Escoge la primera image (En este caso SlothImage) COMPROBAR
-        //Get an instance of the sloth Image in the scene.
-        imageFromPreviousScene = GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Image>()[1];
-        
+
+
+        team1Image = new List<Image>();
+        team2Image = new List<Image>();
+
     }
 
     // Use this for initialization
@@ -58,16 +60,27 @@ public class TurnController: GameController{
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 
         //Set the player teams in Model in order to get captured by view and show them in the scene.
+        //Set the turns for team1 and team2.
         changeTurnModel.SetPlayerTeams(GetPlayerTeam(1), GetPlayerTeam(2));
+        changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
 
         //When the game starts, we got the image of the first sloth in team1 (corresponding to the one who starts playing (by default))
-        imageFromPreviousScene = GetTeamSelectionGameObject().GetComponent<TeamSelection>().team1SlothImages[0];
-
+        //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
+        if(GetTeamImage1().Contains(null))
+        {
+            print("Problemon con GameController");
+        }
+        imageFromPreviousScene = GetTeamImage1()[0];
+        print(GetTeamSelectionGameObject().GetComponent<TeamSelection>().team1SlothImages.Contains(null));
+        if(imageFromPreviousScene == null)
+        {
+            print("Problema con GameController");
+        }
         changeImageModel.SetImage(imageFromPreviousScene);
 
-        //Set the turns for team1 and team2.
-        changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
+        
+        
     }
 
     private void Update()
@@ -75,6 +88,7 @@ public class TurnController: GameController{
         if (isButtonPressed)
         {
             beginStopped = false;
+
             //We comunicate to the View that the game starts.
             changeTurnModel.SetBeginStopped(beginStopped);
 
@@ -82,32 +96,42 @@ public class TurnController: GameController{
             changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
             changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 
-            /////////////*****//////////////
-            //TO FIX BUGS
+            
+            //To fix possible bugs in changing turns.
+            FixedBugs();
 
-            // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
-            if (GetPlayerTeam(1)[turnPlayer1].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || GetPlayerTeam(2)[turnPlayer2].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
-            {
-                changeTurnModel.SetEndTurnButton(false);
-            }
-            else
-            {
-                changeTurnModel.SetEndTurnButton(true);
-            }
+            //Call the method in order to establish the selected image to show.
+            GetSelectedPlayerImage();
 
-            // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
-            if ((GetPlayerTeam(1)[turnPlayer1].GetComponent<ShotScript>().GetShotLoad() || GetPlayerTeam(2)[turnPlayer2].GetComponent<ShotScript>().GetShotLoad()))
-            {
-                changeTurnModel.SetEndTurnButton(false);
-            }
-            else
-            {
-                changeTurnModel.SetEndTurnButton(true);
-            }
+            //Set the bool to false in order to show that the actions done while pressing the button have ended and persisting during time
+            //til an user pressed it again.
+            isButtonPressed = false;
         }
-        /////////////*****//////////////
+        
     }
    
+    private void FixedBugs()
+    {
+        // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
+        if (GetPlayerTeam(1)[turnPlayer1].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || GetPlayerTeam(2)[turnPlayer2].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
+        {
+            changeTurnModel.SetEndTurnButton(false);
+        }
+        else
+        {
+            changeTurnModel.SetEndTurnButton(true);
+        }
+
+        // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
+        if ((GetPlayerTeam(1)[turnPlayer1].GetComponent<ShotScript>().GetShotLoad() || GetPlayerTeam(2)[turnPlayer2].GetComponent<ShotScript>().GetShotLoad()))
+        {
+            changeTurnModel.SetEndTurnButton(false);
+        }
+        else
+        {
+            changeTurnModel.SetEndTurnButton(true);
+        }
+    }
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
@@ -138,19 +162,22 @@ public class TurnController: GameController{
     {
         if (turnPlayer1 > turnPlayer2)
         {
-            imageFromPreviousScene = GetTeamSelectionGameObject().GetComponent<TeamSelection>().team1SlothImages[turnPlayer1];
+            imageFromPreviousScene = GetTeamImage1()[turnPlayer1];
             changeImageModel.SetImage(imageFromPreviousScene);
         }
         else
         {
-            imageFromPreviousScene = GetTeamSelectionGameObject().GetComponent<TeamSelection>().team2SlothImages[turnPlayer2];
+            imageFromPreviousScene = GetTeamImage2()[turnPlayer2];
             changeImageModel.SetImage(imageFromPreviousScene);
         }
 
     }
 
+    //Method to detect when the button is being pressed.
     public void SetPressedButton()
     {
+        print(isButtonPressed);
+       
         isButtonPressed = true;
     }
 }

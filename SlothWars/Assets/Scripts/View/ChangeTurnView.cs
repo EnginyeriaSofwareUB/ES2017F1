@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class ChangeTurnView: MonoBehaviour {
 
@@ -9,17 +9,17 @@ public class ChangeTurnView: MonoBehaviour {
     private bool endTurnOfPlayer,beginStopped;
     private int playerTurn1, playerTurn2;
     private List<Player> playersTeam1, playersTeam2;
+    
 
     private void Awake()
     {
         changeTurnModel = new ChangeTurnModel();
-
     }
     private void Start()
     {
         playersTeam1 = new List<Player>();
         playersTeam2 = new List<Player>();
-
+        
     }
     private void Update()
     {

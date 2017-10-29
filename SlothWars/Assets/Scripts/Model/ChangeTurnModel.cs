@@ -54,45 +54,52 @@ public class ChangeTurnModel
 
 
     // Functions to activate and deactivate sloth's animations
+    // Quit comments when animator is integrated.
+    
     public void ActivateSloth(Player slothTeam)
     {
+        /*
         slothTeam.GetComponent<Animator>().enabled = true;
         slothTeam.GetComponent<Player>().enabled = true;
         slothTeam.GetComponent<ShotScript>().enabled = true;
         slothTeam.GetComponent<ShotScript>().Active(true);
+        */
 
     }
 
     public void DeactivateSloth(Player slothTeam)
     {
-        
+        /*
         slothTeam.GetComponent<Animator>().enabled = false;
         slothTeam.GetComponent<Player>().enabled = false;
         slothTeam.GetComponent<ShotScript>().Active(false);
         slothTeam.GetComponent<ShotScript>().enabled = false;
-
+        */
     }
+   
 
-    // Method in order to have only one sloth active.
-    public void DeactivateAllExceptOne(List<Player> slothTeamA, List<Player> slothTeamB)
-    {
-        foreach (Player player in slothTeamB)
+        // Method in order to have only one sloth active.
+        // Quit comments when animator is integrated.
+        
+        public void DeactivateAllExceptOne(List<Player> slothTeamA, List<Player> slothTeamB)
         {
-            player.GetComponent<Animator>().enabled = false;
-            player.GetComponent<Player>().enabled = false;
-            player.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
-            player.GetComponent<ShotScript>().enabled = false;
-        }
+        /*
+            foreach (Player player in slothTeamB)
+            {
+                player.GetComponent<Animator>().enabled = false;
+                player.GetComponent<Player>().enabled = false;
+                player.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
+                player.GetComponent<ShotScript>().enabled = false;
+            }
 
-        for (int i = 1; i < slothTeamA.Count; i++)
-        {
-            slothTeamA[i].GetComponent<Animator>().enabled = false;
-            slothTeamA[i].GetComponent<Player>().enabled = false;
-            slothTeamA[i].GetComponent<ShotScript>().Active(false);
-            slothTeamA[i].GetComponent<ShotScript>().enabled = false;
+            for (int i = 1; i < slothTeamA.Count; i++)
+            {
+                slothTeamA[i].GetComponent<Animator>().enabled = false;
+                slothTeamA[i].GetComponent<Player>().enabled = false;
+                slothTeamA[i].GetComponent<ShotScript>().Active(false);
+                slothTeamA[i].GetComponent<ShotScript>().enabled = false;
+            }
+        */
         }
-
-    }
-    
 
 }
