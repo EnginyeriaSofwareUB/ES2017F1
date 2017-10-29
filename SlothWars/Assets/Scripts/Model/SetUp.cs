@@ -5,8 +5,9 @@ using UnityEngine;
 public class SetUp : GameController {
 	// Use this for initialization
 	void Awake () {
-		//CreateMap ();
-		PlacePlayers ();
+        //CreateMap ();
+        print("HOLA");
+        PlacePlayers ();
 
 	}
 

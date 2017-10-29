@@ -13,6 +13,7 @@ public class Sloth
     private string idAb1;
     private string idAb2;
     private string idAb3;
+    private string sprite;
     Ability ab1;
     Ability ab2;
     Ability ab3;
@@ -40,6 +41,7 @@ public class Sloth
                 this.idAb1 = n[i]["idAb1"];
                 this.idAb2 = n[i]["idAb2"];
                 this.idAb3 = n[i]["idAb3"];
+                this.sprite = n[i]["photo"];
                 end = true;
             }
             i++;
@@ -66,15 +68,21 @@ public class Sloth
         this.idAb1 = n[id]["idAb1"];
         this.idAb2 = n[id]["idAb2"];
         this.idAb3 = n[id]["idAb3"];
+        this.sprite = n[id]["photo"];
 
         this.ab1 = factory.getAbility(idAb1);
         this.ab2 = factory.getAbility(idAb2);
         this.ab3 = factory.getAbility(idAb3);
     }
 
-    public string getType()
+    public string GetTypeName()
     {
         return this.typeName;
+    }
+
+    public string GetSprite()
+    {
+        return this.sprite;
     }
 
 }

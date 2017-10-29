@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class ChangeImageModel {
 
-    private static Image slothImageSelected;
+    private static Sprite slothImageSelected;
 
     public ChangeImageModel() { }
 
     //Getters and Setters
-    public Image GetImage() { Debug.Log("Hola, estoy en model"); return slothImageSelected; }
-    public void SetImage(Image imageFromPreviousScene) { slothImageSelected = imageFromPreviousScene; }
+    public Sprite GetImage() { return slothImageSelected; }
+    public void SetSprite(Sprite imageFromPreviousScene) { slothImageSelected = imageFromPreviousScene; }
     
 }

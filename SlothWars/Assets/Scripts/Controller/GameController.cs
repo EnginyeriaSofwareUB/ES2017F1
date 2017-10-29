@@ -9,35 +9,32 @@ public class GameController: MonoBehaviour{
     private static List<Player> playerTeam1;
     private static List<Player> playerTeam2;
 
-    private static List<Image> teamImage1, teamImage2;
+    private static List<Sprite> teamSprite1, teamSprite2;
     private static GameObject teamSelectionGameObject;
 
     // Use this for initialization
 
     private void Awake()
     {
+        
         playerTeam1 = new List<Player>();
         playerTeam2 = new List<Player>();
-        teamImage1 = new List<Image>();
-        teamImage2 = new List<Image>();
+        teamSprite1 = new List<Sprite>();
+        teamSprite2 = new List<Sprite>();
 
         teamSelectionGameObject = GameObject.Find("sceneBehaviour");
-        
 
-        SetTeamImage1();
-        SetTeamImage2();
-
-        CreateTeams();
+        CreateTeamsSetSprites();
     }
 
-    public List<Image> GetTeamImage1()
+    public List<Sprite> GetTeamSprite1()
     {
-        return teamImage1;  
+        return teamSprite1;  
     }
 
-    public List<Image> GetTeamImage2()
+    public List<Sprite> GetTeamSprite2()
     {
-        return teamImage2;
+        return teamSprite2;
     }
 
     public GameObject GetTeamSelectionGameObject()
@@ -54,32 +51,20 @@ public class GameController: MonoBehaviour{
         return playerTeam2;
     }
 
-    private void CreateTeams()
+    private void CreateTeamsSetSprites()
     {
 
         foreach (Sloth sloth in teamSelectionGameObject.GetComponent<TeamSelection>().slothTeam1)
         {
             playerTeam1.Add(new Player(sloth));
+            teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 
         foreach (Sloth sloth in teamSelectionGameObject.GetComponent<TeamSelection>().slothTeam2)
         {
             playerTeam2.Add(new Player(sloth));
+            teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
         
     }
-
-    private void SetTeamImage1()
-    {
-        print("Holaaaa");
-        foreach (Image image in teamSelectionGameObject.GetComponent<TeamSelection>().team1SlothImages) { teamImage1.Add(image); }
-        
-    }
-
-    private void SetTeamImage2()
-    {
-        foreach (Image image in teamSelectionGameObject.GetComponent<TeamSelection>().team2SlothImages) { teamImage2.Add(image); }
-        
-    }
-
 }

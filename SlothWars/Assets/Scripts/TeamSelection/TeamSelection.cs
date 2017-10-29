@@ -42,13 +42,11 @@ public class TeamSelection : MonoBehaviour {
 	private Text slot3Defense;
 	private Text slot3Action;
 
-    public List<Image> team1SlothImages;
 	private Image team1Slot1Pic;
 	private Image team1Slot2Pic;
 	private Image team1Slot3Pic;
 	private Image team1Slot4Pic;
 
-    public List<Image> team2SlothImages;
 	private Image team2Slot1Pic;
 	private Image team2Slot2Pic;
 	private Image team2Slot3Pic;
@@ -74,9 +72,6 @@ public class TeamSelection : MonoBehaviour {
         {
             Destroy(transform.gameObject);
         }
-
-        team1SlothImages = new List<Image>();
-        team2SlothImages = new List<Image>();
 
 		slothTeam1 = new List<Sloth> ();
 		slothTeam2 = new List<Sloth> ();
@@ -200,7 +195,7 @@ public class TeamSelection : MonoBehaviour {
 
 	private bool CompareSloths (List<Sloth> list, string type){
 		foreach (Sloth sloth in list) {
-			if (sloth.getType ().Equals (type)) {
+			if (sloth.GetTypeName().Equals (type)) {
 				return true;
 			}
 		}
@@ -213,19 +208,19 @@ public class TeamSelection : MonoBehaviour {
 		if("1".Equals(team)){
 			switch(teamSlot){
 			case 1:
-                team1SlothImages.Add(team1Slot1Pic);
+               
                 team1Slot1Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 2:
-                team1SlothImages.Add(team1Slot2Pic);
+                
                 team1Slot2Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 3:
-                team1SlothImages.Add(team1Slot3Pic);
+               
                 team1Slot3Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 4:
-                team1SlothImages.Add(team1Slot4Pic);
+                
                 team1Slot4Pic.sprite = GetSlothSprite(slot);
 				break;
 			default:
@@ -236,19 +231,19 @@ public class TeamSelection : MonoBehaviour {
 		else{
 			switch(teamSlot){
 			case 1:
-                team2SlothImages.Add(team2Slot1Pic);
+                
                 team2Slot1Pic.sprite = GetSlothSprite (slot);
 				break;
 			case 2:
-                team2SlothImages.Add(team2Slot2Pic);
+                
                 team2Slot2Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 3:
-                team2SlothImages.Add(team2Slot3Pic);
+                
                 team2Slot3Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 4:
-                team2SlothImages.Add(team2Slot4Pic);
+                
                 team2Slot4Pic.sprite = GetSlothSprite(slot);
 				break;
 			default:
