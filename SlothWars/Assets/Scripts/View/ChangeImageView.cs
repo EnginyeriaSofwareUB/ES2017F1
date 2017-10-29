@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class ChangeImageView : MonoBehaviour {
 
     private ChangeImageModel changeImageModel;
-    private static Sprite newSprite;
-
+    public Sprite newSprite;
+    
     private void Awake () {
         changeImageModel = new ChangeImageModel();
-        newSprite = GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Sprite>()[1];
+        
+        //There are some bugs with the Unity Version. It should detect the GameObject.Find as 
+        //it inherits from MonoBehaviour. Therefore, it shows us an error as it could not 
+        //find the gameobject (it is null). (It puts something like Should not be capturing
+        // as it is a hotControl).
+        newSprite = GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Image>()[1].sprite;
     }
 	
 	private void Update () {
