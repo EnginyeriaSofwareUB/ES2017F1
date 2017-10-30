@@ -12,10 +12,11 @@ public class ChangeTurnView: MonoBehaviour {
 
     private void Awake()
     {
-        changeTurnModel = new ChangeTurnModel();
+        
     }
     private void Start()
     {
+        changeTurnModel = new ChangeTurnModel();
         playersTeam1 = new List<Player>();
         playersTeam2 = new List<Player>();
         
@@ -27,6 +28,8 @@ public class ChangeTurnView: MonoBehaviour {
         }
 
         //Getting the information from Model.
+        //TODO: Va antes esto que la accion del boton?? MIRAR: A veces funciona y otras
+        //no. Comprobar flujo.
         playerTurn1 = changeTurnModel.GetTurnPlayer1();
         playerTurn2 = changeTurnModel.GetTurnPlayer2();
 

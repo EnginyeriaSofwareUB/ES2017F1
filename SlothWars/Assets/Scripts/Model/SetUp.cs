@@ -6,7 +6,6 @@ public class SetUp : GameController {
 	// Use this for initialization
 	void Awake () {
         //CreateMap ();
-        print("HOLA");
         PlacePlayers ();
 
 	}

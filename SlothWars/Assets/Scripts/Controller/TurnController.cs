@@ -9,17 +9,17 @@ using UnityEditor.Events;
 public class TurnController: GameController{
    
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
-    private ChangeTurnModel changeTurnModel;
+    private static ChangeTurnModel changeTurnModel;
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
-    private ChangeImageModel changeImageModel;
+    private static ChangeImageModel changeImageModel;
     
     //GameObjects from the scene.
     private static Button endTurnButton;
     private static Sprite spriteFromPreviousScene;
 
     //Parametres need to change the values in the view.
-    private bool isButtonPressed;
+    private static bool isButtonPressed;
 
     private static bool endTurnOfPlayer;
     private static bool beginStopped;
@@ -27,29 +27,28 @@ public class TurnController: GameController{
     private static int turnPlayer2;
 
     
-    private void Awake()
+    public TurnController(bool isButtonPressedCont, int turnPlayer1Cont, int turnPlayer2Cont, bool beginStoppedCont, bool endTurnOfPlayerCont)
     {
 
-        isButtonPressed = false;
+        isButtonPressed = isButtonPressedCont;
         //At the beginning of the game, both turnPlayer1 and turnPlayer2 begin with 0 value.
-        turnPlayer1 = 0;
+        turnPlayer1 = turnPlayer1Cont;
         turnPlayer2 = 0;
 
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
 
         //At the beginning, we set these booleans value to true (To establish that the game has not started yet).
-        beginStopped = true;
-        endTurnOfPlayer = true;
-
-
-        //Get an instance of the end Turn Button in the scene.
-        endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        beginStopped = beginStoppedCont;
+        endTurnOfPlayer = endTurnOfPlayerCont;
 
     }
 
     // Use this for initialization
     private void Start () {
+
+        endTurnButton = GetEndTurnButton();
+
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
@@ -62,20 +61,9 @@ public class TurnController: GameController{
         //When the game starts, we got the image of the first sloth in team1 (corresponding to the one who starts playing (by default))
         //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
-        if(GetTeamSprite1().Contains(null))
-        {
-            print("Problemon con GameController");
-        }
         spriteFromPreviousScene = GetTeamSprite1()[0];
-        print(GetTeamSprite1().Contains(null));
-        if(spriteFromPreviousScene == null)
-        {
-            print("Problema con GameController");
-        }
         changeImageModel.SetSprite(spriteFromPreviousScene);
-
-        
-        
+       
     }
 
     private void Update()
@@ -135,6 +123,7 @@ public class TurnController: GameController{
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
+        //TODO:A veces funciona y otras no. Comprobar flujo
         if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }

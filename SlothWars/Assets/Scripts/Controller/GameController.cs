@@ -10,18 +10,46 @@ public class GameController: MonoBehaviour{
     private static List<Player> playerTeam2;
 
     private static List<Sprite> teamSprite1, teamSprite2;
-    
+    private static Button endTurnButton;
+    private static Sprite spriteFromPreviousScene;
+
+    private bool isButtonPressed;
+
+    private static bool endTurnOfPlayer;
+    private static bool beginStopped;
+    private static int turnPlayer1;
+    private static int turnPlayer2;
+
     // Use this for initialization
+    private TurnController turnController;
+    private LogicController logicController;
 
     private void Awake()
     {
-        
+
+        isButtonPressed = false;
+        endTurnOfPlayer = true;
+        beginStopped = true;
+        turnPlayer1 = 0;
+        turnPlayer2 = 0;
+
         playerTeam1 = new List<Player>();
         playerTeam2 = new List<Player>();
         teamSprite1 = new List<Sprite>();
         teamSprite2 = new List<Sprite>();
    
         CreateTeamsSetSprites();
+
+        endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+
+        turnController = new TurnController(isButtonPressed, turnPlayer1, turnPlayer2, beginStopped, endTurnOfPlayer);
+
+
+    }
+
+    public Button GetEndTurnButton()
+    {
+        return endTurnButton;
     }
 
     public List<Sprite> GetTeamSprite1()
