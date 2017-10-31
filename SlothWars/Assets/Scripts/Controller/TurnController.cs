@@ -33,7 +33,7 @@ public class TurnController: GameController{
         isButtonPressed = isButtonPressedCont;
         //At the beginning of the game, both turnPlayer1 and turnPlayer2 begin with 0 value.
         turnPlayer1 = turnPlayer1Cont;
-        turnPlayer2 = 0;
+        turnPlayer2 = turnPlayer2Cont;
 
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
@@ -68,28 +68,6 @@ public class TurnController: GameController{
 
     private void Update()
     {
-        if (isButtonPressed)
-        {
-            beginStopped = false;
-
-            //We comunicate to the View that the game starts.
-            changeTurnModel.SetBeginStopped(beginStopped);
-
-            //We change the new values in Model in order to comunicate to View and show the results.
-            changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
-            changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
-
-            
-            //To fix possible bugs in changing turns.
-            FixedBugs();
-
-            //Call the method in order to establish the selected image to show.
-            GetSelectedPlayerImage();
-
-            //Set the bool to false in order to show that the actions done while pressing the button have ended and persisting during time
-            //til an user pressed it again.
-            isButtonPressed = false;
-        }
         
     }
    
@@ -143,6 +121,7 @@ public class TurnController: GameController{
     //Method to update the bool endTurnOfPlayer.
     public void SetEndTurnOfPlayer()
     {
+        
         endTurnOfPlayer = !endTurnOfPlayer;
     }
 
@@ -165,8 +144,22 @@ public class TurnController: GameController{
     //Method to detect when the button is being pressed.
     public void SetPressedButton()
     {
-        print(isButtonPressed);
-       
-        isButtonPressed = true;
+        beginStopped = false;
+
+        //We comunicate to the View that the game starts.
+        changeTurnModel.SetBeginStopped(beginStopped);
+
+        //We change the new values in Model in order to comunicate to View and show the results.
+        changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
+        changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
+
+
+        //To fix possible bugs in changing turns.
+        //Quit comments when animator is integrated
+        //FixedBugs();
+
+        //Call the method in order to establish the selected image to show.
+        GetSelectedPlayerImage();
+
     }
 }

@@ -25,20 +25,10 @@ public class ChangeTurnView: MonoBehaviour {
     {
         if (playersTeam1.Count == 0) {
             UpdateSlothTeams();
+            FinishTurn();
         }
-
-        //Getting the information from Model.
-        //TODO: Va antes esto que la accion del boton?? MIRAR: A veces funciona y otras
-        //no. Comprobar flujo.
-        playerTurn1 = changeTurnModel.GetTurnPlayer1();
-        playerTurn2 = changeTurnModel.GetTurnPlayer2();
-
-        beginStopped = changeTurnModel.GetBeginStopped();
-        endTurnOfPlayer = changeTurnModel.GetEndTurnOfPlayer();
-
-        FinishTurn();
     }
-
+     
     //Method to update the teams.
     private void UpdateSlothTeams()
     {
@@ -55,22 +45,30 @@ public class ChangeTurnView: MonoBehaviour {
     // Function in order to change turns.
     public void FinishTurn()
     {
+        playerTurn1 = changeTurnModel.GetTurnPlayer1();
+        playerTurn2 = changeTurnModel.GetTurnPlayer2();
 
+        beginStopped = changeTurnModel.GetBeginStopped();
+        endTurnOfPlayer = changeTurnModel.GetEndTurnOfPlayer();
         // If he has ended, he will press the button, changing the variable to true.
         if (beginStopped)
         {
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
         }
+
         if (endTurnOfPlayer)
         {
+            print("Turno 1 " + playerTurn1);
             changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
         }
         else
         {
+            print("Turno 2 " + playerTurn2);
             changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1]);
             changeTurnModel.ActivateSloth(playersTeam2[playerTurn2]);
 
         }
     }
+    
 }
