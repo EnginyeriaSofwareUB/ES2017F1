@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6d70a83da5386dc4592f300e54ac28bb
 timeCreated: 1509201104
+=======
+guid: 76b5f7131caca481ea9086c956430990
+timeCreated: 1509570562
+>>>>>>> Integració del creador de terrenys. Primera versió. Falta controlar que els "sloths" es posin on toca a partir de les coordenades (x,y,z)=(0,0,0). D'aquesta manera, s'adaptaran a les condicions que es marquen en el creador de terreny.
 licenseType: Free
 DefaultImporter:
   userData: 
