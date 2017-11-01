@@ -50,6 +50,7 @@ public class ChangeTurnView: MonoBehaviour {
 
         beginStopped = changeTurnModel.GetBeginStopped();
         endTurnOfPlayer = changeTurnModel.GetEndTurnOfPlayer();
+
         // If he has ended, he will press the button, changing the variable to true.
         if (beginStopped)
         {

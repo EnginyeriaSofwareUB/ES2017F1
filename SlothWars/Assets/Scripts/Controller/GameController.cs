@@ -5,7 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour{
-  
+
+    //Need this variables to initialize TurnController.
+    
+    ///////*****///////
+    
+    //TURNCONTROLLER VARIABLES
     private static List<Player> playerTeam1;
     private static List<Player> playerTeam2;
 
@@ -20,13 +25,39 @@ public class GameController: MonoBehaviour{
     private static int turnPlayer1;
     private static int turnPlayer2;
 
+    //LOGICCONTROLLER VARIABLES
+    private static List<Button> listAbilities;
+    private static Button firstAbility, secondAbility, thirdAbility;
+
+    //UICONTROLLER VARIABLES
+    public static Image panelMain;
+    public static Image panelOpts;
+    private static bool isPause = false;
+   
+    private static Button resumeOpts;
+    private static Button exitOpts;
+
+    ///////*****///////
+
     // Use this for initialization
     private TurnController turnController;
     private LogicController logicController;
+    private UIController uiController;
 
     private void Awake()
     {
+        InitializeTurnVariables();
+        InitializeLogicVariables();
+        InitializeUIVariables();
 
+        turnController = new TurnController(isButtonPressed, turnPlayer1, turnPlayer2, beginStopped, endTurnOfPlayer);
+        logicController = new LogicController(listAbilities);
+        uiController = new UIController(panelMain, panelOpts, isPause, resumeOpts, exitOpts);
+
+    }
+
+    private void InitializeTurnVariables()
+    {
         isButtonPressed = false;
         endTurnOfPlayer = true;
         beginStopped = true;
@@ -37,13 +68,38 @@ public class GameController: MonoBehaviour{
         playerTeam2 = new List<Player>();
         teamSprite1 = new List<Sprite>();
         teamSprite2 = new List<Sprite>();
-   
+
         CreateTeamsSetSprites();
 
         endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
 
-        turnController = new TurnController(isButtonPressed, turnPlayer1, turnPlayer2, beginStopped, endTurnOfPlayer);
+    }
 
+    private void InitializeLogicVariables()
+    {
+        listAbilities = new List<Button>();
+
+        firstAbility = GameObject.Find("buttonAbility1").GetComponent<Button>();
+        secondAbility = GameObject.Find("buttonAbility2").GetComponent<Button>();
+        thirdAbility = GameObject.Find("buttonAbility3").GetComponent<Button>();
+
+        listAbilities.Add(firstAbility);
+        listAbilities.Add(secondAbility);
+        listAbilities.Add(thirdAbility);
+
+    }
+
+    private void InitializeUIVariables()
+    {
+        panelMain = GameObject.Find("MainUIPanel").GetComponent<Image>();
+        panelOpts = GameObject.Find("OptionPanel").GetComponent<Image>();
+
+        //panelMain init Elements
+
+        //panelOpts init Elements
+
+        resumeOpts = GameObject.Find("ResumeGame").GetComponent<Button>();
+        exitOpts = GameObject.Find("QuitButton").GetComponent<Button>();
 
     }
 
@@ -88,4 +144,5 @@ public class GameController: MonoBehaviour{
         }
         
     }
+
 }

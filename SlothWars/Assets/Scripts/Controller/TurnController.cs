@@ -101,7 +101,7 @@ public class TurnController: GameController{
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
-        //TODO:A veces funciona y otras no. Comprobar flujo
+        
         if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }

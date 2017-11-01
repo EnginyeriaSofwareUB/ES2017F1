@@ -7,9 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class LogicController: GameController{
 
-    public static LogicController logicController;
-    private Button firstAbility;
-    private Button secondAbility;
-    private Button thirdAbility;
+    private static Button firstAbility;
+    private static Button secondAbility;
+    private static Button thirdAbility;
 
+    public LogicController(List<Button> listAbilities)
+    {
+        firstAbility = listAbilities[0];
+        secondAbility = listAbilities[1];
+        thirdAbility = listAbilities[2];
+    } 
 }

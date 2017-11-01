@@ -5,65 +5,90 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-
 public class UIController : MonoBehaviour {
-	public Image panelMain;
-	public Image panelOpts;
-	private bool isPause = false;
+	public static Image panelMain;
+	public static Image panelOpts;
 
-	//optionsPanel
-	private Button resumeOpts;
-	private Button exitOpts;
+    private static bool setActivePanelOpts, setActivePanelMain;
+    private bool isPause;
+    private static bool isSet = false;
+    //optionsPanel
+	private static Button resumeOpts;
+	private static Button exitOpts;
+    private static int i = 0;
+    //Get UIModel Constructor.
+    private UIModel uiModel;
 
+    public UIController (Image panelMainCont, Image PanelOptsCont, bool isPauseCont, Button resumeOptsCont, Button exitOptsCont)
+    {
+        panelMain = panelMainCont;
+        panelOpts = PanelOptsCont;
+        isPause = isPauseCont;
+        resumeOpts = resumeOptsCont;
+        exitOpts = exitOptsCont;
+    }
 
 	// Use this for initialization
-	void Awake () {
-		panelMain = GameObject.Find ("MainUIPanel").GetComponent<Image>();
-		panelOpts = GameObject.Find ("OptionPanel").GetComponent<Image>();
+	private void Start () {
+        uiModel = new UIModel();
 
-		//panelMain init Elements
+        InitializeBoolVariables();
+        
+        uiModel.SetStatePanelOpts(setActivePanelOpts);
+        uiModel.SetStatePanelMain(setActivePanelMain);
 
-		//panelOpts init Elements
+        uiModel.SetPanelOpts(panelOpts);
+        uiModel.SetPanelMain(panelMain);
 
-		resumeOpts = GameObject.Find ("ResumeGame").GetComponent<Button>();
-		exitOpts = GameObject.Find ("QuitButton").GetComponent<Button>();
+        panelOpts.gameObject.SetActive (setActivePanelOpts);
+		panelMain.gameObject.SetActive (setActivePanelMain);
 
-		panelOpts.gameObject.SetActive (false);
-		panelMain.gameObject.SetActive (true);
-
-		resumeOpts.onClick.AddListener (delegate{resumeSelected();});
-		exitOpts.onClick.AddListener (delegate {exitGame ();});
 	}
 	
 	// Update is called once per frame
 
-	void Update () {
+	private void Update () {
 
-		//pause time if they press escape keyboard 
-		if( Input.GetKeyDown(KeyCode.Escape))
+
+
+        //pause time if they press escape keyboard 
+        if ( Input.GetKeyDown(KeyCode.Escape))
 		{
-			
+
 			isPause = !isPause;
-			if (isPause) {
-				Time.timeScale = 0;
-				panelOpts.gameObject.SetActive (true);
-			} else {
-				Time.timeScale = 1;
-				panelOpts.gameObject.SetActive (false);
-			}}
-		
+
+           if (isPause) {
+                uiModel.SetStatePanelOpts(true);
+
+            } else {
+                if (isSet)
+                {
+                    uiModel.SetStatePanelOpts(true);
+                }
+                else
+                {
+                    uiModel.SetStatePanelOpts(false);
+                }                
+			}
+           
+        }
+        
 	}
 
+    private void InitializeBoolVariables()
+    {
+        isPause = false;
+        setActivePanelOpts = false;
+        setActivePanelMain = true;
 
-	void resumeSelected(){
-		isPause = false;
-		panelOpts.gameObject.SetActive (false);
-		Time.timeScale = 1;
-	}
+    }
 
-	void exitGame(){
-		panelOpts.gameObject.SetActive (false);
-		SceneManager.LoadScene("MainMenu");
-	}
+    public void SetPause()
+    {
+        isSet = true;
+        setActivePanelOpts = false;
+        uiModel.SetStatePanelOpts(setActivePanelOpts);
+    }
+
 
 }
