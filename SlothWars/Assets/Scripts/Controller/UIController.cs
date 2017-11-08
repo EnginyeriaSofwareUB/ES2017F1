@@ -49,8 +49,6 @@ public class UIController : MonoBehaviour {
 
 	private void Update () {
 
-
-
         //pause time if they press escape keyboard 
         if ( Input.GetKeyDown(KeyCode.Escape))
 		{
