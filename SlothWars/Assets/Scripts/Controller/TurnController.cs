@@ -15,7 +15,6 @@ public class TurnController: GameController{
     private static ChangeImageModel changeImageModel;
     
     //GameObjects from the scene.
-    private static Button endTurnButton;
     private static Sprite spriteFromPreviousScene;
 
     //Parametres need to change the values in the view.
@@ -42,13 +41,12 @@ public class TurnController: GameController{
         beginStopped = beginStoppedCont;
         endTurnOfPlayer = endTurnOfPlayerCont;
 
+        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
     }
 
     // Use this for initialization
     private void Start () {
-
-        endTurnButton = GetEndTurnButton();
-
+        
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
@@ -70,34 +68,7 @@ public class TurnController: GameController{
     {
         
     }
-   
-    private void FixedBugs()
-    {
-        // Now is the TurnController who interacts with buttons. This should be a job for View.
-        // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
-        if (GetPlayerTeam(1)[turnPlayer1].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || GetPlayerTeam(2)[turnPlayer2].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
-        {
-            changeTurnModel.SetEndTurnButton(false);
-            endTurnButton.interactable = false;
-        }
-        else
-        {
-            changeTurnModel.SetEndTurnButton(true);
-            endTurnButton.interactable = true;
-        }
 
-        // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
-        if ((GetPlayerTeam(1)[turnPlayer1].GetComponent<ShotScript>().GetShotLoad() || GetPlayerTeam(2)[turnPlayer2].GetComponent<ShotScript>().GetShotLoad()))
-        {
-            changeTurnModel.SetEndTurnButton(false);
-            endTurnButton.interactable = false;
-        }
-        else
-        {
-            changeTurnModel.SetEndTurnButton(true);
-            endTurnButton.interactable = true;
-        }
-    }
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
@@ -105,15 +76,15 @@ public class TurnController: GameController{
         if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            if (turnPlayer1 == turnPlayer2) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            if (turnPlayer1 - turnPlayer2 > 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            if (turnPlayer1 - turnPlayer2 < -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if (turnPlayer1 == turnPlayer2) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if (turnPlayer1 - turnPlayer2 > 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if (turnPlayer1 - turnPlayer2 < -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
         else
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            if(turnPlayer1 == GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if(turnPlayer1 == GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else { turnPlayer2 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
     }

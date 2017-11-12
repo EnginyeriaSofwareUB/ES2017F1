@@ -19,9 +19,6 @@ public class ChangeImageView : MonoBehaviour {
     }
 	
 	private void Update () {
-
-        ShowImage();
-
     }
 
     // Method to show the image in the scene. Called by end turn Button in order to show the image corresponding to the sloth's turn.

@@ -115,6 +115,10 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+    public bool GetMove()
+    {
+        return move;
+    }
 	void Die(){
 		Destroy (gameObject);
 	}

@@ -9,20 +9,19 @@ public class ChangeTurnView: MonoBehaviour {
     private bool endTurnOfPlayer,beginStopped;
     private int playerTurn1, playerTurn2;
     private List<Player> playersTeam1, playersTeam2;
+    private Button endTurnButton;
 
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
         changeTurnModel = new ChangeTurnModel();
+        endTurnButton = changeTurnModel.GetEndTurnButton();
         playersTeam1 = new List<Player>();
         playersTeam2 = new List<Player>();
         
     }
     private void Update()
     {
+        
         if (playersTeam1.Count == 0) {
             UpdateSlothTeams();
             FinishTurn();
@@ -71,5 +70,30 @@ public class ChangeTurnView: MonoBehaviour {
 
         }
     }
-    
+
+    private void FixedBugs()
+    {
+        // Now is the TurnController who interacts with buttons. This should be a job for View.
+        // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
+        
+        if (changeTurnModel.GetTeam1()[playerTurn1].GetComponent<Player>().GetMove() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<Player>().GetMove())
+        {
+            endTurnButton.interactable = false;
+        }
+        else
+        {
+            endTurnButton.interactable = true;
+        }
+
+        // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
+        if ((changeTurnModel.GetTeam1()[playerTurn1].GetComponent<ShotScript>().GetShotLoad() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<ShotScript>().GetShotLoad()))
+        {
+            endTurnButton.interactable = false;
+        }
+        else
+        {
+            endTurnButton.interactable = true;
+        }
+    }
+
 }

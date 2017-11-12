@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class ChangeTurnModel
 {
-
+    private static Button endTurnButton;
     private static List<Player> playerTeam1 = new List<Player>();
     private static List<Player> playerTeam2 = new List<Player>();
     private static bool endTurnOfPlayer;
-    private static bool endTurnButton;
+    private static bool endTurnButtonStatus;
     private static bool beginStopped;
     private static int turnPlayer1 = 0;
     private static int turnPlayer2 = 0;
 
     public ChangeTurnModel() {}
   
+    public void SetEndTurnButton(Button endTurnButtonController) { endTurnButton = endTurnButtonController; }
+    public Button GetEndTurnButton() { return endTurnButton; }
     // Getters and Setters.
-    public bool GetEndTurnButton() { return endTurnButton; }
-    public void SetEndTurnButton(bool endTurnButtonController) { endTurnButton = endTurnButtonController; }
+    public bool GetEndTurnButtonStatus() { return endTurnButtonStatus; }
+    public void SetEndTurnButtonStatus(bool endTurnButtonController) { endTurnButtonStatus = endTurnButtonController; }
 
     public bool GetBeginStopped() { return beginStopped; }
     public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController; }

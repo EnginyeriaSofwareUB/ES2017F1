@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour{
-
-    //Need this variables to initialize TurnController.
     
     ///////*****///////
     
