@@ -6,6 +6,14 @@ TagManager:
   tags:
   - sloth
   - slothImage
+  - lifeImage
+  - attackImage
+  - shieldImage
+  - actionImage
+  - lifeSlothText
+  - attackSlothText
+  - shieldSlothText
+  - actionSlothText
   layers:
   - Default
   - TransparentFX
