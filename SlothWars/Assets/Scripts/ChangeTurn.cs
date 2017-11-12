@@ -44,8 +44,7 @@ public class ChangeTurn : MonoBehaviour
         slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
         slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
 
-        // if a sloth is walking, the player cannot end the turn (Disable the end turn button)
-        if (slothTeamA[slothTurnA].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk") || slothTeamB[slothTurnB].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("walk"))
+        if (slothTeamA[slothTurnA].GetComponent<player>().GetMove())
         {
             endTurnButton.GetComponent<Button>().interactable = false;
         }
@@ -53,7 +52,6 @@ public class ChangeTurn : MonoBehaviour
         {
             endTurnButton.GetComponent<Button>().interactable = true;
         }
-
         // if a sloth is shooting, the player cannot end the turn (Disable the end turn button) 
         if ((slothTeamA[slothTurnA].GetComponent<ShotScript>().GetShotLoad() || slothTeamB[slothTurnB].GetComponent<ShotScript>().GetShotLoad()))
         {

@@ -108,4 +108,9 @@ public class player : MonoBehaviour {
 			transform.position = new Vector3 (-9.5f, transform.position.y, transform.position.z);
 		}
 	}
+
+    public bool GetMove()
+    {
+        return this.move;
+    }
 }
