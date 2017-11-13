@@ -113,24 +113,18 @@ public class Player : MonoBehaviour {
 			transform.position = new Vector3 (-9.5f, transform.position.y, transform.position.z);
 		}
 	}
-
-<<<<<<< HEAD
+    
     public bool GetMove()
     {
         return move;
     }
-	void Die(){
-=======
 	public Sloth GetSloth(){
 		return this.sloth;
 	}
-
 	public void SetSloth(Sloth sloth){
 		this.sloth = sloth;
 	}
-
 	public void Die(){
->>>>>>> 8c3dffd6a4c6b089da3ff6ae702454aad5126c87
 		Destroy (gameObject);
 	}
 }
