@@ -50,5 +50,25 @@ public class ProjectileFactory
         return null;
 
     }
+    public Projectile getProjectile(Ability a)
+    {
+        if (a is ProjectileAbility)
+        {
+            return new BulletProjectile();
+
+        }
+        else if (a is HealingAbility)
+        {
+            return new HealingProjectile();
+
+        }
+        else if (a is MagicAbility)
+        {
+            return new MagicProjectile();
+        }
+        
+        return new BulletProjectile();
+
+    }
 
 }

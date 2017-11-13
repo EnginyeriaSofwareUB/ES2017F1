@@ -75,5 +75,10 @@ public class Sloth
     {
         return this.typeName;
     }
+    //sums dmg_heal to hp
+    public void SumToHp(double dmg_heal)
+    {
+        hp += dmg_heal;
+    }
 
 }

@@ -15,9 +15,14 @@ public class HealthScript : MonoBehaviour {
 	void Update () {
      
     }
-    public void TakeDamage(int d)
+    public void SetHealth(int h)
     {
-        health -= d;
+        health = h;
+        text.text = "" + health;
+    }
+    public void SumToHP(int d_h)
+    {
+        health += d_h;
         text.text = "" + health;
     }
     public void turnRight()

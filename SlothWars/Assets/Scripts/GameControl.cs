@@ -35,7 +35,23 @@ public class GameControl : MonoBehaviour {
             // else, do nothing. Keeps the GameControl from previous scenes.
         }
     }
-
+    
+    //sums dmg_heal to the hp bar asociated to target
+ 
+    public void SumToHpBar(Sloth target, double dmg_Heal)
+    {
+        // GameObject-Sloth connection needed HealthScript.SumToHp()
+    }
+    // sums residual during t turns
+    public void SumResidual(Sloth target, Double residual, int t)
+    {
+        // GameObject-Sloth connection needed
+    }
+    // apply last ability to the target
+    public void ApplyLastAbility(GameObject sloth)
+    {
+        // GameObject-Sloth connection needed
+    }
     private void Start()
     {
         slothTeam1 = new List<string>();

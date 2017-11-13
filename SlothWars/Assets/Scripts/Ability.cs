@@ -3,6 +3,8 @@
 public interface Ability
 {
 
-    void apply(Sloth target);
-    void apply();
+    void Apply(Sloth target);
+    void Apply();
+    float GetRange();
+    float GetRadius();
 }
