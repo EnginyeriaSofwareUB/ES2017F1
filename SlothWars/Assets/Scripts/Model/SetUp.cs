@@ -11,7 +11,7 @@ public class SetUp : GameController {
 	List<GameObject> teamSloths1;
 	List<GameObject> teamSloths2;
 	GameController gameControl;
-	void Awake () {
+	void Start () {
         //CreateMap ();
 		gameControl = GameObject.Find("GameController").GetComponent<GameController>();
 		team1 = gameControl.GetPlayerTeam (1);
