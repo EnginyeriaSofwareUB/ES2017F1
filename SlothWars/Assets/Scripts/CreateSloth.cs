@@ -11,7 +11,7 @@ public class CreateSloth : MonoBehaviour {
 	GameObject slothTeamB, gunSlothTeamB;
 
     float startingPositionA = 0.5f;
-    float startingPositionB = 15.5f;
+    float startingPositionB = 149.5f;
 
 	void Start(){
 
@@ -24,7 +24,7 @@ public class CreateSloth : MonoBehaviour {
         slothTeamA = GameObject.Find ("avatarSlothTeamA");
         slothTeamA.transform.position = new Vector3(startingPositionA, 0.5f, 0f);
         //Debug.Log("Team A: " + slothTeamA.transform.position.ToString());
-        startingPositionA += 1;
+        startingPositionA += 2;
         teamA.Add(slothTeamA);
        
         //gunSlothTeamA = GameObject.Find("gunSlothTeamA");
@@ -34,7 +34,7 @@ public class CreateSloth : MonoBehaviour {
         slothTeamB = GameObject.Find ("avatarSlothTeamB");
         slothTeamB.transform.position = new Vector3(startingPositionB, 0.5f, 0f);
         //Debug.Log("Team B: " + slothTeamB.transform.position.ToString());
-        startingPositionB -= 1;
+        startingPositionB -= 2;
         teamB.Add(slothTeamB);
 
         //gunSlothTeamB = GameObject.Find("gunSlothTeamB");
@@ -51,7 +51,7 @@ public class CreateSloth : MonoBehaviour {
 			//GameObject newGunTeamA = Instantiate(gunSlothTeamA);
 
             newSlothTeamA.transform.position = new Vector3 (startingPositionA, 0.5f, 0);
-            startingPositionA += 1;
+            startingPositionA += 2;
             //Debug.Log("Team A: " + newSlothTeamA.transform.position.ToString());
 			//newGunTeamA.transform.position = new Vector3(-gunsTeamA.Count - 1, 0.5F, 0);
 
@@ -66,7 +66,7 @@ public class CreateSloth : MonoBehaviour {
 			//GameObject newGunTeamB = Instantiate(gunSlothTeamB);
 
             newSlothTeamB.transform.position = new Vector3 (startingPositionB, 0.5f, 0);
-            startingPositionB -= 1;
+            startingPositionB -= 2;
             //Debug.Log("Team B: " + newSlothTeamB.transform.position.ToString());
 			//newGunTeamB.transform.position = new Vector3(+gunsTeamB.Count + 1, 0.5F, 0);
 

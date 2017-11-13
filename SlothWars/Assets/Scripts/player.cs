@@ -97,15 +97,15 @@ public class player : MonoBehaviour {
 	// Method for limiting available movement space for the player 
 	void Movement_Correction()
 	{
-		if (transform.position.x > 9.5) 
+		if (transform.position.x > 149.5f) 
 		{
             move = false;
-			transform.position = new Vector3 (9.5f, transform.position.y, transform.position.z);
+			transform.position = new Vector3 (149.5f, transform.position.y, transform.position.z);
 		}
-		if (transform.position.x < -9.5) 
+		if (transform.position.x < 0.5f) 
 		{
             move = false;
-			transform.position = new Vector3 (-9.5f, transform.position.y, transform.position.z);
+			transform.position = new Vector3 (0.5f, transform.position.y, transform.position.z);
 		}
 	}
 
