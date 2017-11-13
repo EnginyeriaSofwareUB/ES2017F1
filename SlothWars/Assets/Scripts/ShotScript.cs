@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShotScript : MonoBehaviour {
     public GameObject ForceBar; //force/range bar gameObject
@@ -13,13 +14,27 @@ public class ShotScript : MonoBehaviour {
     MagicAbility mA;
     ProjectileAbility pA;
     HealingAbility hA;
-    ForceBarScript st; 
-	//initialization
-	void Start () {
+    ForceBarScript st;
+
+    private Button bAbility1;
+    private Button bAbility2;
+    private Button bAbility3;
+    private bool active = true;
+    //initialization
+    void Start () {
         gun = this.GetComponentInChildren<Transform>().Find("GUN");
         hA = new HealingAbility();
         pA = new ProjectileAbility();
         mA = new MagicAbility();
+        // Buttons
+        bAbility1 = GameObject.Find("Ability1").GetComponent<Button>();
+        bAbility2 = GameObject.Find("Ability2").GetComponent<Button>();
+        bAbility3 = GameObject.Find("Ability3").GetComponent<Button>();
+
+        // Listeners
+        bAbility1.onClick.AddListener(delegate { TriggerAbility(1); });
+        bAbility2.onClick.AddListener(delegate { TriggerAbility(2); });
+        bAbility3.onClick.AddListener(delegate { TriggerAbility(3); });
 
     }
 	// creates a force bar with the first key pressed , shoots with the second key pressed and aims with the vertical axis 
@@ -41,6 +56,24 @@ public class ShotScript : MonoBehaviour {
             }
         }
 	}
+    private void TriggerAbility(int n)
+    {
+        if (active && !mov)
+        {
+            if (n == 1)
+            {
+                Shot(mA);
+            }
+            if (n == 2)
+            {
+                Shot(pA);
+            }
+            if (n == 3)
+            {
+                Shot(hA);
+            }
+        }
+    }
     // creates a force bar
     private void Bar()
     {
@@ -74,6 +107,7 @@ public class ShotScript : MonoBehaviour {
     //desactive the gun of the sloth
     public void Active(bool b)
     {
+        active = b;
         gun.gameObject.SetActive(b);
     }
     // used to dont move the sloth when shot is on load
