@@ -21,11 +21,11 @@ public class ChangeTurnView: MonoBehaviour {
     }
     private void Update()
     {
-        
         if (playersTeam1.Count == 0) {
             UpdateSlothTeams();
             FinishTurn();
-        }
+        } 
+        FixedBugs();
     }
      
     //Method to update the teams.

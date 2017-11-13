@@ -6,16 +6,9 @@ using NUnit.Framework;
 
 public class SetUp : GameController {
 	// Use this for initialization
-	List<Player> team1; 
-	List<Player> team2;
 	List<GameObject> teamSloths1;
 	List<GameObject> teamSloths2;
-	GameController gameControl;
 	void Start () {
-        //CreateMap ();
-		gameControl = GameObject.Find("GameController").GetComponent<GameController>();
-		team1 = gameControl.GetPlayerTeam (1);
-		team2 = gameControl.GetPlayerTeam (2);
 		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
 		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
         PlacePlayers ();
@@ -32,7 +25,7 @@ public class SetUp : GameController {
 		Animator anim;
 		ShotScript shot;
 		SlothSelected selected;
-		foreach(Player player in team1){
+		foreach(Player player in GetPlayerTeam(1)){
 			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (i+2, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();
@@ -56,7 +49,7 @@ public class SetUp : GameController {
 			i++;
 		}
 		i = 0;
-		foreach (Player player in team2) {
+		foreach (Player player in GetPlayerTeam(2)) {
 			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (-i-2, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();

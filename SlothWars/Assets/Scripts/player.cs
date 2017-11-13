@@ -118,13 +118,17 @@ public class Player : MonoBehaviour {
     {
         return move;
     }
-	public Sloth GetSloth(){
-		return this.sloth;
+	public Sloth GetSloth()
+    {
+		return sloth;
 	}
-	public void SetSloth(Sloth sloth){
+
+    public void SetSloth(Sloth sloth)
+    {
 		this.sloth = sloth;
 	}
-	public void Die(){
+
+    public void Die(){
 		Destroy (gameObject);
 	}
 }

@@ -13,8 +13,6 @@ public class GameController: MonoBehaviour{
     //TURNCONTROLLER VARIABLES
     private static List<Player> playerTeam1;
     private static List<Player> playerTeam2;
-	private static List<GameObject> teamSloths1;
-	private static List<GameObject> teamSloths2;
 
     private static List<Sprite> teamSprite1, teamSprite2;
     private static Button endTurnButton;
@@ -30,6 +28,8 @@ public class GameController: MonoBehaviour{
     //LOGICCONTROLLER VARIABLES
     private static List<Button> listAbilities;
     private static Button firstAbility, secondAbility, thirdAbility;
+    private static List<GameObject> teamSloths1;
+    private static List<GameObject> teamSloths2;
 
     //UICONTROLLER VARIABLES
     public static Image panelMain;
@@ -71,9 +71,9 @@ public class GameController: MonoBehaviour{
 		Player pla;
 		int i = 1;
 		foreach (GameObject sloth in teamSloths1) {
-			health = (HealthScript) sloth.GetComponent <HealthScript> ();
+			health = sloth.GetComponent <HealthScript> ();
 			if (health.getHealth () <= 0){
-				pla = (Player)sloth.GetComponent <Player> ();
+				pla = sloth.GetComponent <Player> ();
 				pla.Die ();
 				teamSloths1.Remove (sloth);
 			}
@@ -81,9 +81,9 @@ public class GameController: MonoBehaviour{
 		}
 		i = 0;
 		foreach (GameObject sloth in teamSloths2) {
-			health = (HealthScript) sloth.GetComponent <HealthScript> ();
+			health = sloth.GetComponent <HealthScript> ();
 			if (health.getHealth () <= 0){
-				pla = (Player)sloth.GetComponent <Player> ();
+				pla = sloth.GetComponent <Player> ();
 				pla.Die ();
 				teamSloths2.Remove (sloth);
 			}
