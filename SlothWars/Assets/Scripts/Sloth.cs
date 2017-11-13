@@ -85,4 +85,8 @@ public class Sloth
         return this.sprite;
     }
 
+	public double GetHp(){
+		return this.hp;
+	}
+
 }

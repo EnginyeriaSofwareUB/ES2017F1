@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using NUnit.Framework;
+using System.Security.Cryptography.X509Certificates;
 
 public class GameController: MonoBehaviour{
 
@@ -13,6 +15,8 @@ public class GameController: MonoBehaviour{
     //TURNCONTROLLER VARIABLES
     private static List<Player> playerTeam1;
     private static List<Player> playerTeam2;
+	private static List<GameObject> teamSloths1;
+	private static List<GameObject> teamSloths2;
 
     private static List<Sprite> teamSprite1, teamSprite2;
     private static Button endTurnButton;
@@ -54,7 +58,40 @@ public class GameController: MonoBehaviour{
         logicController = new LogicController(listAbilities);
         uiController = new UIController(panelMain, panelOpts, isPause, resumeOpts, exitOpts);
 
+		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
+		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
+
     }
+
+	void Update(){
+		CheckSlothsAlive ();
+
+	}
+
+	private void CheckSlothsAlive(){
+		HealthScript health;
+		Player pla;
+		int i = 1;
+		foreach (GameObject sloth in teamSloths1) {
+			health = (HealthScript) sloth.GetComponent <HealthScript> ();
+			if (health.getHealth () <= 0){
+				pla = (Player)sloth.GetComponent <Player> ();
+				pla.Die ();
+				teamSloths1.Remove (sloth);
+			}
+			i++;
+		}
+		i = 0;
+		foreach (GameObject sloth in teamSloths2) {
+			health = (HealthScript) sloth.GetComponent <HealthScript> ();
+			if (health.getHealth () <= 0){
+				pla = (Player)sloth.GetComponent <Player> ();
+				pla.Die ();
+				teamSloths2.Remove (sloth);
+			}
+			i++;
+		}
+	}
 
     private void InitializeTurnVariables()
     {
@@ -127,7 +164,7 @@ public class GameController: MonoBehaviour{
         }
         return playerTeam2;
     }
-
+		
     private void CreateTeamsSetSprites()
     {
 

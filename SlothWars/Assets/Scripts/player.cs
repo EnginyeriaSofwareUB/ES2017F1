@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
 
 	private float inputH;
 	private float inputV;
-
 	private bool move = false;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
@@ -115,7 +114,15 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void Die(){
+	public Sloth GetSloth(){
+		return this.sloth;
+	}
+
+	public void SetSloth(Sloth sloth){
+		this.sloth = sloth;
+	}
+
+	public void Die(){
 		Destroy (gameObject);
 	}
 }
