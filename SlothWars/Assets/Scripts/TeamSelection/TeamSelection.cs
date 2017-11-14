@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class TeamSelection : MonoBehaviour {
 
+	private static bool created = false;
+	public List<Sloth> slothTeam1;
+	public List<Sloth> slothTeam2;
+	private const int maxTeamSloths = 4;
 	private Text currentPageText;
 	private Text numPlayer;
 
@@ -16,7 +20,7 @@ public class TeamSelection : MonoBehaviour {
 	private GameObject slot1;
 	private GameObject slot2;
 	private GameObject slot3;
-	
+
 	private Text slot1Type;
 	private Button slot1Pic;
 	private Text slot1Health;
@@ -38,13 +42,13 @@ public class TeamSelection : MonoBehaviour {
 	private Text slot3Defense;
 	private Text slot3Action;
 
-    public List<Image> team1SlothImages;
+	public List<Image> team1SlothImages;
 	private Image team1Slot1Pic;
 	private Image team1Slot2Pic;
 	private Image team1Slot3Pic;
 	private Image team1Slot4Pic;
 
-    public List<Image> team2SlothImages;
+	public List<Image> team2SlothImages;
 	private Image team2Slot1Pic;
 	private Image team2Slot2Pic;
 	private Image team2Slot3Pic;
@@ -60,14 +64,14 @@ public class TeamSelection : MonoBehaviour {
 
 	void Awake()
 	{
-        // Need the selected sloths for next scene.
-        DontDestroyOnLoad(transform.gameObject);
 
+		slothTeam1 = new List<Sloth> ();
+		slothTeam2 = new List<Sloth> ();
+		DontDestroyOnLoad(transform.gameObject);
 
+		// Dynamic elements
 
-        // Dynamic elements
-
-        currentPageText = GameObject.Find("currentPage").GetComponent<Text>();
+		currentPageText = GameObject.Find("currentPage").GetComponent<Text>();
 		numPlayer = GameObject.Find("playerValue").GetComponent<Text>();
 
 		slot1 = GameObject.Find ("slot1");
@@ -128,7 +132,7 @@ public class TeamSelection : MonoBehaviour {
 		// if lenJson==0 : System.Exit();
 		slothPerPage = 3;
 		int slothModule = (lenJson % slothPerPage);
-	    currentPage = 0;
+		currentPage = 0;
 		// Number of aviable pages to select a sloth.
 		lastPage = (slothModule == 0) ? (lenJson/slothPerPage)-1 : (int) lenJson/slothPerPage;
 		// Number of the last active slot in the last page.
@@ -148,58 +152,69 @@ public class TeamSelection : MonoBehaviour {
 	}
 
 	void SlothSelect(string slot){
-        string type = GetSlothType(slot);
+		string type = GetSlothType(slot);
 		if("1".Equals(numPlayer.text)){
-			if(GameControl.control.slothTeam1.Contains(type)){
+			if(CompareSloths(slothTeam1, type)){
 				Debug.Log ("Team 1 already has this sloth");
-                // ScreenMessage.showMessage("Your team already has this sloth");
-            }
-            else{
-                GameControl.control.slothTeam1.Add(type);
+				// ScreenMessage.showMessage("Your team already has this sloth");
+			}
+			else{
+				slothTeam1.Add(new Sloth(type));
 				Debug.Log (type+" sloth added to team 1");
-				SetTeamSlotPic("1",slot,GameControl.control.slothTeam1.Count);
-			    numPlayer.text = "2";
-            }
-        }
-        else{
-			if(GameControl.control.slothTeam2.Contains(type)){
+				SetTeamSlotPic("1",slot,slothTeam1.Count);
+				numPlayer.text = "2";
+			}
+		}
+		else{
+			if(CompareSloths(slothTeam2, type)){
 				Debug.Log ("Team 2 already has this sloth");
-                // ScreenMessage.showMessage("Your team already has this sloth");
-            }
-            else{
-				GameControl.control.slothTeam2.Add (type);
+				// ScreenMessage.showMessage("Your team already has this sloth");
+			}
+			else{
+				slothTeam2.Add(new Sloth(type));
+				//slothTeam2.Add (new Sloth(type));
 				Debug.Log (type+" sloth added to team 2");
-				SetTeamSlotPic("2",slot,GameControl.control.slothTeam2.Count);
-				if(GameControl.control.slothTeam2.Count==GameControl.control.maxTeamSloths){
+				SetTeamSlotPic("2",slot,slothTeam2.Count);
+				if(slothTeam2.Count == maxTeamSloths){
 					Debug.Log ("TEAM SELECTION FINISHED!");
-                    //ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
-                    //WaitAndLoadScene(3);
+					//ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
+					//WaitAndLoadScene(3);
 					SceneManager.LoadScene ("default_scene");
-                }
-                numPlayer.text = "1";
-            }
-        }
+				}
+				numPlayer.text = "1";
+			}
+		}
 	}
-    
-    // Adding the images in team1SlothImages and team2SlothImages
+
+	private bool CompareSloths (List<Sloth> list, string type){
+		foreach (Sloth sloth in list) {
+			if (sloth.GetTypeName().Equals (type)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	// Adding the images in team1SlothImages and team2SlothImages
 	void SetTeamSlotPic(string team, string slot, int teamSlot){
 		if("1".Equals(team)){
 			switch(teamSlot){
 			case 1:
-                team1SlothImages.Add(team1Slot1Pic);
-                team1Slot1Pic.sprite = GetSlothSprite(slot);
+				team1SlothImages.Add(team1Slot1Pic);
+				team1Slot1Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 2:
-                team1SlothImages.Add(team1Slot2Pic);
-                team1Slot2Pic.sprite = GetSlothSprite(slot);
+				team1SlothImages.Add(team1Slot2Pic);
+				team1Slot2Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 3:
-                team1SlothImages.Add(team1Slot3Pic);
-                team1Slot3Pic.sprite = GetSlothSprite(slot);
+				team1SlothImages.Add(team1Slot3Pic);
+				team1Slot3Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 4:
-                team1SlothImages.Add(team1Slot4Pic);
-                team1Slot4Pic.sprite = GetSlothSprite(slot);
+				team1SlothImages.Add(team1Slot4Pic);
+				team1Slot4Pic.sprite = GetSlothSprite(slot);
 				break;
 			default:
 				// throw Exception
@@ -209,25 +224,25 @@ public class TeamSelection : MonoBehaviour {
 		else{
 			switch(teamSlot){
 			case 1:
-                team2SlothImages.Add(team2Slot1Pic);
-                team2Slot1Pic.sprite = GetSlothSprite (slot);
+				team2SlothImages.Add(team1Slot1Pic);
+				team2Slot1Pic.sprite = GetSlothSprite (slot);
 				break;
 			case 2:
-                team2SlothImages.Add(team2Slot2Pic);
-                team2Slot2Pic.sprite = GetSlothSprite(slot);
+				team2SlothImages.Add(team1Slot2Pic);
+				team2Slot2Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 3:
-                team2SlothImages.Add(team2Slot3Pic);
-                team2Slot3Pic.sprite = GetSlothSprite(slot);
+				team2SlothImages.Add(team1Slot3Pic);
+				team2Slot3Pic.sprite = GetSlothSprite(slot);
 				break;
 			case 4:
-                team2SlothImages.Add(team2Slot4Pic);
-                team2Slot4Pic.sprite = GetSlothSprite(slot);
+				team2SlothImages.Add(team1Slot4Pic);
+				team2Slot4Pic.sprite = GetSlothSprite(slot);
 				break;
 			default:
 				// throw Exception
 				break;
-			} 
+			}
 		}
 	}
 

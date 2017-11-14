@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour {
-    private int health= 100;
+    private double health= 100;
     private TextMesh text;
 
 	// Use this for initialization
@@ -35,4 +35,12 @@ public class HealthScript : MonoBehaviour {
         text.transform.eulerAngles = new Vector3(0, 360, 0);
         text.transform.localPosition = new Vector3(0, 3, 0.5f);
     }
+
+	public void setHealth(double health){
+		this.health = health;
+	}
+
+	public double getHealth(){
+		return this.health;
+	}
 }

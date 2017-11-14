@@ -75,22 +75,19 @@ public class Sloth
     {
         return this.typeName;
     }
-    //sums dmg_heal to hp
-    public void SumToHp(double dmg_heal)
-    {
-        hp += dmg_heal;
-    }
-		
-	public Ability getAbility(int n){
-		if (n == 1) {
-			return this.ab1;
-		}
-		else if(n == 2) {
-			return this.ab2;
-		}
-		else{
-			return this.ab3;
-		}
+
+	public void SumToHp(double dmg_heal)
+	{
+		hp += dmg_heal;
+	}
+
+	public double GetHp(){
+		return this.hp;
+	}
+
+	public string GetTypeName()
+	{
+		return this.typeName;
 	}
 
 }

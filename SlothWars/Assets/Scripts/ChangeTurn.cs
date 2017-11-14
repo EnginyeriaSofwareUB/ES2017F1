@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ChangeTurn : MonoBehaviour
 {
     // Getting the endTurn Button in the scene.
     private GameObject endTurnButton;
+	private String newText;
 
     // Getting the sloths in the scene.
     public List<GameObject> slothTeamA;
@@ -16,6 +18,7 @@ public class ChangeTurn : MonoBehaviour
     
     //GameObject with the script where the sloths are created
     GameObject managerTeam;
+	GameObject turnText;
 
     public int slothTurnA, slothTurnB;
 
@@ -26,25 +29,26 @@ public class ChangeTurn : MonoBehaviour
     private void Start()
     {
         endTurnButton = GameObject.Find("EndTurnButton");
+		turnText = GameObject.Find ("InfoPanel");
+		managerTeam = GameObject.Find("managerTeam");
         isSlothTurnA = false;
         // In order to know the different turns.
         slothTurnA = 0;
         slothTurnB = 0;
 
-        slothTeamA = new List<GameObject>();
-        slothTeamB = new List<GameObject>();
+		slothTeamA = managerTeam.GetComponent <SetUp> ().createdTeam1;
+		slothTeamB = managerTeam.GetComponent <SetUp> ().createdTeam2;
 
-        managerTeam = GameObject.Find("managerTeam");
     }
 
     // Getting the sloths in the scene. 
     private void Update()
     {
         
-        slothTeamA = managerTeam.GetComponent<CreateSloth>().teamA;
-        slothTeamB = managerTeam.GetComponent<CreateSloth>().teamB;
+		//slothTeamA = new 
+		//slothTeamB = StorePersistentVariables.Instance.createdSlothTeam2;
 
-        if (slothTeamA[slothTurnA].GetComponent<player>().GetMove())
+        if (slothTeamA[slothTurnA].GetComponent<Player>().GetMove())
         {
             endTurnButton.GetComponent<Button>().interactable = false;
         }
@@ -77,7 +81,7 @@ public class ChangeTurn : MonoBehaviour
         foreach (GameObject sloth in slothTeamB)
         {
             sloth.GetComponent<Animator>().enabled = false;
-            sloth.GetComponent<player>().enabled = false;
+            sloth.GetComponent<Player>().enabled = false;
             sloth.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
             sloth.GetComponent<ShotScript>().enabled = false;
         }
@@ -85,7 +89,7 @@ public class ChangeTurn : MonoBehaviour
         for (int i = 1; i<slothTeamA.Count; i++)
         {
             slothTeamA[i].GetComponent<Animator>().enabled = false;
-            slothTeamA[i].GetComponent<player>().enabled = false;
+            slothTeamA[i].GetComponent<Player>().enabled = false;
             slothTeamA[i].GetComponent<ShotScript>().Active(false);
             slothTeamA[i].GetComponent<ShotScript>().enabled = false;
         }
@@ -96,7 +100,7 @@ public class ChangeTurn : MonoBehaviour
     private void ActivateSloth(GameObject slothTeam)
     {
         slothTeam.GetComponent<Animator>().enabled = true;
-        slothTeam.GetComponent<player>().enabled = true;
+        slothTeam.GetComponent<Player>().enabled = true;
         slothTeam.GetComponent<ShotScript>().enabled = true;
         slothTeam.GetComponent<ShotScript>().Active(true);
 
@@ -106,7 +110,7 @@ public class ChangeTurn : MonoBehaviour
     {
         
         slothTeam.GetComponent<Animator>().enabled = false;
-        slothTeam.GetComponent<player>().enabled = false;
+        slothTeam.GetComponent<Player>().enabled = false;
         slothTeam.GetComponent<ShotScript>().Active(false);
         slothTeam.GetComponent<ShotScript>().enabled = false;
 

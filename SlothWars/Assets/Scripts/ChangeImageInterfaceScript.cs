@@ -17,7 +17,7 @@ public class ChangeImageInterfaceScript : MonoBehaviour {
     // Getting the gameObject sceneBehaviour from previous scene
 	void Start () {
        
-		image = GameObject.Find ("slothImage").GetComponent<Image> ();
+        image = GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Image>()[1];
         managerTeam = GameObject.Find("managerTeam");
         previousSceneBehaviour = GameObject.Find("sceneBehaviour");
 
