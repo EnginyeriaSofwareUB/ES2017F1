@@ -6,10 +6,12 @@ using System;
 
 public class ChangeTurn : MonoBehaviour
 {
+    
     // Getting the endTurn Button in the scene.
     private GameObject endTurnButton;
-	private String newText;
+	private Text text;
 
+    private String blueTurn, redTurn;
     // Getting the sloths in the scene.
     public List<GameObject> slothTeamA;
     public List<GameObject> slothTeamB;
@@ -18,7 +20,6 @@ public class ChangeTurn : MonoBehaviour
     
     //GameObject with the script where the sloths are created
     GameObject managerTeam;
-	GameObject turnText;
 
     public int slothTurnA, slothTurnB;
 
@@ -29,13 +30,15 @@ public class ChangeTurn : MonoBehaviour
     private void Start()
     {
         endTurnButton = GameObject.Find("EndTurnButton");
-		turnText = GameObject.Find ("InfoPanel");
+        text = GameObject.Find("TurnText").GetComponent<Text>();
 		managerTeam = GameObject.Find("managerTeam");
         isSlothTurnA = false;
         // In order to know the different turns.
         slothTurnA = 0;
         slothTurnB = 0;
 
+        blueTurn = "Blue Turn";
+        redTurn = "Red Turn";
 		slothTeamA = managerTeam.GetComponent <SetUp> ().createdTeam1;
 		slothTeamB = managerTeam.GetComponent <SetUp> ().createdTeam2;
 
@@ -78,6 +81,7 @@ public class ChangeTurn : MonoBehaviour
     // Method in order to have only one sloth active.
     public void DeactivateAllExceptOne(List<GameObject> slothTeamA, List<GameObject> slothTeamB)
     {
+        text.text = blueTurn;
         foreach (GameObject sloth in slothTeamB)
         {
             sloth.GetComponent<Animator>().enabled = false;
@@ -126,6 +130,7 @@ public class ChangeTurn : MonoBehaviour
             endTurnOfSloth = false;
             DeactivateSloth(slothTeamB[slothTurnB]); 
             ActivateSloth(slothTeamA[slothTurnA]);
+            text.text = blueTurn;
             isSlothTurnA = true;
         
             slothTurnB += 1;
@@ -144,6 +149,7 @@ public class ChangeTurn : MonoBehaviour
      
             DeactivateSloth(slothTeamA[slothTurnA]);
             ActivateSloth(slothTeamB[slothTurnB]);
+            text.text = redTurn;
             isSlothTurnA = false;
            
             slothTurnA += 1;
