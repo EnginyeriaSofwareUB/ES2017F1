@@ -84,9 +84,9 @@ public class ShotScript : MonoBehaviour {
     // creates a projectile and shoots it then destroys de force bar
     private void ShootAfterBar(Ability a)
     {
-        float radAngle = (gun.eulerAngles[2]*(1-rotate) + rotate*(180- gun.eulerAngles[2]) )* Mathf.Deg2Rad;
+        float radAngle = ( gun.eulerAngles[2]*(1 - rotate) + rotate*(180 - gun.eulerAngles[2]) )* Mathf.Deg2Rad;
         Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
-        onLoad.SetAll(gun.position,AimVector,gun.rotation,st.getForce()*(float) a.GetRange(),a.GetRadius());
+        onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce()*(float) a.GetRange(), a.GetRadius());
         onLoad.ApplyLogic();
         st.Destroy();
         shotLoad = false;
@@ -125,6 +125,7 @@ public class ShotScript : MonoBehaviour {
             {
                 ProjectileFactory pf = ProjectileFactory.Instance;
                 onLoad = pf.getProjectile(a);
+				Debug.Log ("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
                 Bar();
             }

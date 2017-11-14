@@ -17,7 +17,7 @@ public class ChangeImageInterfaceScript : MonoBehaviour {
     // Getting the gameObject sceneBehaviour from previous scene
 	void Start () {
        
-        image = GameObject.Find("Interface").GetComponentsInChildren<Image>()[1];
+		image = GameObject.Find ("slothImage").GetComponent<Image> ();
         managerTeam = GameObject.Find("managerTeam");
         previousSceneBehaviour = GameObject.Find("sceneBehaviour");
 
@@ -33,6 +33,8 @@ public class ChangeImageInterfaceScript : MonoBehaviour {
 	// Update is called once per frame. 
     // Getting the images from the scene before in order to have it ordered by players' preselection.
 	void Update () {
+		// ----> THIS SHOULD NOT BE DONE IN UPDATE <---- 
+		// Change the images only when it is needed, not always.
         isSlothTurnA = managerTeam.GetComponent<ChangeTurn>().isSlothTurnA;
         if (!isSlothTurnA)
         {

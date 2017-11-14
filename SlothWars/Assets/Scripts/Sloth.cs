@@ -80,5 +80,17 @@ public class Sloth
     {
         hp += dmg_heal;
     }
+		
+	public Ability getAbility(int n){
+		if (n == 1) {
+			return this.ab1;
+		}
+		else if(n == 2) {
+			return this.ab2;
+		}
+		else{
+			return this.ab3;
+		}
+	}
 
 }

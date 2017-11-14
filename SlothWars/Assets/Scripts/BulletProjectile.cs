@@ -24,6 +24,7 @@ public class BulletProjectile: Projectile
     {
         float zd = zf - zO;
         float vz = Mathf.Sqrt(bVelocity * bVelocity * zd * zd / (zd * zd + rg * rg));
+		vz = vz * 1.5f;
         Vector3 vVector = xyDir * Mathf.Sqrt(bVelocity * bVelocity - vz * vz) + new Vector3(0, 0, vz);
         ea = (GameObject)GameObject.Instantiate(Resources.Load("Objects/Electric Arrow"), pos + vVector * 1.15f, rot);
         ea.GetComponent<Transform>().Rotate(0,90,0);

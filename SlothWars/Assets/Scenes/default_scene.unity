@@ -843,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &491567808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -998,7 +998,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602930564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -15}
+  m_LocalPosition: {x: 15.9, y: 8.57, z: -16.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1348,7 +1348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.68, y: 0.31244707}
   m_AnchorMax: {x: 0.776, y: 0.7016126}
-  m_AnchoredPosition: {x: -0.069992065, y: 0}
+  m_AnchoredPosition: {x: 9.8, y: 0}
   m_SizeDelta: {x: 0.3600006, y: 0.069999695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &735187880
@@ -1627,6 +1627,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -2006,7 +2020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.55, y: 0.31244707}
   m_AnchorMax: {x: 0.647, y: 0.7016126}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 8.6, y: 0}
   m_SizeDelta: {x: 1.1699982, y: 0.6500015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1126005754

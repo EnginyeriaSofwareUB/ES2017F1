@@ -30,25 +30,25 @@ public class AbilityFactory
 
         if (abilityID[0] == 'M')
         {
-            return new MagicAbility(abilityID, s);
+            return new MagicAbility(abilityID, n);
 
         }
         else if (abilityID[0] == 'T')
         {
-            return new TankAbility(abilityID, s);
+            return new TankAbility(abilityID, n);
 
         }
         else if (abilityID[0] == 'P')
         {
-            return new ProjectileAbility(abilityID, s);
+            return new ProjectileAbility(abilityID, n);
         }
         else if (abilityID[0] == 'H')
         {
-            return new HealingAbility(abilityID, s);
+            return new HealingAbility(abilityID, n);
         }
         else if (abilityID[0] == 'U')
         {
-            return new UtilityAbility(abilityID, s);
+            return new UtilityAbility(abilityID, n);
         }
 
         return null;

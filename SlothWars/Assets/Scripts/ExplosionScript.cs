@@ -12,6 +12,10 @@ public class ExplosionScript : MonoBehaviour {
     public int d_h = 20; // used while Sloth-gameobject conection doesnt exit
     public bool xy =false; //if trajectory component z is zero
     private bool colided = false;
+
+	GameObject explosion;
+	int secondLayerZ = 1;
+
     // Use this for initialization
     void Start() {
     }
@@ -20,53 +24,55 @@ public class ExplosionScript : MonoBehaviour {
     void Update() {
        if (xy && (this.GetComponent<Transform>().position - origin).magnitude >= range)
         {
-            GameObject explosion = (GameObject)Instantiate(Resources.Load(namePath), this.transform.position, this.transform.rotation);
-            List<GameObject> sloths = new List<GameObject>(GameObject.FindGameObjectsWithTag("sloth"));
-            foreach(GameObject s in sloths) {
-                if ((s.transform.position - this.transform.position).magnitude <= radius)
-                {
-                    //GameControl.control.ApplyLastAbility(s);
-                    s.gameObject.SendMessage("SumToHP", d_h);
-                    Debug.Log("message send");
-                }
-            }
-            Destroy(explosion, 3);
-            Destroy(this.gameObject);
+			logicAndDestroy ();
         }
+		if (this.GetComponent<Transform> ().position.z > secondLayerZ) {
+			logicAndDestroy ();
+		}
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (onCollision){
             Debug.Log("radius "+radius);
-            GameObject explosion = (GameObject)Instantiate(Resources.Load(namePath), this.transform.position, this.transform.rotation);
-            List<GameObject> sloths = new List<GameObject>(GameObject.FindGameObjectsWithTag("sloth"));
-            foreach (GameObject s in sloths)
-            {
-                if ((s.transform.position - this.transform.position).magnitude <= radius)
-                {
-                    //GameControl.control.ApplyLastAbility(s);
-                    if (!colided)
-                    {
-                        s.gameObject.SendMessage("SumToHP", d_h);
-                        Debug.Log("message send col");
-                    }
-                }
-            }
-            colided = true;
-            Destroy(explosion, 3);
-            Destroy(this.gameObject);
+			logicAndDestroy ();
         }
     }
+
+	void logicAndDestroy(){
+		int effect_radius = 1;
+		Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, effect_radius);
+		int i = 0;
+		Debug.Log ("Hits: " + hitColliders.Length);
+
+		while (i < hitColliders.Length)
+		{
+			//Debug.Log ("collider tag: " + hitColliders [i].tag);
+			if ("sloth".Equals (hitColliders [i].tag)) {
+				hitColliders[i].SendMessage("SumToHP", d_h);
+				//GameControl.control.ApplyLastAbility(s);
+			}
+			i++;
+		}
+
+		explosion = (GameObject) Instantiate(Resources.Load(namePath),this.transform.position,this.transform.rotation);
+		Destroy(explosion, 3);
+		Destroy(this.gameObject);
+	}
+
     public void SetOrigin(Vector3 p)
     {
         origin = p;
     }
+
     public void SetRange(float r)
     {
         range = r;
     }
+
     public void SetRadius(float r)
     {
         radius = r;
     }
+
 }
