@@ -6,31 +6,20 @@ using UnityEngine.SceneManagement;
 using UnityEditor.Events;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
-public class TurnController: ControllerSingleton<MonoBehaviour>{
+public class TurnController: GameController{
 
-    //Get an instance of GameController in order to access to variables.
-    private GameController gameController;
-    
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
     private static ChangeTurnModel changeTurnModel;
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
     private static ChangeImageModel changeImageModel;
 
-
-    //Variables 
-    private int turnPlayer1, turnPlayer2;
-    private bool beginStopped, endTurnOfPlayer;
-    private Sprite spriteFromPreviousScene;
     // Use this for initialization
     private void Start () {
 
-        //Initialization
-        InitializeTurnControllerVariables();
-
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
-        changeTurnModel.SetEndTurnButton(gameController.GetEndTurnButton());
+        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
 
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
@@ -38,7 +27,7 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
 
         //Set the player teams in Model in order to get captured by view and show them in the scene.
         //Set the turns for team1 and team2.
-        changeTurnModel.SetPlayerTeams(gameController.GetPlayerTeam(1), gameController.GetPlayerTeam(2));
+        changeTurnModel.SetPlayerTeams(GetPlayerTeam(1), GetPlayerTeam(2));
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
 
         //When the game starts, we got the image of the first sloth in team1 (corresponding to the one who starts playing (by default))
@@ -52,7 +41,7 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
     public void FinishTurnOfPlayer()
     {
         
-        if (turnPlayer1 != (gameController.GetPlayerTeam(1).Count-1) && turnPlayer2 != (gameController.GetPlayerTeam(2).Count-1))
+        if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
@@ -63,7 +52,7 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
         else
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if(turnPlayer1 == gameController.GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if(turnPlayer1 == GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else { turnPlayer2 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
     }
@@ -80,12 +69,12 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
     {
         if (turnPlayer1 > turnPlayer2)
         {
-            spriteFromPreviousScene = gameController.GetTeamSprite1()[turnPlayer1];
+            spriteFromPreviousScene = GetTeamSprite1()[turnPlayer1];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
         else
         {
-            spriteFromPreviousScene = gameController.GetTeamSprite2()[turnPlayer2];
+            spriteFromPreviousScene = GetTeamSprite2()[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
 
@@ -113,12 +102,4 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
 
     }
     
-    private void InitializeTurnControllerVariables()
-    {
-        turnPlayer1 = gameController.turnPlayer1;
-        turnPlayer2 = gameController.turnPlayer2;
-        beginStopped = gameController.beginStopped;
-        endTurnOfPlayer = gameController.endTurnOfPlayer;
-        spriteFromPreviousScene = gameController.spriteFromPreviousScene;
-}
 }

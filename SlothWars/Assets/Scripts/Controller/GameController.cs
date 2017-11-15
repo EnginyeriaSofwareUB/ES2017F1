@@ -45,10 +45,16 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
     private void Awake()
     {
+        InitializePlayer();
         InitializeTurnVariables();
         InitializeLogicVariables();
         InitializeUIVariables();
 
+    }
+
+    private void InitializePlayer()
+    {
+        GameObject.Find("GameController").GetComponent<Player>().enabled = false;
     }
 
     private void InitializeTurnVariables()
@@ -80,8 +86,8 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
         listAbilities.Add(secondAbility);
         listAbilities.Add(thirdAbility);
 
-        teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
-        teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
+        teamSloths1 = new List<GameObject>();
+        teamSloths2 = new List<GameObject>();
     }
 
     private void InitializeUIVariables()
@@ -137,5 +143,5 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
         }
         
     }
-
+    
 }

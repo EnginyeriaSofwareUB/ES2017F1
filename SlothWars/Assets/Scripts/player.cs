@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         this.sloth = sloth;
     }
 
-    void Start()
+    private void Start()
     {
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
@@ -40,21 +40,7 @@ public class Player : MonoBehaviour
 
     void Movement_Interpretation()
     {
-        Jump();
         Left_Or_Right();
-    }
-
-    // Method for checking spacebar press action to activate jump animation
-    void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.SetBool("jump", true);
-        }
-        else
-        {
-            anim.SetBool("jump", false);
-        }
     }
 
     // Checking movement of the player using arrow keys or A and D keys
@@ -104,15 +90,15 @@ public class Player : MonoBehaviour
     // Method for limiting available movement space for the player 
     void Movement_Correction()
     {
-        if (transform.position.x > 9.5)
+        if (transform.position.x > 150)
         {
             move = false;
-            transform.position = new Vector3(9.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(150f, transform.position.y, transform.position.z);
         }
-        if (transform.position.x < -9.5)
+        if (transform.position.x < 0)
         {
             move = false;
-            transform.position = new Vector3(-9.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         }
     }
 

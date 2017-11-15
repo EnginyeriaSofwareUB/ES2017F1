@@ -75,6 +75,11 @@ public class Sloth
         this.ab3 = factory.getAbility(idAb3);
     }
 
+    public String GetPath()
+    {
+        return sprite;
+    }
+
     public string GetTypeName()
     {
         return this.typeName;

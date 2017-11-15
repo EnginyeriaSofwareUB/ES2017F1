@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class TeamSelection : MonoBehaviour {
 
     private static bool created = false;
-	//public List<Sloth> slothTeam1;
-	//public List<Sloth> slothTeam2;
+
 	private const int maxTeamSloths = 4;
 	private Text currentPageText;
 	private Text numPlayer;
@@ -62,10 +61,6 @@ public class TeamSelection : MonoBehaviour {
      
 	void Awake()
 	{
-        
-		//slothTeam1 = new List<Sloth> ();
-		//slothTeam2 = new List<Sloth> ();
-
 
         // Dynamic elements
 
