@@ -9,6 +9,8 @@ public class LogicView : MonoBehaviour {
     
     // Use this for initialization
 	private void Start () {
+        logicModel = new LogicModel();
+
         teamSloths1 = logicModel.GetTeamSloths1();
         teamSloths2 = logicModel.GetTeamSloths2();
 	}
