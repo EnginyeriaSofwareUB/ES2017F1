@@ -5,18 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
+//TurnController: Created as a controller for logic issues as death rom sloths and abilities.
 public class LogicController: GameController{
 
-    private static Button firstAbility;
-    private static Button secondAbility;
-    private static Button thirdAbility;
+    private LogicModel logicModel;
 
-
-    public LogicController(List<Button> listAbilities)
+    private void Start()
     {
-        firstAbility = listAbilities[0];
-        secondAbility = listAbilities[1];
-        thirdAbility = listAbilities[2];
-    } 
-		
+        logicModel.SetTeamSloths1(teamSloths1);
+        logicModel.SetTeamSloths2(teamSloths2);
+    }
+
+
 }

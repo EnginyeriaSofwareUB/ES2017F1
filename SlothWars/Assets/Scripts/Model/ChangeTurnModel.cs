@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class ChangeTurnModel
 {
-    private static Button endTurnButton;
-    private static List<Player> playerTeam1 = new List<Player>();
-    private static List<Player> playerTeam2 = new List<Player>();
-    private static bool endTurnOfPlayer;
-    private static bool endTurnButtonStatus;
-    private static bool beginStopped;
-    private static int turnPlayer1 = 0;
-    private static int turnPlayer2 = 0;
+    private Button endTurnButton;
+    private List<Player> playerTeam1 = new List<Player>();
+    private List<Player> playerTeam2 = new List<Player>();
+    private bool endTurnOfPlayer;
+    private bool endTurnButtonStatus;
+    private bool beginStopped;
+    private int turnPlayer1 = 0;
+    private int turnPlayer2 = 0;
 
     public ChangeTurnModel() {}
   

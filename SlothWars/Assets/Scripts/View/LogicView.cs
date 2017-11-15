@@ -4,13 +4,47 @@ using UnityEngine;
 
 public class LogicView : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    private LogicModel logicModel;
+    private List<GameObject> teamSloths1, teamSloths2;
+    
+    // Use this for initialization
+	private void Start () {
+        teamSloths1 = logicModel.GetTeamSloths1();
+        teamSloths2 = logicModel.GetTeamSloths2();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	private void Update () {
+        CheckSlothsAlive();
 	}
+
+    private void CheckSlothsAlive()
+    {
+        HealthScript health;
+        Player pla;
+        int i = 1;
+        foreach (GameObject sloth in teamSloths1)
+        {
+            health = sloth.GetComponent<HealthScript>();
+            if (health.getHealth() <= 0)
+            {
+                pla = sloth.GetComponent<Player>();
+                pla.Die();
+                teamSloths1.Remove(sloth);
+            }
+            i++;
+        }
+        i = 0;
+        foreach (GameObject sloth in teamSloths2)
+        {
+            health = sloth.GetComponent<HealthScript>();
+            if (health.getHealth() <= 0)
+            {
+                pla = sloth.GetComponent<Player>();
+                pla.Die();
+                teamSloths2.Remove(sloth);
+            }
+            i++;
+        }
+    }
 }

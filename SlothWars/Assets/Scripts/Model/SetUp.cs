@@ -6,8 +6,6 @@ using NUnit.Framework;
 
 public class SetUp : GameController {
 	// Use this for initialization
-	List<GameObject> teamSloths1;
-	List<GameObject> teamSloths2;
 	void Start () {
 		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
 		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;

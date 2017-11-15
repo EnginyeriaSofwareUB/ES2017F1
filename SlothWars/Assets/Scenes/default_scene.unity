@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657856, g: 0.49641234, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -77,17 +77,15 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFilterTypeDirect: 0
-    m_PVRFilterTypeIndirect: 0
-    m_PVRFilterTypeAO: 0
+    m_PVRFiltering: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-    m_PVRFilteringAtrousPositionSigmaIndirect: 2
-    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -483,6 +481,8 @@ GameObject:
   - component: {fileID: 328900379}
   - component: {fileID: 328900382}
   - component: {fileID: 328900383}
+  - component: {fileID: 328900385}
+  - component: {fileID: 328900384}
   m_Layer: 0
   m_Name: GameController
   m_TagString: gameController
@@ -501,6 +501,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7c8835a614f475a9863356d882ada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!4 &328900377
 Transform:
   m_ObjectHideFlags: 0
@@ -525,6 +545,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2d0635ac15345adaf2646b55632da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!114 &328900379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +599,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6b356ae5cda974db85038022a9a42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!114 &328900382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +641,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501bf0f766c3a55429d94fba50941bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
+--- !u!114 &328900384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328900375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ad70efbb611a84e985573d52456787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &328900385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328900375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc7acd083dc23844b8490de71f241d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!1 &369698623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,6 +2606,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6b356ae5cda974db85038022a9a42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!1 &2002065616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,6 +2734,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501bf0f766c3a55429d94fba50941bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam1: []
+  playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
+  endTurnButton: {fileID: 0}
+  spriteFromPreviousScene: {fileID: 0}
+  isButtonPressed: 0
+  endTurnOfPlayer: 0
+  beginStopped: 0
+  turnPlayer1: 0
+  turnPlayer2: 0
+  listAbilities: []
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  teamSloths1: []
+  teamSloths2: []
+  panelMain: {fileID: 0}
+  panelOpts: {fileID: 0}
+  isPause: 0
 --- !u!114 &2002065622
 MonoBehaviour:
   m_ObjectHideFlags: 0

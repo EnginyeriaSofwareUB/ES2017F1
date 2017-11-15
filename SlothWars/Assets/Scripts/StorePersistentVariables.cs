@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 
-public class StorePersistentVariables : Singleton<StorePersistentVariables> {
+public class StorePersistentVariables : PersistentVariablesSingleton<StorePersistentVariables> {
 
     // Here we will have the variables that we want to persist between scenes. In our case,
     // it will be the sloth teams created in TeamSelection scene.

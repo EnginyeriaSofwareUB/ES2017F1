@@ -4,9 +4,9 @@ using UnityEngine;
 
 //Creating a Singleton class in order to manage the calls to DontDestroyOnLoad to every object which
 //inherits from him in the scene (See StorePersistenVariables.cs)
-public class Singleton<T> : MonoBehaviour where T: Singleton<T> {
+public class PersistentVariablesSingleton<T> : MonoBehaviour where T: PersistentVariablesSingleton<T> {
 
-    protected static Singleton<T> mInstance
+    protected static PersistentVariablesSingleton<T> mInstance
     {
         get
         {

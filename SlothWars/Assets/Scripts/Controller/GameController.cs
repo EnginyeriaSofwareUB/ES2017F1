@@ -6,38 +6,40 @@ using UnityEngine.SceneManagement;
 using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
 
-public class GameController: MonoBehaviour{
+public class GameController: ControllerSingleton<MonoBehaviour>{
+
+    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
     
     ///////*****///////
-    
+
     //TURNCONTROLLER VARIABLES
-    private static List<Player> playerTeam1;
-    private static List<Player> playerTeam2;
+    public List<Player> playerTeam1;
+    public List<Player> playerTeam2;
 
-    private static List<Sprite> teamSprite1, teamSprite2;
-    private static Button endTurnButton;
-    private static Sprite spriteFromPreviousScene;
+    public List<Sprite> teamSprite1, teamSprite2;
+    public Button endTurnButton;
+    public Sprite spriteFromPreviousScene;
 
-    private bool isButtonPressed;
+    public bool isButtonPressed;
 
-    private static bool endTurnOfPlayer;
-    private static bool beginStopped;
-    private static int turnPlayer1;
-    private static int turnPlayer2;
+    public bool endTurnOfPlayer;
+    public bool beginStopped;
+    public int turnPlayer1;
+    public int turnPlayer2;
 
     //LOGICCONTROLLER VARIABLES
-    private static List<Button> listAbilities;
-    private static Button firstAbility, secondAbility, thirdAbility;
-    private static List<GameObject> teamSloths1;
-    private static List<GameObject> teamSloths2;
+    public List<Button> listAbilities;
+    public Button firstAbility, secondAbility, thirdAbility;
+    public List<GameObject> teamSloths1;
+    public List<GameObject> teamSloths2;
 
     //UICONTROLLER VARIABLES
-    public static Image panelMain;
-    public static Image panelOpts;
-    private static bool isPause = false;
+    public Image panelMain;
+    public Image panelOpts;
+    public bool isPause = false;
    
-    private static Button resumeOpts;
-    private static Button exitOpts;
+    private Button resumeOpts;
+    private Button exitOpts;
 
     ///////*****///////
 
@@ -51,10 +53,6 @@ public class GameController: MonoBehaviour{
         InitializeTurnVariables();
         InitializeLogicVariables();
         InitializeUIVariables();
-
-        turnController = new TurnController(isButtonPressed, turnPlayer1, turnPlayer2, beginStopped, endTurnOfPlayer);
-        logicController = new LogicController(listAbilities);
-        uiController = new UIController(panelMain, panelOpts, isPause, resumeOpts, exitOpts);
 
 		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
 		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;

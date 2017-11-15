@@ -13,40 +13,14 @@ public class TurnController: GameController{
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
     private static ChangeImageModel changeImageModel;
-    
-    //GameObjects from the scene.
-    private static Sprite spriteFromPreviousScene;
-
-    //Parametres need to change the values in the view.
-    private static bool isButtonPressed;
-
-    private static bool endTurnOfPlayer;
-    private static bool beginStopped;
-    private static int turnPlayer1;
-    private static int turnPlayer2;
-
-    
-    public TurnController(bool isButtonPressedCont, int turnPlayer1Cont, int turnPlayer2Cont, bool beginStoppedCont, bool endTurnOfPlayerCont)
-    {
-
-        isButtonPressed = isButtonPressedCont;
-        //At the beginning of the game, both turnPlayer1 and turnPlayer2 begin with 0 value.
-        turnPlayer1 = turnPlayer1Cont;
-        turnPlayer2 = turnPlayer2Cont;
-
-        changeImageModel = new ChangeImageModel();
-        changeTurnModel = new ChangeTurnModel();
-
-        //At the beginning, we set these booleans value to true (To establish that the game has not started yet).
-        beginStopped = beginStoppedCont;
-        endTurnOfPlayer = endTurnOfPlayerCont;
-
-        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
-    }
-
+   
     // Use this for initialization
     private void Start () {
-        
+        //Initialization
+        changeImageModel = new ChangeImageModel();
+        changeTurnModel = new ChangeTurnModel();
+        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
+
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);

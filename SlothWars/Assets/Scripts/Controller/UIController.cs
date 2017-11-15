@@ -5,12 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class UIController : MonoBehaviour {
-	public static Image panelMain;
-	public static Image panelOpts;
+public class UIController : GameController {
 
     private static bool setActivePanelOpts, setActivePanelMain;
-    private bool isPause;
     private static bool isSet = false;
     //optionsPanel
 	private static Button resumeOpts;
@@ -18,15 +15,6 @@ public class UIController : MonoBehaviour {
     private static int i = 0;
     //Get UIModel Constructor.
     private UIModel uiModel;
-
-    public UIController (Image panelMainCont, Image PanelOptsCont, bool isPauseCont, Button resumeOptsCont, Button exitOptsCont)
-    {
-        panelMain = panelMainCont;
-        panelOpts = PanelOptsCont;
-        isPause = isPauseCont;
-        resumeOpts = resumeOptsCont;
-        exitOpts = exitOptsCont;
-    }
 
 	// Use this for initialization
 	private void Start () {
