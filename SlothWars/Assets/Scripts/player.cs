@@ -2,66 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
-	public Animator anim;
-	public Rigidbody rbody;
-	private Sloth sloth;
+    public Animator anim;
+    public Rigidbody rbody;
+    private Sloth sloth;
 
-	private float inputH;
-	private float inputV;
-	private bool move = false;
+    private float inputH;
+    private float inputV;
+    private bool move = false;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
     HealthScript hs;
-	// Use this for initialization
+    // Use this for initialization
 
-	public Player(Sloth sloth){
-		this.sloth = sloth;
-	}
+    public Player(Sloth sloth)
+    {
+        this.sloth = sloth;
+    }
 
-	void Start () 
-	{
+    void Start()
+    {
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
-        anim = GetComponent<Animator> ();
-		rbody = GetComponent<Rigidbody> ();
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-        Movement_Interpretation ();
-		Movement_Correction ();
-	}
-		
+        anim = GetComponent<Animator>();
+        rbody = GetComponent<Rigidbody>();
+    }
 
-	void Movement_Interpretation()
-	{
-		Jump ();
-		Left_Or_Right ();
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        Movement_Interpretation();
+        Movement_Correction();
+    }
 
-	// Method for checking spacebar press action to activate jump animation
-	void Jump()
-	{
-		if (Input.GetKey (KeyCode.Space)) 
-		{
-			anim.SetBool ("jump", true);
-		}
-		else 
-		{
-			anim.SetBool ("jump", false);
-		}
-	}
 
-	// Checking movement of the player using arrow keys or A and D keys
-	void Left_Or_Right()
-	{
+    void Movement_Interpretation()
+    {
+        Jump();
+        Left_Or_Right();
+    }
+
+    // Method for checking spacebar press action to activate jump animation
+    void Jump()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("jump", true);
+        }
+        else
+        {
+            anim.SetBool("jump", false);
+        }
+    }
+
+    // Checking movement of the player using arrow keys or A and D keys
+    void Left_Or_Right()
+    {
         if (!move)
         {
-            inputH = Input.GetAxis ("Horizontal");
-            anim.SetFloat ("inputH", inputH);
+            inputH = Input.GetAxis("Horizontal");
+            anim.SetFloat("inputH", inputH);
 
             if (inputH > 0.1)
             {
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            if (Vector3.Distance(transform.position,newPosition) > Vector3.kEpsilon)
+            if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
             {
                 Debug.Log(newPosition);
                 float step = 1 * Time.deltaTime;
@@ -97,38 +99,40 @@ public class Player : MonoBehaviour {
                 ss.IsNotMoving();
             }
         }
-	}
+    }
 
-	// Method for limiting available movement space for the player 
-	void Movement_Correction()
-	{
-		if (transform.position.x > 9.5) 
-		{
+    // Method for limiting available movement space for the player 
+    void Movement_Correction()
+    {
+        if (transform.position.x > 9.5)
+        {
             move = false;
-			transform.position = new Vector3 (9.5f, transform.position.y, transform.position.z);
-		}
-		if (transform.position.x < -9.5) 
-		{
+            transform.position = new Vector3(9.5f, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x < -9.5)
+        {
             move = false;
-			transform.position = new Vector3 (-9.5f, transform.position.y, transform.position.z);
-		}
-	}
-    
+            transform.position = new Vector3(-9.5f, transform.position.y, transform.position.z);
+        }
+    }
+
     public bool GetMove()
     {
         return move;
     }
-	public Sloth GetSloth()
+    public Sloth GetSloth()
     {
-		return sloth;
-	}
+        return sloth;
+    }
 
     public void SetSloth(Sloth sloth)
     {
-		this.sloth = sloth;
-	}
+        this.sloth = sloth;
+    }
 
-    public void Die(){
-		Destroy (gameObject);
-	}
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
+

@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-guid: 116c684f7d4e6400cbb86c60fb75d701
-timeCreated: 1510426081
+guid: 6fef86ba9b11409469dd85d490213fcb
+timeCreated: 1510762775
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - anim: {instanceID: 0}
-  - rbody: {instanceID: 0}
-  - emptyGameObjectPrefab: {fileID: 1930288839981148, guid: 6f7adc3d20975441382ec67e8b4584d4,
-      type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
