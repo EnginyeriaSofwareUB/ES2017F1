@@ -17,7 +17,10 @@ public class LogicView : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-        CheckSlothsAlive();
+        if (teamSloths1 != null && teamSloths2 != null)
+        {
+            CheckSlothsAlive();
+        }
 	}
 
     private void CheckSlothsAlive()

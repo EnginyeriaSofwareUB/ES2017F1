@@ -13,7 +13,6 @@ public class ChangeTurnView: MonoBehaviour {
 
     private void Start()
     {
-        print("VIEW TURN");
         changeTurnModel = new ChangeTurnModel();
         endTurnButton = changeTurnModel.GetEndTurnButton();
         playersTeam1 = new List<GameObject>();

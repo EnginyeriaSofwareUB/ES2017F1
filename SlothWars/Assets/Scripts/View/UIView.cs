@@ -17,19 +17,23 @@ public class UIView : MonoBehaviour {
 
     private void Update()
     {
-        if (uiModel.GetStatePanelOpts())
+        if (uiModel.GetPanelOpts() != null)
         {
-            Time.timeScale = 0;
-            uiModel.GetPanelOpts().gameObject.SetActive(true);
-            
-        } else
-        {
-            Time.timeScale = 1;
-            uiModel.GetPanelOpts().gameObject.SetActive(false);
-            
+            if (uiModel.GetStatePanelOpts())
+            {
+                Time.timeScale = 0;
+                uiModel.GetPanelOpts().gameObject.SetActive(true);
+
+            }
+            else
+            {
+                Time.timeScale = 1;
+                uiModel.GetPanelOpts().gameObject.SetActive(false);
+
+            }
+
         }
     }
-
     public void ResumeSelected()
     {
         uiModel.GetPanelOpts().gameObject.SetActive(false);
