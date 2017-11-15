@@ -51,7 +51,7 @@ public class ShotScript : MonoBehaviour {
         st.Destroy();
         shotLoad = false;
 		if (GetComponent<HealthScript> ().getHealth() <= 0) {
-			Destroy (GetComponentInChildren<Player>());
+			Destroy (GetComponentInChildren<AnimPlayer>());
 		}
     }
     // r = 0 when right moving , left moving r = 1

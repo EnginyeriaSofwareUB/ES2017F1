@@ -11,21 +11,18 @@ public class SetUp : GameController {
         PlacePlayers();
 	}
 
-
-
 	private void PlacePlayers(){ 
 		GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
 		plane.transform.localScale = new Vector3 (100, 1, 100);
 		int i = 0;
 		GameObject sloth;
-		Player pla;
+		AnimPlayer pla;
 		HealthScript health;
 		Animator anim;
 		ShotScript shot;
 		SlothSelected selected;
-        print(GetPlayerTeam(1)[1].GetType());
-		foreach(Player playerSloth in GetPlayerTeam(1)){
-			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (i+2, 0, 0), Quaternion.identity);
+		foreach(AnimPlayer playerSloth in playerTeam1){
+			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (i+20, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();
 			health.setHealth (playerSloth.GetSloth ().GetHp ());
@@ -34,7 +31,7 @@ public class SetUp : GameController {
 			anim = sloth.GetComponent <Animator>();
 			anim.enabled = true;
 
-			pla = sloth.GetComponent<Player>();
+			pla = sloth.AddComponent<AnimPlayer>();
 			pla.SetSloth (playerSloth.GetSloth());
 			pla.enabled = true;
 
@@ -48,8 +45,8 @@ public class SetUp : GameController {
 			i++;
 		}
 		i = 0;
-		foreach (Player playerSloth in GetPlayerTeam(2)) {
-			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (-i-2, 0, 0), Quaternion.identity);
+		foreach (AnimPlayer playerSloth in playerTeam2) {
+			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (i+10, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();
 			health.setHealth (playerSloth.GetSloth ().GetHp ());
@@ -58,7 +55,7 @@ public class SetUp : GameController {
 			anim = sloth.GetComponent <Animator>();
 			anim.enabled = true;
 
-			pla = sloth.GetComponent <Player> ();
+			pla = sloth.AddComponent <AnimPlayer> ();
 			pla.SetSloth (playerSloth.GetSloth ());
 			pla.enabled = true;
 

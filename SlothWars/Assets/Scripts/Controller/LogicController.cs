@@ -10,7 +10,7 @@ public class LogicController: GameController{
    
     private LogicModel logicModel;
     
-    private void Start()
+    private void OnEnable()
     {
         logicModel.SetTeamSloths1(teamSloths1);
         logicModel.SetTeamSloths2(teamSloths2);

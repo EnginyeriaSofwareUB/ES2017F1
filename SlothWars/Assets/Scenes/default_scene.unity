@@ -502,6 +502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7c8835a614f475a9863356d882ada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -517,8 +519,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0
@@ -548,6 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2d0635ac15345adaf2646b55632da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -563,8 +565,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0
@@ -604,6 +604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6b356ae5cda974db85038022a9a42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -619,8 +621,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0
@@ -648,6 +648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501bf0f766c3a55429d94fba50941bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -663,8 +665,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0
@@ -692,6 +692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc7acd083dc23844b8490de71f241d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -707,8 +709,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328900375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fef86ba9b11409469dd85d490213fcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 288536cbb8b1df84aa76397e6d6dd881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
@@ -1495,7 +1495,7 @@ GameObject:
   - component: {fileID: 838167121}
   m_Layer: 5
   m_Name: AbilitiesPanel
-  m_TagString: Finish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2597,6 +2597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501bf0f766c3a55429d94fba50941bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
   teamSprite1: []
@@ -2612,8 +2614,6 @@ MonoBehaviour:
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
-  teamSloths1: []
-  teamSloths2: []
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
   setActivePanelOpts: 0

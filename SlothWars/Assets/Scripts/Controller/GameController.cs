@@ -11,10 +11,13 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     ///////*****///////
+    //GameObjects (sloths) in the scene
+    public List<GameObject> teamSloths1, teamSloths2;
+
+    //Player Lists to attach to the gameObjects in the scene.
+    public List<AnimPlayer> playerTeam1, playerTeam2;
 
     //TURNCONTROLLER VARIABLES
-    public List<Player> playerTeam1, playerTeam2;
-
     public List<Sprite> teamSprite1, teamSprite2;
     public Button endTurnButton;
     public Sprite spriteFromPreviousScene;
@@ -29,16 +32,13 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     //LOGICCONTROLLER VARIABLES
     public List<Button> listAbilities;
     public Button firstAbility, secondAbility, thirdAbility;
-
-    //Used in SetUp too.
-    public List<GameObject> teamSloths1, teamSloths2;
-
+    
     //UICONTROLLER VARIABLES
     public Image panelMain;
     public Image panelOpts;
-    public bool setActivePanelOpts = false;
-    public bool setActivePanelMain = true;
-    public bool isPause = false;
+    public bool setActivePanelOpts;
+    public bool setActivePanelMain;
+    public bool isPause;
 
 
     ///////*****///////
@@ -54,7 +54,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
     private void InitializePlayer()
     {
-        GameObject.Find("GameController").GetComponent<Player>().enabled = false;
+        GameObject.Find("GameController").GetComponent<AnimPlayer>().enabled = false;
     }
 
     private void InitializeTurnVariables()
@@ -65,14 +65,15 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
         turnPlayer1 = 0;
         turnPlayer2 = 0;
 
-        playerTeam1 = new List<Player>();
-        playerTeam2 = new List<Player>();
+        playerTeam1 = new List<AnimPlayer>();
+        playerTeam2 = new List<AnimPlayer>();
         teamSprite1 = new List<Sprite>();
         teamSprite2 = new List<Sprite>();
 
         CreateTeamsSetSprites();
 
         endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        GameObject.Find("GameController").GetComponent<TurnController>().enabled = true;
 
     }
 
@@ -88,43 +89,22 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
         teamSloths1 = new List<GameObject>();
         teamSloths2 = new List<GameObject>();
+        GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
     }
 
     private void InitializeUIVariables()
     {
+        setActivePanelMain = true;
+        setActivePanelOpts = false;
+        isPause = false;
         panelMain = GameObject.Find("MainUIPanel").GetComponent<Image>();
         panelOpts = GameObject.Find("OptionPanel").GetComponent<Image>();
-
         //panelMain init Elements
 
         //panelOpts init Elements
-        
 
-    }
-    
-    public Button GetEndTurnButton()
-    {
-        return endTurnButton;
-    }
+        GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
 
-    public List<Sprite> GetTeamSprite1()
-    {
-        return teamSprite1;  
-    }
-
-    public List<Sprite> GetTeamSprite2()
-    {
-        return teamSprite2;
-    }
-
-
-    public List<Player> GetPlayerTeam(int idTeam)
-    {
-        if (idTeam == 1)
-        {
-            return playerTeam1;
-        }
-        return playerTeam2;
     }
 		
     private void CreateTeamsSetSprites()
@@ -132,13 +112,13 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam1)
         {
-            playerTeam1.Add(new Player(sloth));
+            playerTeam1.Add(new AnimPlayer(sloth));
             teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam2)
         {
-            playerTeam2.Add(new Player(sloth));
+            playerTeam2.Add(new AnimPlayer(sloth));
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
         

@@ -21,14 +21,14 @@ public class LogicView : MonoBehaviour {
     private void CheckSlothsAlive()
     {
         HealthScript health;
-        Player pla;
+        AnimPlayer pla;
         int i = 1;
         foreach (GameObject sloth in teamSloths1)
         {
             health = sloth.GetComponent<HealthScript>();
             if (health.getHealth() <= 0)
             {
-                pla = sloth.GetComponent<Player>();
+                pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
                 teamSloths1.Remove(sloth);
             }
@@ -40,7 +40,7 @@ public class LogicView : MonoBehaviour {
             health = sloth.GetComponent<HealthScript>();
             if (health.getHealth() <= 0)
             {
-                pla = sloth.GetComponent<Player>();
+                pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
                 teamSloths2.Remove(sloth);
             }

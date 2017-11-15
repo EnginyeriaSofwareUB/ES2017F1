@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+public class AnimPlayer : MonoBehaviour {
 
     public Animator anim;
     public Rigidbody rbody;
@@ -17,12 +16,12 @@ public class Player : MonoBehaviour
     HealthScript hs;
     // Use this for initialization
 
-    public Player(Sloth sloth)
+    public AnimPlayer(Sloth sloth)
     {
         this.sloth = sloth;
     }
 
-    private void Start()
+    void Start()
     {
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
@@ -40,7 +39,21 @@ public class Player : MonoBehaviour
 
     void Movement_Interpretation()
     {
+        Jump();
         Left_Or_Right();
+    }
+
+    // Method for checking spacebar press action to activate jump animation
+    void Jump()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("jump", true);
+        }
+        else
+        {
+            anim.SetBool("jump", false);
+        }
     }
 
     // Checking movement of the player using arrow keys or A and D keys
@@ -104,11 +117,12 @@ public class Player : MonoBehaviour
 
     public bool GetMove()
     {
-        return move;
+        return this.move;
     }
+
     public Sloth GetSloth()
     {
-        return sloth;
+        return this.sloth;
     }
 
     public void SetSloth(Sloth sloth)

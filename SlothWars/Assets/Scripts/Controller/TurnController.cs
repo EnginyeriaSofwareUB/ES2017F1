@@ -15,11 +15,11 @@ public class TurnController: GameController{
     private static ChangeImageModel changeImageModel;
 
     // Use this for initialization
-    private void Start () {
-
+    private void OnEnable () {
+        print("CONT TURN");
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
-        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
+        changeTurnModel.SetEndTurnButton(endTurnButton);
 
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
@@ -27,7 +27,7 @@ public class TurnController: GameController{
 
         //Set the player teams in Model in order to get captured by view and show them in the scene.
         //Set the turns for team1 and team2.
-        changeTurnModel.SetPlayerTeams(GetPlayerTeam(1), GetPlayerTeam(2));
+        changeTurnModel.SetTeams(teamSloths1, teamSloths2);
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
 
         //When the game starts, we got the image of the first sloth in team1 (corresponding to the one who starts playing (by default))
@@ -41,18 +41,18 @@ public class TurnController: GameController{
     public void FinishTurnOfPlayer()
     {
         
-        if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
+        if (turnPlayer1 != (teamSloths1.Count-1) && turnPlayer2 != (teamSloths2.Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if (turnPlayer1 == turnPlayer2) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if (turnPlayer1 - turnPlayer2 > 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if (turnPlayer1 - turnPlayer2 < -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            if (turnPlayer1 == turnPlayer2) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            if (turnPlayer1 - turnPlayer2 > 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            if (turnPlayer1 - turnPlayer2 < -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
         else
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if(turnPlayer1 == GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            if(turnPlayer1 == teamSloths1.Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else { turnPlayer2 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
     }
@@ -69,12 +69,12 @@ public class TurnController: GameController{
     {
         if (turnPlayer1 > turnPlayer2)
         {
-            spriteFromPreviousScene = GetTeamSprite1()[turnPlayer1];
+            spriteFromPreviousScene = teamSprite1[turnPlayer1];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
         else
         {
-            spriteFromPreviousScene = GetTeamSprite2()[turnPlayer2];
+            spriteFromPreviousScene = teamSprite2[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
 
