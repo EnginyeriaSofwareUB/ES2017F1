@@ -9,12 +9,11 @@ using System.Security.Cryptography.X509Certificates;
 public class GameController: ControllerSingleton<MonoBehaviour>{
 
     protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
-    
+
     ///////*****///////
 
     //TURNCONTROLLER VARIABLES
-    public List<Player> playerTeam1;
-    public List<Player> playerTeam2;
+    public List<Player> playerTeam1, playerTeam2;
 
     public List<Sprite> teamSprite1, teamSprite2;
     public Button endTurnButton;
@@ -30,27 +29,25 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     //LOGICCONTROLLER VARIABLES
     public List<Button> listAbilities;
     public Button firstAbility, secondAbility, thirdAbility;
-    public List<GameObject> teamSloths1;
-    public List<GameObject> teamSloths2;
+
+    //Used in SetUp too.
+    public List<GameObject> teamSloths1, teamSloths2;
 
     //UICONTROLLER VARIABLES
     public Image panelMain;
     public Image panelOpts;
+    public bool setActivePanelOpts = false;
+    public bool setActivePanelMain = true;
     public bool isPause = false;
-   
-    private Button resumeOpts;
-    private Button exitOpts;
+
 
     ///////*****///////
- 
+
     private void Awake()
     {
         InitializeTurnVariables();
         InitializeLogicVariables();
         InitializeUIVariables();
-
-		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
-		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
 
     }
 
@@ -75,8 +72,6 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
     private void InitializeLogicVariables()
     {
-        listAbilities = new List<Button>();
-
         firstAbility = GameObject.Find("buttonAbility1").GetComponent<Button>();
         secondAbility = GameObject.Find("buttonAbility2").GetComponent<Button>();
         thirdAbility = GameObject.Find("buttonAbility3").GetComponent<Button>();
@@ -85,6 +80,8 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
         listAbilities.Add(secondAbility);
         listAbilities.Add(thirdAbility);
 
+        teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
+        teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
     }
 
     private void InitializeUIVariables()
@@ -95,12 +92,10 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
         //panelMain init Elements
 
         //panelOpts init Elements
-
-        resumeOpts = GameObject.Find("ResumeGame").GetComponent<Button>();
-        exitOpts = GameObject.Find("QuitButton").GetComponent<Button>();
+        
 
     }
-
+    
     public Button GetEndTurnButton()
     {
         return endTurnButton;

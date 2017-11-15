@@ -9,26 +9,22 @@ public class UIController : ControllerSingleton<MonoBehaviour> {
 
     private GameController gameController;
 
-    private bool isPause;
+    private bool isPause, setActivePanelOpts, setActivePanelMain;
     private Image panelOpts, panelMain;
 
-    private static bool setActivePanelOpts, setActivePanelMain;
-    private static bool isSet = false;
-    //optionsPanel
-	private static Button resumeOpts;
-	private static Button exitOpts;
+    //Static variables for Update
     private static int i = 0;
+    private static bool isSet = false;
+
     //Get UIModel Constructor.
     private UIModel uiModel;
 
 	// Use this for initialization
-    //TODO MEJORAR (TODOS LOS STATICS DEBERIAN ESTAR EN GAMECONTROLLER)
 	private void Start () {
         uiModel = new UIModel();
 
         InitializeUIControllerVariables();
-        InitializeBoolVariables();
-        
+
         uiModel.SetStatePanelOpts(setActivePanelOpts);
         uiModel.SetStatePanelMain(setActivePanelMain);
 
@@ -68,13 +64,6 @@ public class UIController : ControllerSingleton<MonoBehaviour> {
         
 	}
 
-    private void InitializeBoolVariables()
-    {
-        isPause = false;
-        setActivePanelOpts = false;
-        setActivePanelMain = true;
-
-    }
 
     public void SetPause()
     {
@@ -86,6 +75,8 @@ public class UIController : ControllerSingleton<MonoBehaviour> {
     private void InitializeUIControllerVariables()
     {
         isPause = gameController.isPause;
+        setActivePanelOpts = gameController.setActivePanelOpts;
+        setActivePanelMain = gameController.setActivePanelMain;
         panelOpts = gameController.panelOpts;
         panelMain = gameController.panelMain;
     }

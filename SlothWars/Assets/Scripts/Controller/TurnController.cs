@@ -27,6 +27,7 @@ public class TurnController: ControllerSingleton<MonoBehaviour>{
 
         //Initialization
         InitializeTurnControllerVariables();
+
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
         changeTurnModel.SetEndTurnButton(gameController.GetEndTurnButton());

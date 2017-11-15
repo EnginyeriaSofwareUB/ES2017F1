@@ -11,13 +11,13 @@ public class LogicController: ControllerSingleton<MonoBehaviour>{
     private GameController gameController;
     private LogicModel logicModel;
 
-    private List<GameObject> teamSloths1, teamSloths2;<
+    private List<GameObject> teamSloths1, teamSloths2;
+    private List<Button> listAbilities;
 
     private void Start()
     {
         InitializeLogicControllerVariables();
-
-        print(teamSloths1.Count == 0);
+      
         logicModel.SetTeamSloths1(teamSloths1);
         logicModel.SetTeamSloths2(teamSloths2);
     }
@@ -26,6 +26,7 @@ public class LogicController: ControllerSingleton<MonoBehaviour>{
     {
         teamSloths1 = gameController.teamSloths1;
         teamSloths2 = gameController.teamSloths2;
+        listAbilities = gameController.listAbilities;
     }
 
 }

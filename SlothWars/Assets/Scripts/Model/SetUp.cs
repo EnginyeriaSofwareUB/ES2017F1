@@ -4,12 +4,14 @@ using UnityEngine;
 using System;
 using NUnit.Framework;
 
-public class SetUp : GameController {
-	// Use this for initialization
-	void Start () {
-		teamSloths1 = StorePersistentVariables.Instance.createdSlothTeam1;
-		teamSloths2 = StorePersistentVariables.Instance.createdSlothTeam2;
-        PlacePlayers ();
+public class SetUp : ControllerSingleton<MonoBehaviour> {
+    // Use this for initialization
+    private GameController gameController;
+    private List<GameObject> teamSloths1, teamSloths2;
+
+    void Start () {
+        InitializeSetUpVariables();
+		PlacePlayers ();
 
 	}
 
@@ -23,7 +25,7 @@ public class SetUp : GameController {
 		Animator anim;
 		ShotScript shot;
 		SlothSelected selected;
-		foreach(Player player in GetPlayerTeam(1)){
+		foreach(Player player in gameController.GetPlayerTeam(1)){
 			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (i+2, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();
@@ -47,7 +49,7 @@ public class SetUp : GameController {
 			i++;
 		}
 		i = 0;
-		foreach (Player player in GetPlayerTeam(2)) {
+		foreach (Player player in gameController.GetPlayerTeam(2)) {
 			sloth = (GameObject) Instantiate (Resources.Load ("Prefabs/Sloth"), new Vector3 (-i-2, 0, 0), Quaternion.identity);
 			// setting health
 			health = sloth.AddComponent <HealthScript>();
@@ -74,4 +76,9 @@ public class SetUp : GameController {
 		StorePersistentVariables.Instance.createdSlothTeam2 = teamSloths2;
 	}
 
+    private void InitializeSetUpVariables()
+    {
+        teamSloths1 = gameController.teamSloths1;
+        teamSloths2 = gameController.teamSloths2;
+    }
 }

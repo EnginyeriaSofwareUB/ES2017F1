@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UIModel {
 
-    private static bool statePanelOpts, statePanelMain;
-    private static Image panelOpts, panelMain;
+    private bool statePanelOpts, statePanelMain;
+    private Image panelOpts, panelMain;
 
     public UIModel() { }
     
