@@ -5,7 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class UIController : GameController {
+public class UIController : ControllerSingleton<MonoBehaviour> {
+
+    private GameController gameController;
+
+    private bool isPause;
+    private Image panelOpts, panelMain;
 
     private static bool setActivePanelOpts, setActivePanelMain;
     private static bool isSet = false;
@@ -17,9 +22,11 @@ public class UIController : GameController {
     private UIModel uiModel;
 
 	// Use this for initialization
+    //TODO MEJORAR (TODOS LOS STATICS DEBERIAN ESTAR EN GAMECONTROLLER)
 	private void Start () {
         uiModel = new UIModel();
 
+        InitializeUIControllerVariables();
         InitializeBoolVariables();
         
         uiModel.SetStatePanelOpts(setActivePanelOpts);
@@ -76,5 +83,11 @@ public class UIController : GameController {
         uiModel.SetStatePanelOpts(setActivePanelOpts);
     }
 
+    private void InitializeUIControllerVariables()
+    {
+        isPause = gameController.isPause;
+        panelOpts = gameController.panelOpts;
+        panelMain = gameController.panelMain;
+    }
 
 }

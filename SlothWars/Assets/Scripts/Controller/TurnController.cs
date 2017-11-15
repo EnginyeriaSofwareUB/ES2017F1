@@ -6,20 +6,30 @@ using UnityEngine.SceneManagement;
 using UnityEditor.Events;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
-public class TurnController: GameController{
-   
+public class TurnController: ControllerSingleton<MonoBehaviour>{
+
+    //Get an instance of GameController in order to access to variables.
+    private GameController gameController;
+    
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
     private static ChangeTurnModel changeTurnModel;
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
     private static ChangeImageModel changeImageModel;
-   
+
+
+    //Variables 
+    private int turnPlayer1, turnPlayer2;
+    private bool beginStopped, endTurnOfPlayer;
+    private Sprite spriteFromPreviousScene;
     // Use this for initialization
     private void Start () {
+
         //Initialization
+        InitializeTurnControllerVariables();
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
-        changeTurnModel.SetEndTurnButton(GetEndTurnButton());
+        changeTurnModel.SetEndTurnButton(gameController.GetEndTurnButton());
 
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
@@ -27,27 +37,21 @@ public class TurnController: GameController{
 
         //Set the player teams in Model in order to get captured by view and show them in the scene.
         //Set the turns for team1 and team2.
-        changeTurnModel.SetPlayerTeams(GetPlayerTeam(1), GetPlayerTeam(2));
+        changeTurnModel.SetPlayerTeams(gameController.GetPlayerTeam(1), gameController.GetPlayerTeam(2));
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
 
         //When the game starts, we got the image of the first sloth in team1 (corresponding to the one who starts playing (by default))
         //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
-        spriteFromPreviousScene = GetTeamSprite1()[0];
         changeImageModel.SetSprite(spriteFromPreviousScene);
        
-    }
-
-    private void Update()
-    {
-        
     }
 
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
         
-        if (turnPlayer1 != (GetPlayerTeam(1).Count-1) && turnPlayer2 != (GetPlayerTeam(2).Count-1))
+        if (turnPlayer1 != (gameController.GetPlayerTeam(1).Count-1) && turnPlayer2 != (gameController.GetPlayerTeam(2).Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else if (turnPlayer1 - turnPlayer2 == -1) { turnPlayer1 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
@@ -58,7 +62,7 @@ public class TurnController: GameController{
         else
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
-            else if(turnPlayer1 == GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
+            else if(turnPlayer1 == gameController.GetPlayerTeam(1).Count-1) { turnPlayer1 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
             else { turnPlayer2 = 0; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
         }
     }
@@ -75,12 +79,12 @@ public class TurnController: GameController{
     {
         if (turnPlayer1 > turnPlayer2)
         {
-            spriteFromPreviousScene = GetTeamSprite1()[turnPlayer1];
+            spriteFromPreviousScene = gameController.GetTeamSprite1()[turnPlayer1];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
         else
         {
-            spriteFromPreviousScene = GetTeamSprite2()[turnPlayer2];
+            spriteFromPreviousScene = gameController.GetTeamSprite2()[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
         }
 
@@ -107,4 +111,13 @@ public class TurnController: GameController{
         GetSelectedPlayerImage();
 
     }
+    
+    private void InitializeTurnControllerVariables()
+    {
+        turnPlayer1 = gameController.turnPlayer1;
+        turnPlayer2 = gameController.turnPlayer2;
+        beginStopped = gameController.beginStopped;
+        endTurnOfPlayer = gameController.endTurnOfPlayer;
+        spriteFromPreviousScene = gameController.spriteFromPreviousScene;
+}
 }
