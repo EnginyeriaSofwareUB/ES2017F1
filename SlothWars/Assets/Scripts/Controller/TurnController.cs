@@ -16,6 +16,7 @@ public class TurnController: GameController{
 
     // Use this for initialization
     private void OnEnable () {
+        print(teamSloths1.Count);
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
         changeTurnModel.SetEndTurnButton(endTurnButton);

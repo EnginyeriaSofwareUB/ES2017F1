@@ -68,5 +68,7 @@ public class SetUp : GameController {
 			teamSloths2.Add (sloth);
 			i++;
 		}
+        StorePersistentVariables.Instance.teamSloths1 = teamSloths1;
+        StorePersistentVariables.Instance.teamSloths2 = teamSloths2;
 	}
 }
