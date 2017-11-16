@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public class GameController: ControllerSingleton<MonoBehaviour>{
 
-    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
+    protected  GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     ///////*****///////
     //GameObjects (sloths) in the scene

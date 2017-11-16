@@ -28,7 +28,10 @@ public class MainMenu : ControllerSingleton<MonoBehaviour>
         panelMain = GameObject.Find("mainMenuPanel").GetComponent<Image>();
         panelVS = GameObject.Find("playVSPanel").GetComponent<Image>();
         panelOpts = GameObject.Find("OptionsPanel").GetComponent<Image>();
+    }
 
+    private void Start()
+    {
         panelVS.gameObject.SetActive(false);
         panelOpts.gameObject.SetActive(false);
     }
