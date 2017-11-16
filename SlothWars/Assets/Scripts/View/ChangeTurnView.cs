@@ -42,6 +42,7 @@ public class ChangeTurnView: MonoBehaviour {
     }
 
     // Function in order to change turns.
+    // TODO: MIRAR CON ADRIA LOS METODOS PARA ACTIVAR Y DESACTIVAR MOVIMIENTO
     public void FinishTurn()
     {
         playerTurn1 = changeTurnModel.GetTurnPlayer1();
@@ -54,6 +55,7 @@ public class ChangeTurnView: MonoBehaviour {
         if (beginStopped)
         {
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
+            return;
         }
 
         if (endTurnOfPlayer)
@@ -73,7 +75,6 @@ public class ChangeTurnView: MonoBehaviour {
 
     private void FixedBugs()
     {
-        // Now is the TurnController who interacts with buttons. This should be a job for View.
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
         
         if (changeTurnModel.GetTeam1()[playerTurn1].GetComponent<AnimPlayer>().GetMove() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<AnimPlayer>().GetMove())

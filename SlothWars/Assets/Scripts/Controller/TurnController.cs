@@ -16,12 +16,12 @@ public class TurnController: GameController{
 
     // Use this for initialization
     private void OnEnable () {
-        print("CONT TURN");
         changeImageModel = new ChangeImageModel();
         changeTurnModel = new ChangeTurnModel();
         changeTurnModel.SetEndTurnButton(endTurnButton);
 
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
+        print("CONT " + beginStopped);
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 

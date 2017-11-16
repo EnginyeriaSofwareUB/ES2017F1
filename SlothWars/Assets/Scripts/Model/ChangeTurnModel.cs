@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class ChangeTurnModel
 {
-    private Button endTurnButton;
-    private List<GameObject> teamSloths1 = new List<GameObject>();
-    private List<GameObject> teamSloths2 = new List<GameObject>();
-    private bool endTurnOfPlayer;
-    private bool endTurnButtonStatus;
-    private bool beginStopped;
-    private int turnPlayer1 = 0;
-    private int turnPlayer2 = 0;
+    private static Button endTurnButton;
+    private static List<GameObject> teamSloths1 = new List<GameObject>();
+    private static List<GameObject> teamSloths2 = new List<GameObject>();
+    private static bool endTurnOfPlayer;
+    private static bool endTurnButtonStatus;
+    private static bool beginStopped;
+    private static int turnPlayer1;
+    private static int turnPlayer2;
 
     public ChangeTurnModel() {}
   
@@ -23,7 +23,7 @@ public class ChangeTurnModel
     public void SetEndTurnButtonStatus(bool endTurnButtonController) { endTurnButtonStatus = endTurnButtonController; }
 
     public bool GetBeginStopped() { return beginStopped; }
-    public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController; }
+    public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController;}
 
     public List<GameObject> GetTeam1() { return teamSloths1; }
     public List<GameObject> GetTeam2() { return teamSloths2; }
@@ -72,25 +72,24 @@ public class ChangeTurnModel
    
 
         // Method in order to have only one sloth active.        
-        public void DeactivateAllExceptOne(List<GameObject> slothTeamA, List<GameObject> slothTeamB)
+    public void DeactivateAllExceptOne(List<GameObject> slothTeamA, List<GameObject> slothTeamB)
+    {
+        foreach (GameObject player in slothTeamB)
         {
-        
-            foreach (GameObject player in slothTeamB)
-            {
-                player.GetComponent<Animator>().enabled = false;
-                player.GetComponent<AnimPlayer>().enabled = false;
-                player.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
-                player.GetComponent<ShotScript>().enabled = false;
-            }
-
-            for (int i = 1; i < slothTeamA.Count; i++)
-            {
-                slothTeamA[i].GetComponent<Animator>().enabled = false;
-                slothTeamA[i].GetComponent<AnimPlayer>().enabled = false;
-                slothTeamA[i].GetComponent<ShotScript>().Active(false);
-                slothTeamA[i].GetComponent<ShotScript>().enabled = false;
-            }
-        
+            player.GetComponent<Animator>().enabled = false;
+            player.GetComponent<AnimPlayer>().enabled = false;
+            player.GetComponent<ShotScript>().Active(false); //turn off de canvas UI
+            player.GetComponent<ShotScript>().enabled = false;
         }
+
+        for (int i = 1; i < slothTeamA.Count; i++)
+        {
+            slothTeamA[i].GetComponent<Animator>().enabled = false;
+            slothTeamA[i].GetComponent<AnimPlayer>().enabled = false;
+            slothTeamA[i].GetComponent<ShotScript>().Active(false);
+            slothTeamA[i].GetComponent<ShotScript>().enabled = false;
+        }
+        
+    }
 
 }
