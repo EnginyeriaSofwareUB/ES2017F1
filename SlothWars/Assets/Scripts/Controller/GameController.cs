@@ -47,6 +47,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     {
         InitializePlayer();
         InitializeSetUp();
+
         InitializeTurnVariables();
         InitializeLogicVariables();
         InitializeUIVariables();

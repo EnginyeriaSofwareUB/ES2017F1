@@ -11,9 +11,9 @@ public class MainMenu : ControllerSingleton<MonoBehaviour>
     //If this is necessary in the future
     protected MainMenu() { }
 
-    public Image panelMain;
-    public Image panelVS;
-    public Image panelOpts;
+    private Image panelMain;
+    private Image panelVS;
+    private Image panelOpts;
 
 
     // Use this for initialization
@@ -28,6 +28,9 @@ public class MainMenu : ControllerSingleton<MonoBehaviour>
         panelMain = GameObject.Find("mainMenuPanel").GetComponent<Image>();
         panelVS = GameObject.Find("playVSPanel").GetComponent<Image>();
         panelOpts = GameObject.Find("OptionsPanel").GetComponent<Image>();
+
+        panelVS.gameObject.SetActive(false);
+        panelOpts.gameObject.SetActive(false);
     }
 
     public void PlaySelected()
