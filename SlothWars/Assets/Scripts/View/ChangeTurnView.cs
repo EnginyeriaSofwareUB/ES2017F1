@@ -50,23 +50,24 @@ public class ChangeTurnView: MonoBehaviour {
 
         beginStopped = changeTurnModel.GetBeginStopped();
         endTurnOfPlayer = changeTurnModel.GetEndTurnOfPlayer();
-
+        print(endTurnOfPlayer);
         // If he has ended, he will press the button, changing the variable to true.
         if (beginStopped)
         {
+            print("Turno Equipo Azul " + playerTurn1);
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
             return;
         }
 
         if (endTurnOfPlayer)
         {
-            print("Turno 1 " + playerTurn1);
+            print("Turno Equipo Azul " + playerTurn1);
             changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
         }
         else
         {
-            print("Turno 2 " + playerTurn2);
+            print("Turno Equipo Rojo " + playerTurn2);
             changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1]);
             changeTurnModel.ActivateSloth(playersTeam2[playerTurn2]);
 

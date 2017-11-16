@@ -21,7 +21,6 @@ public class TurnController: GameController{
         changeTurnModel.SetEndTurnButton(endTurnButton);
 
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
-        print("CONT " + beginStopped);
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 
@@ -40,7 +39,10 @@ public class TurnController: GameController{
     //Method to update the values from turnPlayer1 and turnPlayer2.
     public void FinishTurnOfPlayer()
     {
-        
+        print("CONT " + teamSloths1.Count);
+        print("Cont Equipo Azul " + turnPlayer1);
+        print("Cont Equipo Rojo " + turnPlayer2);
+
         if (turnPlayer1 != (teamSloths1.Count-1) && turnPlayer2 != (teamSloths2.Count-1))
         {
             if (turnPlayer1 - turnPlayer2 == 1) { turnPlayer2 += 1; changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2); return; }
@@ -59,9 +61,9 @@ public class TurnController: GameController{
 
     //Method to update the bool endTurnOfPlayer.
     public void SetEndTurnOfPlayer()
-    {
-        
+    {       
         endTurnOfPlayer = !endTurnOfPlayer;
+        changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
     }
 
     //Method to update the image selected.
