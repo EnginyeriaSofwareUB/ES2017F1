@@ -21,8 +21,6 @@ public class StorePersistentVariables : PersistentVariablesSingleton<StorePersis
     // PERSISTENT (PUBLIC) VARIABLES HERE:
 	public List<Sloth> slothTeam1 = new List<Sloth>();
 	public List<Sloth> slothTeam2 = new List<Sloth>();
-    public List<GameObject> teamSloths1 = new List<GameObject>();
-    public List<GameObject> teamSloths2 = new List<GameObject>();
     
     //
 

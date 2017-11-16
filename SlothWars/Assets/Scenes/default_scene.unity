@@ -477,7 +477,6 @@ GameObject:
   m_Component:
   - component: {fileID: 328900377}
   - component: {fileID: 328900376}
-  - component: {fileID: 328900378}
   - component: {fileID: 328900381}
   - component: {fileID: 328900380}
   - component: {fileID: 328900379}
@@ -539,39 +538,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &328900378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328900375}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2d0635ac15345adaf2646b55632da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamSloths1: []
-  teamSloths2: []
-  playerTeam1: []
-  playerTeam2: []
-  teamSprite1: []
-  teamSprite2: []
-  endTurnButton: {fileID: 0}
-  spriteFromPreviousScene: {fileID: 0}
-  isButtonPressed: 0
-  endTurnOfPlayer: 0
-  beginStopped: 0
-  turnPlayer1: 0
-  turnPlayer2: 0
-  listAbilities: []
-  firstAbility: {fileID: 0}
-  secondAbility: {fileID: 0}
-  thirdAbility: {fileID: 0}
-  panelMain: {fileID: 0}
-  panelOpts: {fileID: 0}
-  setActivePanelOpts: 0
-  setActivePanelMain: 1
-  isPause: 0
 --- !u!114 &328900379
 MonoBehaviour:
   m_ObjectHideFlags: 0

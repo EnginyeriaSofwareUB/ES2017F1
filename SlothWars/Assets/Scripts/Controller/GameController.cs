@@ -46,7 +46,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     private void Awake()
     {
         InitializePlayer();
-        InitializeSetUp();
+       // InitializeSetUp();
         PlacePlayers();
         InitializeTurnVariables();
         InitializeLogicVariables();
