@@ -46,6 +46,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     private void Awake()
     {
         InitializePlayer();
+        InitializeSetUp();
         InitializeTurnVariables();
         InitializeLogicVariables();
         InitializeUIVariables();
@@ -55,6 +56,11 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     private void InitializePlayer()
     {
         GameObject.Find("GameController").GetComponent<AnimPlayer>().enabled = false;
+    }
+
+    private void InitializeSetUp()
+    {
+        GameObject.Find("GameController").GetComponent<SetUp>().enabled = true;
     }
 
     private void InitializeTurnVariables()
