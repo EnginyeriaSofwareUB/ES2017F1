@@ -13,6 +13,7 @@ public class ChangeTurnModel
     private static bool beginStopped;
     private static int turnPlayer1;
     private static int turnPlayer2;
+    private static Text turnLabel;
 
     public ChangeTurnModel() {}
   
@@ -47,7 +48,15 @@ public class ChangeTurnModel
         turnPlayer2 = turnControllerPlayer2;
     }
 
+    public void SetTurnPlayer1(int turnControllerPlayer1)
+    {
+        turnPlayer1 = turnControllerPlayer1;
+    }
 
+    public void SetTurnPlayer2(int turnControllerPlayer2)
+    {
+        turnPlayer2 = turnControllerPlayer2;
+    }
     // Functions to activate and deactivate sloth's animations
     public void ActivateSloth(GameObject slothTeam)
     {
@@ -90,6 +99,15 @@ public class ChangeTurnModel
             slothTeamA[i].GetComponent<ShotScript>().enabled = false;
         }
         
+    }
+
+    public void SetText(Text label){
+        turnLabel = label;
+
+    }
+
+    public Text GetText(){
+        return turnLabel;
     }
 
 }

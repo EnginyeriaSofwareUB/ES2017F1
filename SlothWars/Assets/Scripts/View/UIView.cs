@@ -19,9 +19,11 @@ public class UIView : MonoBehaviour {
     {
         if (uiModel.GetPanelOpts() != null)
         {
+            
             if (uiModel.GetStatePanelOpts())
             {
                 Time.timeScale = 0;
+                print("He pasado");
                 uiModel.GetPanelOpts().gameObject.SetActive(true);
 
             }

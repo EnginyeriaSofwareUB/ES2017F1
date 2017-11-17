@@ -5,16 +5,26 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class UIController : GameController{
+public class UIController : ControllerSingleton<MonoBehaviour>{
 
 
     //Static variables for Update
     private static int i = 0;
     private static bool isSet = false;
-
+    private static Image panelOpts;
+    private static Image panelMain;
+    private static bool setActivePanelMain, setActivePanelOpts, isPause;
     //Get UIModel Constructor.
     private UIModel uiModel;
 
+    public UIController(Image panelMainCont, Image panelOptsCont)
+    {
+        panelOpts = panelOptsCont;
+        panelMain = panelMainCont;
+        setActivePanelMain = true;
+        setActivePanelOpts = false;
+        isPause = false;
+    }
 	// Use this for initialization
 	private void Start () {
         uiModel = new UIModel();
@@ -37,20 +47,23 @@ public class UIController : GameController{
         //pause time if they press escape keyboard 
         if ( Input.GetKeyDown(KeyCode.Escape))
 		{
-
+         
 			isPause = !isPause;
 
            if (isPause) {
                 uiModel.SetStatePanelOpts(true);
+                isSet = true;
 
             } else {
                 if (isSet)
                 {
                     uiModel.SetStatePanelOpts(true);
+                    isSet = true;
                 }
                 else
                 {
                     uiModel.SetStatePanelOpts(false);
+                    isSet = false;
                 }                
 			}
            
@@ -61,7 +74,7 @@ public class UIController : GameController{
 
     public void SetPause()
     {
-        isSet = true;
+        isSet = false;
         setActivePanelOpts = false;
         uiModel.SetStatePanelOpts(setActivePanelOpts);
     }

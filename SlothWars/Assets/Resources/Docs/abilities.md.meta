@@ -1,6 +1,16 @@
 fileFormatVersion: 2
-guid: ab9c0611f468e4340aed16c815b0cebe
-timeCreated: 1509026549
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: 6d70a83da5386dc4592f300e54ac28bb
+timeCreated: 1509201104
+=======
+guid: 76b5f7131caca481ea9086c956430990
+timeCreated: 1509570562
+>>>>>>> Integració del creador de terrenys. Primera versió. Falta controlar que els "sloths" es posin on toca a partir de les coordenades (x,y,z)=(0,0,0). D'aquesta manera, s'adaptaran a les condicions que es marquen en el creador de terreny.
+=======
+guid: 71c2a48287c585b4eb68adaf12663d94
+timeCreated: 1509108403
+>>>>>>> projectile integration with no controler setup
 licenseType: Free
 DefaultImporter:
   userData: 

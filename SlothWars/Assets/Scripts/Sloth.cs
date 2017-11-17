@@ -21,15 +21,15 @@ public class Sloth
     AbilityFactory factory = AbilityFactory.Instance;
 
 
-	public Sloth(string name)
-	{
+    public Sloth(string name)
+    {
         string s = ((TextAsset)Resources.Load("slothapedia")).text;
         JSONNode n = JSON.Parse(s);
         int len = n.Count;
         bool end = false;
         int i = 0;
 
-        while(i < len && !end)
+        while (i < len && !end)
         {
             if (n[i]["type"].Equals(name))
             {
@@ -46,7 +46,7 @@ public class Sloth
             }
             i++;
         }
-		/*
+        /*
         this.ab1 = factory.getAbility(idAb1);
         this.ab2 = factory.getAbility(idAb2);
         this.ab3 = factory.getAbility(idAb3);
@@ -55,7 +55,7 @@ public class Sloth
 
     public Sloth(int numId)
     {
-        
+
         string s = ((TextAsset)Resources.Load("slothapedia")).text;
         JSONNode n = JSON.Parse(s);
 
@@ -90,8 +90,14 @@ public class Sloth
         return this.sprite;
     }
 
-	public double GetHp(){
-		return this.hp;
-	}
+    public double GetHp()
+    {
+        return this.hp;
+    }
 
+    public void SumToHp(double dmg_heal)
+    {
+        hp += dmg_heal;
+
+    }
 }

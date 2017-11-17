@@ -87,7 +87,6 @@ public class AnimPlayer : MonoBehaviour {
         {
             if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
             {
-                Debug.Log(newPosition);
                 float step = 1 * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
             }

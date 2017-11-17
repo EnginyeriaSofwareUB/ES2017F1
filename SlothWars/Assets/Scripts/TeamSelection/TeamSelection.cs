@@ -153,6 +153,7 @@ public class TeamSelection : MonoBehaviour {
             }
             else{
                 StorePersistentVariables.Instance.slothTeam1.Add(new Sloth(type));
+
                 //slothTeam1.Add(new Sloth(type));
 				Debug.Log (type+" sloth added to team 1");
 				SetTeamSlotPic("1",slot,StorePersistentVariables.Instance.slothTeam1.Count);

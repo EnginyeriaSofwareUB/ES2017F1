@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIModel {
+public class UIModel:MonoBehaviour {
 
     private static bool statePanelOpts, statePanelMain;
     private static Image panelOpts, panelMain;
@@ -12,7 +12,7 @@ public class UIModel {
     public UIModel() { }
     
     public bool GetStatePanelOpts() { return statePanelOpts; }
-    public void SetStatePanelOpts(bool setActivePanelOpts) { statePanelOpts = setActivePanelOpts; }
+    public void SetStatePanelOpts(bool setActivePanelOpts) { statePanelOpts = setActivePanelOpts;}
 
     public bool GetStatePanelMain() { return statePanelMain; }
     public void SetStatePanelMain(bool setActivePanelMain) { statePanelMain = setActivePanelMain; }

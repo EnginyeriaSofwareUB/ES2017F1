@@ -14,8 +14,8 @@ public class UtilityAbility : Ability
     private double boostAtt;
     private int durBoostAtt;
 
-	public UtilityAbility(string id, JSONNode json)
-	{
+    public UtilityAbility(string id, JSONNode json)
+    {
         this.buildTerrain = json[id]["buildTerrain"];
         this.terrainType = json[id]["terrainType"];
         this.terrainSize = json[id]["terrainSize"];
@@ -28,13 +28,18 @@ public class UtilityAbility : Ability
     }
 
     //Apply ability to another sloth
-    public void apply(Sloth target)
+    public void Apply(Sloth target)
     {
 
     }
 
     //WIP: apply ability to terrain
-    public void apply()
+    public void Apply()
     {
+    }
+    public float GetRange() { return 0; }
+    public float GetRadius()
+    {
+        return 0;
     }
 }

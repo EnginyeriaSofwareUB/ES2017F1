@@ -6,9 +6,9 @@
     "def": 20,
     "ap": 5,
     "photo": "slothWizard",
-    "idAb1": "M1",
-    "idAb2": "M2",
-    "idAb3": "M3"
+    "idAb1": "M0",
+    "idAb2": "M1",
+    "idAb3": "M2"
   },
   
    "1": {
@@ -18,9 +18,9 @@
     "def": 60,
     "ap": 3,
     "photo": "slothTank",
-    "idAb1": "T1",
-    "idAb2": "T2",
-    "idAb3": "T3"
+    "idAb1": "T0",
+    "idAb2": "T1",
+    "idAb3": "T2"
   },
   
    "2": {
@@ -30,9 +30,9 @@
     "def": 20,
     "ap": 5,
     "photo": "slothArcher",
-    "idAb1": "P1",
-    "idAb2": "P2",
-    "idAb3": "P3"
+    "idAb1": "P0",
+    "idAb2": "P1",
+    "idAb3": "P2"
   },
   
    "3": {
@@ -42,9 +42,9 @@
     "def": 50,
     "ap": 4,
     "photo": "slothHealer",
-    "idAb1": "H1",
-    "idAb2": "H2",
-    "idAb3": "H3"
+    "idAb1": "H0",
+    "idAb2": "H1",
+    "idAb3": "H2"
   },
   
    "4": {
@@ -54,9 +54,9 @@
     "def": 50,
     "ap": 6,
     "photo": "slothUtility",
-    "idAb1": "U1",
-    "idAb2": "U2",
-    "idAb3": "U3"
+    "idAb1": "U0",
+    "idAb2": "U1",
+    "idAb3": "U2"
   }
 
 }

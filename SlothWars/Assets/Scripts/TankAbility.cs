@@ -1,7 +1,7 @@
 ﻿using System;
 using SimpleJSON;
 
-public class TankAbility: Ability
+public class TankAbility : Ability
 {
     private bool shield;
     private double boostDef;
@@ -11,8 +11,8 @@ public class TankAbility: Ability
     private double hpShield;
     private bool blockAb;
 
-	public TankAbility(string id, JSONNode json)
-	{
+    public TankAbility(string id, JSONNode json)
+    {
 
         this.shield = json[id]["shield"];
         this.boostDef = json[id]["boostDef"];
@@ -21,16 +21,25 @@ public class TankAbility: Ability
         this.durBoostHp = json[id]["durBoosthp"];
         this.hpShield = json[id]["hpShield"];
         this.blockAb = json[id]["blockAb"];
-}
+    }
 
     //Apply ability to another sloth
-    public void apply(Sloth target)
+    public void Apply(Sloth target)
     {
 
     }
 
     //WIP: apply ability to terrain
-    public void apply()
+    public void Apply()
     {
+    }
+
+    public float GetRange()
+    {
+        return 0;
+    }
+    public float GetRadius()
+    {
+        return 0;
     }
 }

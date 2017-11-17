@@ -1,15 +1,17 @@
 {
   "M0": {
 	"energy": 1,
-	"desc":"Shoots a fire discharge that deals damage in a short radius",
+	"desc":"Shoots a fireball that explodes dealing on hit damage and residual in a small radius",
     "elem": "fire",
     "onHit": "burnt",
     "oHitProb": 0.1,
     "dmg": 20,
+	"residual": 2,
     "distance": "ranged",
     "alterTerrain": true,
-    "reach": 10,
-	"hitRadius": 0.5
+    "reach": 15,
+	"hitRadius": 0.5,
+	"residual turns": 2
   },
   
    "M1": {
@@ -73,7 +75,7 @@
     "boostHp": 0,
     "durBoostHp": 0,
     "hpShield": 40,
-    "blockAb": true
+    "blockAb": true,
 	"hitRadius": 0.5
   },
   
@@ -96,9 +98,9 @@
   
   "P2": {
 	"energy": 1,
-	"desc":"",
+	"desc":"shoots an electric arrow that explodes when colliding causing damage in a small radius and reducing the action points. then, a maximum of three lightning bolt appear targeting three different close units and applying the same reduced effect.",
     "dmg": 10,
-    "reach": 20,
+    "reach": 30,
 	"hitRadius": 0.5
   },
 
@@ -111,7 +113,8 @@
     "healEffects": false,
     "boostDef": 0,
     "durBoostDef": 0,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+	"range": 15,
   },
   
   "H1": {
@@ -129,7 +132,7 @@
   
   "H2": {
     "shield": 0,
-	"desc":"",
+	"desc":"shoots a healing sphere that traverses units and explodes when reaching the chosen range and heals all the units in a small radius",
     "durShield": 0,
     "healHp": 0,
     "healEffects": true,

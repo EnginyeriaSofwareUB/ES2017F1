@@ -78,4 +78,8 @@ public class MainMenu : ControllerSingleton<MonoBehaviour>
     {
         Application.Quit();
     }
+
+    public void ShowSlothapedia(){
+        SceneManager.LoadScene("Slothapedia");
+    }
 }
