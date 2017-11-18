@@ -6,7 +6,22 @@ using UnityEngine.SceneManagement;
 using UnityEditor.Events;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
-public class TurnController: ControllerSingleton<MonoBehaviour>{
+public class TurnController: MonoBehaviour{
+    //SINGLETON
+    private static TurnController instance;
+    public static TurnController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new TurnController();
+            }
+            return instance;
+        }
+    }
+    protected  TurnController() { }
+    ///////*****///////
 
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
     private static ChangeTurnModel changeTurnModel;

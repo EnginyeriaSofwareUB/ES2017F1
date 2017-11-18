@@ -33,7 +33,7 @@ public class MagicAbility: Ability
 
     }
     //Apply ability to another sloth
-    public void Apply(Sloth target)
+    public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
         //GameControl.control.SumToHpBar(target,-dmg);

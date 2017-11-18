@@ -12,6 +12,7 @@ public class AbilityModel {
     private static List<Transform> listGunTeam1, listGunTeam2;
     private static bool beginStopped;
     private static int turnPlayer1, turnPlayer2;
+    private static Ability lastAbility;
 
     public AbilityModel() { }
 
@@ -39,5 +40,8 @@ public class AbilityModel {
 
     public void SetTurnPlayer2(int turnPlayer2FromTurns) { turnPlayer2 = turnPlayer2FromTurns; }
     public int GetTurnPlayer2() { return turnPlayer2; }
+
+    public void SetLastAbility(Ability onLastAbility) { lastAbility = onLastAbility; Debug.Log(lastAbility); }
+    public Ability GetLastAbility() { Debug.Log(lastAbility); return lastAbility; }
 
 }

@@ -24,7 +24,7 @@ public class TankAbility : Ability
     }
 
     //Apply ability to another sloth
-    public void Apply(Sloth target)
+    public void Apply(ref Sloth target)
     {
 
     }

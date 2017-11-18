@@ -37,17 +37,18 @@ public class ShotScript : MonoBehaviour
     void Update()
     {
         beginStopped = abilityModel.GetBeginStopped();
-        turnPlayer1 = abilityModel.GetTurnPlayer1();
-        turnPlayer2 = abilityModel.GetTurnPlayer2();
+
         if (beginStopped)
         {
             if (!mov)
             {
-                gun = listGunTeam1[turnPlayer1];
+                gun = listGunTeam1[0];
                 gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
             }
         } else
         {
+            turnPlayer1 = abilityModel.GetTurnPlayer1();
+            turnPlayer2 = abilityModel.GetTurnPlayer2();
             listGunTeam1[0].gameObject.SetActive(false);
             if (turnPlayer1 - turnPlayer2 == 1)
             {
@@ -154,6 +155,7 @@ public class ShotScript : MonoBehaviour
                 onLoad = pf.getProjectile(a);
                 Debug.Log("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
+                abilityModel.SetLastAbility(a);
                 Bar();
             }
             else

@@ -19,6 +19,7 @@ TagManager:
   - ActionPointsSlothText
   - gameController
   - endTurnButton
+  - Gun
   layers:
   - Default
   - TransparentFX

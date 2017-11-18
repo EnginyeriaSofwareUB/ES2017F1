@@ -6,7 +6,7 @@ public class AnimPlayer : MonoBehaviour {
 
     public Animator anim;
     public Rigidbody rbody;
-    private Sloth sloth;
+    public Sloth sloth;
 
     private float inputH;
     private float inputV;

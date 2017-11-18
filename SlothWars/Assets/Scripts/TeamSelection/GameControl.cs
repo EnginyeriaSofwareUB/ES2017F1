@@ -3,8 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameControl : ControllerSingleton<MonoBehaviour> {
-    
+public class GameControl : MonoBehaviour {
+    private static GameControl instance;
+    public static GameControl Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameControl();
+            }
+            return instance;
+        }
+    }
+    protected  GameControl() { }
     // GameControl instance that you may call from any other script in the scene using GameControl.control 
     // and then you may access to any of its public variables and/or expressions.
     public static GameControl control;

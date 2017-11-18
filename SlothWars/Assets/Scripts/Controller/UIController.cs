@@ -5,8 +5,22 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class UIController : ControllerSingleton<MonoBehaviour>{
-
+public class UIController : MonoBehaviour{
+    //SINGLETON
+    private static UIController instance;
+    public static UIController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new UIController();
+            }
+            return instance;
+        }
+    }
+    protected  UIController() { }
+    ///////*****///////
 
     //Static variables for Update
     private static int i = 0;
@@ -15,7 +29,7 @@ public class UIController : ControllerSingleton<MonoBehaviour>{
     private static Image panelMain;
     private static bool setActivePanelMain, setActivePanelOpts, isPause;
     //Get UIModel Constructor.
-    private UIModel uiModel;
+    private static UIModel uiModel;
 
     public UIController(Image panelMainCont, Image panelOptsCont)
     {

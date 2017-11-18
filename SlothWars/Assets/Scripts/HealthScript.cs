@@ -41,4 +41,10 @@ public class HealthScript : MonoBehaviour {
 		return health;
 	}
 
+    public void SumToHP(int d_h)
+    {
+        health += d_h;
+        text.text = "" + health;
+    }
+
 }

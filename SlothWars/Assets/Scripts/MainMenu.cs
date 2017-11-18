@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenu : ControllerSingleton<MonoBehaviour>
+public class MainMenu : MonoBehaviour
 {
 
     //If this is necessary in the future

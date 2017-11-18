@@ -31,7 +31,7 @@ public class HealingAbility: Ability
     }
 
     //Apply ability to another sloth
-    public void Apply(Sloth target)
+    public void Apply(ref Sloth target)
     {
         target.SumToHp(healHp);
         //GameControl.control.SumToHpBar(target, healHp);

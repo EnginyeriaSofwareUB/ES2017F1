@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour {
     private Vector3 origin = new Vector3();
+    
     private float range = 10;
     public string namePath = "";
     private bool onCollision = true;
+    AbilityController abilityController = AbilityController.Instance;
     public float DieIn= 2;
     private float radius = 0.5f;
     public int d_h = 20; // used while Sloth-gameobject conection doesnt exit
@@ -18,6 +20,7 @@ public class ExplosionScript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        
     }
 
     // Update is called once per frame
@@ -33,7 +36,8 @@ public class ExplosionScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (onCollision){
+        if (onCollision && !colided){
+            colided = true;
             Debug.Log("radius "+radius);
 			logicAndDestroy ();
         }
@@ -49,10 +53,11 @@ public class ExplosionScript : MonoBehaviour {
 		{
 			//Debug.Log ("collider tag: " + hitColliders [i].tag);
 			if ("sloth".Equals (hitColliders [i].tag)) {
-				hitColliders[i].SendMessage("SumToHP", d_h);
-				//GameControl.control.ApplyLastAbility(s);
-			}
-			i++;
+				//hitColliders[i].SendMessage("SumToHP", d_h);
+                abilityController.ApplyLastAbility(hitColliders[i].gameObject);
+                Debug.Log(hitColliders[i].gameObject.GetComponent<AnimPlayer>().sloth.GetHp());
+            }
+            i++;
 		}
 
 		explosion = (GameObject) Instantiate(Resources.Load(namePath),this.transform.position,this.transform.rotation);

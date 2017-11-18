@@ -9,8 +9,21 @@ using System.Security.Cryptography.X509Certificates;
 // Class created in order to control the executional flow. It stores variables obtained in the scene and call the rest
 // of the controllers.
 // TODO: Redo this singleton in order to not have static variables.
-public class GameController: ControllerSingleton<MonoBehaviour>{
+public class GameController: MonoBehaviour{
 
+    //SINGLETON
+    private static GameController instance;
+    public static GameController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameController();
+            }
+            return instance;
+        }
+    }
     protected  GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     ///////*****///////
@@ -51,10 +64,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
     public Image panelOpts;
 
     //ABILITY VARIABLES
-    public static GameObject createGun;
-    public static List<GameObject> createGunTeam1 = new List<GameObject>();
-    public static List<GameObject> createGunTeam2 = new List<GameObject>();
-    private GameObject addGun;
+    private Transform createGun;
     private AbilityController abilityController;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
@@ -141,11 +151,12 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.enabled = false;
 
-                createGun = (GameObject)Instantiate(Resources.Load("Objects/Gun"), new Vector3(i + 20, 0, 0), Quaternion.identity);
-                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-                createGun.transform.parent = sloth.transform;
 
-                createGunTeam1.Add(createGun);
+                createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
+                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+               
+                listGunTeam1.Add(createGun);
+                
                 teamSloths1.Add(sloth);
 
                 i++;
@@ -172,11 +183,12 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.enabled = false;
 
-                createGun = (GameObject)Instantiate(Resources.Load("Objects/Gun"), new Vector3(i + 10, 0, 0), Quaternion.identity);
-                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-                createGun.transform.parent = sloth.transform;
 
-                createGunTeam2.Add(createGun);
+                createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
+                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+
+                listGunTeam2.Add(createGun);
+
                 teamSloths2.Add(sloth);
                 i++;
             }
@@ -201,16 +213,7 @@ public class GameController: ControllerSingleton<MonoBehaviour>{
 
     private void InitializeAbilityVariables()
     {
-        foreach (GameObject createGun in createGunTeam1)
-        {
-            listGunTeam1.Add(createGun.transform);
-        }
 
-        foreach (GameObject createGun in createGunTeam2)
-        {
-            listGunTeam2.Add(createGun.transform);
-        }
-        //gun = GameObject.Find("Sloth").GetComponentInChildren<Transform>().Find("GUN");
         abilityController = new AbilityController(listGunTeam1, listGunTeam2);
     }
 

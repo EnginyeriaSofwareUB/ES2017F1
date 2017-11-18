@@ -69,14 +69,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4423591830621622}
-  - component: {fileID: 114500882488181320}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1963346320434410
 GameObject:
   m_ObjectHideFlags: 1
@@ -192,19 +191,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114500882488181320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878489649262260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43b2eecf02afb5e44a261d2f02b03a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 1897508314032064, guid: 37ba6968a8d4194479ad619a3904d2e1, type: 2}
-  ForceBar: {fileID: 1638866425143238, guid: bac708725c5b2d94ba3edc48c75ec110, type: 2}
 --- !u!114 &114570944917763786
 MonoBehaviour:
   m_ObjectHideFlags: 1

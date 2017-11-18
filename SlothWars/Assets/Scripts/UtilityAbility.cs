@@ -28,7 +28,7 @@ public class UtilityAbility : Ability
     }
 
     //Apply ability to another sloth
-    public void Apply(Sloth target)
+    public void Apply(ref Sloth target)
     {
 
     }
