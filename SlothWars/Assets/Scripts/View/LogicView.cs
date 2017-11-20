@@ -7,7 +7,6 @@ public class LogicView : MonoBehaviour {
     private LogicModel logicModel;
     private AbilityModel abilityModel;
     private List<GameObject> teamSloths1, teamSloths2;
-    private List<Transform> listGunTeam1, listGunTeam2;
     
     // Use this for initialization
 	private void Start () {
@@ -16,8 +15,6 @@ public class LogicView : MonoBehaviour {
 
         teamSloths1 = logicModel.GetTeamSloths1();
         teamSloths2 = logicModel.GetTeamSloths2();
-        listGunTeam1 = abilityModel.GetGunTeam1();
-        listGunTeam2 = abilityModel.GetGunTeam2();
 	}
 	
 	// Update is called once per frame
@@ -42,7 +39,6 @@ public class LogicView : MonoBehaviour {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
                 teamSloths1.Remove(sloth);
-                listGunTeam1.Remove(listGunTeam1[i]);
                 //REMOVE LISTGUN
             }
             i++;
@@ -56,7 +52,6 @@ public class LogicView : MonoBehaviour {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
                 teamSloths2.Remove(sloth);
-                listGunTeam2.Remove(listGunTeam2[i]);
             }
             i++;
         }

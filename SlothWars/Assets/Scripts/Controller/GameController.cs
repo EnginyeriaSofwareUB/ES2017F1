@@ -41,13 +41,6 @@ public class GameController: MonoBehaviour{
     private static int checkPlayer = 0;
     private static int checkTurn = 0;
 
-    private GameObject sloth;
-    private static AnimPlayer pla;
-    private static HealthScript health;
-    private static Animator anim;
-    private static ShotScript shot;
-    private static SlothSelected selected;
-
     //TURNCONTROLLER VARIABLES
     private TurnController turnController;
     public static List<Sprite> teamSprite1, teamSprite2;
@@ -125,6 +118,12 @@ public class GameController: MonoBehaviour{
 
     private void PlacePlayers()
     {
+        GameObject sloth;
+        AnimPlayer pla;
+        HealthScript health;
+        Animator anim;
+        ShotScript shot;
+        SlothSelected selected;
         
         if (checkPlayer == 0)
         {
@@ -152,10 +151,10 @@ public class GameController: MonoBehaviour{
                 selected.enabled = false;
 
 
-                createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
-                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+                //createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
+                //createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
                
-                listGunTeam1.Add(createGun);
+                //listGunTeam1.Add(createGun);
                 
                 teamSloths1.Add(sloth);
 
@@ -184,10 +183,10 @@ public class GameController: MonoBehaviour{
                 selected.enabled = false;
 
 
-                createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
-                createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+               // createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
+                //createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
 
-                listGunTeam2.Add(createGun);
+                //listGunTeam2.Add(createGun);
 
                 teamSloths2.Add(sloth);
                 i++;
@@ -214,7 +213,7 @@ public class GameController: MonoBehaviour{
     private void InitializeAbilityVariables()
     {
 
-        abilityController = new AbilityController(listGunTeam1, listGunTeam2);
+        abilityController = new AbilityController();
     }
 
     private void InitializeLogicVariables()

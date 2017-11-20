@@ -7,10 +7,8 @@ public class ShotScript : MonoBehaviour
 {
     public GameObject ForceBar; //force/range bar gameObject
     private static bool beginStopped;
-    private static int turnPlayer1, turnPlayer2;
-    private Transform gun;
+    private Transform gun;  // aim vector transform
     private AbilityModel abilityModel;
-    public List<Transform> listGunTeam1, listGunTeam2; // aim vector transform
     private int rotate = 0; // 0 when loocking to the right, 1 when loocking to left
     bool shotLoad = false; // it says if its calculating range/force
     bool mov = false; // sloth is moving bool
@@ -20,88 +18,29 @@ public class ShotScript : MonoBehaviour
     ProjectileAbility pA;
     HealingAbility hA;
     ForceBarScript st;
-
     private bool active = true;
     //initialization
     void Start()
     {
         abilityModel = new AbilityModel();
-        listGunTeam1 = abilityModel.GetGunTeam1();
-        listGunTeam2 = abilityModel.GetGunTeam2();
+        gun = GetComponentInChildren<Transform>().Find("Gun");
+        gun.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         hA = new HealingAbility();
         pA = new ProjectileAbility();
         mA = new MagicAbility();
+
 
     }
     // creates a force bar with the first key pressed , shoots with the second key pressed and aims with the vertical axis 
     void Update()
     {
-        beginStopped = abilityModel.GetBeginStopped();
-
-        if (beginStopped)
+        if (!mov)
         {
-            if (!mov)
-            {
-                gun = listGunTeam1[0];
-                gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
-            }
-        } else
-        {
-            turnPlayer1 = abilityModel.GetTurnPlayer1();
-            turnPlayer2 = abilityModel.GetTurnPlayer2();
-            listGunTeam1[0].gameObject.SetActive(false);
-            if (turnPlayer1 - turnPlayer2 == 1)
-            {
-                if (!mov)
-                {
-                    gun = listGunTeam2[turnPlayer2];
-                    gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
-                }
-            } else if (turnPlayer1 == turnPlayer2)
-            {
-                if(turnPlayer1 == 0)
-                {
-                    listGunTeam1[0].gameObject.SetActive(true);
-                }
-                if (!mov)
-                {
-                    
-                    gun = listGunTeam1[turnPlayer1];
-                    gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
-                }
-            } else if (turnPlayer1 - turnPlayer2 < 0)
-            {
-                if (!mov)
-                {
-                    gun = listGunTeam2[turnPlayer2];
-                    gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
-                }
-            }
+            gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
         }
+       
     }
-    public void TriggerAbility1()
-    {
-        if (active && !mov){
-            Shot(mA);
-        }
-    }
-
-    public void TriggerAbility2()
-    {
-        if (active && !mov)
-        {
-            Shot(pA);
-        }
-    }
-
-    public void TriggerAbility3()
-    {
-        if (active && !mov)
-        {
-            Shot(hA);
-        }
-    }
-
+   
     // creates a force bar
     private void Bar()
     {

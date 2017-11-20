@@ -37,9 +37,9 @@ public class UtilityAbility : Ability
     public void Apply()
     {
     }
-    public float GetRange() { return 0; }
+    public float GetRange() { return 10; }
     public float GetRadius()
     {
-        return 0;
+        return 1;
     }
 }

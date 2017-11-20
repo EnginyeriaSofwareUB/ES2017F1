@@ -9,16 +9,12 @@ public class AbilityModel {
 
     private static Button firstAbility, secondAbility, thirdAbility;
     private static List<Button> listAbilities;
-    private static List<Transform> listGunTeam1, listGunTeam2;
     private static bool beginStopped;
     private static int turnPlayer1, turnPlayer2;
     private static Ability lastAbility;
 
     public AbilityModel() { }
 
-    public void SetGunTeams(List<Transform> gunTeam1Cont, List<Transform> gunTeam2Cont) {listGunTeam1 = gunTeam1Cont; listGunTeam2 = gunTeam2Cont; }
-    public List<Transform> GetGunTeam1() { return listGunTeam1; }
-    public List<Transform> GetGunTeam2() { return listGunTeam2; }
 
     public void SetFirstAbility(Button firstAbilityCont) { firstAbility = firstAbilityCont; }
     public Button GetFirstAbility() { return firstAbility; }

@@ -148,4 +148,9 @@ public class TurnController: MonoBehaviour{
         }
 
     }
+    public GameObject GetActiveSloth()
+    {
+        if (turnPlayer1 == turnPlayer2) { return changeTurnModel.GetTeam1()[turnPlayer1]; }
+        else { return changeTurnModel.GetTeam2()[turnPlayer2]; }
+    }
 }

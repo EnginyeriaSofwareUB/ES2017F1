@@ -46,11 +46,11 @@ public class Sloth
             }
             i++;
         }
-        /*
+        
         this.ab1 = factory.getAbility(idAb1);
         this.ab2 = factory.getAbility(idAb2);
         this.ab3 = factory.getAbility(idAb3);
-        */
+        
     }
 
     public Sloth(int numId)
@@ -99,5 +99,17 @@ public class Sloth
     {
         hp += dmg_heal;
 
+    }
+    public Ability GetAbility1()
+    {
+        return this.ab1;
+    }
+    public Ability GetAbility2()
+    {
+        return this.ab2;
+    }
+    public Ability GetAbility3()
+    {
+        return this.ab3;
     }
 }

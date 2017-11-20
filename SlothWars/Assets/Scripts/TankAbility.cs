@@ -36,10 +36,10 @@ public class TankAbility : Ability
 
     public float GetRange()
     {
-        return 0;
+        return 10;
     }
     public float GetRadius()
     {
-        return 0;
+        return 1;
     }
 }

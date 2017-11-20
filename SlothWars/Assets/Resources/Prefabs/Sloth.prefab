@@ -324,8 +324,7 @@ GameObject:
   - component: {fileID: 95932873992857546}
   - component: {fileID: 54556548840247300}
   - component: {fileID: 136740565990022728}
-  - component: {fileID: 114719540054521818}
-  - component: {fileID: 114407660920989922}
+  - component: {fileID: 114188936806274146}
   m_Layer: 0
   m_Name: Sloth
   m_TagString: sloth
@@ -1384,7 +1383,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1725288240344064}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.5000007, y: 0.5, z: 0.5000007}
   m_Children:
   - {fileID: 4747001752863906}
@@ -2231,22 +2230,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114407660920989922
+--- !u!114 &114188936806274146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1258916781917802}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43b2eecf02afb5e44a261d2f02b03a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForceBar: {fileID: 0}
-  listGunTeam1:
-  - {fileID: 0}
-  listGunTeam2:
-  - {fileID: 0}
+  ForceBar: {fileID: 1638866425143238, guid: 27ff1f3cc995c544db3450c4786de7bf, type: 2}
+  listGunTeam1: []
+  listGunTeam2: []
 --- !u!114 &114676824083915418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2274,17 +2271,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114719540054521818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258916781917802}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114884076823582910
 MonoBehaviour:
   m_ObjectHideFlags: 1

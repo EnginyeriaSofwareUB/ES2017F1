@@ -24,26 +24,16 @@ public class AbilityController : MonoBehaviour {
 
     private static AbilityModel abilityModel;
     private Ability ability;
-    private static List<Transform> listGunTeam1, listGunTeam2;
 
-	public AbilityController(List<Transform> listGunTeam1Cont, List<Transform> listGunTeam2Cont)
+	public AbilityController()
     {
-        listGunTeam1 = listGunTeam1Cont;
-        listGunTeam2 = listGunTeam2Cont;
     }
-
-    protected AbilityController(){}
 
     private void Awake()
     {
         abilityModel = new AbilityModel();
     }
     
-    private void OnEnable()
-    {
-        abilityModel.SetGunTeams(listGunTeam1, listGunTeam2);
-    }
-  
     //sums dmg_heal to the hp bar asociated to target
 
     public void SumToHpBar(GameObject target, double dmg_Heal)
@@ -61,5 +51,22 @@ public class AbilityController : MonoBehaviour {
     {
         ability = abilityModel.GetLastAbility();
         ability.Apply(ref sloth.GetComponent<AnimPlayer>().sloth);
+    }
+    public void TriggerAbility1()
+    {
+        GameObject s = TurnController.Instance.GetActiveSloth();
+        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility1());
+    }
+
+    public void TriggerAbility2()
+    {
+        GameObject s = TurnController.Instance.GetActiveSloth();
+        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility2());
+    }
+
+    public void TriggerAbility3()
+    {
+        GameObject s = TurnController.Instance.GetActiveSloth();
+        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility3());
     }
 }

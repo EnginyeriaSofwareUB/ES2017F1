@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 43b2eecf02afb5e44a261d2f02b03a2b
-timeCreated: 1507635672
+timeCreated: 1511202994
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ForceBar: {fileID: 1638866425143238, guid: 27ff1f3cc995c544db3450c4786de7bf, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

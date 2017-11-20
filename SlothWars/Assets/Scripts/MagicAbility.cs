@@ -13,6 +13,7 @@ public class MagicAbility: Ability
     private int reach =15;
     private int residualTurns;
     private float hitRadius = 2f;
+    AbilityController abilityController = AbilityController.Instance;
 
     public MagicAbility(string id, JSONNode json)
     {
@@ -36,8 +37,8 @@ public class MagicAbility: Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        //GameControl.control.SumToHpBar(target,-dmg);
-        //GameControl.control.SumResidual(target, -residual, residualTurns);
+        //abilityController.SumToHpBar(target,-dmg);
+        //abilityController.SumResidual(target, -residual, residualTurns);
     }
 
     //WIP: apply ability to terrain
