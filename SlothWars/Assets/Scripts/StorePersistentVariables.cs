@@ -12,15 +12,16 @@ public class StorePersistentVariables : PersistentVariablesSingleton<StorePersis
      To refer to this variables in any cs file, you have to put the code below:
 
         if you want to set it:
-            StorePersistenVariables.Instance.NAMEPERSISTENTVALUE = value;
+            StorePersistentVariables.Instance.NAMEPERSISTENTVALUE = value;
         if you want to get it:
-            value = StorePersistenVariables.Instance.NAMEPERSISTENTVALUE;
+            value = StorePersistentVariables.Instance.NAMEPERSISTENTVALUE;
     
     */
 
     // PERSISTENT (PUBLIC) VARIABLES HERE:
 	public List<Sloth> slothTeam1 = new List<Sloth>();
 	public List<Sloth> slothTeam2 = new List<Sloth>();
+    public string winner = "BatmanWinner";
     
     //
 
@@ -35,6 +36,5 @@ public class StorePersistentVariables : PersistentVariablesSingleton<StorePersis
             mInstance = value;
         }
     }
-
     protected StorePersistentVariables() { }
 }

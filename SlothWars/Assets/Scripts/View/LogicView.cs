@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LogicView : MonoBehaviour {
 
@@ -22,6 +23,7 @@ public class LogicView : MonoBehaviour {
         if (teamSloths1 != null && teamSloths2 != null)
         {
             CheckSlothsAlive();
+            CheckGameOver();
         }
 	}
 
@@ -54,6 +56,16 @@ public class LogicView : MonoBehaviour {
                 teamSloths2.Remove(sloth);
             }
             i++;
+        }
+    }
+
+    private void CheckGameOver(){
+        if(teamSloths1.Count == 0){
+            StorePersistentVariables.Instance.winner = "Blue";
+            SceneManager.LoadScene("GameOverScene");
+        } else if(teamSloths2.Count == 0){
+            StorePersistentVariables.Instance.winner = "Red";
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 }

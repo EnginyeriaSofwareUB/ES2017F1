@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Slothapedia.unity
     guid: 7df96287fc3ed5f4593865bad08aac85
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: bd6a7f16196ad3e46bb6c71574fc5701
