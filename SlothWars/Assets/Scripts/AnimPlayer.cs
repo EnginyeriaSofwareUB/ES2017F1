@@ -40,7 +40,7 @@ public class AnimPlayer : MonoBehaviour {
             print(changeTurnModel.GetApCurrentSloth());
             Movement_Interpretation();
             Movement_Correction();
-            Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
+            //Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
         } else{
             print("HELLO THIS SHOULD NOT MOVE"+changeTurnModel.GetApCurrentSloth());
             inputH = 0;
@@ -52,8 +52,7 @@ public class AnimPlayer : MonoBehaviour {
         
     void Movement_Interpretation()
     {
-
-        Jump();
+        //Jump();
         Left_Or_Right();
     }
 

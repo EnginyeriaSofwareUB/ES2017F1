@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4437120698280348}
   m_Layer: 0
   m_Name: HealExplosion
-  m_TagString: Untagged
+  m_TagString: explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

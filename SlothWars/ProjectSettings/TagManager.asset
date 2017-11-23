@@ -20,6 +20,16 @@ TagManager:
   - gameController
   - endTurnButton
   - Gun
+  - lifeImage
+  - actionImage
+  - actionSlothText
+  - attackSlothText
+  - attackImage
+  - shieldSlothText
+  - shieldImage
+  - Undefined
+  - explosion
+  - projectile
   layers:
   - Default
   - TransparentFX
