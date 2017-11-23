@@ -256,5 +256,10 @@ public class GameController: MonoBehaviour{
         }
         
     }
+
+    public TurnController GetTurnController()
+    {
+        return turnController;
+    }
     
 }

@@ -34,12 +34,11 @@ public class AnimPlayer : MonoBehaviour {
     {
         Movement_Interpretation();
         Movement_Correction();
-        Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
     }
         
     void Movement_Interpretation()
     {
-        Jump();
+        //Jump();
         Left_Or_Right();
     }
 
