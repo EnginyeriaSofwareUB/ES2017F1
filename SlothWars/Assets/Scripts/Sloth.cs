@@ -95,6 +95,8 @@ public class Sloth
         return this.hp;
     }
 
+    public int GetAp(){ return ap;}
+
     public void SumToHp(double dmg_heal)
     {
         hp += dmg_heal;

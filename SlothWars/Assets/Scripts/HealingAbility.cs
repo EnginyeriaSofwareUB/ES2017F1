@@ -12,6 +12,7 @@ public class HealingAbility: Ability
     private int durBoostDef;
     private float range = 15;
     private float hitRadius= 2f;
+    private int ap;
 
 	public HealingAbility(string id, JSONNode json)
 	{
@@ -24,6 +25,7 @@ public class HealingAbility: Ability
         this.durBoostDef = json[id]["durBoostDef"];
         this.range = json[id]["range"];
         this.hitRadius = json[id]["hitRadius"];
+        this.ap = json[id]["ap"];
     }
     public HealingAbility()
     {
@@ -47,6 +49,10 @@ public class HealingAbility: Ability
     public float GetRadius()
     {
         return hitRadius;
+    }
+
+    public int GetAp(){
+        return ap;
     }
 
 }

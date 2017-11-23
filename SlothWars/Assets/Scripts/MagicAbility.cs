@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleJSON;
+using UnityEngine;
 
 public class MagicAbility: Ability
 {
@@ -13,6 +14,7 @@ public class MagicAbility: Ability
     private int reach =15;
     private int residualTurns;
     private float hitRadius = 2f;
+    private int ap;
     AbilityController abilityController = AbilityController.Instance;
 
     public MagicAbility(string id, JSONNode json)
@@ -28,10 +30,10 @@ public class MagicAbility: Ability
         this.reach = json[id]["reach"];
         this.residualTurns = json[id]["residual turns"];
         this.hitRadius = json[id]["hitRadius"];
+        this.ap = json[id]["ap"];
     }
     public MagicAbility()
     {
-
     }
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
@@ -52,5 +54,12 @@ public class MagicAbility: Ability
     public float GetRadius()
     {
         return hitRadius;
+    }
+
+    public int GetAp(){
+        Debug.Log("MAGIC ABILITY AP: "+ap);
+        Debug.Log("onHit AP: "+onHitEff);
+        Debug.Log("dmg AP: "+dmg);
+        return ap;
     }
 }

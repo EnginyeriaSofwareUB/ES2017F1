@@ -1,6 +1,5 @@
 {
   "M0": {
-	"energy": 1,
 	"desc":"Shoots a fire discharge that deals damage in a short radius",
     "elem": "fire",
     "onHit": "burnt",
@@ -9,11 +8,11 @@
     "distance": "ranged",
     "alterTerrain": true,
     "reach": 10,
-	"hitRadius": 0.5
+	  "hitRadius": 0.5,
+    "ap": 1
   },
   
    "M1": {
-	"energy": 1,
 	"desc":"",
     "elem": "ice",
     "onHit": "freeze",
@@ -22,11 +21,11 @@
     "distance": "ranged",
     "alterTerrain": true,
     "reach": 10,
-	"hitRadius": 0.5
+	  "hitRadius": 0.5,
+    "ap": 1
   },
   
    "M2": {
-	"energy": 1,
 	"desc":"",
     "elem": "water",
     "onHit": "None",
@@ -35,12 +34,12 @@
     "distance": "ranged",
     "alterTerrain": false,
     "reach": 15,
-	"hitRadius": 0.5
+	  "hitRadius": 0.5,
+    "ap": 1
   },
   
   "T0": {
-	"energy": 1,
-	"desc":"",
+	  "desc":"",
     "shield": true,
     "boostDef": 30,
     "durBoostDef": 5,
@@ -48,11 +47,11 @@
     "durBoostHp": 0,
     "hpShield": 40,
     "blockAb": false,
-	"hitRadius": 0.5
+	  "hitRadius": 0.5,
+	  "ap": 1
   },
   
    "T1": {
-	"energy": 1,
 	"desc":"",
     "shield": false,
     "boostDef": 0,
@@ -61,49 +60,50 @@
     "durBoostHp": 10,
     "hpShield": 0,
     "blockAb": false,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+		"ap": 1
   },
   
    "T2": {
-	"energy": 1,
-	"desc":"",
+  	"desc":"",
     "shield": true,
     "boostDef": 0,
     "durBoostDef": 0,
     "boostHp": 0,
     "durBoostHp": 0,
     "hpShield": 40,
-    "blockAb": true
-	"hitRadius": 0.5
+    "blockAb": true,
+	  "hitRadius": 0.5,
+		"ap": 1
   },
   
   "P0": {
-	"energy": 1,
 	"desc":"",
     "dmg": 50,
     "reach": 15,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+	"ap":1
   },
   
   "P1": {
-	"energy": 1,
+	"ap": 1,
 	"desc":"",
-    "dmg": 60,
-    "reach": 30,
-	"hitRadius": 0.5
+  "dmg": 60,
+  "reach": 30,
+	"hitRadius": 0.5,
+	"ap": 1
 
   },
   
   "P2": {
-	"energy": 1,
 	"desc":"",
-    "dmg": 10,
-    "reach": 20,
-	"hitRadius": 0.5
+  "dmg": 10,
+  "reach": 20,
+	"hitRadius": 0.5,
+	"ap": 1
   },
 
   "H0": {
-	"energy": 1,
 	"desc":"",
     "shield": 40,
     "durShield": 5,
@@ -111,11 +111,11 @@
     "healEffects": false,
     "boostDef": 0,
     "durBoostDef": 0,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+		"ap": 1
   },
   
   "H1": {
-	"energy": 1,
 	"desc":"",
     "shield": 0,
     "durShield": 0,
@@ -123,7 +123,8 @@
     "healEffects": false,
     "boostDef": 0,
     "durBoostDef": 0,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+		"ap": 1
 
   },
   
@@ -136,10 +137,10 @@
     "boostDef": 50,
     "durBoostDef": 5,
 	"hitRadius": 0.5,
+	   "ap": 1
   },
   
   "U0": {
-	"energy": 1,
 	"desc":"",
     "buildTerrain": true,
     "terrainType": "Tree",
@@ -150,11 +151,11 @@
     "boostAp": 4,
     "boostAtt": 30,
     "durBoostAtt": 5,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+		"ap": 1
   },
   
   "U1": {
-	"energy": 1,
 	"desc":"",
     "buildTerrain": false,
     "terrainType": "None",
@@ -165,12 +166,12 @@
     "boostAp": 4,
     "boostAtt": 30,
     "durBoostAtt": 5,
-	"hitRadius": 0.5
+	"hitRadius": 0.5,
+		"ap": 1
 
   },
   
   "U2": {
-	"energy": 1,
 	"desc":"",
     "buildTerrain": false,
     "terrainType": "None",
@@ -182,5 +183,6 @@
     "boostAtt": 50,
     "durBoostAtt": 5,
 	"hitRadius": 0.5,
+		"ap": 1
   }
 }

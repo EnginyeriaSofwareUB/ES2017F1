@@ -9,6 +9,7 @@ public class ShotScript : MonoBehaviour
     private static bool beginStopped;
     private Transform gun;  // aim vector transform
     private AbilityModel abilityModel;
+    private ChangeTurnModel changeTurnModel;
     private int rotate = 0; // 0 when loocking to the right, 1 when loocking to left
     bool shotLoad = false; // it says if its calculating range/force
     bool mov = false; // sloth is moving bool
@@ -23,6 +24,7 @@ public class ShotScript : MonoBehaviour
     void Start()
     {
         abilityModel = new AbilityModel();
+        changeTurnModel = new ChangeTurnModel();
         gun = GetComponentInChildren<Transform>().Find("Gun");
         gun.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         hA = new HealingAbility();
@@ -102,6 +104,7 @@ public class ShotScript : MonoBehaviour
                 if (a.Equals(onloadAbility))
                 {
                     ShootAfterBar(a);
+                    changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
                 }
             }
         }

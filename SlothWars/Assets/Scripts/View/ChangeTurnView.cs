@@ -10,6 +10,7 @@ public class ChangeTurnView: MonoBehaviour {
     private bool endTurnOfPlayer,beginStopped;
     private int playerTurn1, playerTurn2;
     private List<GameObject> playersTeam1, playersTeam2;
+    private List<Sloth> slothTeam1, slothTeam2;
     private Button endTurnButton;
 
     private void Start()
@@ -21,6 +22,9 @@ public class ChangeTurnView: MonoBehaviour {
 
         playersTeam1 = new List<GameObject>();
         playersTeam2 = new List<GameObject>();
+        
+        slothTeam1 = StorePersistentVariables.Instance.slothTeam1;
+        slothTeam2 =StorePersistentVariables.Instance.slothTeam2;
         
     }
     private void Update()
@@ -65,8 +69,12 @@ public class ChangeTurnView: MonoBehaviour {
         // If he has ended, he will press the button, changing the variable to true.
         if (beginStopped)
         {
+            print("TURN");
             changeTurnModel.GetText().text = "Blue Turn";
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
+            changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
+            changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
+            print(changeTurnModel.GetApCurrentSloth());
             return;
         }
 
@@ -86,6 +94,8 @@ public class ChangeTurnView: MonoBehaviour {
                 changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);      
             }
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
+            changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
+            changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
 
         }
         else
@@ -105,6 +115,8 @@ public class ChangeTurnView: MonoBehaviour {
                 changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1]);
             }
             changeTurnModel.ActivateSloth(playersTeam2[playerTurn2]);
+            changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
+            changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
         }
             
             

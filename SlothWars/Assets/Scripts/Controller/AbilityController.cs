@@ -8,6 +8,8 @@ using System;
 public class AbilityController : MonoBehaviour {
     //SINGLETON
     private static AbilityController instance;
+    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private static ChangeTurnModel changeTurnModel;
 
     public static AbilityController Instance
     {
@@ -15,6 +17,7 @@ public class AbilityController : MonoBehaviour {
         {
             if (instance == null)
             {
+                //TODO: FIX THIS TO MAKE IT SINGLETON
                 instance = new AbilityController();
             }
             return instance;
@@ -25,13 +28,18 @@ public class AbilityController : MonoBehaviour {
     private static AbilityModel abilityModel;
     private Ability ability;
 
-	public AbilityController()
+	public AbilityController(Button bnAbility1, Button bnAbility2, Button bnAbility3)
     {
+        buttonAbility1 = bnAbility1;
+        buttonAbility2 = bnAbility2;
+        buttonAbility3 = bnAbility3;
+        changeTurnModel  = new ChangeTurnModel();
+        abilityModel = new AbilityModel();
     }
 
-    private void Awake()
-    {
-        abilityModel = new AbilityModel();
+    //TODO: FIX THIS
+    protected AbilityController(){
+
     }
     
     //sums dmg_heal to the hp bar asociated to target
@@ -68,5 +76,24 @@ public class AbilityController : MonoBehaviour {
     {
         GameObject s = TurnController.Instance.GetActiveSloth();
         s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility3());
+    }
+
+    public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){
+        if(ab1ap > currentAp){
+            buttonAbility1.interactable = false;
+        }else{
+            buttonAbility1.interactable = true;
+        }
+        if(ab1ap > currentAp){
+            buttonAbility2.interactable = false;
+        }else{
+            buttonAbility2.interactable = true;
+        }
+        if(ab1ap > currentAp){
+            buttonAbility3.interactable = false;
+        }else{
+            buttonAbility3.interactable = true;
+        }
+        
     }
 }

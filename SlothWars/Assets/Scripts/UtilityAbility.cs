@@ -13,6 +13,7 @@ public class UtilityAbility : Ability
     private double boostAp;
     private double boostAtt;
     private int durBoostAtt;
+    private int ap;
 
     public UtilityAbility(string id, JSONNode json)
     {
@@ -25,6 +26,7 @@ public class UtilityAbility : Ability
         this.boostAp = json[id]["boostAp"];
         this.boostAtt = json[id]["boostAtt"];
         this.durBoostAtt = json[id]["durBoostAtt"];
+        this.ap = json[id]["ap"];
     }
 
     //Apply ability to another sloth
@@ -41,5 +43,9 @@ public class UtilityAbility : Ability
     public float GetRadius()
     {
         return 1;
+    }
+
+    public int GetAp(){
+        return ap;
     }
 }

@@ -11,6 +11,7 @@ public class AnimPlayer : MonoBehaviour {
     private float inputH;
     private float inputV;
     private bool move = false;
+    private ChangeTurnModel changeTurnModel;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
     HealthScript hs;
@@ -27,18 +28,31 @@ public class AnimPlayer : MonoBehaviour {
         hs = GetComponentInChildren<HealthScript>();
         anim = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody>();
+        changeTurnModel = new ChangeTurnModel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement_Interpretation();
-        Movement_Correction();
-        Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
+        //set the ap so the fucking animator doesnt play the animation ffs
+        anim.SetInteger("ap", changeTurnModel.GetApCurrentSloth());
+        if (changeTurnModel.GetApCurrentSloth() >= 0 ){
+            print(changeTurnModel.GetApCurrentSloth());
+            Movement_Interpretation();
+            Movement_Correction();
+            Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
+        } else{
+            print("HELLO THIS SHOULD NOT MOVE"+changeTurnModel.GetApCurrentSloth());
+            inputH = 0;
+            anim.SetFloat("inputH", inputH);
+            move = false;
+            ss.IsNotMoving();
+        }
     }
         
     void Movement_Interpretation()
     {
+
         Jump();
         Left_Or_Right();
     }
@@ -72,6 +86,7 @@ public class AnimPlayer : MonoBehaviour {
                 transform.eulerAngles = new Vector3(0, 90, 0);
                 ss.IsMoving(0);
                 hs.turnRight();
+                changeTurnModel.DecrementApCurrentSloth(1);
             }
             if (inputH < -0.1)
             {
@@ -81,6 +96,7 @@ public class AnimPlayer : MonoBehaviour {
                 transform.eulerAngles = new Vector3(0, -90, 0);
                 ss.IsMoving(1);
                 hs.turnLeft();
+                changeTurnModel.DecrementApCurrentSloth(1);
             }
         }
         else
@@ -97,6 +113,7 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsNotMoving();
             }
         }
+
     }
 
     // Method for limiting available movement space for the player 

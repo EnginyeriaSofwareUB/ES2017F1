@@ -7,4 +7,5 @@ public interface Ability
     void Apply();
     float GetRange();
     float GetRadius();
+    int GetAp();
 }

@@ -59,6 +59,7 @@ public class GameController: MonoBehaviour{
     //ABILITY VARIABLES
     private Transform createGun;
     private AbilityController abilityController;
+    private Button buttonAbility1, buttonAbility2, buttonAbility3;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
 
@@ -213,7 +214,10 @@ public class GameController: MonoBehaviour{
     private void InitializeAbilityVariables()
     {
 
-        abilityController = new AbilityController();
+        buttonAbility1 =  GameObject.Find("buttonAbility1").GetComponent<Button>();
+        buttonAbility2 =  GameObject.Find("buttonAbility2").GetComponent<Button>();
+        buttonAbility3 =  GameObject.Find("buttonAbility3").GetComponent<Button>();
+        abilityController = new AbilityController(buttonAbility1, buttonAbility2, buttonAbility3);
     }
 
     private void InitializeLogicVariables()

@@ -8,11 +8,13 @@ public class LogicView : MonoBehaviour {
     private LogicModel logicModel;
     private AbilityModel abilityModel;
     private List<GameObject> teamSloths1, teamSloths2;
+    private ChangeTurnModel changeTurnModel;
     
     // Use this for initialization
 	private void Start () {
         logicModel = new LogicModel();
         abilityModel = new AbilityModel();
+        changeTurnModel = new ChangeTurnModel();
 
         teamSloths1 = logicModel.GetTeamSloths1();
         teamSloths2 = logicModel.GetTeamSloths2();
@@ -24,6 +26,7 @@ public class LogicView : MonoBehaviour {
         {
             CheckSlothsAlive();
             CheckGameOver();
+            DeactivateButtonsIfNecessary();
         }
 	}
 
@@ -67,5 +70,12 @@ public class LogicView : MonoBehaviour {
             StorePersistentVariables.Instance.winner = "Red";
             SceneManager.LoadScene("GameOverScene");
         }
+    }
+
+    private void DeactivateButtonsIfNecessary(){
+        int ab1ap = changeTurnModel.GetCurrentSloth().GetAbility1().GetAp();
+        int ab2ap = changeTurnModel.GetCurrentSloth().GetAbility2().GetAp();
+        int ab3ap = changeTurnModel.GetCurrentSloth().GetAbility3().GetAp();
+        abilityModel.DeactivateButtonsIfNecessary(ab1ap, ab2ap, ab3ap, changeTurnModel.GetApCurrentSloth());
     }
 }

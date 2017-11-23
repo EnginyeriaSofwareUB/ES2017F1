@@ -14,6 +14,8 @@ public class ChangeTurnModel
     private static int turnPlayer1;
     private static int turnPlayer2;
     private static Text turnLabel;
+    private static Sloth currentSloth;
+    private static int apCurrentSloth;
 
     public ChangeTurnModel() {}
   
@@ -41,6 +43,14 @@ public class ChangeTurnModel
     
     public int GetTurnPlayer1() { return turnPlayer1; }
     public int GetTurnPlayer2() { return turnPlayer2; }    
+
+    public Sloth GetCurrentSloth() { return currentSloth; }
+    public void SetCurrentSloth(Sloth sloth) { currentSloth = sloth;}
+
+    public int GetApCurrentSloth() { return apCurrentSloth; }
+    public void SetApCurrentSloth(int ap ) { apCurrentSloth = ap;}
+    public void DecrementApCurrentSloth(int ap){ apCurrentSloth -= ap;}
+
 
     public void SetTurnPlayers(int turnControllerPlayer1, int turnControllerPlayer2)
     {

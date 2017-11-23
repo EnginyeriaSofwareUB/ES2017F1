@@ -6,6 +6,7 @@ public class ProjectileAbility : Ability
     private double dmg;
     private int reach = 30;
     private float hitRadius = 2f;
+    private int ap;
     //private int sApoints;
 
     public ProjectileAbility(string id, JSONNode json)
@@ -13,6 +14,7 @@ public class ProjectileAbility : Ability
         this.dmg = json[id]["dmg"];
         this.reach = json[id]["reach"];
         this.hitRadius = json[id]["hitRadius"];
+        this.ap = json[id]["ap"];
     }
 
     //Apply ability to another sloth
@@ -38,5 +40,9 @@ public class ProjectileAbility : Ability
     public float GetRadius()
     {
         return hitRadius;
+    }
+
+    public int GetAp(){
+        return ap;
     }
 }

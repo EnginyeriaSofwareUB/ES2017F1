@@ -10,6 +10,7 @@ public class TankAbility : Ability
     private int durBoostHp;
     private double hpShield;
     private bool blockAb;
+    private int ap;
 
     public TankAbility(string id, JSONNode json)
     {
@@ -21,6 +22,7 @@ public class TankAbility : Ability
         this.durBoostHp = json[id]["durBoosthp"];
         this.hpShield = json[id]["hpShield"];
         this.blockAb = json[id]["blockAb"];
+        this.ap = json[id]["ap"];
     }
 
     //Apply ability to another sloth
@@ -41,5 +43,9 @@ public class TankAbility : Ability
     public float GetRadius()
     {
         return 1;
+    }
+
+    public int GetAp(){
+        return ap;
     }
 }
