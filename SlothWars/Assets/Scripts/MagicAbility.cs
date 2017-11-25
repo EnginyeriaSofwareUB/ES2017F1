@@ -62,4 +62,8 @@ public class MagicAbility: Ability
         Debug.Log("dmg AP: "+dmg);
         return ap;
     }
+
+    public bool GetAlterTerrain() {
+        return "true".Equals(this.alterTerrain);
+    }
 }

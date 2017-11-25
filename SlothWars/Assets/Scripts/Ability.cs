@@ -8,4 +8,5 @@ public interface Ability
     float GetRange();
     float GetRadius();
     int GetAp();
+    bool GetAlterTerrain();
 }

@@ -30,6 +30,7 @@ TagManager:
   - Undefined
   - explosion
   - projectile
+  - Destroyable
   layers:
   - Default
   - TransparentFX

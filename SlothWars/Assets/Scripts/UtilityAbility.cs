@@ -48,4 +48,9 @@ public class UtilityAbility : Ability
     public int GetAp(){
         return ap;
     }
+
+    public bool GetAlterTerrain()
+    {
+        return "true".Equals(this.alterTerrain);
+    }
 }

@@ -48,4 +48,9 @@ public class TankAbility : Ability
     public int GetAp(){
         return ap;
     }
+
+    public bool GetAlterTerrain()
+    {
+        return false;
+    }
 }

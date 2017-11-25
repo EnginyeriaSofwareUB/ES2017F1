@@ -46,16 +46,22 @@ public class ExplosionScript : MonoBehaviour {
 	void logicAndDestroy(){
 		int effect_radius = 1;
 		Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, effect_radius);
-		int i = 0;
+        Collider currentCollider;
+        int i = 0;
 		Debug.Log ("Hits: " + hitColliders.Length);
 
 		while (i < hitColliders.Length)
 		{
-			//Debug.Log ("collider tag: " + hitColliders [i].tag);
-			if ("sloth".Equals (hitColliders [i].tag)) {
-				//hitColliders[i].SendMessage("SumToHP", d_h);
-                abilityController.ApplyLastAbility(hitColliders[i].gameObject);
-                Debug.Log(hitColliders[i].gameObject.GetComponent<AnimPlayer>().sloth.GetHp());
+            currentCollider = hitColliders[i];
+			Debug.Log ("[TRACE] collider tag: " + currentCollider.tag);
+			if ("sloth".Equals (currentCollider.tag)) {
+                abilityController.ApplyLastAbility(currentCollider.gameObject);
+                Debug.Log(currentCollider.gameObject.GetComponent<AnimPlayer>().sloth.GetHp());
+            }
+            else if("Destroyable".Equals(currentCollider.tag))
+            {
+                Destroy(currentCollider.gameObject);
+                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
 		}

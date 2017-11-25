@@ -55,4 +55,9 @@ public class HealingAbility: Ability
         return ap;
     }
 
+    public bool GetAlterTerrain()
+    {
+        return false;
+    }
+
 }
