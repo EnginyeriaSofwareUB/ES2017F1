@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BulletProjectile : Projectile
 {
-    private float bVelocity = 2.5f; //Projectile velocity
+    private float bVelocity = 8f; //Projectile velocity
     private Vector3 xyDir; //xY aim vector
     private float zO = 0; //sloths plane
     private float zf = 1; //tree plane
@@ -24,11 +24,10 @@ public class BulletProjectile : Projectile
     {
         float zd = zf - zO;
         float vz = Mathf.Sqrt(bVelocity * bVelocity * zd * zd / (zd * zd + rg * rg));
-        vz = vz * 1.5f;
         Vector3 vVector = xyDir * Mathf.Sqrt(bVelocity * bVelocity - vz * vz) + new Vector3(0, 0, vz);
-        ea = (GameObject)GameObject.Instantiate(Resources.Load("Objects/Electric Arrow"), pos + vVector * 1.15f, rot);
+        ea = (GameObject)GameObject.Instantiate(Resources.Load("Objects/Electric Arrow"), pos + vVector.normalized * 1.15f, rot);
         ea.GetComponent<Transform>().Rotate(0, 90, 0);
-        ea.GetComponent<Rigidbody>().AddForce(vVector * bVelocity, ForceMode.VelocityChange);
+        ea.GetComponent<Rigidbody>().AddForce(vVector , ForceMode.VelocityChange);
         ea.GetComponent<ExplosionScript>().SetRadius(rd);
     }
     // needed to set initial parameters

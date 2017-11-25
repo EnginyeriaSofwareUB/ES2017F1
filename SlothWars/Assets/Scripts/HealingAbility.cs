@@ -13,8 +13,8 @@ public class HealingAbility: Ability
     private float range = 15;
     private float hitRadius= 2f;
     private int ap;
-
-	public HealingAbility(string id, JSONNode json)
+    AbilityController abilityController = AbilityController.Instance;
+    public HealingAbility(string id, JSONNode json)
 	{
 
         this.shield = json[id]["shield"];
@@ -36,7 +36,7 @@ public class HealingAbility: Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(healHp);
-        //GameControl.control.SumToHpBar(target, healHp);
+        abilityController.SumToHpBar(healHp);
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)

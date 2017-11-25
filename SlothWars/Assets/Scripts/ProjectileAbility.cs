@@ -9,7 +9,7 @@ public class ProjectileAbility : Ability
     private float hitRadius = 2f;
     private int ap;
     //private int sApoints;
-
+    AbilityController abilityController = AbilityController.Instance;
     public ProjectileAbility(string id, JSONNode json)
     {
         this.dmg = json[id]["dmg"];
@@ -22,7 +22,7 @@ public class ProjectileAbility : Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        //GameControl.control.SumToHpBar(target, -dmg);
+        abilityController.SumToHpBar(-dmg);
         //GameControl.control.SubtractActionPoints(target, sApints);
     }
     public ProjectileAbility()

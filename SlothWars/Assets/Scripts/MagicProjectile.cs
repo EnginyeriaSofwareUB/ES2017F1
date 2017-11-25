@@ -2,7 +2,7 @@
 using UnityEngine;
 public class MagicProjectile:  Projectile
 {
-    private float MVelocity = 3.2f; //Projectile velocity
+    private float MVelocity = 9; //Projectile velocity
     private Vector3 xyDir; //xY aim vector
     private float zO = 0; //sloths plane
     private float zf = 1; //tree plane
@@ -20,11 +20,9 @@ public class MagicProjectile:  Projectile
     {
         float zd = zf - zO;
         float vz = Mathf.Sqrt(MVelocity * MVelocity * zd * zd / (zd * zd + rg * rg));
-		vz = vz / 4;
-		Debug.Log ("ZD: " + zd + " | vz: " + vz );
         Vector3 vVector = xyDir * Mathf.Sqrt(MVelocity * MVelocity - vz * vz) + new Vector3(0, 0, vz);
-        GameObject fb = (GameObject)GameObject.Instantiate(Resources.Load("Objects/FireBall"), pos + xyDir * 1.15f, rot);
-        fb.GetComponent<Rigidbody>().AddForce(vVector * MVelocity, ForceMode.VelocityChange);
+        GameObject fb = (GameObject)GameObject.Instantiate(Resources.Load("Objects/FireBall"), pos + vVector.normalized * 1.15f, rot);
+        fb.GetComponent<Rigidbody>().AddForce(vVector , ForceMode.VelocityChange);
         fb.GetComponent<ExplosionScript>().SetRadius(rd);
 
     }

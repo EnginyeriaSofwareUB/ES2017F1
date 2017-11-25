@@ -24,15 +24,21 @@ public class LogicView : MonoBehaviour {
 	private void Update () {
         if (teamSloths1 != null && teamSloths2 != null)
         {
-            CheckSlothsAlive();
             CheckGameOver();
             DeactivateButtonsIfNecessary();
         }
 	}
 
-    private void CheckSlothsAlive()
+    public void CheckSlothAlive(GameObject g)
     {
-        HealthScript health;
+        if (g.GetComponent<HealthScript>().getHealth() <= 0)
+        {
+            g.GetComponent<AnimPlayer>().Die();
+            bool b1 = teamSloths1.Remove(g);
+            bool b2 = teamSloths2.Remove(g);
+            Debug.Log(b1 + "check " + b2);
+        }
+        /*HealthScript health;
         AnimPlayer pla;
         int i = 0;
         foreach (GameObject sloth in teamSloths1)
@@ -59,7 +65,7 @@ public class LogicView : MonoBehaviour {
                 teamSloths2.Remove(sloth);
             }
             i++;
-        }
+        } */
     }
 
     private void CheckGameOver(){

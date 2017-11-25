@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealingProjectile :  Projectile
 {
-    private float HVelocity = 2; //Projectile velocity
+    private float HVelocity = 4; //Projectile velocity
     private Vector3 xyDir; //xY aim vector
     private Quaternion rot; // gun rotation
     private float rg = 10; // max range of the projectile

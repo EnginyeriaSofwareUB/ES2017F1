@@ -39,7 +39,7 @@ public class MagicAbility: Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        //abilityController.SumToHpBar(target,-dmg);
+        abilityController.SumToHpBar(-dmg);
         //abilityController.SumResidual(target, -residual, residualTurns);
     }
 

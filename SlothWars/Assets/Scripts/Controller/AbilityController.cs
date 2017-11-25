@@ -10,6 +10,7 @@ public class AbilityController : MonoBehaviour {
     private static AbilityController instance;
     private static Button buttonAbility1, buttonAbility2, buttonAbility3;
     private static ChangeTurnModel changeTurnModel;
+    private static GameObject lastTarget;
 
     public static AbilityController Instance
     {
@@ -44,10 +45,10 @@ public class AbilityController : MonoBehaviour {
     
     //sums dmg_heal to the hp bar asociated to target
 
-    public void SumToHpBar(GameObject target, double dmg_Heal)
+    public void SumToHpBar(double dmg_Heal)
     {
-        target.GetComponent<AnimPlayer>().GetSloth().SumToHp(dmg_Heal);
-        target.GetComponent<HealthScript>().SumToHP(Mathf.FloorToInt((float)dmg_Heal));    
+        lastTarget.GetComponent<HealthScript>().SumToHP(Mathf.FloorToInt((float)dmg_Heal));
+        GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
     // sums residual during t turns
     public void SumResidual(GameObject target, Double residual, int t)
@@ -58,7 +59,10 @@ public class AbilityController : MonoBehaviour {
     public void ApplyLastAbility(GameObject g)
     {
         ability = abilityModel.GetLastAbility();
-        if (g.gameObject.tag == "sloth") { ability.Apply(ref g.GetComponent<AnimPlayer>().sloth); }
+        if (g.gameObject.tag == "sloth") {
+            lastTarget = g;
+            ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+        }
         else{ability.Apply(g); }
     }
     public void TriggerAbility1()
