@@ -73,7 +73,7 @@ public class AnimPlayer : MonoBehaviour {
     // Checking movement of the player using arrow keys or A and D keys
     void Left_Or_Right()
     {
-        if (!move)
+        if (!move && !ss.GetShotLoad())
         {
             inputH = Input.GetAxis("Horizontal");
             anim.SetFloat("inputH", inputH);

@@ -67,7 +67,14 @@ public class ProjectileFactory
             return new MagicProjectile();
         }
 
-        return new BulletProjectile();
+        else if (a is UtilityAbility)
+        {
+            return new ProjectileTerrain();
+        }
+        else
+        {
+            return new BulletProjectile();
+        }
 
     }
 

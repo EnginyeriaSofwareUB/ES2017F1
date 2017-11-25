@@ -1,9 +1,10 @@
 ﻿using System;
 using SimpleJSON;
+using UnityEngine;
 
 public class UtilityAbility : Ability
 {
-
+    private float scale = 1;
     private bool buildTerrain;
     private string terrainType;
     private int terrainSize;
@@ -36,16 +37,21 @@ public class UtilityAbility : Ability
     }
 
     //WIP: apply ability to terrain
-    public void Apply()
+    public void Apply(GameObject g)
     {
+        Debug.Log("building wall");
+        Vector3 position = new Vector3(0, 0, 0);
+        for(int i= 0; i< terrainSize; i++)
+        {
+            GameObject.Instantiate(Resources.Load("Objects/WallCube"),g.transform.position+i* scale*new Vector3(0, 1, 0) + 2*scale*new Vector3(0,1,0)/2,g.transform.rotation);
+        }
+
     }
     public float GetRange() { return 10; }
-    public float GetRadius()
-    {
-        return 1;
-    }
-
-    public int GetAp(){
+    public float GetRadius(){return 1;}
+    public bool GetBuildTerrain() { return buildTerrain; }
+    public int GetTerrainSize() { return terrainSize; }
+	public int GetAp(){
         return ap;
     }
 }

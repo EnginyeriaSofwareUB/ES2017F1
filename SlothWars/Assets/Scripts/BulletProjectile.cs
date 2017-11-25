@@ -40,4 +40,6 @@ public class BulletProjectile : Projectile
         pos = positon;
         rd = radius;
     }
+    public void Mark() { }
+    public bool GetApply() { return true; }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleJSON;
+using UnityEngine;
 
 public class ProjectileAbility : Ability
 {
@@ -29,7 +30,7 @@ public class ProjectileAbility : Ability
 
     }
     //WIP: apply ability to terrain
-    public void Apply()
+    public void Apply(GameObject g)
     {
 
     }
@@ -41,8 +42,9 @@ public class ProjectileAbility : Ability
     {
         return hitRadius;
     }
-
-    public int GetAp(){
+    public bool GetBuildTerrain() { return false; }
+    public int GetTerrainSize() { return 0; }
+	public int GetAp(){
         return ap;
     }
 }

@@ -37,4 +37,6 @@ public class MagicProjectile:  Projectile
         pos = positon;
         rd = radius;
     }
+    public void Mark() { }
+    public bool GetApply() { return true; }
 }

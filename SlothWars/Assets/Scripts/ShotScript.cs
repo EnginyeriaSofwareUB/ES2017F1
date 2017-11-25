@@ -15,11 +15,8 @@ public class ShotScript : MonoBehaviour
     bool mov = false; // sloth is moving bool
     Projectile onLoad; //projectile shoot
     Ability onloadAbility;
-    MagicAbility mA;
-    ProjectileAbility pA;
-    HealingAbility hA;
     ForceBarScript st;
-    private bool active = true;
+    private bool active = false;
     //initialization
     void Start()
     {
@@ -27,51 +24,93 @@ public class ShotScript : MonoBehaviour
         changeTurnModel = new ChangeTurnModel();
         gun = GetComponentInChildren<Transform>().Find("Gun");
         gun.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-        hA = new HealingAbility();
-        pA = new ProjectileAbility();
-        mA = new MagicAbility();
-
-
+        Active(false);
     }
-    // creates a force bar with the first key pressed , shoots with the second key pressed and aims with the vertical axis 
     void Update()
     {
-        if (!mov)
+        if (!mov && active)
         {
-            gun.Rotate(0, 0, Time.deltaTime * Input.GetAxis("Vertical") * 100);
+            AimWithMouse();
+            MarkBuildTerrain();
+            if (Input.GetMouseButtonDown(0))
+            {
+                ShootAfterBar();
+            }
         }
        
     }
-   
+    private void AimWithMouse()
+    {
+        Plane playerPlane = new Plane(Vector3.forward, gun.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float hitdist = 0.0f;
+        playerPlane.Raycast(ray, out hitdist);
+        Vector3 targetPoint = ray.GetPoint(hitdist);
+        targetPoint -= gun.position;
+        float radAngle = (gun.eulerAngles[2] * (1 - rotate) + rotate * (180 - gun.eulerAngles[2])) * Mathf.Deg2Rad;
+        Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
+        Quaternion r = Quaternion.FromToRotation(AimVector, targetPoint);
+        AimVector = r.eulerAngles;
+        if (rotate == 1)
+        {
+            AimVector *= -1;
+        }
+        gun.Rotate(AimVector);
+    }
+    private void MarkBuildTerrain()
+    {
+        if (onloadAbility.GetBuildTerrain()) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize());
+            onLoad.Mark();
+        }
+    }
     // creates a force bar
     private void Bar()
     {
-        GameObject bar = (GameObject) Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 3, 0), gun.rotation);
-        st = bar.GetComponent<ForceBarScript>();
+        if (!onloadAbility.GetBuildTerrain())
+        {
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 3, 0), gun.rotation);
+            st = bar.GetComponent<ForceBarScript>();
+        }
         shotLoad = true;
     }
     // creates a projectile and shoots it then destroys de force bar
-    private void ShootAfterBar(Ability a)
+    private void ShootAfterBar()
     {
-        float radAngle = (gun.eulerAngles[2] * (1 - rotate) + rotate * (180 - gun.eulerAngles[2])) * Mathf.Deg2Rad;
-        Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
-        onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)a.GetRange(), a.GetRadius());
-        onLoad.ApplyLogic();
-        st.Destroy();
-        shotLoad = false;
+        if (onloadAbility.GetBuildTerrain())
+        {
+            if (onLoad.GetApply())
+            {
+                shotLoad = false;
+                Active(false);
+                onLoad.ApplyLogic();
+                changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
+            }
+        }
+        else
+        {
+            float radAngle = (gun.eulerAngles[2] * (1 - rotate) + rotate * (180 - gun.eulerAngles[2])) * Mathf.Deg2Rad;
+            Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
+            Debug.Log("rangeeeeeeeee"+(float)onloadAbility.GetRange());
+            onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius());
+            onLoad.ApplyLogic();
+            st.Destroy();
+            shotLoad = false;
+            Active(false);
+            changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
+        }
     }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)
     {
         mov = true;
         rotate = r;
-        gun.gameObject.SetActive(false);
     }
     // tells to the script that the sloth is not moving
     public void IsNotMoving()
     {
         mov = false;
-        gun.gameObject.SetActive(true);
     }
     //desactive the gun of the sloth
     public void Active(bool b)
@@ -98,16 +137,8 @@ public class ShotScript : MonoBehaviour
                 onloadAbility = a;
                 abilityModel.SetLastAbility(a);
                 Bar();
-            }
-            else
-            {
-                if (a.Equals(onloadAbility))
-                {
-                    ShootAfterBar(a);
-                    Debug.Log("nos quedamos sin puntos");
-                    changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
-                }
-            }
+				Active(true);            
+			}
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using SimpleJSON;
-
+using UnityEngine;
 public class HealingAbility: Ability
 {
     
@@ -23,7 +23,7 @@ public class HealingAbility: Ability
         this.healEffects = json[id]["healEffects"];
         this.boostDef = json[id]["boostDef"];
         this.durBoostDef = json[id]["durBoostDef"];
-        this.range = json[id]["range"];
+        this.range = json[id]["reach"];
         this.hitRadius = json[id]["hitRadius"];
         this.ap = json[id]["ap"];
     }
@@ -39,7 +39,7 @@ public class HealingAbility: Ability
         //GameControl.control.SumToHpBar(target, healHp);
     }
     //WIP: apply ability to terrain
-    public void Apply()
+    public void Apply(GameObject g)
     {
     }
     public float GetRange()
@@ -50,8 +50,9 @@ public class HealingAbility: Ability
     {
         return hitRadius;
     }
-
-    public int GetAp(){
+    public bool GetBuildTerrain() { return false; }
+    public int GetTerrainSize() { return 0; }
+	public int GetAp(){
         return ap;
     }
 

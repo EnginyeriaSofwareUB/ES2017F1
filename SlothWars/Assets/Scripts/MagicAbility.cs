@@ -44,7 +44,7 @@ public class MagicAbility: Ability
     }
 
     //WIP: apply ability to terrain
-    public void Apply()
+    public void Apply(GameObject g)
     {
     }
     public float GetRange()
@@ -55,8 +55,9 @@ public class MagicAbility: Ability
     {
         return hitRadius;
     }
-
-    public int GetAp(){
+    public bool GetBuildTerrain() { return false; }
+    public int GetTerrainSize() { return 0; }
+	 public int GetAp(){
         Debug.Log("MAGIC ABILITY AP: "+ap);
         Debug.Log("onHit AP: "+onHitEff);
         Debug.Log("dmg AP: "+dmg);

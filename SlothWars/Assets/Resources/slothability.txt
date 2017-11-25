@@ -112,7 +112,9 @@
     "boostDef": 0,
     "durBoostDef": 0,
 	"hitRadius": 0.5,
-		"ap": 1
+		"ap": 1,
+		"reach": 15
+
   },
   
   "H1": {
@@ -124,7 +126,8 @@
     "boostDef": 0,
     "durBoostDef": 0,
 	"hitRadius": 0.5,
-		"ap": 1
+		"ap": 1,
+		"reach": 15
 
   },
   
@@ -137,7 +140,8 @@
     "boostDef": 50,
     "durBoostDef": 5,
 	"hitRadius": 0.5,
-	   "ap": 1
+	   "ap": 1,
+	   "reach": 15
   },
   
   "U0": {
@@ -152,7 +156,8 @@
     "boostAtt": 30,
     "durBoostAtt": 5,
 	"hitRadius": 0.5,
-		"ap": 1
+		"ap": 1,
+		"reach": 15
   },
   
   "U1": {

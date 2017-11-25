@@ -55,10 +55,11 @@ public class AbilityController : MonoBehaviour {
         // GameObject-Sloth connection needed
     }
     // apply last ability to the target
-    public void ApplyLastAbility(GameObject sloth)
+    public void ApplyLastAbility(GameObject g)
     {
         ability = abilityModel.GetLastAbility();
-        ability.Apply(ref sloth.GetComponent<AnimPlayer>().sloth);
+        if (g.gameObject.tag == "sloth") { ability.Apply(ref g.GetComponent<AnimPlayer>().sloth); }
+        else{ability.Apply(g); }
     }
     public void TriggerAbility1()
     {

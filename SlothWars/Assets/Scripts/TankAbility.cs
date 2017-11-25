@@ -1,6 +1,6 @@
 ﻿using System;
 using SimpleJSON;
-
+using UnityEngine;
 public class TankAbility : Ability
 {
     private bool shield;
@@ -32,7 +32,7 @@ public class TankAbility : Ability
     }
 
     //WIP: apply ability to terrain
-    public void Apply()
+    public void Apply(GameObject g)
     {
     }
 
@@ -44,8 +44,9 @@ public class TankAbility : Ability
     {
         return 1;
     }
-
-    public int GetAp(){
+    public bool GetBuildTerrain() { return false; }
+    public int GetTerrainSize() { return 0; }
+	public int GetAp(){
         return ap;
     }
 }

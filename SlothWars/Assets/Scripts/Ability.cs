@@ -1,11 +1,13 @@
 ﻿using System;
-
+using UnityEngine;
 public interface Ability
 {
 
     void Apply(ref Sloth target);
-    void Apply();
+    void Apply(GameObject g);
     float GetRange();
     float GetRadius();
-    int GetAp();
+    bool GetBuildTerrain();
+    int GetTerrainSize();
+	int GetAp();
 }
