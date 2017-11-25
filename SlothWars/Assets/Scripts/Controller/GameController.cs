@@ -125,7 +125,6 @@ public class GameController: MonoBehaviour{
         Animator anim;
         ShotScript shot;
         SlothSelected selected;
-        
         if (checkPlayer == 0)
         {
             checkPlayer = 1;
@@ -149,13 +148,13 @@ public class GameController: MonoBehaviour{
                 shot.enabled = true;
 
                 selected = sloth.AddComponent<SlothSelected>();
-                selected.enabled = false;
+                selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf").gameObject);
+                sloth.GetComponentInChildren<Transform>().Find("leaf").position = new Vector3(i+20, 3, 0);
+                sloth.GetComponentInChildren<Transform>().Find("leaf").rotation = Quaternion.Euler(0, 90, 90);
+                selected.Active(true);
+                selected.enabled = true;
 
 
-                //createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
-                //createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-               
-                //listGunTeam1.Add(createGun);
                 
                 teamSloths1.Add(sloth);
 
@@ -181,13 +180,11 @@ public class GameController: MonoBehaviour{
                 shot.enabled = true;
 
                 selected = sloth.AddComponent<SlothSelected>();
-                selected.enabled = false;
-
-
-               // createGun = sloth.GetComponentInChildren<Transform>().Find("Gun");
-                //createGun.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-
-                //listGunTeam2.Add(createGun);
+                selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf").gameObject);
+                sloth.GetComponentInChildren<Transform>().Find("leaf").position = new Vector3(i + 10, 3, 0);
+                sloth.GetComponentInChildren<Transform>().Find("leaf").rotation = Quaternion.Euler(0, 90, 90);
+                selected.Active(true);
+                selected.enabled = true;
 
                 teamSloths2.Add(sloth);
                 i++;

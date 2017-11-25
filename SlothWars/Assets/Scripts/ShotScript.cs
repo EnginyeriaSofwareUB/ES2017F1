@@ -104,6 +104,7 @@ public class ShotScript : MonoBehaviour
                 if (a.Equals(onloadAbility))
                 {
                     ShootAfterBar(a);
+                    Debug.Log("nos quedamos sin puntos");
                     changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
                 }
             }

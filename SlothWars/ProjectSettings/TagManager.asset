@@ -30,6 +30,7 @@ TagManager:
   - Undefined
   - explosion
   - projectile
+  - leaf
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class AnimPlayer : MonoBehaviour {
     public Animator anim;
     public Rigidbody rbody;
     public Sloth sloth;
-
+    SlothSelected selected;
     private float inputH;
     private float inputV;
     private bool move = false;
@@ -29,6 +29,7 @@ public class AnimPlayer : MonoBehaviour {
         anim = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody>();
         changeTurnModel = new ChangeTurnModel();
+        selected = GetComponentInChildren<SlothSelected>();
     }
 
     // Update is called once per frame
@@ -76,7 +77,6 @@ public class AnimPlayer : MonoBehaviour {
         {
             inputH = Input.GetAxis("Horizontal");
             anim.SetFloat("inputH", inputH);
-
             if (inputH > 0.1)
             {
                 move = true;
@@ -86,6 +86,9 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(0);
                 hs.turnRight();
                 changeTurnModel.DecrementApCurrentSloth(1);
+                selected.GetLeaf().transform.position = newPosition + new Vector3(0, 3, 0);
+                selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
+
             }
             if (inputH < -0.1)
             {
@@ -96,6 +99,9 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(1);
                 hs.turnLeft();
                 changeTurnModel.DecrementApCurrentSloth(1);
+                selected.GetLeaf().transform.position = newPosition + new Vector3(0, 3, 0);
+                selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
+
             }
         }
         else
@@ -132,7 +138,7 @@ public class AnimPlayer : MonoBehaviour {
 
     public bool GetMove()
     {
-        return this.move;
+        return move;
     }
 
     public Sloth GetSloth()

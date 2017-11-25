@@ -105,10 +105,12 @@ public class ChangeTurnView: MonoBehaviour {
             if (playerTurn1 != 0)
             {
                 changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1 - 1]);
+                playersTeam1[playerTurn1 - 1].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
 
             } else if (playerTurn2 > playerTurn1)
             {
                 changeTurnModel.DeactivateSloth(playersTeam1[playerTurn2]);
+                playersTeam1[playerTurn2].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
             }
             else
             {
