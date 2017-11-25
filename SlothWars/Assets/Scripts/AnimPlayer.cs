@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class AnimPlayer : MonoBehaviour {
 
-    public Animator anim;
     public Rigidbody rbody;
     public Sloth sloth;
 
     private float inputH;
     private float inputV;
+    private int currentAxis;  // 0 = horizontal 1 = vertical
+    private int playerSpeed;
     private bool move = false;
     private ChangeTurnModel changeTurnModel;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
     HealthScript hs;
-    // Use this for initialization
 
     public AnimPlayer(Sloth sloth)
     {
@@ -24,9 +24,10 @@ public class AnimPlayer : MonoBehaviour {
 
     void Start()
     {
+        playerSpeed = 2;
+        currentAxis = 0;
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
-        anim = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody>();
         changeTurnModel = new ChangeTurnModel();
     }
@@ -34,17 +35,26 @@ public class AnimPlayer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //set the ap so the fucking animator doesnt play the animation ffs
-        anim.SetInteger("ap", changeTurnModel.GetApCurrentSloth());
         if (changeTurnModel.GetApCurrentSloth() >= 0 ){
-            print(changeTurnModel.GetApCurrentSloth());
-            Movement_Interpretation();
-            Movement_Correction();
-            //Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
+            //Debug.Log("Current sloth: " + changeTurnModel.GetApCurrentSloth());
+            if (!move)
+            {
+                Movement_Interpretation();
+            }
+            else
+            {
+                if (currentAxis == 0)
+                {
+                    Left_Or_Right();
+                }
+                if (currentAxis == 1)
+                {
+                    Up_Or_Down();
+                }
+            }
         } else{
-            print("HELLO THIS SHOULD NOT MOVE"+changeTurnModel.GetApCurrentSloth());
+            //Debug.Log("HELLO THIS SHOULD NOT MOVE" +changeTurnModel.GetApCurrentSloth());
             inputH = 0;
-            anim.SetFloat("inputH", inputH);
             move = false;
             ss.IsNotMoving();
         }
@@ -52,20 +62,61 @@ public class AnimPlayer : MonoBehaviour {
         
     void Movement_Interpretation()
     {
-        //Jump();
-        Left_Or_Right();
+        inputH = Input.GetAxis("Horizontal");
+        inputV = Input.GetAxis("Vertical");
+        // Debug.Log("Horizontal axis: " + inputH + " | Vertical axis: " + inputV);
+        if (inputH != 0 && inputV != 0)
+        {
+            Debug.Log("Only one direction at a time plz");
+        }
+        else if (inputH != 0)
+        {
+            IsBlockInFront();
+            currentAxis = 0;
+            Left_Or_Right();
+        }
+        else if (inputV != 0)
+        {
+            IsBlockInFront();
+            currentAxis = 1;
+            Up_Or_Down();
+        }
+        
     }
 
-    // Method for checking spacebar press action to activate jump animation
-    void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.SetBool("jump", true);
+    void Up_Or_Down() {
+        if (!move) {
+            //anim.SetFloat("inputV", inputV);
+            if (inputV > 0.1)
+            {
+                move = true;
+                inputV = 1;
+                newPosition = transform.position + new Vector3(0f, 1f, 0f);
+                ss.IsMoving(0);
+                //changeTurnModel.DecrementApCurrentSloth(1);
+            }
+            if (inputV < -0.1)
+            {
+                move = true;
+                inputV = -1;
+                newPosition = transform.position + new Vector3(0f, -1f, 0f);
+                ss.IsMoving(0);
+                //changeTurnModel.DecrementApCurrentSloth(1);
+            }
         }
         else
         {
-            anim.SetBool("jump", false);
+            if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
+            {
+                float step = playerSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
+            }
+            else
+            {
+                inputV = 0;
+                move = false;
+                ss.IsNotMoving();
+            }
         }
     }
 
@@ -74,35 +125,29 @@ public class AnimPlayer : MonoBehaviour {
     {
         if (!move)
         {
-            inputH = Input.GetAxis("Horizontal");
-            anim.SetFloat("inputH", inputH);
-
+            //anim.SetFloat("inputH", inputH);
             if (inputH > 0.1)
             {
                 move = true;
                 inputH = 1;
                 newPosition = transform.position + new Vector3(1f, 0f, 0f);
-                transform.eulerAngles = new Vector3(0, 90, 0);
                 ss.IsMoving(0);
-                hs.turnRight();
-                changeTurnModel.DecrementApCurrentSloth(1);
+                //changeTurnModel.DecrementApCurrentSloth(1);
             }
             if (inputH < -0.1)
             {
                 move = true;
                 inputH = -1;
                 newPosition = transform.position + new Vector3(-1f, 0f, 0f);
-                transform.eulerAngles = new Vector3(0, -90, 0);
                 ss.IsMoving(1);
-                hs.turnLeft();
-                changeTurnModel.DecrementApCurrentSloth(1);
+                //changeTurnModel.DecrementApCurrentSloth(1);
             }
         }
         else
         {
             if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
             {
-                float step = 1 * Time.deltaTime;
+                float step = playerSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
             }
             else
@@ -112,25 +157,21 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsNotMoving();
             }
         }
-
     }
 
-    // Method for limiting available movement space for the player 
-    void Movement_Correction()
+    public bool IsBlockInFront()
     {
-        if (transform.position.x > 150)
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(transform.position, fwd, 3))
         {
-            move = false;
-            transform.position = new Vector3(150f, transform.position.y, transform.position.z);
+            Debug.Log("There's SOMETHING in front of the object!");
+            return true;
         }
-        if (transform.position.x < 0)
-        {
-            move = false;
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
-        }
+        Debug.Log("There NOTHING in front of the object!");
+        return false;
     }
 
-    public bool GetMove()
+    public bool IsMoving()
     {
         return this.move;
     }

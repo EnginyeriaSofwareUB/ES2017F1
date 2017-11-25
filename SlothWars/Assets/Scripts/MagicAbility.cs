@@ -57,9 +57,9 @@ public class MagicAbility: Ability
     }
 
     public int GetAp(){
-        Debug.Log("MAGIC ABILITY AP: "+ap);
-        Debug.Log("onHit AP: "+onHitEff);
-        Debug.Log("dmg AP: "+dmg);
+        //Debug.Log("MAGIC ABILITY AP: "+ap);
+        //Debug.Log("onHit AP: "+onHitEff);
+        //Debug.Log("dmg AP: "+dmg);
         return ap;
     }
 

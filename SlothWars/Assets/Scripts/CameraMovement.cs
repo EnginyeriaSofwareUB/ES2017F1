@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     float speed = 10.0f;
+    float cameraDistance = -10.0f;
     GameObject[] projectile;
     GameObject[] explosion;
 
@@ -20,7 +21,7 @@ public class CameraMovement : MonoBehaviour {
         projectile = GameObject.FindGameObjectsWithTag("projectile");
         explosion = GameObject.FindGameObjectsWithTag("explosion");
 
-        if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().GetMove()
+        if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving()
             && !TurnController.Instance.GetActiveSloth().GetComponent<ShotScript>().GetShotLoad()
             && projectile.Length == 0
             && explosion.Length == 0)
@@ -30,16 +31,16 @@ public class CameraMovement : MonoBehaviour {
         else if (projectile.Length > 0)
         {
             Debug.Log("Projectiles: " + projectile.Length.ToString());
-            transform.position = new Vector3(projectile[0].transform.position.x, 4.0f, -15.0f);
+            transform.position = new Vector3(projectile[0].transform.position.x, 4.0f, cameraDistance);
         }
         else if (explosion.Length > 0)
         {
             Debug.Log("Explosions: " + explosion.Length.ToString());
-            transform.position = new Vector3(explosion[0].transform.position.x, 4.0f, -15.0f);
+            transform.position = new Vector3(explosion[0].transform.position.x, 4.0f, cameraDistance);
         }
-        else if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().GetMove())
+        else if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
         {
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, -15.0f);
+            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, cameraDistance);
         }
 
         projectile = new GameObject[] {};
