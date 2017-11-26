@@ -123,12 +123,13 @@ public class ChangeTurnView: MonoBehaviour {
             
             
 
-        }
+    }
 
     private void FixedBugs()
     {
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
-        
+        print("Size of the team " + changeTurnModel.GetTeam1().Count);
+        print(playerTurn1);
         if (changeTurnModel.GetTeam1()[playerTurn1].GetComponent<AnimPlayer>().IsMoving() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<AnimPlayer>().IsMoving())
         {
             endTurnButton.interactable = false;

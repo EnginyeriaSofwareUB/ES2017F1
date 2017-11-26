@@ -16,8 +16,8 @@ public class LogicView : MonoBehaviour {
         abilityModel = new AbilityModel();
         changeTurnModel = new ChangeTurnModel();
 
-        teamSloths1 = logicModel.GetTeamSloths1();
-        teamSloths2 = logicModel.GetTeamSloths2();
+        teamSloths1 = changeTurnModel.GetTeam1();
+        teamSloths2 = changeTurnModel.GetTeam2();
 	}
 	
 	// Update is called once per frame
