@@ -23,7 +23,7 @@ public class ShotScript : MonoBehaviour
         abilityModel = new AbilityModel();
         changeTurnModel = new ChangeTurnModel();
         gun = GetComponentInChildren<Transform>().Find("Gun");
-        gun.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+        gun.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Active(false);
     }
     void Update()

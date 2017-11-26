@@ -70,7 +70,9 @@ public class AnimPlayer : MonoBehaviour {
             }
             else
             {
+                ScreenMessage.sm.ForceShowMessage("You don't have any action points left",0.1f);
                 inputH = 0;
+                inputV = 0;
                 move = false;
                 ss.IsNotMoving();
             }
@@ -180,6 +182,7 @@ public class AnimPlayer : MonoBehaviour {
         }
     }
 
+    // Checks if there is a block in front of the current sloth
     public bool IsBlockInFront()
     {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
@@ -190,20 +193,19 @@ public class AnimPlayer : MonoBehaviour {
         return false;
     }
 
+    // Makes the sloth fall off the tree. It grabs to another block if it founds any.
     private IEnumerator ApplyGravity()
     {
-        int iters = 0;
         rbody.useGravity = true;
         yield return new WaitForSeconds(0.01f);
         while (!IsBlockInFront())
         {
-            iters++;
             yield return new WaitForSeconds(0.01f);
         }
-        GrabPositionCorrection();
         rbody.useGravity = false;
         rbody.velocity = Vector3.zero;
-        ScreenMessage.sm.ForceShowMessage("Whew!", 1.2f);
+        GrabPositionCorrection();
+        ScreenMessage.sm.ForceShowMessage("Whew!", 1.0f);
         falling = false;
     }
    
