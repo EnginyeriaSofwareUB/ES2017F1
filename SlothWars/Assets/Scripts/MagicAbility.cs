@@ -56,11 +56,17 @@ public class MagicAbility: Ability
         return hitRadius;
     }
     public bool GetBuildTerrain() { return false; }
+	
     public int GetTerrainSize() { return 0; }
-	 public int GetAp(){
-        Debug.Log("MAGIC ABILITY AP: "+ap);
-        Debug.Log("onHit AP: "+onHitEff);
-        Debug.Log("dmg AP: "+dmg);
+	
+	public int GetAp(){
+        //Debug.Log("MAGIC ABILITY AP: "+ap);
+        //Debug.Log("onHit AP: "+onHitEff);
+        //Debug.Log("dmg AP: "+dmg);
         return ap;
+    }
+
+    public bool GetAlterTerrain() {
+        return "true".Equals(this.alterTerrain);
     }
 }

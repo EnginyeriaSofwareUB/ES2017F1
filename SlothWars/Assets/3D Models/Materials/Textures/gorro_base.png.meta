@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f0061abcfb8ab4b449d5755d3d8b3969
 timeCreated: 1511536421
+=======
+guid: 4333657e6e658d844ac4546b3e4e67b9
+timeCreated: 1511554678
+>>>>>>> origin/Tree-climbing
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}

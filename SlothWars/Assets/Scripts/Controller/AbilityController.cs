@@ -65,6 +65,14 @@ public class AbilityController : MonoBehaviour {
         }
         else{ability.Apply(g); }
     }
+    // apply last ability to terrain blocks in range
+    public void ApplyDestroyTerrainAbility(GameObject destroyable) {
+        ability = abilityModel.GetLastAbility();
+        if (ability.GetAlterTerrain())
+        {
+            Destroy(destroyable);
+        }
+    }
     public void TriggerAbility1()
     {
         GameObject s = TurnController.Instance.GetActiveSloth();

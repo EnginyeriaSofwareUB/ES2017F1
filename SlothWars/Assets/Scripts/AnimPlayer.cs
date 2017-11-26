@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class AnimPlayer : MonoBehaviour {
 
-    public Animator anim;
     public Rigidbody rbody;
     public Sloth sloth;
     SlothSelected selected;
     private float inputH;
     private float inputV;
+    private int currentAxis;  // 0 = horizontal 1 = vertical
+    private int playerSpeed;
     private bool move = false;
     private ChangeTurnModel changeTurnModel;
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
     HealthScript hs;
-    // Use this for initialization
+    private bool falling;
 
     public AnimPlayer(Sloth sloth)
     {
@@ -24,9 +25,11 @@ public class AnimPlayer : MonoBehaviour {
 
     void Start()
     {
+        falling = false;
+        playerSpeed = 2;
+        currentAxis = 0;
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
-        anim = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody>();
         changeTurnModel = new ChangeTurnModel();
         selected = GetComponentInChildren<SlothSelected>();
@@ -35,38 +38,101 @@ public class AnimPlayer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //set the ap so the fucking animator doesnt play the animation ffs
-        anim.SetInteger("ap", changeTurnModel.GetApCurrentSloth());
-        if (changeTurnModel.GetApCurrentSloth() >= 0 ){
-            print(changeTurnModel.GetApCurrentSloth());
-            Movement_Interpretation();
-            Movement_Correction();
-            //Camera.main.transform.position = new Vector3(transform.position.x, 4.0f, -15.0f);
-        } else{
-            print("HELLO THIS SHOULD NOT MOVE"+changeTurnModel.GetApCurrentSloth());
-            inputH = 0;
-            anim.SetFloat("inputH", inputH);
-            move = false;
-            ss.IsNotMoving();
+        if (!falling)
+        {
+            if (changeTurnModel.GetApCurrentSloth() >= 0)
+            {
+                //Debug.Log("Current sloth: " + changeTurnModel.GetApCurrentSloth());
+                if (!move)
+                {
+                    if (IsBlockInFront())
+                    {
+                        Movement_Interpretation();
+                    }
+                    else
+                    {
+                        falling = true;
+                        ScreenMessage.sm.ShowMessage("Whoops...", 0.7f);
+                        StartCoroutine(ApplyGravity());
+                    }
+                }
+                else
+                {
+                    if (currentAxis == 0)
+                    {
+                        Left_Or_Right();
+                    }
+                    if (currentAxis == 1)
+                    {
+                        Up_Or_Down();
+                    }
+                }
+            }
+            else
+            {
+                inputH = 0;
+                move = false;
+                ss.IsNotMoving();
+            }
         }
     }
         
     void Movement_Interpretation()
     {
-        //Jump();
-        Left_Or_Right();
+        inputH = Input.GetAxis("Horizontal");
+        inputV = Input.GetAxis("Vertical");
+        // Debug.Log("Horizontal axis: " + inputH + " | Vertical axis: " + inputV);
+        if (inputH != 0 && inputV != 0)
+        {
+            ScreenMessage.sm.ShowMessage("Sloths can only move one direction at a time", 3.0f);
+        }
+        else if (inputH != 0)
+        {
+            currentAxis = 0;
+            Left_Or_Right();
+        }
+        else if (inputV != 0)
+        {
+            currentAxis = 1;
+            Up_Or_Down();
+        }
+        
     }
 
-    // Method for checking spacebar press action to activate jump animation
-    void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.SetBool("jump", true);
+    // Checking movement of the player using arrow keys or W and S keys
+    void Up_Or_Down() {
+        if (!move) {
+            //anim.SetFloat("inputV", inputV);
+            if (inputV > 0.1)
+            {
+                move = true;
+                inputV = 1;
+                newPosition = transform.position + new Vector3(0f, 1f, 0f);
+                ss.IsMoving(0);
+                //changeTurnModel.DecrementApCurrentSloth(1);
+            }
+            if (inputV < -0.1)
+            {
+                move = true;
+                inputV = -1;
+                newPosition = transform.position + new Vector3(0f, -1f, 0f);
+                ss.IsMoving(0);
+                //changeTurnModel.DecrementApCurrentSloth(1);
+            }
         }
         else
         {
-            anim.SetBool("jump", false);
+            if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
+            {
+                float step = playerSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
+            }
+            else
+            {
+                inputV = 0;
+                move = false;
+                ss.IsNotMoving();
+            }
         }
     }
 
@@ -75,40 +141,34 @@ public class AnimPlayer : MonoBehaviour {
     {
         if (!move && !ss.GetShotLoad())
         {
-            inputH = Input.GetAxis("Horizontal");
-            anim.SetFloat("inputH", inputH);
             if (inputH > 0.1)
             {
                 move = true;
                 inputH = 1;
                 newPosition = transform.position + new Vector3(1f, 0f, 0f);
-                transform.eulerAngles = new Vector3(0, 90, 0);
                 ss.IsMoving(0);
                 hs.turnRight();
                 changeTurnModel.DecrementApCurrentSloth(1);
                 selected.GetLeaf().transform.position = newPosition + new Vector3(0, 3, 0);
                 selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
-
             }
             if (inputH < -0.1)
             {
                 move = true;
                 inputH = -1;
                 newPosition = transform.position + new Vector3(-1f, 0f, 0f);
-                transform.eulerAngles = new Vector3(0, -90, 0);
                 ss.IsMoving(1);
                 hs.turnLeft();
                 changeTurnModel.DecrementApCurrentSloth(1);
                 selected.GetLeaf().transform.position = newPosition + new Vector3(0, 3, 0);
                 selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
-
             }
         }
         else
         {
             if (Vector3.Distance(transform.position, newPosition) > Vector3.kEpsilon)
             {
-                float step = 1 * Time.deltaTime;
+                float step = playerSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
             }
             else
@@ -118,25 +178,43 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsNotMoving();
             }
         }
-
     }
 
-    // Method for limiting available movement space for the player 
-    void Movement_Correction()
+    public bool IsBlockInFront()
     {
-        if (transform.position.x > 150)
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(transform.position, fwd, 3))
         {
-            move = false;
-            transform.position = new Vector3(150f, transform.position.y, transform.position.z);
+            return true;
         }
-        if (transform.position.x < 0)
-        {
-            move = false;
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
-        }
+        return false;
     }
 
-    public bool GetMove()
+    private IEnumerator ApplyGravity()
+    {
+        int iters = 0;
+        rbody.useGravity = true;
+        yield return new WaitForSeconds(0.01f);
+        while (!IsBlockInFront())
+        {
+            iters++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        GrabPositionCorrection();
+        rbody.useGravity = false;
+        rbody.velocity = Vector3.zero;
+        ScreenMessage.sm.ForceShowMessage("Whew!", 1.2f);
+        falling = false;
+    }
+   
+    private void GrabPositionCorrection()
+    {
+        Vector3 newPos = gameObject.transform.position;
+        newPos.y = Mathf.Floor(newPos.y - 0.5f) + 0.55f;
+        gameObject.transform.position = newPos;
+    }
+
+    public bool IsMoving()
     {
         return move;
     }

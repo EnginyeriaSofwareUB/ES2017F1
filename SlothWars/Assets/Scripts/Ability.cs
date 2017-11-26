@@ -10,4 +10,5 @@ public interface Ability
     bool GetBuildTerrain();
     int GetTerrainSize();
 	int GetAp();
+    bool GetAlterTerrain();
 }
