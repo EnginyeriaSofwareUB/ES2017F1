@@ -122,16 +122,33 @@ public class SlothapediaController : MonoBehaviour {
             });
 		//changingImage
 
-        ((Button)GameObject.Find("Ability2").GetComponent<Button>()).onClick.AddListener(delegate{
+
+		//Debug.Log("hola");
+		//Debug.Log(newSprite);
+		///Image theImage = 
+
+		name = n[currentSloth.ToString()]["idAb1"];
+		name = name.Insert (0, "Spellicons/");
+		GameObject.Find("Ability1").GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
+
+		//theImage.sprite = newSprite;​
+
+
+		((Button)GameObject.Find("Ability2").GetComponent<Button>()).onClick.AddListener(delegate{
             showAbilityInfo(n[currentSloth.ToString()]["idAb2"]);     
         });
 
-
+		name = n[currentSloth.ToString()]["idAb2"];
+		name = name.Insert (0, "Spellicons/");
+		GameObject.Find("Ability2").GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
 
         ((Button)GameObject.Find("Ability3").GetComponent<Button>()).onClick.AddListener(delegate{
             showAbilityInfo(n[currentSloth.ToString()]["idAb3"]);     
         });
 
+		name = n[currentSloth.ToString()]["idAb3"];
+		name = name.Insert (0, "Spellicons/");
+		GameObject.Find("Ability3").GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
 	
     }
 
