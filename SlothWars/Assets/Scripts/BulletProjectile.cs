@@ -9,7 +9,7 @@ public class BulletProjectile : Projectile
     private float bVelocity = 8f; //Projectile velocity
     private Vector3 xyDir; //xY aim vector
     private float zO = 0; //sloths plane
-    private float zf = 1; //tree plane
+    private float zf = 0.5f; //tree plane
     private float rg = 50; // max range
     private float rd = 1; // explosion radius
     private Vector3 pos; // spawn position

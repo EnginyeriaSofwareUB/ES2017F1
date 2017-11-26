@@ -22,9 +22,7 @@ public class ShotScript : MonoBehaviour
     {
         abilityModel = new AbilityModel();
         changeTurnModel = new ChangeTurnModel();
-        gun = GetComponentInChildren<Transform>().Find("Gun");
-        gun.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        Active(false);
+        gun = transform;
     }
     void Update()
     {
@@ -47,14 +45,10 @@ public class ShotScript : MonoBehaviour
         playerPlane.Raycast(ray, out hitdist);
         Vector3 targetPoint = ray.GetPoint(hitdist);
         targetPoint -= gun.position;
-        float radAngle = (gun.eulerAngles[2] * (1 - rotate) + rotate * (180 - gun.eulerAngles[2])) * Mathf.Deg2Rad;
+        float radAngle = gun.eulerAngles[2]  * Mathf.Deg2Rad;
         Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
         Quaternion r = Quaternion.FromToRotation(AimVector, targetPoint);
         AimVector = r.eulerAngles;
-        if (rotate == 1)
-        {
-            AimVector *= -1;
-        }
         gun.Rotate(AimVector);
     }
     private void MarkBuildTerrain()
@@ -70,7 +64,7 @@ public class ShotScript : MonoBehaviour
     {
         if (!onloadAbility.GetBuildTerrain())
         {
-            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 3, 0), gun.rotation);
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 2, 0), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
         }
         shotLoad = true;
@@ -90,7 +84,7 @@ public class ShotScript : MonoBehaviour
         }
         else
         {
-            float radAngle = (gun.eulerAngles[2] * (1 - rotate) + rotate * (180 - gun.eulerAngles[2])) * Mathf.Deg2Rad;
+            float radAngle = gun.eulerAngles[2]  * Mathf.Deg2Rad;
             Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
             Debug.Log("rangeeeeeeeee"+(float)onloadAbility.GetRange());
             onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius());
@@ -116,7 +110,15 @@ public class ShotScript : MonoBehaviour
     public void Active(bool b)
     {
         active = b;
-        gun.gameObject.SetActive(b);
+        if (!b) {
+            Destroy(gun.gameObject);
+            gun = this.transform;
+        }
+        else{
+            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            gun = g.transform;
+        }
+        //gun.gameObject.SetActive(b);
     }
     // used to dont move the sloth when shot is on load
     public bool GetShotLoad()
