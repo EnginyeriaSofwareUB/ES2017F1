@@ -16,6 +16,7 @@ public class AnimPlayer : MonoBehaviour {
     Vector3 newPosition = new Vector3(0f, 0f, 0f);
     ShotScript ss;
     HealthScript hs;
+    private bool falling;
 
     public AnimPlayer(Sloth sloth)
     {
@@ -24,6 +25,7 @@ public class AnimPlayer : MonoBehaviour {
 
     void Start()
     {
+        falling = false;
         playerSpeed = 2;
         currentAxis = 0;
         ss = GetComponentInChildren<ShotScript>();
@@ -35,28 +37,42 @@ public class AnimPlayer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (changeTurnModel.GetApCurrentSloth() >= 0 ){
-            //Debug.Log("Current sloth: " + changeTurnModel.GetApCurrentSloth());
-            if (!move)
+        if (!falling)
+        {
+            if (changeTurnModel.GetApCurrentSloth() >= 0)
             {
-                Movement_Interpretation();
+                //Debug.Log("Current sloth: " + changeTurnModel.GetApCurrentSloth());
+                if (!move)
+                {
+                    if (IsBlockInFront())
+                    {
+                        Movement_Interpretation();
+                    }
+                    else
+                    {
+                        falling = true;
+                        ScreenMessage.sm.ShowMessage("Whoops...", 0.7f);
+                        StartCoroutine(ApplyGravity());
+                    }
+                }
+                else
+                {
+                    if (currentAxis == 0)
+                    {
+                        Left_Or_Right();
+                    }
+                    if (currentAxis == 1)
+                    {
+                        Up_Or_Down();
+                    }
+                }
             }
             else
             {
-                if (currentAxis == 0)
-                {
-                    Left_Or_Right();
-                }
-                if (currentAxis == 1)
-                {
-                    Up_Or_Down();
-                }
+                inputH = 0;
+                move = false;
+                ss.IsNotMoving();
             }
-        } else{
-            //Debug.Log("HELLO THIS SHOULD NOT MOVE" +changeTurnModel.GetApCurrentSloth());
-            inputH = 0;
-            move = false;
-            ss.IsNotMoving();
         }
     }
         
@@ -67,23 +83,22 @@ public class AnimPlayer : MonoBehaviour {
         // Debug.Log("Horizontal axis: " + inputH + " | Vertical axis: " + inputV);
         if (inputH != 0 && inputV != 0)
         {
-            Debug.Log("Only one direction at a time plz");
+            ScreenMessage.sm.ShowMessage("Sloths can only move one direction at a time", 3.0f);
         }
         else if (inputH != 0)
         {
-            IsBlockInFront();
             currentAxis = 0;
             Left_Or_Right();
         }
         else if (inputV != 0)
         {
-            IsBlockInFront();
             currentAxis = 1;
             Up_Or_Down();
         }
         
     }
 
+    // Checking movement of the player using arrow keys or W and S keys
     void Up_Or_Down() {
         if (!move) {
             //anim.SetFloat("inputV", inputV);
@@ -164,11 +179,33 @@ public class AnimPlayer : MonoBehaviour {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (Physics.Raycast(transform.position, fwd, 3))
         {
-            Debug.Log("There's SOMETHING in front of the object!");
             return true;
         }
-        Debug.Log("There NOTHING in front of the object!");
         return false;
+    }
+
+    private IEnumerator ApplyGravity()
+    {
+        int iters = 0;
+        rbody.useGravity = true;
+        yield return new WaitForSeconds(0.01f);
+        while (!IsBlockInFront())
+        {
+            iters++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        GrabPositionCorrection();
+        rbody.useGravity = false;
+        rbody.velocity = Vector3.zero;
+        ScreenMessage.sm.ForceShowMessage("Whew!", 1.2f);
+        falling = false;
+    }
+   
+    private void GrabPositionCorrection()
+    {
+        Vector3 newPos = gameObject.transform.position;
+        newPos.y = Mathf.Floor(newPos.y - 0.5f) + 0.55f;
+        gameObject.transform.position = newPos;
     }
 
     public bool IsMoving()

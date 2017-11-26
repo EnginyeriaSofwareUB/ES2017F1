@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     float speed = 10.0f;
-    float cameraDistance = -10.0f;
+    float cameraDistance = -8.0f;
     GameObject[] projectile;
     GameObject[] explosion;
 
