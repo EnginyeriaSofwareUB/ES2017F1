@@ -93,7 +93,7 @@ public class SlothapediaController : MonoBehaviour {
         panelStatsInfo.GetComponent<RectTransform>().sizeDelta = new Vector2((width * slothWidth)*0.5f, height*0.6f*0.33f);
         //abilities:
         GameObject panelAbilityIcon = GameObject.Find("AbilityIconResume");
-        //panelAbilityIcon.GetComponent<RectTransform>().sizeDelta = new Vector2((width * slothWidth)*0.5f, height*0.6f*0.33f);
+        panelAbilityIcon.GetComponent<RectTransform>().sizeDelta = new Vector2((width * slothWidth)*0.5f, height*0.6f*0.33f);
         //Place the abilityResume panel where we will see the description of the selected ability:
         panelAbilityInfo = GameObject.Find("AbilityResume");
 
