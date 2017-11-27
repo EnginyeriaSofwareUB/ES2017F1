@@ -9,7 +9,8 @@ using System.Security.Cryptography.X509Certificates;
 // Class created in order to control the executional flow. It stores variables obtained in the scene and call the rest
 // of the controllers.
 // TODO: Redo this singleton in order to not have static variables.
-public class GameController: MonoBehaviour{
+public class GameController : MonoBehaviour
+{
 
     //SINGLETON
     private static GameController instance;
@@ -24,7 +25,7 @@ public class GameController: MonoBehaviour{
             return instance;
         }
     }
-    protected  GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
+    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     ///////*****///////
 
@@ -150,13 +151,13 @@ public class GameController: MonoBehaviour{
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").position = new Vector3(i+20, 3, 0);
+                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").position = new Vector3(i + 20, 3, 0);
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
 
 
-                
+
                 teamSloths1.Add(sloth);
 
                 i++;
@@ -191,7 +192,7 @@ public class GameController: MonoBehaviour{
                 teamSloths2.Add(sloth);
                 i++;
             }
-        }       
+        }
     }
 
     private void InitializeTurnVariables()
@@ -204,7 +205,7 @@ public class GameController: MonoBehaviour{
 
             //TODO: Change the design in order to avoid calling the constructor.
             //It also initializes the start method.
-            turnController = new TurnController(teamSloths1, teamSloths2, teamSprite1 , teamSprite2, endTurnButton, turnLabel);
+            turnController = new TurnController(teamSloths1, teamSloths2, teamSprite1, teamSprite2, endTurnButton, turnLabel);
 
         }
 
@@ -213,9 +214,9 @@ public class GameController: MonoBehaviour{
     private void InitializeAbilityVariables()
     {
 
-        buttonAbility1 =  GameObject.Find("buttonAbility1").GetComponent<Button>();
-        buttonAbility2 =  GameObject.Find("buttonAbility2").GetComponent<Button>();
-        buttonAbility3 =  GameObject.Find("buttonAbility3").GetComponent<Button>();
+        buttonAbility1 = GameObject.Find("buttonAbility1").GetComponent<Button>();
+        buttonAbility2 = GameObject.Find("buttonAbility2").GetComponent<Button>();
+        buttonAbility3 = GameObject.Find("buttonAbility3").GetComponent<Button>();
         abilityController = new AbilityController(buttonAbility1, buttonAbility2, buttonAbility3);
     }
 
@@ -226,7 +227,7 @@ public class GameController: MonoBehaviour{
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
         logicController = new LogicController(teamSloths1, teamSloths2);
-        
+
     }
 
     private void InitializeUIVariables()
@@ -238,10 +239,10 @@ public class GameController: MonoBehaviour{
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
         uiController = new UIController(panelMain, panelOpts);
-        
+
 
     }
-    
+
     //Method to store in the lists the elements from the previous Scene (Stored in 
     //StorePersistentVariables.cs)
     private void CreateTeamsSetSprites()
@@ -257,12 +258,12 @@ public class GameController: MonoBehaviour{
             playerTeam2.Add(new AnimPlayer(sloth));
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
-        
+
     }
 
     public TurnController GetTurnController()
     {
         return turnController;
     }
-    
+
 }
