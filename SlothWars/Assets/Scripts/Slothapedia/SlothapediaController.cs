@@ -13,6 +13,8 @@ public class SlothapediaController : MonoBehaviour {
     private float slothWidth = 0.4f;
     private GameObject panelSlothInfo;
     private GameObject panelAbilityInfo;
+    private GameObject slothModel;
+    private Quaternion quaternion;
     //Slothapedia json and slothability json
     private JSONNode n;
     private JSONNode m;
@@ -21,6 +23,8 @@ public class SlothapediaController : MonoBehaviour {
 	void Start () {
         canvas = GameObject.Find("Canvas");
         GameObject background = GameObject.Find("backgroundMatrix");
+        slothModel = GameObject.Find("slothModel");
+        quaternion = Quaternion.Euler(0, 5f, 0);
         // Sizes in which we will apply the factor conversion
         int width = Screen.width;
         int height = Screen.height;
@@ -164,6 +168,6 @@ public class SlothapediaController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		slothModel.transform.Rotate(quaternion.eulerAngles*Time.deltaTime);
 	}
 }
