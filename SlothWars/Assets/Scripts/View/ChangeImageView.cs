@@ -9,7 +9,7 @@ public class ChangeImageView : MonoBehaviour {
     public Image newSprite;
     
     private void Start () {
-        changeImageModel = new ChangeImageModel();
+        changeImageModel = ChangeImageModel.Instance;
         
         //There are some bugs with the Unity Version. It should detect the GameObject.Find as 
         //it inherits from MonoBehaviour. Therefore, it shows us an error as it could not 
@@ -26,5 +26,8 @@ public class ChangeImageView : MonoBehaviour {
     public void ShowImage()
     {
        newSprite.sprite = changeImageModel.GetSprite();
+        GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(1));
+        GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(2));
+        GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(3));
     }
 }

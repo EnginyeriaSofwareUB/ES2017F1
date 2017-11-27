@@ -57,7 +57,7 @@ public class TurnController: MonoBehaviour{
     // Use this for initialization
     private void OnEnable () {
 
-        changeImageModel = new ChangeImageModel();
+        changeImageModel = ChangeImageModel.Instance;
         changeTurnModel = new ChangeTurnModel();
         changeTurnModel.SetEndTurnButton(endTurnButton);
 
@@ -75,6 +75,8 @@ public class TurnController: MonoBehaviour{
         //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
         changeImageModel.SetSprite(spriteFromPreviousScene);
+        changeImageModel.SendSlothInfo(newTeamSloths1[0].GetComponent<AnimPlayer>().GetSloth().GetTypeName());
+
        
     }
 
@@ -133,6 +135,7 @@ public class TurnController: MonoBehaviour{
         {
             spriteFromPreviousScene = teamSprite2[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
+            changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
         }
         else 
         {
@@ -140,10 +143,12 @@ public class TurnController: MonoBehaviour{
             {
                 spriteFromPreviousScene = teamSprite1[turnPlayer1];
                 changeImageModel.SetSprite(spriteFromPreviousScene);
+                changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
             } else if (turnPlayer2 - turnPlayer1 < -1)
             {
                 spriteFromPreviousScene = teamSprite1[turnPlayer2];
                 changeImageModel.SetSprite(spriteFromPreviousScene);
+                changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
             }
         }
 

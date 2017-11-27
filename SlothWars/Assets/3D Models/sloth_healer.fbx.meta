@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 4ea2de775d8a1418b89e83262ce4ae9f
-timeCreated: 1511536425
-=======
-guid: 3455bc485b289aa4ca35a4c50abd5972
-timeCreated: 1511554710
->>>>>>> origin/Tree-climbing
-licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
