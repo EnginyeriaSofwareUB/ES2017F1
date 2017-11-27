@@ -1942,7 +1942,7 @@ GameObject:
   - component: {fileID: 4999956165695896}
   - component: {fileID: 95513264596482488}
   m_Layer: 0
-  m_Name: slothRojo_mago
+  m_Name: sloth_mago
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4036,7 +4036,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1899837923588370}
-  m_LocalRotation: {x: -0.53364325, y: 0.15576968, z: 0.5795639, w: 0.5958746}
+  m_LocalRotation: {x: -0.5336432, y: 0.15576966, z: 0.57956386, w: 0.59587455}
   m_LocalPosition: {x: -0.001786964, y: -0.0008637962, z: 0.0015302184}
   m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
   m_Children:

@@ -2318,7 +2318,7 @@ GameObject:
   - component: {fileID: 4686251742353222}
   - component: {fileID: 95091483549664708}
   m_Layer: 0
-  m_Name: slothRojo_healer
+  m_Name: sloth_healer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2477,7 +2477,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1938840274308120}
-  m_LocalRotation: {x: -0.53364325, y: 0.15576968, z: 0.5795639, w: 0.5958746}
+  m_LocalRotation: {x: -0.5336432, y: 0.15576966, z: 0.57956386, w: 0.59587455}
   m_LocalPosition: {x: -0.001786964, y: -0.0008637962, z: 0.0015302184}
   m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
   m_Children:
