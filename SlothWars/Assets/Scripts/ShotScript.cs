@@ -23,6 +23,7 @@ public class ShotScript : MonoBehaviour
         abilityModel = new AbilityModel();
         changeTurnModel = new ChangeTurnModel();
         gun = transform;
+		gun.position = new Vector3(gun.position.x,gun.position.y,gun.position.z-0.5f);
     }
     void Update()
     {

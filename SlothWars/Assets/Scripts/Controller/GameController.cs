@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
             teamSloths2 = new List<GameObject>();
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
-                sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 20, 0, 0), Quaternion.identity);
+				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(playerSloth.GetSloth().GetHp());
@@ -165,8 +165,8 @@ public class GameController : MonoBehaviour
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
-                sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 10, 0, 0), Quaternion.identity);
-                // setting health
+				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+				// setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(playerSloth.GetSloth().GetHp());
                 health.enabled = true;
@@ -188,6 +188,7 @@ public class GameController : MonoBehaviour
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
+
 
                 teamSloths2.Add(sloth);
                 i++;

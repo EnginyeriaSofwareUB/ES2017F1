@@ -17,6 +17,7 @@ public class AnimPlayer : MonoBehaviour {
     ShotScript ss;
     HealthScript hs;
     private bool falling;
+	Vector3 aPos;
 
     public AnimPlayer(Sloth sloth)
     {
@@ -33,6 +34,8 @@ public class AnimPlayer : MonoBehaviour {
         rbody = GetComponent<Rigidbody>();
         changeTurnModel = new ChangeTurnModel();
         selected = GetComponentInChildren<SlothSelected>();
+		aPos = gameObject.transform.position;
+		//gameObject.transform.position = new Vector3 (aPos.x,aPos.y+1,aPos.z-1);
     }
 
     // Update is called once per frame
@@ -185,7 +188,8 @@ public class AnimPlayer : MonoBehaviour {
     // Checks if there is a block in front of the current sloth
     public bool IsBlockInFront()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+		Vector3 fwd = transform.TransformDirection(transform.forward);
+		//Debug.DrawRay (transform.position, fwd, Color.green);
         if (Physics.Raycast(transform.position, fwd, 3))
         {
             return true;
@@ -212,7 +216,8 @@ public class AnimPlayer : MonoBehaviour {
     private void GrabPositionCorrection()
     {
         Vector3 newPos = gameObject.transform.position;
-        newPos.y = Mathf.Floor(newPos.y - 0.5f) + 0.55f;
+        //newPos.y = Mathf.Floor(newPos.y - 0.5f) + 0.55f;
+		newPos.y = newPos.y-0.3f;
         gameObject.transform.position = newPos;
     }
 
