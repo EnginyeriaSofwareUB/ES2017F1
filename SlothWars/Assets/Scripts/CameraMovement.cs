@@ -8,11 +8,19 @@ public class CameraMovement : MonoBehaviour {
     float cameraDistance = -8.0f;
     GameObject[] projectile;
     GameObject[] explosion;
+	int Boundary = 50;
+
+	int theScreenWidth = Screen.width;
+	int theScreenHeight = Screen.height;
+
+	GameObject turn;
 
 	// Use this for initialization
 	void Start () 
     {
-        
+		turn = TurnController.Instance.GetActiveSloth ();
+		if (turn != null)
+			transform.position = new Vector3(turn.transform.position.x, 4.0f, cameraDistance);
 	}
 	
 	// Update is called once per frame
@@ -43,19 +51,26 @@ public class CameraMovement : MonoBehaviour {
             transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, cameraDistance);
         }
 
+		if (turn != TurnController.Instance.GetActiveSloth ()) 
+		{
+			transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, cameraDistance);
+			turn = TurnController.Instance.GetActiveSloth ();
+		}
+
         projectile = new GameObject[] {};
         explosion = new GameObject[] {};
 	}
 
     public void MoveCameraFreely()
     {
-        if (Input.GetAxis("Mouse X") > 0)
-        {
-            transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
-        }
-        else if (Input.GetAxis("Mouse X") < 0)
-        {
-            transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);
-        }
+		if (Input.mousePosition.x > theScreenWidth - Boundary)
+		{
+			transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
+		}
+
+		if (Input.mousePosition.x < 0 + Boundary)
+		{
+			transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
+		}
     }
 }
