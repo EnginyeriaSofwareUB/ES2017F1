@@ -31,6 +31,7 @@ public class ChangeTurnView: MonoBehaviour {
     {
         if (playersTeam1.Count == 0) {
             UpdateSlothTeams();
+            //ChangeUIStats();
             FinishTurn();
             
         }
@@ -75,6 +76,7 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
             print(changeTurnModel.GetApCurrentSloth());
+            ChangeUIStats();
             return;
         }
 
@@ -96,6 +98,7 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
+            ChangeUIStats();
 
         }
         else
@@ -119,12 +122,20 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.ActivateSloth(playersTeam2[playerTurn2]);
             changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
+            ChangeUIStats();
         }
             
             
 
     }
 
+
+    private void ChangeUIStats(){
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModel.GetCurrentSloth().GetHp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModel.GetCurrentSloth().GetAttack().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModel.GetCurrentSloth().GetDefense().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetCurrentSloth().GetAp().ToString();
+    }
     private void FixedBugs()
     {
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)

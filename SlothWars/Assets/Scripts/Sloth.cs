@@ -95,6 +95,14 @@ public class Sloth
         return this.hp;
     }
 
+    public double GetAttack(){
+        return this.attack;
+    }
+
+    public double GetDefense(){
+        return this.defense;
+    }
+
     public int GetAp(){ return ap;}
 
     public void SumToHp(double dmg_heal)
