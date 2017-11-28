@@ -13,7 +13,7 @@
   },
   
    "M1": {
-	"desc":"",
+	"desc":"Shoots an icy charge that deals damage and freezes an area.",
     "elem": "ice",
     "onHit": "freeze",
     "oHitProb": 0.2,
@@ -26,7 +26,7 @@
   },
   
    "M2": {
-	"desc":"",
+	"desc":"Shoots a water bubble that deals damage in a short radius.",
     "elem": "water",
     "onHit": "None",
     "oHitProb": 0,
@@ -39,7 +39,7 @@
   },
   
   "T0": {
-	  "desc":"",
+	  "desc":"Generates a shield around caster that increases sloth defense.",
     "shield": true,
     "boostDef": 30,
     "durBoostDef": 5,
@@ -52,7 +52,7 @@
   },
   
    "T1": {
-	"desc":"",
+	"desc":"Boosts user HP.",
     "shield": false,
     "boostDef": 0,
     "durBoostDef": 0,
@@ -65,7 +65,7 @@
   },
   
    "T2": {
-  	"desc":"",
+  	"desc":"Generates a shield around castes that blocks next ability used against.",
     "shield": true,
     "boostDef": 0,
     "durBoostDef": 0,
@@ -78,7 +78,7 @@
   },
   
   "P0": {
-	"desc":"",
+	"desc":"Deals damage in a short range.",
     "dmg": 50,
     "reach": 15,
 	"hitRadius": 0.5,
@@ -87,7 +87,7 @@
   
   "P1": {
 	"ap": 1,
-	"desc":"",
+	"desc":"Deals massive damage in a long range.",
   "dmg": 60,
   "reach": 30,
 	"hitRadius": 0.5,
@@ -96,7 +96,7 @@
   },
   
   "P2": {
-	"desc":"",
+	"desc":"Deals little damage in a very short range.",
   "dmg": 10,
   "reach": 20,
 	"hitRadius": 0.5,
@@ -104,7 +104,7 @@
   },
 
   "H0": {
-	"desc":"",
+	"desc":"Generates a shield around caster that increases sloth defense.",
     "shield": 40,
     "durShield": 5,
     "healHp": 0,
@@ -118,7 +118,7 @@
   },
   
   "H1": {
-	"desc":"",
+	"desc":"Heals objective of this ability.",
     "shield": 0,
     "durShield": 0,
     "healHp": 50,
@@ -133,7 +133,7 @@
   
   "H2": {
     "shield": 0,
-	"desc":"",
+	"desc":"Shoots a magic charge that increases objective defense.",
     "durShield": 0,
     "healHp": 0,
     "healEffects": true,
@@ -145,7 +145,7 @@
   },
   
   "U0": {
-	"desc":"",
+	"desc":"Spawns impassable terrain in a zone.",
     "buildTerrain": true,
     "terrainType": "Tree",
     "terrainSize": 4,
@@ -161,7 +161,7 @@
   },
   
   "U1": {
-	"desc":"",
+	"desc":"Spawns a totem in an area that increases sloth attributes.",
     "buildTerrain": false,
     "terrainType": "None",
     "terrainSize": 0,
@@ -177,7 +177,7 @@
   },
   
   "U2": {
-	"desc":"",
+	"desc":"Generates area in a selected zone that increases sloth attributes. Vanishes after a few turns.",
     "buildTerrain": false,
     "terrainType": "None",
     "terrainSize": 0,
