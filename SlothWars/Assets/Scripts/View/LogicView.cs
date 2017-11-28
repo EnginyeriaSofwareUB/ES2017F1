@@ -38,14 +38,14 @@ public class LogicView : MonoBehaviour {
             bool b2 = teamSloths2.Remove(g);
             Debug.Log(b1 + "check " + b2);
         }
-        /*HealthScript health;
+        double health;
         AnimPlayer pla;
         int i = 0;
         foreach (GameObject sloth in teamSloths1)
         {
-            health = sloth.GetComponent<HealthScript>();
+            health = sloth.GetComponent<AnimPlayer>().GetSloth().GetHp();
             
-            if (health.getHealth() <= 0)
+            if (health <= 0)
             {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
@@ -57,25 +57,27 @@ public class LogicView : MonoBehaviour {
         i = 0;
         foreach (GameObject sloth in teamSloths2)
         {
-            health = sloth.GetComponent<HealthScript>();
-            if (health.getHealth() <= 0)
+            health = sloth.GetComponent<AnimPlayer>().GetSloth().GetHp();
+
+            if (health <= 0)
             {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
-                teamSloths2.Remove(sloth);
+                teamSloths1.Remove(sloth);
+                //REMOVE LISTGUN
             }
             i++;
-        } */
+        } 
     }
 
     private void CheckGameOver(){
-        /*if(teamSloths1.Count == 0){
+        if(teamSloths1.Count == 0){
             StorePersistentVariables.Instance.winner = "Blue";
             SceneManager.LoadScene("GameOverScene");
         } else if(teamSloths2.Count == 0){
             StorePersistentVariables.Instance.winner = "Red";
             SceneManager.LoadScene("GameOverScene");
-        }*/
+        }
     }
 
     private void DeactivateButtonsIfNecessary(){
