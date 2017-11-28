@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 136878828376162272}
   - component: {fileID: 114621402620256226}
   m_Layer: 0
-  m_Name: Sloth
+  m_Name: sloth
   m_TagString: sloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

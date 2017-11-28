@@ -753,7 +753,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100270, guid: fbc45c150a59a4642bb26d64b8a7694b, type: 3}
       propertyPath: m_Name
-      value: slothExample
+      value: slothModel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbc45c150a59a4642bb26d64b8a7694b, type: 3}
