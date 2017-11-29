@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor.Events;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
 public class TurnController: MonoBehaviour{

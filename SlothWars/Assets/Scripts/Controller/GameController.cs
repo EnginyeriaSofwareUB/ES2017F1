@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
 
 // Class created in order to control the executional flow. It stores variables obtained in the scene and call the rest

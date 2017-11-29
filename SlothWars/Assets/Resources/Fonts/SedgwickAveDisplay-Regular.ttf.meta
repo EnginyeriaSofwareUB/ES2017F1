@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7abf6346a3dab45e581d0db63823b3d0
+timeCreated: 1507567678
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sedgwick Ave Display
+  fontNames:
+  - Sedgwick Ave Display
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 857dfb92d91ec574a8ca3dfb44121393, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
