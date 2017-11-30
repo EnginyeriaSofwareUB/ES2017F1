@@ -8,10 +8,7 @@ using System;
 public class AbilityController : MonoBehaviour {
     //SINGLETON
     private static AbilityController instance;
-    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
-    private static ChangeTurnModel changeTurnModel;
-    private static GameObject lastTarget;
-
+    
     public static AbilityController Instance
     {
         get
@@ -26,23 +23,15 @@ public class AbilityController : MonoBehaviour {
     }
     ///////*****///////
 
-    private static AbilityModel abilityModel;
-    private Ability ability;
-
-	public AbilityController(Button bnAbility1, Button bnAbility2, Button bnAbility3)
-    {
-        buttonAbility1 = bnAbility1;
-        buttonAbility2 = bnAbility2;
-        buttonAbility3 = bnAbility3;
-        changeTurnModel  = new ChangeTurnModel();
-        abilityModel = new AbilityModel();
-    }
-
+    private static Ability ability;
+    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private static GameObject lastTarget;
+    
     //TODO: FIX THIS
     protected AbilityController(){
 
     }
-    
+
     //sums dmg_heal to the hp bar asociated to target
 
     public void SumToHpBar(double dmg_Heal)
@@ -58,7 +47,7 @@ public class AbilityController : MonoBehaviour {
     // apply last ability to the target
     public void ApplyLastAbility(GameObject g)
     {
-        ability = abilityModel.GetLastAbility();
+        ability = AbilityModel.Instance.GetLastAbility();
         if (g.gameObject.tag == "sloth") {
             lastTarget = g;
             ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
@@ -67,7 +56,7 @@ public class AbilityController : MonoBehaviour {
     }
     // apply last ability to terrain blocks in range
     public void ApplyDestroyTerrainAbility(GameObject destroyable) {
-        ability = abilityModel.GetLastAbility();
+        ability = AbilityModel.Instance.GetLastAbility();
         if (ability.GetAlterTerrain())
         {
             Destroy(destroyable);
@@ -108,5 +97,18 @@ public class AbilityController : MonoBehaviour {
             buttonAbility3.interactable = true;
         }
         
+    }
+
+    public void SetAbility1(Button ability1Cont)
+    {
+        buttonAbility1 = ability1Cont;
+    }
+    public void SetAbility2(Button ability2Cont)
+    {
+        buttonAbility2 = ability2Cont;
+    }
+    public void SetAbility3(Button ability3Cont)
+    {
+        buttonAbility3 = ability3Cont;
     }
 }

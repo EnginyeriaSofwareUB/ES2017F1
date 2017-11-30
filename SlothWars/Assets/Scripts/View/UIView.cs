@@ -12,7 +12,7 @@ public class UIView : MonoBehaviour {
 
     private void Start()
     {
-        uiModel = new UIModel();
+        uiModel = UIModel.Instance;
     }
 
     private void Update()

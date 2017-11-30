@@ -15,9 +15,9 @@ public class ChangeTurnView: MonoBehaviour {
 
     private void Start()
     {
-        
-        changeTurnModel = new ChangeTurnModel();
-        abilityModel = new AbilityModel();
+        changeTurnModel = ChangeTurnModel.Instance;
+        abilityModel = AbilityModel.Instance;
+
         endTurnButton = changeTurnModel.GetEndTurnButton();
 
         playersTeam1 = new List<GameObject>();

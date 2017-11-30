@@ -12,9 +12,9 @@ public class LogicView : MonoBehaviour {
     
     // Use this for initialization
 	private void Start () {
-        logicModel = new LogicModel();
-        abilityModel = new AbilityModel();
-        changeTurnModel = new ChangeTurnModel();
+        logicModel = LogicModel.Instance;
+        abilityModel = AbilityModel.Instance;
+        changeTurnModel = ChangeTurnModel.Instance;
 
         teamSloths1 = changeTurnModel.GetTeam1();
         teamSloths2 = changeTurnModel.GetTeam2();

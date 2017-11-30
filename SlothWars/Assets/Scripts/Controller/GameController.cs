@@ -29,8 +29,7 @@ public class GameController : MonoBehaviour
     ///////*****///////
 
     //GameObjects (sloths) in the scene
-    public static List<GameObject> teamSloths1;
-    public static List<GameObject> teamSloths2;
+    public List<GameObject> teamSloths1, teamSloths2;
 
     //Player Lists to attach to the gameObjects in the scene.
     public List<AnimPlayer> playerTeam1, playerTeam2;
@@ -42,24 +41,24 @@ public class GameController : MonoBehaviour
     private static int checkTurn = 0;
 
     //TURNCONTROLLER VARIABLES
-    private TurnController turnController;
-    public static List<Sprite> teamSprite1, teamSprite2;
+    private TurnController turnControllerInstance = TurnController.Instance;
+    public List<Sprite> teamSprite1, teamSprite2;
     public Button endTurnButton;
-    private Text turnLabel;
+    public Text turnLabel;
 
     //LOGICCONTROLLER VARIABLES
-    private LogicController logicController;
-    private GameObject prove;
+    private LogicController logicControllerInstance = LogicController.Instance;
+    private static GameObject prove;
 
     //UICONTROLLER VARIABLES
-    private UIController uiController;
+    private UIController uiControllerInstance = UIController.Instance;
     public Image panelMain;
     public Image panelOpts;
 
     //ABILITY VARIABLES
+    private AbilityController abilityControllerInstance = AbilityController.Instance;
     private Transform createGun;
-    private AbilityController abilityController;
-    private Button buttonAbility1, buttonAbility2, buttonAbility3;
+    public Button buttonAbility1, buttonAbility2, buttonAbility3;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
 
@@ -71,6 +70,7 @@ public class GameController : MonoBehaviour
         //HOTFIX: Awake tries to execute twice. Have to check why.
         if (checkAwake == 0)
         {
+            print("HOLA");
             checkAwake = 1;
 
             // As long as method Awake is called only here (it must be the only one who calls Awake method)
@@ -161,6 +161,8 @@ public class GameController : MonoBehaviour
 
                 i++;
             }
+            turnControllerInstance.SetTeamSloths1(teamSloths1);
+           
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
@@ -192,6 +194,7 @@ public class GameController : MonoBehaviour
                 teamSloths2.Add(sloth);
                 i++;
             }
+            turnControllerInstance.SetTeamSloths2(teamSloths2);
         }
     }
 
@@ -203,10 +206,12 @@ public class GameController : MonoBehaviour
             turnLabel = GameObject.Find("TurnText").GetComponent<Text>();
             endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
 
+            turnControllerInstance.SetEndTurnButton(endTurnButton);
+            turnControllerInstance.SetTurnLabel(turnLabel);
+
             //TODO: Change the design in order to avoid calling the constructor.
             //It also initializes the start method.
-            turnController = new TurnController(teamSloths1, teamSloths2, teamSprite1, teamSprite2, endTurnButton, turnLabel);
-
+            GameObject.Find("GameController").GetComponent<TurnController>().enabled = true;
         }
 
     }
@@ -217,7 +222,12 @@ public class GameController : MonoBehaviour
         buttonAbility1 = GameObject.Find("buttonAbility1").GetComponent<Button>();
         buttonAbility2 = GameObject.Find("buttonAbility2").GetComponent<Button>();
         buttonAbility3 = GameObject.Find("buttonAbility3").GetComponent<Button>();
-        abilityController = new AbilityController(buttonAbility1, buttonAbility2, buttonAbility3);
+
+        abilityControllerInstance.SetAbility1(buttonAbility1);
+        abilityControllerInstance.SetAbility2(buttonAbility1);
+        abilityControllerInstance.SetAbility3(buttonAbility1);
+        GameObject.Find("GameController").GetComponent<AbilityController>().enabled = true;
+
     }
 
     private void InitializeLogicVariables()
@@ -226,7 +236,8 @@ public class GameController : MonoBehaviour
 
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
-        logicController = new LogicController(teamSloths1, teamSloths2);
+        GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
+
 
     }
 
@@ -238,7 +249,11 @@ public class GameController : MonoBehaviour
 
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
-        uiController = new UIController(panelMain, panelOpts);
+
+        uiControllerInstance.SetPanelMain(panelMain);
+        uiControllerInstance.SetPanelOpts(panelOpts);
+
+        GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
 
 
     }
@@ -259,11 +274,9 @@ public class GameController : MonoBehaviour
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 
-    }
+        TurnController.Instance.SetTeamSprite1(teamSprite1);
+        TurnController.Instance.SetTeamSprite2(teamSprite2);
 
-    public TurnController GetTurnController()
-    {
-        return turnController;
     }
 
 }

@@ -20,8 +20,8 @@ public class ShotScript : MonoBehaviour
     //initialization
     void Start()
     {
-        abilityModel = new AbilityModel();
-        changeTurnModel = new ChangeTurnModel();
+        abilityModel = AbilityModel.Instance;
+        changeTurnModel = ChangeTurnModel.Instance;
         gun = transform;
 		gun.position = new Vector3(gun.position.x,gun.position.y,gun.position.z-0.5f);
     }

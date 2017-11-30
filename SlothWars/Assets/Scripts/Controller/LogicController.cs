@@ -22,7 +22,6 @@ public class LogicController: MonoBehaviour{
     }
     protected  LogicController() { }
     ///////*****///////
-    private static LogicModel logicModel;
     private static List<GameObject> teamSloths1 = new List<GameObject>();
     private static List<GameObject> teamSloths2 = new List<GameObject>();
 
@@ -35,10 +34,9 @@ public class LogicController: MonoBehaviour{
     }
     private void OnEnable()
     {
-        logicModel = new LogicModel();
-
-        logicModel.SetTeamSloths1(teamSloths1);
-        logicModel.SetTeamSloths2(teamSloths2);
+        
+        LogicModel.Instance.SetTeamSloths1(teamSloths1);
+        LogicModel.Instance.SetTeamSloths2(teamSloths2);
     }
 
 
