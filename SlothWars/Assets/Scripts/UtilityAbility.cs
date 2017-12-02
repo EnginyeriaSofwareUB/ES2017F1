@@ -35,15 +35,13 @@ public class UtilityAbility : Ability
     {
 
     }
-
+    public void Apply(GameObject g){}
     //WIP: apply ability to terrain
-    public void Apply(GameObject g)
+    public void Apply(Vector3 position)
     {
-        Debug.Log("building wall");
-        Vector3 position = new Vector3(0, 0, 0);
         for(int i= 0; i< terrainSize; i++)
         {
-            GameObject.Instantiate(Resources.Load("Objects/WallCube"),g.transform.position+i* scale*new Vector3(0, 1, 0) + 2*scale*new Vector3(0,1,0)/2,g.transform.rotation);
+            GameObject.Instantiate(Resources.Load("Objects/WallCube"),position +i* scale*new Vector3(0, 1, 0) ,Quaternion.identity);
         }
 
     }
