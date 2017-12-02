@@ -438,8 +438,8 @@ GameObject:
   - component: {fileID: 328900385}
   - component: {fileID: 328900384}
   - component: {fileID: 328900386}
-  - component: {fileID: 328900387}
   - component: {fileID: 328900378}
+  - component: {fileID: 328900387}
   m_Layer: 0
   m_Name: GameController
   m_TagString: gameController
@@ -458,11 +458,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7c8835a614f475a9863356d882ada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
   playerTeam1: []
   playerTeam2: []
+  teamSprite1: []
+  teamSprite2: []
   endTurnButton: {fileID: 0}
+  turnLabel: {fileID: 0}
   panelMain: {fileID: 0}
   panelOpts: {fileID: 0}
+  buttonAbility1: {fileID: 0}
+  buttonAbility2: {fileID: 0}
+  buttonAbility3: {fileID: 0}
 --- !u!4 &328900377
 Transform:
   m_ObjectHideFlags: 0

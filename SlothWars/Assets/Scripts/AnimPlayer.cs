@@ -32,7 +32,7 @@ public class AnimPlayer : MonoBehaviour {
         ss = GetComponentInChildren<ShotScript>();
         hs = GetComponentInChildren<HealthScript>();
         rbody = GetComponent<Rigidbody>();
-        changeTurnModel = new ChangeTurnModel();
+        changeTurnModel = ChangeTurnModel.Instance;
         selected = GetComponentInChildren<SlothSelected>();
 		aPos = gameObject.transform.position;
 		//gameObject.transform.position = new Vector3 (aPos.x,aPos.y+1,aPos.z-1);

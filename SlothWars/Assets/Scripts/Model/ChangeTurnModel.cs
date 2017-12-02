@@ -4,7 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeTurnModel
-{
+{    //SINGLETON
+    private static ChangeTurnModel instance;
+
+    public static ChangeTurnModel Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                //TODO: FIX THIS TO MAKE IT SINGLETON
+                instance = new ChangeTurnModel();
+            }
+            return instance;
+        }
+    }
+    ///////*****///////
     private static Button endTurnButton;
     private static List<GameObject> teamSloths1 = new List<GameObject>();
     private static List<GameObject> teamSloths2 = new List<GameObject>();
@@ -15,9 +30,10 @@ public class ChangeTurnModel
     private static int turnPlayer2;
     private static Text turnLabel;
     private static Sloth currentSloth;
+    private static int id, currentTurn;
     private static int apCurrentSloth;
 
-    public ChangeTurnModel() {}
+    protected ChangeTurnModel() {  }
   
     public void SetEndTurnButton(Button endTurnButtonController) { endTurnButton = endTurnButtonController; }
     public Button GetEndTurnButton() { return endTurnButton; }
@@ -28,7 +44,7 @@ public class ChangeTurnModel
     public bool GetBeginStopped() { return beginStopped; }
     public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController;}
 
-    public List<GameObject> GetTeam1() { return teamSloths1; }
+    public List<GameObject> GetTeam1() { Debug.Log("HOLA"); return teamSloths1; }
     public List<GameObject> GetTeam2() { return teamSloths2; }
 
     public void SetTeams(List<GameObject> playerControllerTeam1, List<GameObject> playerControllerTeam2)
@@ -37,6 +53,10 @@ public class ChangeTurnModel
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         
     }
+
+    public void SetCurrentTurn(int idCont, int currentTurnCont) { id = idCont; currentTurn = currentTurnCont; }
+    public int GetId() { return id; }
+    public int GetCurrentTurn() { return currentTurn;}
 
     public bool GetEndTurnOfPlayer() { return endTurnOfPlayer; }
     public void SetEndTurnOfPlayer(bool endTurnOfPlayerController) { endTurnOfPlayer = endTurnOfPlayerController; }

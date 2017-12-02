@@ -19,7 +19,11 @@ public class UIController : MonoBehaviour{
             return instance;
         }
     }
-    protected  UIController() { }
+    protected  UIController() {
+        setActivePanelMain = true;
+        setActivePanelOpts = false;
+        isPause = false;
+    }
     ///////*****///////
 
     //Static variables for Update
@@ -29,19 +33,11 @@ public class UIController : MonoBehaviour{
     private static Image panelMain;
     private static bool setActivePanelMain, setActivePanelOpts, isPause;
     //Get UIModel Constructor.
-    private static UIModel uiModel;
+    private UIModel uiModel;
 
-    public UIController(Image panelMainCont, Image panelOptsCont)
-    {
-        panelOpts = panelOptsCont;
-        panelMain = panelMainCont;
-        setActivePanelMain = true;
-        setActivePanelOpts = false;
-        isPause = false;
-    }
-	// Use this for initialization
+    // Use this for initialization
 	private void Start () {
-        uiModel = new UIModel();
+        uiModel = UIModel.Instance;
 
         uiModel.SetStatePanelOpts(setActivePanelOpts);
         uiModel.SetStatePanelMain(setActivePanelMain);
@@ -85,6 +81,15 @@ public class UIController : MonoBehaviour{
         
 	}
 
+    public void SetPanelOpts(Image panelOptsCont)
+    {
+        panelOpts = panelOptsCont;
+    }
+
+    public void SetPanelMain(Image panelMainCont)
+    {
+        panelMain = panelMainCont;
+    }
 
     public void SetPause()
     {

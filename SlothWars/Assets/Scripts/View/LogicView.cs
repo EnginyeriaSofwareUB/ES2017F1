@@ -12,9 +12,9 @@ public class LogicView : MonoBehaviour {
     
     // Use this for initialization
 	private void Start () {
-        logicModel = new LogicModel();
-        abilityModel = new AbilityModel();
-        changeTurnModel = new ChangeTurnModel();
+        logicModel = LogicModel.Instance;
+        abilityModel = AbilityModel.Instance;
+        changeTurnModel = ChangeTurnModel.Instance;
 
         teamSloths1 = changeTurnModel.GetTeam1();
         teamSloths2 = changeTurnModel.GetTeam2();
@@ -43,7 +43,7 @@ public class LogicView : MonoBehaviour {
         int i = 0;
         foreach (GameObject sloth in teamSloths1)
         {
-            health = sloth.GetComponent<AnimPlayer>().GetSloth().GetHp();
+            health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
             
             if (health <= 0)
             {
@@ -57,7 +57,7 @@ public class LogicView : MonoBehaviour {
         i = 0;
         foreach (GameObject sloth in teamSloths2)
         {
-            health = sloth.GetComponent<AnimPlayer>().GetSloth().GetHp();
+            health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
 
             if (health <= 0)
             {

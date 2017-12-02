@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
 
 // Class created in order to control the executional flow. It stores variables obtained in the scene and call the rest
@@ -30,8 +29,7 @@ public class GameController : MonoBehaviour
     ///////*****///////
 
     //GameObjects (sloths) in the scene
-    public static List<GameObject> teamSloths1;
-    public static List<GameObject> teamSloths2;
+    public List<GameObject> teamSloths1, teamSloths2;
 
     //Player Lists to attach to the gameObjects in the scene.
     public List<AnimPlayer> playerTeam1, playerTeam2;
@@ -41,26 +39,25 @@ public class GameController : MonoBehaviour
     private int checkAwake = 0;
     private static int checkPlayer = 0;
     private static int checkTurn = 0;
+    private static int checkAbility = 0;
 
     //TURNCONTROLLER VARIABLES
-    private TurnController turnController;
-    public static List<Sprite> teamSprite1, teamSprite2;
+    private TurnController turnControllerInstance = TurnController.Instance;
+    public List<Sprite> teamSprite1, teamSprite2;
     public Button endTurnButton;
-    private Text turnLabel;
+    public Text turnLabel;
 
     //LOGICCONTROLLER VARIABLES
-    private LogicController logicController;
-    private GameObject prove;
+    private LogicController logicControllerInstance = LogicController.Instance;
 
     //UICONTROLLER VARIABLES
-    private UIController uiController;
+    private UIController uiControllerInstance = UIController.Instance;
     public Image panelMain;
     public Image panelOpts;
 
     //ABILITY VARIABLES
-    private Transform createGun;
-    private AbilityController abilityController;
-    private Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private AbilityController abilityControllerInstance = AbilityController.Instance;
+    public Button buttonAbility1, buttonAbility2, buttonAbility3;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
 
@@ -87,7 +84,7 @@ public class GameController : MonoBehaviour
             //Place the players in the scene.
             //TODO: Put this method in another class.
             PlacePlayers();
-
+            
             //Initialize all the variables for the rest of controllers (Getting from the scene)
             //Initialize controllers.
             InitializeTurnVariables();
@@ -155,13 +152,12 @@ public class GameController : MonoBehaviour
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
-
-
-
                 teamSloths1.Add(sloth);
 
                 i++;
             }
+            turnControllerInstance.SetTeamSloths1(teamSloths1);
+           
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
@@ -193,6 +189,7 @@ public class GameController : MonoBehaviour
                 teamSloths2.Add(sloth);
                 i++;
             }
+            turnControllerInstance.SetTeamSloths2(teamSloths2);
         }
     }
 
@@ -204,30 +201,30 @@ public class GameController : MonoBehaviour
             turnLabel = GameObject.Find("TurnText").GetComponent<Text>();
             endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
 
-            //TODO: Change the design in order to avoid calling the constructor.
-            //It also initializes the start method.
-            turnController = new TurnController(teamSloths1, teamSloths2, teamSprite1, teamSprite2, endTurnButton, turnLabel);
-
+            turnControllerInstance.SetEndTurnButton(endTurnButton);
+            turnControllerInstance.SetTurnLabel(turnLabel);
         }
 
     }
 
     private void InitializeAbilityVariables()
     {
-
+        
         buttonAbility1 = GameObject.Find("buttonAbility1").GetComponent<Button>();
         buttonAbility2 = GameObject.Find("buttonAbility2").GetComponent<Button>();
         buttonAbility3 = GameObject.Find("buttonAbility3").GetComponent<Button>();
-        abilityController = new AbilityController(buttonAbility1, buttonAbility2, buttonAbility3);
+
+        abilityControllerInstance.SetAbility1(buttonAbility1);
+        abilityControllerInstance.SetAbility2(buttonAbility2);
+        abilityControllerInstance.SetAbility3(buttonAbility3);
+
     }
 
     private void InitializeLogicVariables()
     {
 
+        //GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
 
-        //TODO: Change the design in order to avoid calling the constructor.
-        //It also initializes the start method.
-        logicController = new LogicController(teamSloths1, teamSloths2);
 
     }
 
@@ -239,7 +236,11 @@ public class GameController : MonoBehaviour
 
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
-        uiController = new UIController(panelMain, panelOpts);
+
+        uiControllerInstance.SetPanelMain(panelMain);
+        uiControllerInstance.SetPanelOpts(panelOpts);
+
+        //GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
 
 
     }
@@ -260,11 +261,9 @@ public class GameController : MonoBehaviour
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 
-    }
+        TurnController.Instance.SetTeamSprite1(teamSprite1);
+        TurnController.Instance.SetTeamSprite2(teamSprite2);
 
-    public TurnController GetTurnController()
-    {
-        return turnController;
     }
 
 }
