@@ -65,7 +65,7 @@ public class ShotScript : MonoBehaviour
     {
         if (!onloadAbility.GetBuildTerrain())
         {
-            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 2, 0), gun.rotation);
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 0.8f, 0), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
         }
         shotLoad = true;
@@ -116,7 +116,7 @@ public class ShotScript : MonoBehaviour
             gun = this.transform;
         }
         else{
-            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position, Quaternion.identity);
             gun = g.transform;
         }
         //gun.gameObject.SetActive(b);

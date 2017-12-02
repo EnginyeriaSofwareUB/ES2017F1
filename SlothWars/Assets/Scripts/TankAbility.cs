@@ -35,7 +35,7 @@ public class TankAbility : Ability
     public void Apply(GameObject g)
     {
     }
-
+    public void Apply(Vector3 p) { }
     public float GetRange()
     {
         return 10;

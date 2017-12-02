@@ -34,6 +34,7 @@ public class ProjectileAbility : Ability
     {
 
     }
+    public void Apply(Vector3 p) { }
     public float GetRange()
     {
         return reach;
