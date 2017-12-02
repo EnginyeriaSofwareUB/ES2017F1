@@ -14,6 +14,7 @@ public class SlothapediaController : MonoBehaviour {
     private GameObject panelSlothInfo;
     private GameObject panelAbilityInfo;
     private GameObject slothModel;
+    private GameObject rawImage;
     private Quaternion quaternion;
     //Slothapedia json and slothability json
     private JSONNode n;
@@ -24,6 +25,7 @@ public class SlothapediaController : MonoBehaviour {
         canvas = GameObject.Find("Canvas");
         GameObject background = GameObject.Find("backgroundMatrix");
         slothModel = GameObject.Find("slothModel");
+        rawImage = GameObject.Find("RawImage");
         quaternion = Quaternion.Euler(0, 5f, 0);
         // Sizes in which we will apply the factor conversion
         int width = Screen.width;
@@ -92,6 +94,7 @@ public class SlothapediaController : MonoBehaviour {
         //Place the slothResume panel where we can find the model of the sloth, its stats and its abilities
         panelSlothInfo= GameObject.Find("SlothResume");
         panelSlothInfo.GetComponent<RectTransform>().sizeDelta = new Vector2(width * slothWidth, height*0.6f);
+        rawImage.GetComponent<RectTransform>().sizeDelta = new Vector2(height*0.6f*0.66f, height*0.6f*0.66f);
         //stats
         GameObject panelStatsInfo = GameObject.Find("StatsResume");
         panelStatsInfo.GetComponent<RectTransform>().sizeDelta = new Vector2((width * slothWidth)*0.5f, height*0.6f*0.33f);
@@ -120,6 +123,11 @@ public class SlothapediaController : MonoBehaviour {
         GameObject.Find("attack1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["att"].ToString();
         GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
         GameObject.Find("action1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["ap"].ToString();
+        Destroy(slothModel);
+        GameObject kk = Resources.Load<GameObject>("3D Models/"+n[currentSloth.ToString()]["model"]);
+        slothModel = Instantiate(kk);
+        slothModel.transform.position = new Vector3(-100f, -100.023f, 0.0489f);
+        
         //Add via software the delegate. Note that this is also mandatory since this buttons are created on time execution too.
         ((Button)GameObject.Find("Ability1").GetComponent<Button>()).onClick.AddListener(delegate{
                 showAbilityInfo(n[currentSloth.ToString()]["idAb1"]);     
@@ -168,6 +176,8 @@ public class SlothapediaController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		slothModel.transform.Rotate(quaternion.eulerAngles*Time.deltaTime);
+        if(slothModel != null){
+		    slothModel.transform.Rotate(quaternion.eulerAngles*Time.deltaTime);
+        }
 	}
 }
