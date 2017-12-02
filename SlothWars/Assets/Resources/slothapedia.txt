@@ -9,7 +9,7 @@
     "idAb1": "M0",
     "idAb2": "M1",
     "idAb3": "M2",
-    "model": "sloth_mago"
+    "model": "sloth_wizard"
   },
   
    "1": {
@@ -61,7 +61,7 @@
     "idAb1": "U0",
     "idAb2": "U1",
     "idAb3": "U2",
-    "model": "sloth_mago"
+    "model": "sloth_wizard"
   }
 
 }
