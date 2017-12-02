@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour
     private Image panelMain;
     private Image panelVS;
     private Image panelOpts;
+    private SpriteRenderer background;
+    private bool done = false;
 
 
     // Use this for initialization
@@ -30,8 +32,7 @@ public class MainMenu : MonoBehaviour
         panelOpts = GameObject.Find("OptionsPanel").GetComponent<Image>();
     }
 
-    private void Start()
-    {
+    private void Start(){
         panelVS.gameObject.SetActive(false);
         panelOpts.gameObject.SetActive(false);
     }
@@ -81,5 +82,20 @@ public class MainMenu : MonoBehaviour
 
     public void ShowSlothapedia(){
         SceneManager.LoadScene("Slothapedia");
+    }
+
+    public void Update(){
+        float height = Camera.main.orthographicSize * 2.35f;
+        float width = height / Screen.height * Screen.width;
+        
+        if (!done){
+            background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+            background.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+            if(background != null){
+                Bounds size = background.sprite.bounds;
+                background.gameObject.transform.localScale = new Vector3(width / size.size.x, height / size.size.y,0f);
+                done = true;
+            }
+        }
     }
 }
