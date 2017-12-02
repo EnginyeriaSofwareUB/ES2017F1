@@ -56,7 +56,7 @@ public class AbilityController : MonoBehaviour {
     }
     public void ApplyLastAbility(Vector3 position)
     {
-        abilityModel.GetLastAbility().Apply(position);
+        AbilityModel.Instance.GetLastAbility().Apply(position);
     }
     // apply last ability to terrain blocks in range
     public void ApplyDestroyTerrainAbility(GameObject destroyable) {
