@@ -30,6 +30,7 @@ public class ChangeTurnModel
     private static int turnPlayer2;
     private static Text turnLabel;
     private static Sloth currentSloth;
+    private static int id, currentTurn;
     private static int apCurrentSloth;
 
     protected ChangeTurnModel() {  }
@@ -52,6 +53,10 @@ public class ChangeTurnModel
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         
     }
+
+    public void SetCurrentTurn(int idCont, int currentTurnCont) { id = idCont; currentTurn = currentTurnCont; }
+    public int GetId() { return id; }
+    public int GetCurrentTurn() { return currentTurn;}
 
     public bool GetEndTurnOfPlayer() { return endTurnOfPlayer; }
     public void SetEndTurnOfPlayer(bool endTurnOfPlayerController) { endTurnOfPlayer = endTurnOfPlayerController; }

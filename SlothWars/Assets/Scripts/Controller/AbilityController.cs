@@ -7,15 +7,13 @@ using System;
 
 public class AbilityController : MonoBehaviour {
     //SINGLETON
-    private static AbilityController instance;
-    
+    private static AbilityController instance; 
     public static AbilityController Instance
     {
         get
         {
             if (instance == null)
             {
-                //TODO: FIX THIS TO MAKE IT SINGLETON
                 instance = new AbilityController();
             }
             return instance;
@@ -27,11 +25,11 @@ public class AbilityController : MonoBehaviour {
     private static Button buttonAbility1, buttonAbility2, buttonAbility3;
     private static GameObject lastTarget;
     
-    //TODO: FIX THIS
     protected AbilityController(){
 
     }
 
+    private void Start(){}
     //sums dmg_heal to the hp bar asociated to target
 
     public void SumToHpBar(double dmg_Heal)
@@ -90,12 +88,12 @@ public class AbilityController : MonoBehaviour {
         }else{
             buttonAbility1.interactable = true;
         }
-        if(ab1ap > currentAp){
+        if (ab2ap > currentAp){
             buttonAbility2.interactable = false;
         }else{
             buttonAbility2.interactable = true;
         }
-        if(ab1ap > currentAp){
+        if(ab3ap > currentAp){
             buttonAbility3.interactable = false;
         }else{
             buttonAbility3.interactable = true;

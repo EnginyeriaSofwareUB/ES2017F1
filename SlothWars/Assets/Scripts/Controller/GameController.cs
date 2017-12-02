@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
     private int checkAwake = 0;
     private static int checkPlayer = 0;
     private static int checkTurn = 0;
+    private static int checkAbility = 0;
 
     //TURNCONTROLLER VARIABLES
     private TurnController turnControllerInstance = TurnController.Instance;
@@ -48,7 +49,6 @@ public class GameController : MonoBehaviour
 
     //LOGICCONTROLLER VARIABLES
     private LogicController logicControllerInstance = LogicController.Instance;
-    private static GameObject prove;
 
     //UICONTROLLER VARIABLES
     private UIController uiControllerInstance = UIController.Instance;
@@ -57,7 +57,6 @@ public class GameController : MonoBehaviour
 
     //ABILITY VARIABLES
     private AbilityController abilityControllerInstance = AbilityController.Instance;
-    private Transform createGun;
     public Button buttonAbility1, buttonAbility2, buttonAbility3;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
@@ -70,7 +69,6 @@ public class GameController : MonoBehaviour
         //HOTFIX: Awake tries to execute twice. Have to check why.
         if (checkAwake == 0)
         {
-            print("HOLA");
             checkAwake = 1;
 
             // As long as method Awake is called only here (it must be the only one who calls Awake method)
@@ -86,7 +84,7 @@ public class GameController : MonoBehaviour
             //Place the players in the scene.
             //TODO: Put this method in another class.
             PlacePlayers();
-
+            
             //Initialize all the variables for the rest of controllers (Getting from the scene)
             //Initialize controllers.
             InitializeTurnVariables();
@@ -154,9 +152,6 @@ public class GameController : MonoBehaviour
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
-
-
-
                 teamSloths1.Add(sloth);
 
                 i++;
@@ -208,35 +203,27 @@ public class GameController : MonoBehaviour
 
             turnControllerInstance.SetEndTurnButton(endTurnButton);
             turnControllerInstance.SetTurnLabel(turnLabel);
-
-            //TODO: Change the design in order to avoid calling the constructor.
-            //It also initializes the start method.
-            GameObject.Find("GameController").GetComponent<TurnController>().enabled = true;
         }
 
     }
 
     private void InitializeAbilityVariables()
     {
-
+        
         buttonAbility1 = GameObject.Find("buttonAbility1").GetComponent<Button>();
         buttonAbility2 = GameObject.Find("buttonAbility2").GetComponent<Button>();
         buttonAbility3 = GameObject.Find("buttonAbility3").GetComponent<Button>();
 
         abilityControllerInstance.SetAbility1(buttonAbility1);
-        abilityControllerInstance.SetAbility2(buttonAbility1);
-        abilityControllerInstance.SetAbility3(buttonAbility1);
-        GameObject.Find("GameController").GetComponent<AbilityController>().enabled = true;
+        abilityControllerInstance.SetAbility2(buttonAbility2);
+        abilityControllerInstance.SetAbility3(buttonAbility3);
 
     }
 
     private void InitializeLogicVariables()
     {
 
-
-        //TODO: Change the design in order to avoid calling the constructor.
-        //It also initializes the start method.
-        GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
+        //GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
 
 
     }
@@ -253,7 +240,7 @@ public class GameController : MonoBehaviour
         uiControllerInstance.SetPanelMain(panelMain);
         uiControllerInstance.SetPanelOpts(panelOpts);
 
-        GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
+        //GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
 
 
     }

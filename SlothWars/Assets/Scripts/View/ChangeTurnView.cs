@@ -75,7 +75,7 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
-            print(changeTurnModel.GetApCurrentSloth());
+            changeTurnModel.SetCurrentTurn(1, playerTurn1);
             ChangeUIStats();
             return;
         }
@@ -96,6 +96,7 @@ public class ChangeTurnView: MonoBehaviour {
                 changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);      
             }
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
+            changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
             ChangeUIStats();
@@ -120,6 +121,7 @@ public class ChangeTurnView: MonoBehaviour {
                 changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1]);
             }
             changeTurnModel.ActivateSloth(playersTeam2[playerTurn2]);
+            changeTurnModel.SetCurrentTurn(2, playerTurn2);
             changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
             ChangeUIStats();
