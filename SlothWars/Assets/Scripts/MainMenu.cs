@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     }
 
     private void Start(){
-        sloth = GameObject.Find("sloth_wizard");
+        sloth = GameObject.Find("main_menu_sloth");
         sloth.GetComponent<Rigidbody>().velocity = new Vector3(-1f, 0f, 0f);
         panelVS.gameObject.SetActive(false);
         panelOpts.gameObject.SetActive(false);
