@@ -117,6 +117,7 @@ public class GameController : MonoBehaviour
 
     private void PlacePlayers()
     {
+        Sloth slothPlayer;
         GameObject sloth;
         AnimPlayer pla;
         HealthScript health;
@@ -130,7 +131,9 @@ public class GameController : MonoBehaviour
             teamSloths2 = new List<GameObject>();
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+                
+                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+                Debug.Log(sloth);
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(playerSloth.GetSloth().GetHp());
@@ -144,7 +147,7 @@ public class GameController : MonoBehaviour
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
-
+                
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
@@ -161,7 +164,7 @@ public class GameController : MonoBehaviour
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+				sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
 				// setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(playerSloth.GetSloth().GetHp());

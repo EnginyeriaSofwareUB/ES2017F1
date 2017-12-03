@@ -5,13 +5,20 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     float speed = 10.0f;
-    float cameraDistance = -8.0f;
+    float cameraDistance = -12.0f;
+    float cameraHeight = 7.0f;
     GameObject[] projectile;
     GameObject[] explosion;
 	int Boundary = 50;
 
+    // Screen Size
 	int theScreenWidth = Screen.width;
 	int theScreenHeight = Screen.height;
+
+    // Mouse Zoom variables
+    float minFov = 15.0f;
+    float maxFov = 90.0f;
+    float sensitivity = 10.0f;
 
 	GameObject turn;
 
@@ -20,7 +27,7 @@ public class CameraMovement : MonoBehaviour {
     {
 		turn = TurnController.Instance.GetActiveSloth ();
 		if (turn != null)
-			transform.position = new Vector3(turn.transform.position.x, 4.0f, cameraDistance);
+			transform.position = new Vector3(turn.transform.position.x, 7.0f, cameraDistance);
 	}
 	
 	// Update is called once per frame
@@ -39,21 +46,23 @@ public class CameraMovement : MonoBehaviour {
         else if (projectile.Length > 0)
         {
             Debug.Log("Projectiles: " + projectile.Length.ToString());
-            transform.position = new Vector3(projectile[0].transform.position.x, 4.0f, cameraDistance);
+            transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
         else if (explosion.Length > 0)
         {
             Debug.Log("Explosions: " + explosion.Length.ToString());
-            transform.position = new Vector3(explosion[0].transform.position.x, 4.0f, cameraDistance);
+            transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
         else if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
         {
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, cameraDistance);
+            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
+                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
         }
 
 		if (turn != TurnController.Instance.GetActiveSloth ()) 
 		{
-			transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 4.0f, cameraDistance);
+            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
+                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
 			turn = TurnController.Instance.GetActiveSloth ();
 		}
 
@@ -72,5 +81,20 @@ public class CameraMovement : MonoBehaviour {
 		{
 			transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
 		}
+
+        if (Input.mousePosition.y > theScreenHeight - Boundary)
+        {
+            transform.position += new Vector3(0.0f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed, 0.0f);   
+        }
+
+        if (Input.mousePosition.y < 0 + Boundary)
+        {
+            transform.position += new Vector3(0.0f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed, 0.0f);   
+        }
+
+        float fov = Camera.main.fieldOfView;
+        fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+        fov = Mathf.Clamp(fov, minFov, maxFov);
+        Camera.main.fieldOfView = fov;
     }
 }

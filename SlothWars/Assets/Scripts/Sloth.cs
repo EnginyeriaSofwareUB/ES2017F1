@@ -78,6 +78,11 @@ public class Sloth
         this.ab3 = factory.getAbility(idAb3);
     }
 
+    public String GetModel()
+    {
+        return this.model;
+    }
+
     public String GetPath()
     {
         return sprite;
