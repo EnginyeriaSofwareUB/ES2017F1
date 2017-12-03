@@ -48,7 +48,8 @@ public class AbilityController : MonoBehaviour {
         ability = AbilityModel.Instance.GetLastAbility();
         if (g.gameObject.tag == "sloth") {
             lastTarget = g;
-            ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            //ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            ability.Apply(g);
         }
         else{ability.Apply(g); }
     }
@@ -66,20 +67,54 @@ public class AbilityController : MonoBehaviour {
     }
     public void TriggerAbility1()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility1());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
+                break;
+        }
+            
     }
 
     public void TriggerAbility2()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility2());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
+                break;
+        }
     }
 
     public void TriggerAbility3()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility3());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
+                break;
+        }
     }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){
