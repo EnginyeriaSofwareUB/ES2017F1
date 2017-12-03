@@ -43,15 +43,15 @@ public class CameraMovement : MonoBehaviour {
         {
             MoveCameraFreely();
         }
-        else if (projectile.Length > 0)
+        else if (projectile != null)
         {
-            Debug.Log("Projectiles: " + projectile.Length.ToString());
-            transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
+            if(projectile.Length > 0)
+                transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
-        else if (explosion.Length > 0)
+        else if (explosion != null)
         {
-            Debug.Log("Explosions: " + explosion.Length.ToString());
-            transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
+            if(explosion.Length > 0)
+                transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
         else if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
         {
