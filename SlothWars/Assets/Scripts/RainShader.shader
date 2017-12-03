@@ -62,20 +62,24 @@ Shader "Unlit/RainShader"
                 float offsett = _TexCoords.x;
 
                 float2 screenPos = i.screenPos.xy / i.screenPos.w;
+                float2 texCoord = float2(i.uv.x,i.uv.y + _Time.w/6.0);
                 float _half = (top + bottom)*0.5;
                 float _diff = (bottom - top)*0.5;
                 screenPos.x = screenPos.x*(_half+_diff*screenPos.y);
                 screenPos.x = (screenPos.x+1)*0.5;
                 screenPos.y = (screenPos.y+1)*0.5;
                 fixed4 sum = fixed4(0.0h,0.0h,0.0h,0.0h);
-                //sum = tex2D(_MainTex,float2(i.uv.x+(1-i.uv.y)*sin((_Time.w+i.uv.y)*2.3),i.uv.y))*screenPos.y;//*_SinTime.w
+                if(texCoord.y>1){
+                    texCoord.y = texCoord.y - (int) texCoord.y ;
+                }
+                sum = tex2D(_MainTex,texCoord)*screenPos.y;//*_SinTime.w
 
-                sum = tex2D(_MainTex,i.uv);//*_SinTime.w
+                //sum = tex2D(_MainTex,i.uv);//*_SinTime.w
                	//sum = tex2D(_MainTex,float2(i.uv.x,i.uv.y))*screenPos.y;
                	if(sum.w<0.02h){
                		return fixed4(0.0h,0.0h,0.0h,0.0);
                	}
-               	sum.w = 1.0h;
+               	sum.w = 0.4h;
                 return sum;
             }
             ENDCG
