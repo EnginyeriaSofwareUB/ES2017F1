@@ -132,7 +132,7 @@ public class GameController : MonoBehaviour
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
                 
-                sloth = (GameObject)Instantiate(Resources.Load("3D Models/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
                 Debug.Log(sloth);
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
@@ -164,7 +164,7 @@ public class GameController : MonoBehaviour
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("3D Models/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+				sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
 				// setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(playerSloth.GetSloth().GetHp());
