@@ -37,9 +37,9 @@ public class GameController : MonoBehaviour
     //PLACEPLAYERS VARIABLES: Variables created in order to place the sloths in the scene. 
     private int i = 0;
     private int checkAwake = 0;
-    private static int checkPlayer = 0;
-    private static int checkTurn = 0;
-    private static int checkAbility = 0;
+    private int checkPlayer = 0;
+    private int checkTurn = 0;
+    private int checkAbility = 0;
 
     //TURNCONTROLLER VARIABLES
     private TurnController turnControllerInstance = TurnController.Instance;
@@ -136,13 +136,12 @@ public class GameController : MonoBehaviour
                 Debug.Log(sloth);
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(playerSloth.GetSloth().GetHp());
+                health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
                 health.enabled = true;
                 anim = sloth.GetComponent<Animator>();
                 anim.enabled = true;
 
                 pla = sloth.AddComponent<AnimPlayer>();
-                pla.SetSloth(playerSloth.GetSloth());
                 pla.enabled = true;
 
                 shot = sloth.GetComponent<ShotScript>();
@@ -167,14 +166,13 @@ public class GameController : MonoBehaviour
 				sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
 				// setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(playerSloth.GetSloth().GetHp());
+                health.setHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
                 health.enabled = true;
                 //Start the animation
                 anim = sloth.GetComponent<Animator>();
                 anim.enabled = true;
 
                 pla = sloth.AddComponent<AnimPlayer>();
-                pla.SetSloth(playerSloth.GetSloth());
                 pla.enabled = true;
 
                 shot = sloth.GetComponent<ShotScript>();
@@ -255,12 +253,12 @@ public class GameController : MonoBehaviour
 
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam1)
         {
-            playerTeam1.Add(new AnimPlayer(sloth));
+            playerTeam1.Add(new AnimPlayer());
             teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam2)
         {
-            playerTeam2.Add(new AnimPlayer(sloth));
+            playerTeam2.Add(new AnimPlayer());
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
 

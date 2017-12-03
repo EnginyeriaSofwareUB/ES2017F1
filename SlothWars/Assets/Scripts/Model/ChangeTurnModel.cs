@@ -21,8 +21,8 @@ public class ChangeTurnModel
     }
     ///////*****///////
     private static Button endTurnButton;
-    private static List<GameObject> teamSloths1 = new List<GameObject>();
-    private static List<GameObject> teamSloths2 = new List<GameObject>();
+    private static List<GameObject> teamSloths1;
+    private static List<GameObject> teamSloths2;
     private static bool endTurnOfPlayer;
     private static bool endTurnButtonStatus;
     private static bool beginStopped;
@@ -49,6 +49,8 @@ public class ChangeTurnModel
 
     public void SetTeams(List<GameObject> playerControllerTeam1, List<GameObject> playerControllerTeam2)
     {
+        teamSloths1 = new List<GameObject>();
+        teamSloths2 = new List<GameObject>();
         foreach (GameObject player in playerControllerTeam1) { teamSloths1.Add(player); }
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         

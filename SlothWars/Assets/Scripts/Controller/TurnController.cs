@@ -27,8 +27,8 @@ public class TurnController: MonoBehaviour{
 
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
     private static List<GameObject> newTeamSloths1, newTeamSloths2;
-    private static List<Sprite> teamSprite1 = new List<Sprite>();
-    private static List<Sprite> teamSprite2 = new List<Sprite>();
+    private static List<Sprite> teamSprite1;
+    private static List<Sprite> teamSprite2;
     private static int turnPlayer1, turnPlayer2;
     private static Text turnLabel;
     private static bool beginStopped, endTurnOfPlayer, isButtonPressed;
@@ -41,6 +41,9 @@ public class TurnController: MonoBehaviour{
 
     // Use this for initialization
     private void OnEnable () {
+        //newTeamSloths1 = new List<GameObject>();
+        //newTeamSloths2 = new List<GameObject>();
+
         beginStopped = true;
         isButtonPressed = false;
         endTurnOfPlayer = true;
@@ -159,21 +162,26 @@ public class TurnController: MonoBehaviour{
 
     public void SetTeamSprite1(List<Sprite> spriteTeamCont)
     {
+        teamSprite1 = new List<Sprite>();
         teamSprite1 = spriteTeamCont;
     }
 
     public void SetTeamSprite2(List<Sprite> spriteTeamCont)
     {
+        teamSprite2 = new List<Sprite>();
         teamSprite2 = spriteTeamCont;
     }
 
     public void SetTeamSloths1(List<GameObject> slothTeamCont)
     {
+
+        newTeamSloths1 = new List<GameObject>();
         newTeamSloths1 = slothTeamCont;
     }
 
     public void SetTeamSloths2(List<GameObject> slothTeamCont)
     {
+        newTeamSloths2 = new List<GameObject>();
         newTeamSloths2 = slothTeamCont;
     }
 
