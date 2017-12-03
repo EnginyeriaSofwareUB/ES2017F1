@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     private Image panelOpts;
     private SpriteRenderer background;
     private bool done = false;
+    private GameObject sloth;
 
 
     // Use this for initialization
@@ -33,6 +34,8 @@ public class MainMenu : MonoBehaviour
     }
 
     private void Start(){
+        sloth = GameObject.Find("sloth_wizard");
+        sloth.GetComponent<Rigidbody>().velocity = new Vector3(-1f, 0f, 0f);
         panelVS.gameObject.SetActive(false);
         panelOpts.gameObject.SetActive(false);
     }
@@ -96,6 +99,12 @@ public class MainMenu : MonoBehaviour
                 background.gameObject.transform.localScale = new Vector3(width / size.size.x, height / size.size.y,0f);
                 done = true;
             }
+        }
+
+        if(sloth.transform.position.x < -15f){
+        Vector3 position = sloth.transform.position;
+        position.x = 15f;
+        sloth.transform.position = position;
         }
     }
 }
