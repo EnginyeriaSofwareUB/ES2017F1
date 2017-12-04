@@ -44,7 +44,7 @@ public class ChangeTurnModel
     public bool GetBeginStopped() { return beginStopped; }
     public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController;}
 
-    public List<GameObject> GetTeam1() { Debug.Log("HOLA"); return teamSloths1; }
+    public List<GameObject> GetTeam1() { return teamSloths1; }
     public List<GameObject> GetTeam2() { return teamSloths2; }
 
     public void SetTeams(List<GameObject> playerControllerTeam1, List<GameObject> playerControllerTeam2)

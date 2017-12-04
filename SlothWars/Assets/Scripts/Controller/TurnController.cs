@@ -152,8 +152,6 @@ public class TurnController: MonoBehaviour{
     }
     public GameObject GetActiveSloth()
     {
-        print("Turn1" + turnPlayer1);
-        print("Turn2" + turnPlayer2);
         if (turnPlayer1 == 0 && turnPlayer2 == 0) { return newTeamSloths1[turnPlayer1]; }
         else if (turnPlayer1 == turnPlayer2) { return newTeamSloths1[turnPlayer1]; }
         else if (turnPlayer2 -turnPlayer1<-1){ return newTeamSloths1[turnPlayer2]; }
