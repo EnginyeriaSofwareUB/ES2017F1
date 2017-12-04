@@ -7,16 +7,17 @@ using System.IO;
 
 public class TerrainCreator : MonoBehaviour
 {
+    public static List<DataPoint> places = new List<DataPoint>();
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		TxtReader("Assets/Scripts/terrain1.txt");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 	}
 
 	// Method that reads terrain from txt file
@@ -38,10 +39,12 @@ public class TerrainCreator : MonoBehaviour
 					if(c.Equals('T'))
 					{
 						Instantiate(Resources.Load("Prefabs/Trunk_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
+                        places.Add(new DataPoint((float)x,(float)lineCount));
 					}
 					if(c.Equals('H'))
 					{ 
 						Instantiate(Resources.Load("Prefabs/Leaf_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
+                        places.Add(new DataPoint((float)x,(float)lineCount));
 					}
 					x += 1;
 				}
@@ -58,7 +61,7 @@ public class TerrainCreator : MonoBehaviour
 					Instantiate(Resources.Load("Prefabs/Floor_Cube"), new Vector3((float)x, 0f, (float)z), Quaternion.identity);
 				}
 			}
-
+                
 			return true;
 		}
 		catch(Exception e)
@@ -67,4 +70,21 @@ public class TerrainCreator : MonoBehaviour
 			return false;
 		}
 	}
+
+    public List<DataPoint> GetAvailablePlaces()
+    {
+        return places;
+    }
+}
+
+public struct DataPoint
+{
+    public DataPoint(float x, float y)
+    {
+        x_coord = x;
+        y_coord = y;
+    }
+
+    public float x_coord { get; private set; }
+    public float y_coord { get; private set; }
 }

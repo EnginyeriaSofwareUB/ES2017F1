@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour
 
     ///////*****///////
 
+    // Random Generator
+    System.Random random = new System.Random();
+
     //GameObjects (sloths) in the scene
     public List<GameObject> teamSloths1, teamSloths2;
 
@@ -113,8 +116,9 @@ public class GameController : MonoBehaviour
         //Call the TerrainCreator.cs in order to execute Start method in that cs.
         //TODO: Coroutines.
         GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().enabled = true;
+        //print("PLACES: " + TerrainCreator.places.Count);
     }
-
+        
     private void PlacePlayers()
     {
         Sloth slothPlayer;
@@ -126,14 +130,21 @@ public class GameController : MonoBehaviour
         SlothSelected selected;
         if (checkPlayer == 0)
         {
+            GameObject terrain = GameObject.Find("EmptyTerrain");
             checkPlayer = 1;
             teamSloths1 = new List<GameObject>();
             teamSloths2 = new List<GameObject>();
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
-                
-                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
-                Debug.Log(sloth);
+                // Instantiate sloths in random valid positions of the field
+                int point = random.Next(0, GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().GetAvailablePlaces().Count);
+                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), 
+                    new Vector3((float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].x_coord, 
+                        (float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
+                    Quaternion.Euler (90, 180, 0));
+                // Delete valid position of the field to avoid possible repetitions
+                terrain.GetComponent<TerrainCreator>().GetAvailablePlaces().RemoveAt(point);
+
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
@@ -163,7 +174,15 @@ public class GameController : MonoBehaviour
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+                // Instantiate sloths in random valid positions of the field
+                int point = random.Next(0, GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().GetAvailablePlaces().Count);
+                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()), 
+                    new Vector3((float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].x_coord, 
+                        (float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
+                    Quaternion.Euler (90, 180, 0));
+                // Delete valid position of the field to avoid possible repetitions
+                terrain.GetComponent<TerrainCreator>().GetAvailablePlaces().RemoveAt(point);
+
 				// setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
