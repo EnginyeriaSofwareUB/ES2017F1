@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class AbilityController : MonoBehaviour {
+public class AbilityController{
     //SINGLETON
     private static AbilityController instance; 
     public static AbilityController Instance
@@ -21,16 +21,24 @@ public class AbilityController : MonoBehaviour {
     }
     ///////*****///////
 
-    private static Ability ability;
-    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
-    private static GameObject lastTarget;
+    private  Ability ability;
+    private  Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private  GameObject lastTarget;
     
     protected AbilityController(){
 
     }
 
-    private void Start(){}
+    //private void Start(){}
     //sums dmg_heal to the hp bar asociated to target
+
+    public void StartAbilities()
+    {
+        buttonAbility1.onClick.AddListener(delegate { TriggerAbility1(); });
+        buttonAbility2.onClick.AddListener(delegate { TriggerAbility2(); });
+        buttonAbility3.onClick.AddListener(delegate { TriggerAbility3(); });
+
+    }
 
     public void SumToHpBar(double dmg_Heal)
     {
@@ -62,7 +70,7 @@ public class AbilityController : MonoBehaviour {
         ability = AbilityModel.Instance.GetLastAbility();
         if (ability.GetAlterTerrain())
         {
-            Destroy(destroyable);
+            GameObject.Destroy(destroyable);
         }
     }
     public void TriggerAbility1()

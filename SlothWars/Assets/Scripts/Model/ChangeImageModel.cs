@@ -19,9 +19,9 @@ public class ChangeImageModel
         }
     }
 
-    private static Sprite slothSpriteSelected;
+    private Sprite slothSpriteSelected;
     private JSONNode n;
-    private static string s;
+    private  string s;
     private int lastId;
     private string name;
 

@@ -5,23 +5,21 @@ using System;
 using System.Text;
 using System.IO;
 
-public class TerrainCreator : MonoBehaviour
+public class TerrainCreator
 {
     public static List<DataPoint> places = new List<DataPoint>();
 
 	// Use this for initialization
-	void Awake () 
-	{
-		TxtReader("Assets/Scripts/terrain1.txt");
-	}
 	
-	// Update is called once per frame
-	void Update () {
-        
-	}
+
+		
+    public static void LoadMap()
+    {
+        TxtReader("Assets/Scripts/terrain1.txt");
+    }
 
 	// Method that reads terrain from txt file
-	bool TxtReader(string fileName)
+	private static bool TxtReader(string fileName)
 	{
 		string line;
 		int x = 0;
@@ -38,12 +36,12 @@ public class TerrainCreator : MonoBehaviour
 				{
 					if(c.Equals('T'))
 					{
-						Instantiate(Resources.Load("Prefabs/Trunk_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
+						GameObject.Instantiate(Resources.Load("Prefabs/Trunk_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
                         places.Add(new DataPoint((float)x,(float)lineCount));
 					}
 					if(c.Equals('H'))
 					{ 
-						Instantiate(Resources.Load("Prefabs/Leaf_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
+						GameObject.Instantiate(Resources.Load("Prefabs/Leaf_Cube"), new Vector3(x, (float)lineCount, 1f), Quaternion.identity);
                         places.Add(new DataPoint((float)x,(float)lineCount));
 					}
 					x += 1;
@@ -58,7 +56,7 @@ public class TerrainCreator : MonoBehaviour
 			{
 				for(x = 0; x < lineLength; x++)
 				{
-					Instantiate(Resources.Load("Prefabs/Floor_Cube"), new Vector3((float)x, 0f, (float)z), Quaternion.identity);
+					GameObject.Instantiate(Resources.Load("Prefabs/Floor_Cube"), new Vector3((float)x, 0f, (float)z), Quaternion.identity);
 				}
 			}
                 
@@ -71,7 +69,7 @@ public class TerrainCreator : MonoBehaviour
 		}
 	}
 
-    public List<DataPoint> GetAvailablePlaces()
+    public static List<DataPoint> GetAvailablePlaces()
     {
         return places;
     }

@@ -51,7 +51,7 @@ public class AbilityModel {
     public void SetTurnPlayer2(int turnPlayer2FromTurns) { turnPlayer2 = turnPlayer2FromTurns; }
     public int GetTurnPlayer2() { return turnPlayer2; }
 
-    public void SetLastAbility(Ability onLastAbility) { lastAbility = onLastAbility; Debug.Log(lastAbility); }
+    public void SetLastAbility(Ability onLastAbility) { lastAbility = onLastAbility; }
     public Ability GetLastAbility() { Debug.Log(lastAbility); return lastAbility; }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){

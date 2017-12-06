@@ -20,18 +20,18 @@ public class ChangeTurnModel
         }
     }
     ///////*****///////
-    private static Button endTurnButton;
-    private static List<GameObject> teamSloths1;
-    private static List<GameObject> teamSloths2;
-    private static bool endTurnOfPlayer;
-    private static bool endTurnButtonStatus;
-    private static bool beginStopped;
-    private static int turnPlayer1;
-    private static int turnPlayer2;
-    private static Text turnLabel;
-    private static Sloth currentSloth;
-    private static int id, currentTurn;
-    private static int apCurrentSloth;
+    private  Button endTurnButton;
+    private  List<GameObject> teamSloths1;
+    private  List<GameObject> teamSloths2;
+    private  bool endTurnOfPlayer;
+    private  bool endTurnButtonStatus;
+    private  bool beginStopped;
+    private  int turnPlayer1;
+    private  int turnPlayer2;
+    private  Text turnLabel;
+    private  Sloth currentSloth;
+    private  int id, currentTurn;
+    private  int apCurrentSloth;
 
     protected ChangeTurnModel() {  }
   

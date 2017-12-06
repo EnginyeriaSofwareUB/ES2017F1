@@ -7,9 +7,10 @@ public class ChangeTurnView: MonoBehaviour {
 
     private ChangeTurnModel changeTurnModel;
     private AbilityModel abilityModel;
-    private bool endTurnOfPlayer,beginStopped;
-    private int playerTurn1, playerTurn2;
-    private List<GameObject> playersTeam1, playersTeam2;
+    private bool endTurnOfPlayer;
+    private static bool beginStopped;
+    private static int playerTurn1, playerTurn2;
+    private static List<GameObject> playersTeam1, playersTeam2;
     private List<Sloth> slothTeam1, slothTeam2;
     private Button endTurnButton;
 
@@ -29,9 +30,10 @@ public class ChangeTurnView: MonoBehaviour {
     }
     private void Update()
     {
+        
         if (playersTeam1.Count == 0) {
-            UpdateSlothTeams();
             //ChangeUIStats();
+            UpdateSlothTeams();
             FinishTurn();
             
         }
@@ -70,6 +72,7 @@ public class ChangeTurnView: MonoBehaviour {
         // If he has ended, he will press the button, changing the variable to true.
         if (beginStopped)
         {
+
             changeTurnModel.GetText().text = "Blue Turn";
             changeTurnModel.DeactivateAllExceptOne(playersTeam1, playersTeam2);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
@@ -85,15 +88,19 @@ public class ChangeTurnView: MonoBehaviour {
             if (playerTurn2 != 0)
             {
                 changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2 - 1]);
+
             }
             else if (playerTurn1 == playerTurn2)
             {
                 changeTurnModel.DeactivateSloth(playersTeam2[playersTeam2.Count - 1]);
+
             }
             else 
             {
-                changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);      
+                changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
             }
+
+            changeTurnModel.SetTeams(playersTeam1,playersTeam2);
             changeTurnModel.ActivateSloth(playersTeam1[playerTurn1]);
             changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
@@ -125,11 +132,8 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
             ChangeUIStats();
         }
-            
-            
-
+           
     }
-
 
     private void ChangeUIStats(){
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModel.GetCurrentSloth().GetHp().ToString();
@@ -140,7 +144,8 @@ public class ChangeTurnView: MonoBehaviour {
     private void FixedBugs()
     {
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
-        if (changeTurnModel.GetTeam1()[playerTurn1].GetComponent<AnimPlayer>().IsMoving() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<AnimPlayer>().IsMoving())
+
+        if (playersTeam1[playerTurn1].GetComponent<AnimPlayer>().IsMoving() || playersTeam2[playerTurn2].GetComponent<AnimPlayer>().IsMoving())
         {
             endTurnButton.interactable = false;
         }
@@ -150,7 +155,7 @@ public class ChangeTurnView: MonoBehaviour {
         }
 
         // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
-        if ((changeTurnModel.GetTeam1()[playerTurn1].GetComponent<ShotScript>().GetShotLoad() || changeTurnModel.GetTeam2()[playerTurn2].GetComponent<ShotScript>().GetShotLoad()))
+        if (playersTeam1[playerTurn1].GetComponent<ShotScript>().GetShotLoad() || playersTeam2[playerTurn2].GetComponent<ShotScript>().GetShotLoad())
         {
             endTurnButton.interactable = false;
         }

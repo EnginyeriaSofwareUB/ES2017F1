@@ -77,17 +77,15 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFilterTypeDirect: 0
-    m_PVRFilterTypeIndirect: 0
-    m_PVRFilterTypeAO: 0
+    m_PVRFiltering: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-    m_PVRFilteringAtrousPositionSigmaIndirect: 2
-    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -184,46 +182,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 31514668}
---- !u!1 &40453239
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 40453241}
-  - component: {fileID: 40453240}
-  m_Layer: 0
-  m_Name: EmptyTerrain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &40453240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 40453239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d99eb8ab13e4d92b24a0a6f9873d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &40453241
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 40453239}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 364.78186, y: 200.70602, z: -0.5332947}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &184083749
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,16 +388,13 @@ GameObject:
   m_Component:
   - component: {fileID: 328900377}
   - component: {fileID: 328900376}
-  - component: {fileID: 328900381}
   - component: {fileID: 328900380}
   - component: {fileID: 328900379}
   - component: {fileID: 328900382}
   - component: {fileID: 328900383}
-  - component: {fileID: 328900385}
   - component: {fileID: 328900384}
   - component: {fileID: 328900386}
   - component: {fileID: 328900378}
-  - component: {fileID: 328900387}
   m_Layer: 0
   m_Name: GameController
   m_TagString: gameController
@@ -518,17 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newSprite: {fileID: 0}
---- !u!114 &328900381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328900375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6b356ae5cda974db85038022a9a42c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &328900382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,17 +506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ad70efbb611a84e985573d52456787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &328900385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328900375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc7acd083dc23844b8490de71f241d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &328900386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,17 +518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 0}
---- !u!114 &328900387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328900375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97210f14eecb47749a770e83ce05dbab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &347491513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +976,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328900387}
+      - m_Target: {fileID: 0}
         m_MethodName: TriggerAbility3
         m_Mode: 1
         m_Arguments:
@@ -1176,7 +1098,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328900387}
+      - m_Target: {fileID: 0}
         m_MethodName: TriggerAbility1
         m_Mode: 1
         m_Arguments:
@@ -1298,7 +1220,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328900387}
+      - m_Target: {fileID: 0}
         m_MethodName: TriggerAbility2
         m_Mode: 1
         m_Arguments:
@@ -1939,7 +1861,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328900381}
+      - m_Target: {fileID: 0}
         m_MethodName: SetEndTurnOfPlayer
         m_Mode: 1
         m_Arguments:
@@ -1950,7 +1872,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 328900381}
+      - m_Target: {fileID: 0}
         m_MethodName: FinishTurnOfPlayer
         m_Mode: 1
         m_Arguments:
@@ -1961,7 +1883,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 328900381}
+      - m_Target: {fileID: 0}
         m_MethodName: GetSelectedPlayerImage
         m_Mode: 1
         m_Arguments:
@@ -1972,7 +1894,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 328900381}
+      - m_Target: {fileID: 0}
         m_MethodName: SetPressedButton
         m_Mode: 1
         m_Arguments:

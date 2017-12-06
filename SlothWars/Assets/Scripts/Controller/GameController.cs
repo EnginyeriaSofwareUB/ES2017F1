@@ -113,15 +113,12 @@ public class GameController : MonoBehaviour
 
     private void InitializeTerrain()
     {
-        //Call the TerrainCreator.cs in order to execute Start method in that cs.
-        //TODO: Coroutines.
-        GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().enabled = true;
-        //print("PLACES: " + TerrainCreator.places.Count);
+        TerrainCreator.LoadMap();
     }
         
     private void PlacePlayers()
     {
-        Sloth slothPlayer;
+        
         GameObject sloth;
         AnimPlayer pla;
         HealthScript health;
@@ -130,20 +127,21 @@ public class GameController : MonoBehaviour
         SlothSelected selected;
         if (checkPlayer == 0)
         {
-            GameObject terrain = GameObject.Find("EmptyTerrain");
+            
             checkPlayer = 1;
             teamSloths1 = new List<GameObject>();
             teamSloths2 = new List<GameObject>();
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
                 // Instantiate sloths in random valid positions of the field
-                int point = random.Next(0, GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().GetAvailablePlaces().Count);
+                int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
                 sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), 
-                    new Vector3((float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].x_coord, 
-                        (float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
+                    new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                       TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
                 // Delete valid position of the field to avoid possible repetitions
-                terrain.GetComponent<TerrainCreator>().GetAvailablePlaces().RemoveAt(point);
+                TerrainCreator.GetAvailablePlaces().RemoveAt(point);
+
 
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
@@ -157,7 +155,9 @@ public class GameController : MonoBehaviour
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
-                
+
+                sloth.GetComponent<Rigidbody>().useGravity = false;
+                Debug.Log(sloth.GetComponent<Rigidbody>().useGravity);
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
@@ -165,6 +165,8 @@ public class GameController : MonoBehaviour
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
+
+
                 teamSloths1.Add(sloth);
 
                 i++;
@@ -175,15 +177,16 @@ public class GameController : MonoBehaviour
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
                 // Instantiate sloths in random valid positions of the field
-                int point = random.Next(0, GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().GetAvailablePlaces().Count);
+                int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
                 sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()), 
-                    new Vector3((float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].x_coord, 
-                        (float)terrain.GetComponent<TerrainCreator>().GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
+                    new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                        TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
                 // Delete valid position of the field to avoid possible repetitions
-                terrain.GetComponent<TerrainCreator>().GetAvailablePlaces().RemoveAt(point);
+               TerrainCreator.GetAvailablePlaces().RemoveAt(point);
 
-				// setting health
+                
+                // setting health
                 health = sloth.AddComponent<HealthScript>();
                 health.setHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
                 health.enabled = true;
@@ -197,6 +200,8 @@ public class GameController : MonoBehaviour
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
 
+                sloth.GetComponent<Rigidbody>().useGravity = false;
+                Debug.Log(sloth.GetComponent<Rigidbody>().useGravity);
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
@@ -204,7 +209,7 @@ public class GameController : MonoBehaviour
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
-
+       
 
                 teamSloths2.Add(sloth);
                 i++;
@@ -223,6 +228,7 @@ public class GameController : MonoBehaviour
 
             turnControllerInstance.SetEndTurnButton(endTurnButton);
             turnControllerInstance.SetTurnLabel(turnLabel);
+            turnControllerInstance.StartTurns();
         }
 
     }
@@ -238,14 +244,13 @@ public class GameController : MonoBehaviour
         abilityControllerInstance.SetAbility2(buttonAbility2);
         abilityControllerInstance.SetAbility3(buttonAbility3);
 
+        abilityControllerInstance.StartAbilities();
+
     }
 
     private void InitializeLogicVariables()
     {
-
-        //GameObject.Find("GameController").GetComponent<LogicController>().enabled = true;
-
-
+        logicControllerInstance.StartLogic();
     }
 
     private void InitializeUIVariables()
