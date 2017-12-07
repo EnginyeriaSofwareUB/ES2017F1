@@ -167,6 +167,13 @@ ModelImporter:
     100318: tongue_002
     100320: upper_arm_L
     100322: upper_arm_R
+    100324: Camera
+    100326: Cone
+    100328: Cylinder
+    100330: Cylinder_002
+    100332: Cylinder_006
+    100334: Lamp_002
+    100336: Lamp_003
     400000: breast_L
     400002: breast_R
     400004: brow_B_L
@@ -329,10 +336,32 @@ ModelImporter:
     400318: tongue_002
     400320: upper_arm_L
     400322: upper_arm_R
+    400324: Camera
+    400326: Cone
+    400328: Cylinder
+    400330: Cylinder_002
+    400332: Cylinder_006
+    400334: Lamp_002
+    400336: Lamp_003
+    2000000: Camera
+    2300000: Cone
+    2300002: Cylinder
+    2300004: Cylinder_002
+    2300006: Cylinder_006
+    3300000: Cone
+    3300002: Cylinder
+    3300004: Cylinder_002
+    3300006: Cylinder_006
     4300000: Cube
+    4300002: Cylinder_006
+    4300004: Cylinder
+    4300006: Cone
+    4300008: Cylinder_002
     7400000: Default Take
     7400002: Action
     9500000: //RootNode
+    10800000: Lamp_002
+    10800002: Lamp_003
     13700000: Cube
   materials:
     importMaterials: 1
