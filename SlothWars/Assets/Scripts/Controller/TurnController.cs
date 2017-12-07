@@ -29,7 +29,7 @@ public class TurnController{
     private List<GameObject> newTeamSloths1, newTeamSloths2;
     private List<Sprite> teamSprite1;
     private List<Sprite> teamSprite2;
-    private int turnPlayer1, turnPlayer2;
+    private static int turnPlayer1, turnPlayer2;
     private Text turnLabel;
     private bool beginStopped, endTurnOfPlayer, isButtonPressed;
     private Sprite spriteFromPreviousScene;
@@ -124,9 +124,6 @@ public class TurnController{
     //Method to update the image selected when the button is pressed.
     public void GetSelectedPlayerImage()
     {
-        //NO BORRAR
-        Debug.Log(turnPlayer1);
-        Debug.Log(turnPlayer2);
         if (turnPlayer1 > turnPlayer2)
         {
             spriteFromPreviousScene = teamSprite2[turnPlayer2];

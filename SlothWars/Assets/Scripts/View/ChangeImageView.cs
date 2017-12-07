@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ChangeImageView : MonoBehaviour {
 
     private ChangeImageModel changeImageModel;
+    private static int turnPlayer1, turnPlayer2;
     public Image newSprite;
     
     private void Start () {
         changeImageModel = ChangeImageModel.Instance;
-        
         //There are some bugs with the Unity Version. It should detect the GameObject.Find as 
         //it inherits from MonoBehaviour. Therefore, it shows us an error as it could not 
         //find the gameobject (it is null). (It puts something like Should not be capturing
@@ -19,13 +19,21 @@ public class ChangeImageView : MonoBehaviour {
         ShowImage();
     }
 
+    private void Update()
+    {
+        newSprite.sprite = changeImageModel.GetSprite();
+        GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(1));
+        GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(2));
+        GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(3));
+    }
 
     // Method to show the image in the scene. Called by end turn Button in order to show the image corresponding to the sloth's turn.
     public void ShowImage()
     {
-       newSprite.sprite = changeImageModel.GetSprite();
-       GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(1));
-       GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(2));
-       GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(3));
+        
+        newSprite.sprite = changeImageModel.GetSprite();
+        GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(1));
+        GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(2));
+        GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(3));
     }
 }
