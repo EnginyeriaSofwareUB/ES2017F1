@@ -113,6 +113,10 @@ public class Sloth
 
     public int GetAp(){ return ap;}
 
+    public void SetAp(int ap){
+        this.ap = ap;
+    }
+
     public void SumToHp(double dmg_heal)
     {
         hp += dmg_heal;

@@ -105,7 +105,6 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
-            ChangeUIStats();
 
         }
         else
@@ -130,9 +129,9 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(2, playerTurn2);
             changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
-            ChangeUIStats();
+
         }
-           
+        ChangeUIStats();  
     }
 
     private void ChangeUIStats(){

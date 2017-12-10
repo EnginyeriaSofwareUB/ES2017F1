@@ -47,7 +47,6 @@ public class UIController : MonoBehaviour{
 
         panelOpts.gameObject.SetActive (setActivePanelOpts);
 		panelMain.gameObject.SetActive (setActivePanelMain);
-
 	}
 	
 	// Update is called once per frame
@@ -65,6 +64,7 @@ public class UIController : MonoBehaviour{
                 isSet = true;
 
             } else {
+                
                 if (isSet)
                 {
                     uiModel.SetStatePanelOpts(true);
@@ -78,9 +78,12 @@ public class UIController : MonoBehaviour{
 			}
            
         }
+
         
 	}
 
+
+ 
     public void SetPanelOpts(Image panelOptsCont)
     {
         panelOpts = panelOptsCont;
