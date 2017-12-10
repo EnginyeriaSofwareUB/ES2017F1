@@ -12,4 +12,7 @@ public interface Ability
     int GetTerrainSize();
 	int GetAp();
     bool GetAlterTerrain();
+	string GetProjectile ();
+	bool GetExplosive ();
+	string GetSource ();
 }

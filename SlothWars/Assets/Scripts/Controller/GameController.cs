@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour
                     Quaternion.Euler (90, 180, 0));
                 // Delete valid position of the field to avoid possible repetitions
                 TerrainCreator.GetAvailablePlaces().RemoveAt(point);
-
+                sloth.tag = "sloth";
 
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
@@ -152,6 +152,7 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
@@ -182,6 +183,7 @@ public class GameController : MonoBehaviour
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                         TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
+                sloth.tag = "sloth";
                 // Delete valid position of the field to avoid possible repetitions
                TerrainCreator.GetAvailablePlaces().RemoveAt(point);
 
@@ -196,6 +198,7 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;

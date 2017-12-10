@@ -8,6 +8,9 @@ public class ProjectileAbility : Ability
     private int reach = 30;
     private float hitRadius = 2f;
     private int ap;
+	private string projectile;
+	private bool explosive;
+	private string source;
     //private int sApoints;
     AbilityController abilityController = AbilityController.Instance;
     public ProjectileAbility(string id, JSONNode json)
@@ -16,13 +19,16 @@ public class ProjectileAbility : Ability
         this.reach = json[id]["reach"];
         this.hitRadius = json[id]["hitRadius"];
         this.ap = json[id]["ap"];
+		this.projectile = json[id]["projectile"];
+		this.explosive = json[id]["explosive"];
+		this.source = json[id]["source"];
     }
 
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        abilityController.SumToHpBar(-dmg);
+		abilityController.UpdateHpBar(target.GetHp(),target.GetShield());
         //GameControl.control.SubtractActionPoints(target, sApints);
     }
     public ProjectileAbility()
@@ -53,4 +59,13 @@ public class ProjectileAbility : Ability
     {
         return false;
     }
+	public string GetProjectile(){
+		return projectile;
+	}
+	public bool GetExplosive(){
+		return explosive;
+	}
+	public string GetSource(){
+		return source;
+	}
 }

@@ -153,6 +153,12 @@ public class TurnController{
         else if (turnPlayer2 -turnPlayer1<-1){ return newTeamSloths1[turnPlayer2]; }
         else { return newTeamSloths2[turnPlayer2]; }
     }
+	public int GetActualTurnTeam(){
+		if (turnPlayer1 == 0 && turnPlayer2 == 0) { return 1; }
+		else if (turnPlayer1 == turnPlayer2) { return 1; }
+		else if (turnPlayer2 -turnPlayer1<-1){ return 2; }
+		else { return 2; }
+	}
 
     public void SetTeamSprite1(List<Sprite> spriteTeamCont)
     {

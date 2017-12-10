@@ -11,7 +11,9 @@ public class TankAbility : Ability
     private double hpShield;
     private bool blockAb;
     private int ap;
-
+	private string projectile;
+	private string source;
+	AbilityController abilityController = AbilityController.Instance;
     public TankAbility(string id, JSONNode json)
     {
 
@@ -23,12 +25,15 @@ public class TankAbility : Ability
         this.hpShield = json[id]["hpShield"];
         this.blockAb = json[id]["blockAb"];
         this.ap = json[id]["ap"];
+		this.projectile = json[id]["projectile"];
+		this.source = json[id]["source"];
     }
 
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
-
+		target.SetShield (hpShield);
+		abilityController.UpdateHpBar(target.GetHp(),target.GetShield());
     }
 
     //WIP: apply ability to terrain
@@ -54,4 +59,13 @@ public class TankAbility : Ability
     {
         return false;
     }
+	public string GetProjectile(){
+		return projectile;
+	}
+	public bool GetExplosive(){
+		return false;
+	}
+	public string GetSource(){
+		return source;
+	}
 }
