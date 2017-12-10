@@ -20,18 +20,18 @@ public class ChangeTurnModel
         }
     }
     ///////*****///////
-    private static Button endTurnButton;
-    private static List<GameObject> teamSloths1 = new List<GameObject>();
-    private static List<GameObject> teamSloths2 = new List<GameObject>();
-    private static bool endTurnOfPlayer;
-    private static bool endTurnButtonStatus;
-    private static bool beginStopped;
-    private static int turnPlayer1;
-    private static int turnPlayer2;
-    private static Text turnLabel;
-    private static Sloth currentSloth;
-    private static int id, currentTurn;
-    private static int apCurrentSloth;
+    private  Button endTurnButton;
+    private  List<GameObject> teamSloths1;
+    private  List<GameObject> teamSloths2;
+    private  bool endTurnOfPlayer;
+    private  bool endTurnButtonStatus;
+    private  bool beginStopped;
+    private  int turnPlayer1;
+    private  int turnPlayer2;
+    private  Text turnLabel;
+    private  Sloth currentSloth;
+    private  int id, currentTurn;
+    private  int apCurrentSloth;
 
     protected ChangeTurnModel() {  }
   
@@ -44,11 +44,13 @@ public class ChangeTurnModel
     public bool GetBeginStopped() { return beginStopped; }
     public void SetBeginStopped(bool beginStoppedController) { beginStopped = beginStoppedController;}
 
-    public List<GameObject> GetTeam1() { Debug.Log("HOLA"); return teamSloths1; }
+    public List<GameObject> GetTeam1() { return teamSloths1; }
     public List<GameObject> GetTeam2() { return teamSloths2; }
 
     public void SetTeams(List<GameObject> playerControllerTeam1, List<GameObject> playerControllerTeam2)
     {
+        teamSloths1 = new List<GameObject>();
+        teamSloths2 = new List<GameObject>();
         foreach (GameObject player in playerControllerTeam1) { teamSloths1.Add(player); }
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         

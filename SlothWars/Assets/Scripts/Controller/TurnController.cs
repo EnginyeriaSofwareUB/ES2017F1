@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
-public class TurnController: MonoBehaviour{
+public class TurnController{
     //SINGLETON
     private static TurnController instance;
     public static TurnController Instance
@@ -26,13 +26,13 @@ public class TurnController: MonoBehaviour{
     ///////*****///////
 
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
-    private static List<GameObject> newTeamSloths1, newTeamSloths2;
-    private static List<Sprite> teamSprite1 = new List<Sprite>();
-    private static List<Sprite> teamSprite2 = new List<Sprite>();
+    private List<GameObject> newTeamSloths1, newTeamSloths2;
+    private List<Sprite> teamSprite1;
+    private List<Sprite> teamSprite2;
     private static int turnPlayer1, turnPlayer2;
-    private static Text turnLabel;
-    private static bool beginStopped, endTurnOfPlayer, isButtonPressed;
-    private static Sprite spriteFromPreviousScene;
+    private Text turnLabel;
+    private bool beginStopped, endTurnOfPlayer, isButtonPressed;
+    private Sprite spriteFromPreviousScene;
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
     private ChangeImageModel changeImageModel;
@@ -40,7 +40,8 @@ public class TurnController: MonoBehaviour{
     private static Button endTurnButton;
 
     // Use this for initialization
-    private void OnEnable () {
+    public void StartTurns () {
+
         beginStopped = true;
         isButtonPressed = false;
         endTurnOfPlayer = true;
@@ -71,7 +72,10 @@ public class TurnController: MonoBehaviour{
         changeImageModel.SetSprite(spriteFromPreviousScene);
         changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[0].GetTypeName());
 
-       
+        endTurnButton.onClick.AddListener(delegate { FinishTurnOfPlayer(); });
+        endTurnButton.onClick.AddListener(delegate { SetEndTurnOfPlayer(); });
+        endTurnButton.onClick.AddListener(delegate { SetPressedButton(); });
+
     }
 
     //Method to update the values from turnPlayer1 and turnPlayer2 when the button is pressed.
@@ -112,11 +116,6 @@ public class TurnController: MonoBehaviour{
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 
-
-        //To fix possible bugs in changing turns.
-        //Quit comments when animator is integrated
-        //FixedBugs();
-
         //Call the method in order to establish the selected image to show.
         GetSelectedPlayerImage();
 
@@ -140,17 +139,15 @@ public class TurnController: MonoBehaviour{
                 changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[turnPlayer1].GetTypeName());
             } else if (turnPlayer2 - turnPlayer1 < -1)
             {
-                spriteFromPreviousScene = teamSprite1[turnPlayer2];
+                spriteFromPreviousScene = teamSprite2[turnPlayer2];
                 changeImageModel.SetSprite(spriteFromPreviousScene);
-                changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[turnPlayer2].GetTypeName());
+                changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2].GetTypeName());
             }
         }
 
     }
     public GameObject GetActiveSloth()
     {
-        print("Turn1" + turnPlayer1);
-        print("Turn2" + turnPlayer2);
         if (turnPlayer1 == 0 && turnPlayer2 == 0) { return newTeamSloths1[turnPlayer1]; }
         else if (turnPlayer1 == turnPlayer2) { return newTeamSloths1[turnPlayer1]; }
         else if (turnPlayer2 -turnPlayer1<-1){ return newTeamSloths1[turnPlayer2]; }
@@ -159,21 +156,26 @@ public class TurnController: MonoBehaviour{
 
     public void SetTeamSprite1(List<Sprite> spriteTeamCont)
     {
+        teamSprite1 = new List<Sprite>();
         teamSprite1 = spriteTeamCont;
     }
 
     public void SetTeamSprite2(List<Sprite> spriteTeamCont)
     {
+        teamSprite2 = new List<Sprite>();
         teamSprite2 = spriteTeamCont;
     }
 
     public void SetTeamSloths1(List<GameObject> slothTeamCont)
     {
+
+        newTeamSloths1 = new List<GameObject>();
         newTeamSloths1 = slothTeamCont;
     }
 
     public void SetTeamSloths2(List<GameObject> slothTeamCont)
     {
+        newTeamSloths2 = new List<GameObject>();
         newTeamSloths2 = slothTeamCont;
     }
 

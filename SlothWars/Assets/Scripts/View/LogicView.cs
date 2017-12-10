@@ -26,6 +26,8 @@ public class LogicView : MonoBehaviour {
         {
             CheckGameOver();
             DeactivateButtonsIfNecessary();
+            teamSloths1 = changeTurnModel.GetTeam1();
+            teamSloths2 = changeTurnModel.GetTeam2();
         }
 	}
 
@@ -50,6 +52,7 @@ public class LogicView : MonoBehaviour {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
                 teamSloths1.Remove(sloth);
+               
                 //REMOVE LISTGUN
             }
             i++;
@@ -63,11 +66,12 @@ public class LogicView : MonoBehaviour {
             {
                 pla = sloth.GetComponent<AnimPlayer>();
                 pla.Die();
-                teamSloths1.Remove(sloth);
+                teamSloths2.Remove(sloth);
                 //REMOVE LISTGUN
             }
             i++;
-        } 
+        }
+        changeTurnModel.SetTeams(teamSloths1,teamSloths2);
     }
 
     private void CheckGameOver(){

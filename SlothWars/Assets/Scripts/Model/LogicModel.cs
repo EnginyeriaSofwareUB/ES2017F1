@@ -20,7 +20,7 @@ public class LogicModel{
     }
     ///////*****///////
 
-    private static List<GameObject> teamSloths1, teamSloths2;
+    private  List<GameObject> teamSloths1, teamSloths2;
 
     protected LogicModel() { }
 

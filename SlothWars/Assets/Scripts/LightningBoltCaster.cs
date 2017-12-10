@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightningBoltCaster : MonoBehaviour {
 
 	// Use this for initialization
-    public int lnumber= 3;
+    public int lnumber;
     private float range = 20f;
     public string lpath= "Objects/LightningBolt/SimpleLightningBoltPrefab";
     AbilityController abilityController = AbilityController.Instance;

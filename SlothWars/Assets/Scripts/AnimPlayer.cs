@@ -5,7 +5,6 @@ using UnityEngine;
 public class AnimPlayer : MonoBehaviour {
 
     public Rigidbody rbody;
-    public Sloth sloth;
     SlothSelected selected;
     private float inputH;
     private float inputV;
@@ -19,10 +18,7 @@ public class AnimPlayer : MonoBehaviour {
     private bool falling;
 	Vector3 aPos;
 
-    public AnimPlayer(Sloth sloth)
-    {
-        this.sloth = sloth;
-    }
+    public AnimPlayer(){}
 
     void Start()
     {
@@ -114,7 +110,7 @@ public class AnimPlayer : MonoBehaviour {
                 inputV = 1;
                 newPosition = transform.position + new Vector3(0f, 1f, 0f);
                 ss.IsMoving(0);
-                //changeTurnModel.DecrementApCurrentSloth(1);
+                changeTurnModel.DecrementApCurrentSloth(1);
             }
             if (inputV < -0.1)
             {
@@ -122,7 +118,8 @@ public class AnimPlayer : MonoBehaviour {
                 inputV = -1;
                 newPosition = transform.position + new Vector3(0f, -1f, 0f);
                 ss.IsMoving(0);
-                //changeTurnModel.DecrementApCurrentSloth(1);
+                
+changeTurnModel.DecrementApCurrentSloth(1);
             }
         }
         else
@@ -224,16 +221,6 @@ public class AnimPlayer : MonoBehaviour {
     public bool IsMoving()
     {
         return move;
-    }
-
-    public Sloth GetSloth()
-    {
-        return this.sloth;
-    }
-
-    public void SetSloth(Sloth sloth)
-    {
-        this.sloth = sloth;
     }
 
     public void Die()

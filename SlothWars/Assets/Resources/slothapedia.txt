@@ -61,7 +61,7 @@
     "idAb1": "U0",
     "idAb2": "U1",
     "idAb3": "U2",
-    "model": "sloth_wizard"
+    "model": "sloth_utility"
   }
 
 }

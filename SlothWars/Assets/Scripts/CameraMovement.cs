@@ -26,8 +26,10 @@ public class CameraMovement : MonoBehaviour {
 	void Start () 
     {
 		turn = TurnController.Instance.GetActiveSloth ();
-		if (turn != null)
-			transform.position = new Vector3(turn.transform.position.x, 7.0f, cameraDistance);
+        if (turn != null)
+        {
+            transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y + cameraHeight, cameraDistance);
+        }
 	}
 	
 	// Update is called once per frame
@@ -35,28 +37,29 @@ public class CameraMovement : MonoBehaviour {
     {
         projectile = GameObject.FindGameObjectsWithTag("projectile");
         explosion = GameObject.FindGameObjectsWithTag("explosion");
+        //print("IS MOVING: " + TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving().ToString());
 
-        if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving()
+        if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
+        {
+            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
+                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+        }
+        else if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving()
             && !TurnController.Instance.GetActiveSloth().GetComponent<ShotScript>().GetShotLoad()
             && projectile.Length == 0
             && explosion.Length == 0)
         {
             MoveCameraFreely();
         }
-        else if (projectile.Length > 0)
+        else if (projectile != null)
         {
-            Debug.Log("Projectiles: " + projectile.Length.ToString());
-            transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
+            if(projectile.Length > 0)
+                transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
-        else if (explosion.Length > 0)
+        else if (explosion != null)
         {
-            Debug.Log("Explosions: " + explosion.Length.ToString());
-            transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
-        }
-        else if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
-        {
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
-                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+            if(explosion.Length > 0)
+                transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
         }
 
 		if (turn != TurnController.Instance.GetActiveSloth ()) 

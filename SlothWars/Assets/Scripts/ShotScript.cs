@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 public class ShotScript : MonoBehaviour
 {
-    public GameObject ForceBar; //force/range bar gameObject
-    private static bool beginStopped;
-    private Transform gun;  // aim vector transform
+    
+    private static Transform gun;  // aim vector transform
     private AbilityModel abilityModel;
     private ChangeTurnModel changeTurnModel;
     private int rotate = 0; // 0 when loocking to the right, 1 when loocking to left
-    bool shotLoad = false; // it says if its calculating range/force
-    bool mov = false; // sloth is moving bool
-    Projectile onLoad; //projectile shoot
-    Ability onloadAbility;
-    ForceBarScript st;
-    private bool active = false;
+    static bool shotLoad = false; // it says if its calculating range/force
+    static bool mov; // sloth is moving bool
+    static Projectile onLoad; //projectile shoot
+    static Ability onloadAbility;
+   
+    private static bool active;
     //initialization
     void Start()
     {
@@ -27,6 +26,7 @@ public class ShotScript : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log("Active" + active);
         if (!mov && active)
         {
             AimWithMouse();
@@ -40,6 +40,7 @@ public class ShotScript : MonoBehaviour
     }
     private void AimWithMouse()
     {
+        Debug.Log(name);
         Plane playerPlane = new Plane(Vector3.forward, gun.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float hitdist = 0.0f;
@@ -56,11 +57,12 @@ public class ShotScript : MonoBehaviour
     {
         if (onloadAbility.GetBuildTerrain()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize());
+            onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,onloadAbility.GetTerrainSize());
             onLoad.Mark();
         }
     }
     // creates a force bar
+    /*
     private void Bar()
     {
         if (!onloadAbility.GetBuildTerrain())
@@ -70,6 +72,7 @@ public class ShotScript : MonoBehaviour
         }
         shotLoad = true;
     }
+    */
     // creates a projectile and shoots it then destroys de force bar
     private void ShootAfterBar()
     {
@@ -88,9 +91,9 @@ public class ShotScript : MonoBehaviour
             float radAngle = gun.eulerAngles[2]  * Mathf.Deg2Rad;
             Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
             Debug.Log("rangeeeeeeeee"+(float)onloadAbility.GetRange());
-            onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius());
+            onLoad.SetAll(gun.position, AimVector, gun.rotation, (float)onloadAbility.GetRange(), onloadAbility.GetRadius());
             onLoad.ApplyLogic();
-            st.Destroy();
+            //st.Destroy();
             shotLoad = false;
             Active(false);
             changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
@@ -111,6 +114,7 @@ public class ShotScript : MonoBehaviour
     public void Active(bool b)
     {
         active = b;
+        Debug.Log("Active active" + active);
         if (!b) {
             Destroy(gun.gameObject);
             gun = this.transform;
@@ -124,7 +128,7 @@ public class ShotScript : MonoBehaviour
     // used to dont move the sloth when shot is on load
     public bool GetShotLoad()
     {
-        return this.shotLoad;
+        return shotLoad;
     }
     //shots the projectile asociated to Ability a
     public void Shot(Ability a)
@@ -139,7 +143,7 @@ public class ShotScript : MonoBehaviour
                 Debug.Log("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
                 abilityModel.SetLastAbility(a);
-                Bar();
+                //Bar();
 				Active(true);            
 			}
         }

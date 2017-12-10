@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class AbilityController : MonoBehaviour {
+public class AbilityController{
     //SINGLETON
     private static AbilityController instance; 
     public static AbilityController Instance
@@ -21,16 +21,24 @@ public class AbilityController : MonoBehaviour {
     }
     ///////*****///////
 
-    private static Ability ability;
-    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
-    private static GameObject lastTarget;
+    private  Ability ability;
+    private  Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private  GameObject lastTarget;
     
     protected AbilityController(){
 
     }
 
-    private void Start(){}
+    //private void Start(){}
     //sums dmg_heal to the hp bar asociated to target
+
+    public void StartAbilities()
+    {
+        buttonAbility1.onClick.AddListener(delegate { TriggerAbility1(); });
+        buttonAbility2.onClick.AddListener(delegate { TriggerAbility2(); });
+        buttonAbility3.onClick.AddListener(delegate { TriggerAbility3(); });
+
+    }
 
     public void SumToHpBar(double dmg_Heal)
     {
@@ -48,7 +56,8 @@ public class AbilityController : MonoBehaviour {
         ability = AbilityModel.Instance.GetLastAbility();
         if (g.gameObject.tag == "sloth") {
             lastTarget = g;
-            ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            //ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            ability.Apply(g);
         }
         else{ability.Apply(g); }
     }
@@ -61,25 +70,59 @@ public class AbilityController : MonoBehaviour {
         ability = AbilityModel.Instance.GetLastAbility();
         if (ability.GetAlterTerrain())
         {
-            Destroy(destroyable);
+            GameObject.Destroy(destroyable);
         }
     }
     public void TriggerAbility1()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility1());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
+                break;
+        }
+            
     }
 
     public void TriggerAbility2()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility2());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
+                break;
+        }
     }
 
     public void TriggerAbility3()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility3());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
+                break;
+        }
     }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){

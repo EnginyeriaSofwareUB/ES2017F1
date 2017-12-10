@@ -9,10 +9,12 @@ public class UIView : MonoBehaviour {
     // Use this for initialization
 
     private UIModel uiModel;
+    private ChangeTurnModel changeTurnModelInstance;
 
     private void Start()
     {
         uiModel = UIModel.Instance;
+        changeTurnModelInstance = ChangeTurnModel.Instance;
     }
 
     private void Update()
@@ -46,5 +48,18 @@ public class UIView : MonoBehaviour {
     {
         uiModel.GetPanelOpts().gameObject.SetActive(false);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SurrenderGame()
+    {
+        if (changeTurnModelInstance.GetText().text == "Blue Turn")
+        {
+            StorePersistentVariables.Instance.winner = "Red"; 
+        }
+        else
+        {
+            StorePersistentVariables.Instance.winner = "Blue";     
+        }
+        SceneManager.LoadScene("GameOverScene");
     }
 }

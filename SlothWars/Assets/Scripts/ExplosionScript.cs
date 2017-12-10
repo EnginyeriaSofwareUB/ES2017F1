@@ -56,7 +56,6 @@ public class ExplosionScript : MonoBehaviour {
 			Debug.Log ("[TRACE] collider tag: " + currentCollider.tag);
 			if ("sloth".Equals (currentCollider.tag)) {
                 abilityController.ApplyLastAbility(currentCollider.gameObject);
-                Debug.Log(currentCollider.gameObject.GetComponent<AnimPlayer>().sloth.GetHp());
             }
             else if("Destroyable".Equals(currentCollider.tag))
             {
