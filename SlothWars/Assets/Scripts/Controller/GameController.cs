@@ -100,7 +100,6 @@ public class GameController : MonoBehaviour
 
     private void InitializePlayer()
     {
-
         playerTeam1 = new List<AnimPlayer>();
         playerTeam2 = new List<AnimPlayer>();
         teamSprite1 = new List<Sprite>();

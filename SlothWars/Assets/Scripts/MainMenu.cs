@@ -58,6 +58,12 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("TeamSelection");
     }
+
+	public void GoCreditsScreen()
+	{
+		SceneManager.LoadScene("CreditsScene");
+	}
+
     public void GoBackPlay()
     {
         panelMain.gameObject.SetActive(true);
