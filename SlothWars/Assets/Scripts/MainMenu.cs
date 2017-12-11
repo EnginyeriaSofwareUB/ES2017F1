@@ -14,8 +14,10 @@ public class MainMenu : MonoBehaviour
     private Image panelMain;
     private Image panelVS;
     private Image panelOpts;
+	private Slider mVolSlider;
     private SpriteRenderer background;
     private bool done = false;
+	private bool isInit = true;
     private GameObject sloth;
 
 
@@ -31,6 +33,7 @@ public class MainMenu : MonoBehaviour
         panelMain = GameObject.Find("mainMenuPanel").GetComponent<Image>();
         panelVS = GameObject.Find("playVSPanel").GetComponent<Image>();
         panelOpts = GameObject.Find("OptionsPanel").GetComponent<Image>();
+		mVolSlider = GameObject.Find ("mVolSlider").GetComponent<Slider> ();
     }
 
     private void Start(){
@@ -86,6 +89,13 @@ public class MainMenu : MonoBehaviour
     public void ShowSlothapedia(){
         SceneManager.LoadScene("Slothapedia");
     }
+
+	public void mainVolSliderOnValueChanged (){
+		 
+		AudioListener.volume = mVolSlider.value;
+	}
+
+
 
     public void Update(){
         float height = Camera.main.orthographicSize * 2.35f;
