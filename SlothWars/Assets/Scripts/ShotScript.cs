@@ -19,6 +19,7 @@ public class ShotScript : MonoBehaviour
     //initialization
     void Start()
     {
+		
         abilityModel = AbilityModel.Instance;
         changeTurnModel = ChangeTurnModel.Instance;
         gun = transform;
@@ -33,6 +34,7 @@ public class ShotScript : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 ShootAfterBar();
+				GameObject.FindGameObjectWithTag("soundManager").GetComponent<SoundEffects>().playLaunchEffect ();
             }
         }
        
@@ -81,6 +83,7 @@ public class ShotScript : MonoBehaviour
                 Active(false);
                 onLoad.ApplyLogic();
                 changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
+
             }
         }
         else
@@ -135,9 +138,12 @@ public class ShotScript : MonoBehaviour
             {
                 ProjectileFactory pf = ProjectileFactory.Instance;
                 onLoad = pf.getProjectile(a);
+				Debug.Log("The type of the used projectile is " + a.GetHashCode());
                 Debug.Log("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
                 abilityModel.SetLastAbility(a);
+
+
 				if (a.GetProjectile ().Equals ("autoApply")) {
 					onLoad.ApplyLogic ();
 				} else {
