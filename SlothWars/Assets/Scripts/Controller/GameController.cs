@@ -143,6 +143,7 @@ public class GameController : MonoBehaviour
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 selected.GetLeaf().transform.position = sloth.transform.position + new Vector3(0f, 7f, 0f);
+                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
                 selected.SetSlothPosition(sloth.transform.position);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").position = new Vector3(i + 20, 2, 0);
@@ -189,6 +190,7 @@ public class GameController : MonoBehaviour
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
                 selected.GetLeaf().transform.position = sloth.transform.position + new Vector3(0f, 7f, 0f);
+                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
                 selected.SetSlothPosition(sloth.transform.position);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").position = new Vector3(i + 10, 2, 0);

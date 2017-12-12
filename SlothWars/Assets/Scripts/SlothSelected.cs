@@ -10,6 +10,7 @@ public class SlothSelected : MonoBehaviour {
 
     void Update(){
         leaf.transform.position = leaf.transform.position + new Vector3(0f, 0.015f*Mathf.Cos(Time.time), 0f);
+        leaf.transform.rotation = Quaternion.Euler(-160, 0, 90);
     }
 
     public void Active(bool b)
@@ -31,6 +32,7 @@ public class SlothSelected : MonoBehaviour {
 
     public void SetSlothPosition(Vector3 slothPosition){
         this.slothPosition = slothPosition;
+        leaf.transform.position = slothPosition + new Vector3(0f, 1f, 0f);
     }
 
 }
