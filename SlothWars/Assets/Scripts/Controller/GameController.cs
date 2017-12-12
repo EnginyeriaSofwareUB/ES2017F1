@@ -11,23 +11,6 @@ using System.Security.Cryptography.X509Certificates;
 public class GameController : MonoBehaviour
 {
 
-    //SINGLETON
-    private static GameController instance;
-    public static GameController Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new GameController();
-            }
-            return instance;
-        }
-    }
-    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
-
-    ///////*****///////
-
     // Random Generator
     System.Random random = new System.Random();
 
@@ -157,7 +140,6 @@ public class GameController : MonoBehaviour
                 shot.enabled = true;
 
                 sloth.GetComponent<Rigidbody>().useGravity = false;
-                Debug.Log(sloth.GetComponent<Rigidbody>().useGravity);
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);

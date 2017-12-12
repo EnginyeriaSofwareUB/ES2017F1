@@ -60,7 +60,7 @@ public class TurnController{
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
-
+        changeTurnModel.SetIsButtonPressed(isButtonPressed);
         //Set the player teams in Model in order to get captured by view and show them in the scene.
         //Set the turns for team1 and team2.
         changeTurnModel.SetTeams(newTeamSloths1, newTeamSloths2);
@@ -108,9 +108,12 @@ public class TurnController{
     public void SetPressedButton()
     {
         beginStopped = false;
+        isButtonPressed = true;
 
         //We comunicate to the View that the game starts.
+        Debug.Log("Comunico a Model que he pulsado el boton " + isButtonPressed);
         changeTurnModel.SetBeginStopped(beginStopped);
+        changeTurnModel.SetIsButtonPressed(isButtonPressed);
 
         //We change the new values in Model in order to comunicate to View and show the results.
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
@@ -118,7 +121,6 @@ public class TurnController{
 
         //Call the method in order to establish the selected image to show.
         GetSelectedPlayerImage();
-
     }
 
     //Method to update the image selected when the button is pressed.
