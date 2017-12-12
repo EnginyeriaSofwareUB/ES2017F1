@@ -15,4 +15,5 @@ public interface Ability
 	string GetProjectile ();
 	bool GetExplosive ();
 	string GetSource ();
+    bool GetMark();
 }

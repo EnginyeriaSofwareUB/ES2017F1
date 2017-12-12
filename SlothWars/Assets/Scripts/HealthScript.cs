@@ -44,8 +44,10 @@ public class HealthScript : MonoBehaviour {
 	public void UpdateHP(int hp,int shield)
     {
         health = hp;
-		if (shield > 0) {
-			if (shieldEffect == null) {
+        Debug.Log("lol");
+        if (shield > 0) {
+            Debug.Log("lol");
+            if (shieldEffect == null) {
 				this.shield.SetActive (true);
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
 			}

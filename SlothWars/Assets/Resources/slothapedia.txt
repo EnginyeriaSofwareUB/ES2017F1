@@ -19,7 +19,7 @@
     "def": 60,
     "ap": 3,
     "photo": "slothTank",
-    "idAb1": "T0",
+    "idAb1": "P3",
     "idAb2": "T1",
     "idAb3": "T2",
     "model": "sloth_tank"
@@ -46,8 +46,8 @@
     "ap": 4,
     "photo": "slothHealer",
     "idAb1": "H0",
-    "idAb2": "H1",
-    "idAb3": "H2",
+    "idAb2": "DH1",
+    "idAb3": "T3",
     "model": "sloth_healer"
   },
   

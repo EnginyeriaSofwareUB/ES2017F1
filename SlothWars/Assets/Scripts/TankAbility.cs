@@ -13,11 +13,13 @@ public class TankAbility : Ability
     private int ap;
 	private string projectile;
 	private string source;
+    private bool mark;
 	AbilityController abilityController = AbilityController.Instance;
     public TankAbility(string id, JSONNode json)
     {
 
         this.shield = json[id]["shield"];
+        this.mark = json[id]["mark"];
         this.boostDef = json[id]["boostDef"];
         this.durBoostDef = json[id]["durBoostDef"];
         this.boostHp = json[id]["boostHp"];
@@ -54,7 +56,7 @@ public class TankAbility : Ability
 	public int GetAp(){
         return ap;
     }
-
+    public bool GetMark() { return this.mark; }
     public bool GetAlterTerrain()
     {
         return false;

@@ -60,8 +60,8 @@ public class ExplosionScript : MonoBehaviour {
             }
             else if("Destroyable".Equals(currentCollider.tag))
             {
-                Destroy(currentCollider.gameObject);
-                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
+                //Destroy(currentCollider.gameObject);
+                abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
 		}

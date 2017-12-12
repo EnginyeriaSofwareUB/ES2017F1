@@ -64,7 +64,12 @@ public class ProjectileFactory
 			return new ChainProjectile ();
 		} else if (a.GetProjectile ().Equals("autoApply")) {
 			return new AutoApplyProjectile ();
-		} else {
+		}
+        else if (a.GetProjectile().Equals("allyTarget"))
+        {
+            return new TargetTeamProjectile();
+        }
+        else {
 			return null;
 		}
 

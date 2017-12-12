@@ -32,11 +32,11 @@ public class NormalCollisionScript : MonoBehaviour {
 		if (!colided) {
 			colided = true;
 			abilityController.ApplyLastAbility (collision.gameObject);
-			this.transform.position += dir*0.3f;
+			//this.transform.position += dir*0.3f;
 			if (rotative) {
-                //this.transform.Rotate(0, 90, 0);
                 Vector3 v = transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
-                this.transform.rotation = Quaternion.Euler (0, rot + Random.Range (-20, 20), 0);
+                //this.transform.Rotate(0, 90, 0);
+                this.transform.rotation = Quaternion.Euler (0, rot , 0);
                 v -= transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
                 this.transform.position += v;
             }
@@ -50,6 +50,7 @@ public class NormalCollisionScript : MonoBehaviour {
 			rotative = false;
 			rb.useGravity = false;
 			Destroy (this.gameObject, 20);
+            this.tag = "Untagged";
 		}
 	}
 
@@ -62,7 +63,8 @@ public class NormalCollisionScript : MonoBehaviour {
 				rot = 180;
 			} else {
 				torque = new Vector3 (-3*360, 0,0);
-			}
+                rot = 180;
+            }
 		}
 	}
 }

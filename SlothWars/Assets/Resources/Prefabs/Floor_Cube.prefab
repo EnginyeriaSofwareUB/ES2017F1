@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 33214559966114650}
   - component: {fileID: 65116763176501396}
   - component: {fileID: 23208031258263732}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Floor_Cube
   m_TagString: Destroyable
   m_Icon: {fileID: 0}

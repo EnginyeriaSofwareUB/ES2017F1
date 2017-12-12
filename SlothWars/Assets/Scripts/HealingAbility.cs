@@ -16,6 +16,7 @@ public class HealingAbility: Ability
 	private string projectile;
 	private bool explosive;
 	private string source;
+    private bool mark;
     AbilityController abilityController = AbilityController.Instance;
     public HealingAbility(string id, JSONNode json)
 	{
@@ -32,6 +33,7 @@ public class HealingAbility: Ability
 		this.projectile = json[id]["projectile"];
 		this.explosive = json[id]["explosive"];
 		this.source = json[id]["source"];
+        this.mark = json[id]["mark"];
     }
     public HealingAbility()
     {
@@ -76,4 +78,5 @@ public class HealingAbility: Ability
 	public string GetSource(){
 		return source;
 	}
+    public bool GetMark() { return this.mark; }
 }

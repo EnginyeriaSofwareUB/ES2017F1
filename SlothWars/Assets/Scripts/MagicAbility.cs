@@ -18,6 +18,7 @@ public class MagicAbility: Ability
 	private string projectile;
 	private string source;
 	private bool explosive;
+    private bool mark;
     AbilityController abilityController = AbilityController.Instance;
 
     public MagicAbility(string id, JSONNode json)
@@ -37,6 +38,7 @@ public class MagicAbility: Ability
 		this.projectile = json[id]["projectile"];
 		this.explosive = json[id]["explosive"];
 		this.source = json[id]["source"];
+        this.mark = json[id]["mark"];
     }
     public MagicAbility()
     {
@@ -85,4 +87,5 @@ public class MagicAbility: Ability
 	public string GetSource(){
 		return source;
 	}
+    public bool GetMark() { return this.mark; }
 }

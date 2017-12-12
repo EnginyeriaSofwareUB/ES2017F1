@@ -11,10 +11,12 @@ public class ProjectileAbility : Ability
 	private string projectile;
 	private bool explosive;
 	private string source;
+    private bool mark;
     //private int sApoints;
     AbilityController abilityController = AbilityController.Instance;
     public ProjectileAbility(string id, JSONNode json)
     {
+        this.mark = json[id]["mark"];
         this.dmg = json[id]["dmg"];
         this.reach = json[id]["reach"];
         this.hitRadius = json[id]["hitRadius"];
@@ -68,4 +70,5 @@ public class ProjectileAbility : Ability
 	public string GetSource(){
 		return source;
 	}
+    public bool GetMark() { return this.mark; }
 }

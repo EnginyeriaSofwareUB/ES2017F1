@@ -17,6 +17,7 @@ public class UtilityAbility : Ability
     private int ap;
 	private string projectile;
 	private string source;
+    private bool mark;
 
     public UtilityAbility(string id, JSONNode json)
     {
@@ -32,6 +33,7 @@ public class UtilityAbility : Ability
         this.ap = json[id]["ap"];
 		this.projectile = json[id]["projectile"];
 		this.source = json[id]["source"];
+        this.mark = json[id]["mark"];
     }
 
     //Apply ability to another sloth
@@ -70,4 +72,5 @@ public class UtilityAbility : Ability
 	public string GetSource(){
 		return source;
 	}
+    public bool GetMark() { return this.mark; }
 }

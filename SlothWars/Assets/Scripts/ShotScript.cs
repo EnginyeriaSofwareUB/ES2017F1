@@ -55,7 +55,7 @@ public class ShotScript : MonoBehaviour
     }
     private void MarkBuildTerrain()
     {
-        if (onloadAbility.GetBuildTerrain()) {
+        if (onloadAbility.GetMark()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
             onLoad.Mark();
@@ -64,7 +64,7 @@ public class ShotScript : MonoBehaviour
     // creates a force bar
     private void Bar()
     {
-        if (!onloadAbility.GetBuildTerrain())
+        if (!onloadAbility.GetMark())
         {
             GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 0.8f, 0), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
@@ -74,7 +74,7 @@ public class ShotScript : MonoBehaviour
     // creates a projectile and shoots it then destroys de force bar
     private void ShootAfterBar()
     {
-        if (onloadAbility.GetBuildTerrain())
+        if (onloadAbility.GetMark())
         {
             if (onLoad.GetApply())
             {

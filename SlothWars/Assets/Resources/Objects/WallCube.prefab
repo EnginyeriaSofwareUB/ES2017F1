@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33620724908459850}
   - component: {fileID: 65011855768170642}
   - component: {fileID: 23759081941489064}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: WallCube
   m_TagString: Destroyable
   m_Icon: {fileID: 0}

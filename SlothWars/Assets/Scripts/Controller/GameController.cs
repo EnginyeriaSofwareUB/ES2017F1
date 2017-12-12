@@ -135,6 +135,8 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
+                pla.sloth.SetTeam(1);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
@@ -178,6 +180,8 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
+                pla.sloth.SetTeam(2);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;

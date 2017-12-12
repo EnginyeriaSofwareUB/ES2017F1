@@ -14,7 +14,8 @@ public class DamageHealAbility : Ability
 	private string projectile;
 	private bool explosive;
 	private string source;
-	AbilityController abilityController = AbilityController.Instance;
+    private bool mark;
+    AbilityController abilityController = AbilityController.Instance;
 	public DamageHealAbility(string id, JSONNode json)
 	{
 
@@ -26,7 +27,8 @@ public class DamageHealAbility : Ability
 		this.projectile = json[id]["projectile"];
 		this.explosive = json[id]["explosive"];
 		this.source = json[id]["source"];
-	}
+        this.mark = json[id]["mark"];
+    }
 
 	//Apply ability to another sloth
 	public void Apply(ref Sloth target)
@@ -70,4 +72,5 @@ public class DamageHealAbility : Ability
 	public string GetSource(){
 		return source;
 	}
+    public bool GetMark() { return this.mark; }
 }
