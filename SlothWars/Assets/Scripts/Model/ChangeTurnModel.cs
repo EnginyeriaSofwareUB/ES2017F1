@@ -26,6 +26,7 @@ public class ChangeTurnModel
     private  bool endTurnOfPlayer;
     private  bool endTurnButtonStatus;
     private  bool beginStopped;
+    private bool isButtonPressed;
     private  int turnPlayer1;
     private  int turnPlayer2;
     private  Text turnLabel;
@@ -55,6 +56,9 @@ public class ChangeTurnModel
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         
     }
+
+    public void SetIsButtonPressed(bool isButtonPressed){ this.isButtonPressed = isButtonPressed; }
+    public bool GetIsButtonPressed() { return isButtonPressed; }
 
     public void SetCurrentTurn(int idCont, int currentTurnCont) { id = idCont; currentTurn = currentTurnCont; }
     public int GetId() { return id; }
