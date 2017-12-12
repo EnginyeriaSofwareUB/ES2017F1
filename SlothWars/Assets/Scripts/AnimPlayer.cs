@@ -17,7 +17,7 @@ public class AnimPlayer : MonoBehaviour {
     HealthScript hs;
     private bool falling;
 	Vector3 aPos;
-
+    public Sloth sloth;
     public AnimPlayer(){}
 
     void Start()
@@ -125,7 +125,7 @@ public class AnimPlayer : MonoBehaviour {
                 newPosition = transform.position + new Vector3(0f, -1f, 0f);
                 ss.IsMoving(0);
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition + new Vector3(0f, 3f, 0f);
+                selected.GetLeaf().transform.position = newPosition + new Vector3(0f, -1f, 0f);
                 selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
                 selected.SetSlothPosition(newPosition);
             }
@@ -165,7 +165,7 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(0);
                 hs.turnRight();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition + new Vector3(-1, 0, 0);
+                //selected.GetLeaf().transform.position = newPosition + new Vector3(3, 0, 0);
                 selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
                 selected.SetSlothPosition(newPosition);
             }
@@ -177,7 +177,7 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(1);
                 hs.turnLeft();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition + new Vector3(+1, 0, 0);
+                //selected.GetLeaf().transform.position = newPosition + new Vector3(-3, 0, 0);
                 selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
                 selected.SetSlothPosition(newPosition);
             }
@@ -244,6 +244,14 @@ public class AnimPlayer : MonoBehaviour {
     public void Die()
     {
         Destroy(gameObject);
+    }
+    public Sloth GetSloth()
+    {
+        return sloth;
+    }
+    public void SetSloth(Sloth sl)
+    {
+        sloth = sl;
     }
 }
 

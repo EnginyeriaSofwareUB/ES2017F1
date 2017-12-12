@@ -67,7 +67,7 @@ public class ProjectileTerrain : Projectile {
         GameObject.Destroy(mark);
         AbilityController.Instance.ApplyLastAbility(position);
     }
-    public void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius)
+	public void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source)
     {
         nCubes = radius;
     }

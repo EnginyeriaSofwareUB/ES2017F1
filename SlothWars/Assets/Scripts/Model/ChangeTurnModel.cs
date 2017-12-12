@@ -26,6 +26,7 @@ public class ChangeTurnModel
     private  bool endTurnOfPlayer;
     private  bool endTurnButtonStatus;
     private  bool beginStopped;
+    private bool isButtonPressed;
     private  int turnPlayer1;
     private  int turnPlayer2;
     private  Text turnLabel;
@@ -56,6 +57,9 @@ public class ChangeTurnModel
         
     }
 
+    public void SetIsButtonPressed(bool isButtonPressed){ this.isButtonPressed = isButtonPressed; }
+    public bool GetIsButtonPressed() { return isButtonPressed; }
+
     public void SetCurrentTurn(int idCont, int currentTurnCont) { id = idCont; currentTurn = currentTurnCont; }
     public int GetId() { return id; }
     public int GetCurrentTurn() { return currentTurn;}
@@ -70,8 +74,12 @@ public class ChangeTurnModel
     public void SetCurrentSloth(Sloth sloth) { currentSloth = sloth;}
 
     public int GetApCurrentSloth() { return apCurrentSloth; }
-    public void SetApCurrentSloth(int ap ) { apCurrentSloth = ap;}
-    public void DecrementApCurrentSloth(int ap){ apCurrentSloth -= ap;}
+    public void SetApCurrentSloth(int ap ) { 
+        apCurrentSloth = ap;
+    }
+    public void DecrementApCurrentSloth(int ap){ 
+        apCurrentSloth -= ap;
+    }
 
 
     public void SetTurnPlayers(int turnControllerPlayer1, int turnControllerPlayer2)

@@ -37,7 +37,21 @@ public class UIView : MonoBehaviour {
             }
 
         }
+        ChangeUIStats();
+
     }
+
+    private void ChangeUIStats()
+    {
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModelInstance.GetCurrentSloth().GetHp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModelInstance.GetCurrentSloth().GetAttack().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModelInstance.GetCurrentSloth().GetDefense().ToString();
+        if (changeTurnModelInstance.GetApCurrentSloth() >= 0)
+        {
+            GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModelInstance.GetApCurrentSloth().ToString();
+        }
+    }
+
     public void ResumeSelected()
     {
         uiModel.GetPanelOpts().gameObject.SetActive(false);

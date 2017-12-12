@@ -40,6 +40,7 @@ public class ExplosionScript : MonoBehaviour {
             colided = true;
             Debug.Log("radius "+radius);
 			logicAndDestroy ();
+			GameObject.FindGameObjectWithTag("soundManager").GetComponent<SoundEffects>().playExplosionEffect ();
         }
     }
 

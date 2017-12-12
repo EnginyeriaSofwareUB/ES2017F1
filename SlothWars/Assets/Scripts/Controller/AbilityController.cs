@@ -40,9 +40,9 @@ public class AbilityController{
 
     }
 
-    public void SumToHpBar(double dmg_Heal)
+    public void UpdateHpBar(double hp, double shield)
     {
-        lastTarget.GetComponent<HealthScript>().SumToHP(Mathf.FloorToInt((float)dmg_Heal));
+        lastTarget.GetComponent<HealthScript>().UpdateHP(Mathf.FloorToInt((float)hp), Mathf.FloorToInt((float)shield));
         GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
     // sums residual during t turns
@@ -56,8 +56,8 @@ public class AbilityController{
         ability = AbilityModel.Instance.GetLastAbility();
         if (g.gameObject.tag == "sloth") {
             lastTarget = g;
-            //ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
-            ability.Apply(g);
+            ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            //ability.Apply(g);
         }
         else{ability.Apply(g); }
     }

@@ -8,7 +8,10 @@ public class Sloth
     private double defense;
     private int ap;
     private double hp;
+	private double maxhp;
+	private double shield = 0;
     private int id;
+	private int team;
     private string typeName;
     private string idAb1;
     private string idAb2;
@@ -36,7 +39,8 @@ public class Sloth
             {
                 this.attack = n[i]["att"];
                 this.defense = n[i]["def"];
-                this.hp = n[i]["hp"];
+                this.maxhp = n[i]["hp"];
+				this.hp = this.maxhp;
                 this.ap = n[i]["ap"];
                 this.typeName = n[i]["type"];
                 this.idAb1 = n[i]["idAb1"];
@@ -113,9 +117,22 @@ public class Sloth
 
     public int GetAp(){ return ap;}
 
+
     public void SumToHp(double dmg_heal)
     {
-        hp += dmg_heal;
+		if (dmg_heal < 0) {
+			shield += dmg_heal;
+			if (shield < 0) {
+				hp += shield;
+				shield = 0;
+			}
+		}
+		else {
+			hp += dmg_heal;
+			if (hp > maxhp) {
+				hp = maxhp;
+			}
+		}
 
     }
     public Ability GetAbility1()
@@ -130,6 +147,18 @@ public class Sloth
     {
         return this.ab3;
     }
+	public int GetTeam(){
+		return team;
+	}
+	public void SetTeam(int t){
+		team = t;
+	}
+	public void SetShield(double s){
+		shield += s;
+	}
+	public double GetShield(){
+		return shield;
+	}
 
 
 }

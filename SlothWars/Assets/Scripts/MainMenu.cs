@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     private Image panelMain;
     private Image panelVS;
     private Image panelOpts;
+	private Slider mVolSlider;
+    private SpriteRenderer background;
+    private bool done = false;
+	private bool isInit = true;
+    private GameObject sloth;
 
 
     // Use this for initialization
@@ -28,10 +33,12 @@ public class MainMenu : MonoBehaviour
         panelMain = GameObject.Find("mainMenuPanel").GetComponent<Image>();
         panelVS = GameObject.Find("playVSPanel").GetComponent<Image>();
         panelOpts = GameObject.Find("OptionsPanel").GetComponent<Image>();
+		mVolSlider = GameObject.Find ("mVolSlider").GetComponent<Slider> ();
     }
 
-    private void Start()
-    {
+    private void Start(){
+        sloth = GameObject.Find("main_menu_sloth");
+        sloth.GetComponent<Rigidbody>().velocity = new Vector3(-1f, 0f, 0f);
         panelVS.gameObject.SetActive(false);
         panelOpts.gameObject.SetActive(false);
     }
@@ -51,6 +58,12 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("TeamSelection");
     }
+
+	public void GoCreditsScreen()
+	{
+		SceneManager.LoadScene("CreditsScene");
+	}
+
     public void GoBackPlay()
     {
         panelMain.gameObject.SetActive(true);
@@ -81,5 +94,33 @@ public class MainMenu : MonoBehaviour
 
     public void ShowSlothapedia(){
         SceneManager.LoadScene("Slothapedia");
+    }
+
+	public void mainVolSliderOnValueChanged (){
+		 
+		AudioListener.volume = mVolSlider.value;
+	}
+
+
+
+    public void Update(){
+        float height = Camera.main.orthographicSize * 2.35f;
+        float width = height / Screen.height * Screen.width;
+        
+        if (!done){
+            background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+            background.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+            if(background != null){
+                Bounds size = background.sprite.bounds;
+                background.gameObject.transform.localScale = new Vector3(width / size.size.x, height / size.size.y,0f);
+                done = true;
+            }
+        }
+
+        if(sloth.transform.position.x < -15f){
+        Vector3 position = sloth.transform.position;
+        position.x = 15f;
+        sloth.transform.position = position;
+        }
     }
 }

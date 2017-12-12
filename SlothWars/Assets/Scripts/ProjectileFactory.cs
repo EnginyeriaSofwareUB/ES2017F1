@@ -24,7 +24,7 @@ public class ProjectileFactory
     //Pass abilityID to instantiate a projectile
     public Projectile getProjectile(string projectileID)
     {
-        if (projectileID[0] == 'M')
+       /* if (projectileID[0] == 'M')
         {
             return new MagicProjectile();
 
@@ -46,35 +46,27 @@ public class ProjectileFactory
         {
             return null;
         }
-
-        return null;
+	*/
+        return null; 
 
     }
     public Projectile getProjectile(Ability a)
     {
-        if (a is ProjectileAbility)
-        {
-            return new BulletProjectile();
+		if (a.GetProjectile().Equals("xyz")) {
+			return new xyzProjectile ();
 
-        }
-        else if (a is HealingAbility)
-        {
-            return new HealingProjectile();
+		} else if (a.GetProjectile ().Equals("xy")) {
+			return new xyProjectile ();
 
-        }
-        else if (a is MagicAbility)
-        {
-            return new MagicProjectile();
-        }
-
-        else if (a is UtilityAbility)
-        {
-            return new ProjectileTerrain();
-        }
-        else
-        {
-            return new BulletProjectile();
-        }
+		} else if (a.GetProjectile ().Equals("terrain")) {
+			return new ProjectileTerrain ();
+		} else if (a.GetProjectile ().Equals("targetChain")) {
+			return new ChainProjectile ();
+		} else if (a.GetProjectile ().Equals("autoApply")) {
+			return new AutoApplyProjectile ();
+		} else {
+			return null;
+		}
 
     }
 

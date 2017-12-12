@@ -15,6 +15,8 @@ public class UtilityAbility : Ability
     private double boostAtt;
     private int durBoostAtt;
     private int ap;
+	private string projectile;
+	private string source;
 
     public UtilityAbility(string id, JSONNode json)
     {
@@ -28,6 +30,8 @@ public class UtilityAbility : Ability
         this.boostAtt = json[id]["boostAtt"];
         this.durBoostAtt = json[id]["durBoostAtt"];
         this.ap = json[id]["ap"];
+		this.projectile = json[id]["projectile"];
+		this.source = json[id]["source"];
     }
 
     //Apply ability to another sloth
@@ -57,4 +61,13 @@ public class UtilityAbility : Ability
     {
         return "true".Equals(this.alterTerrain);
     }
+	public string GetProjectile(){
+		return projectile;
+	}
+	public bool GetExplosive(){
+		return false;
+	}
+	public string GetSource(){
+		return source;
+	}
 }

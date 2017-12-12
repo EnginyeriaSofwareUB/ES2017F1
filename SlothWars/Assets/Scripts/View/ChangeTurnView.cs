@@ -9,6 +9,7 @@ public class ChangeTurnView: MonoBehaviour {
     private AbilityModel abilityModel;
     private bool endTurnOfPlayer;
     private static bool beginStopped;
+    private static bool isButtonPressed, auxIsButtonPressed;
     private static int playerTurn1, playerTurn2;
     private static List<GameObject> playersTeam1, playersTeam2;
     private List<Sloth> slothTeam1, slothTeam2;
@@ -21,6 +22,9 @@ public class ChangeTurnView: MonoBehaviour {
 
         endTurnButton = changeTurnModel.GetEndTurnButton();
 
+        //This should be false at the beggining.
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
+
         playersTeam1 = new List<GameObject>();
         playersTeam2 = new List<GameObject>();
         
@@ -30,13 +34,25 @@ public class ChangeTurnView: MonoBehaviour {
     }
     private void Update()
     {
+        auxIsButtonPressed = !isButtonPressed;
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
+
         
+        Debug.Log("ESTADO AUX" + auxIsButtonPressed);
+        Debug.Log("ESTADO PRESSED" + isButtonPressed);
         if (playersTeam1.Count == 0) {
             //ChangeUIStats();
             UpdateSlothTeams();
             FinishTurn();
             
         }
+        if (isButtonPressed == auxIsButtonPressed)
+        {
+            Debug.Log("HOLA");
+            FinishTurn();
+        }
+
+
         FixedBugs();
         
     }
@@ -62,6 +78,7 @@ public class ChangeTurnView: MonoBehaviour {
         playerTurn1 = changeTurnModel.GetTurnPlayer1();
         playerTurn2 = changeTurnModel.GetTurnPlayer2();
         beginStopped = changeTurnModel.GetBeginStopped();
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
 
         abilityModel.SetBeginStopped(beginStopped);
         abilityModel.SetTurnPlayer1(playerTurn1);
@@ -105,7 +122,6 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
-            ChangeUIStats();
 
         }
         else
@@ -119,7 +135,7 @@ public class ChangeTurnView: MonoBehaviour {
 
             } else if (playerTurn2 > playerTurn1)
             {
-                changeTurnModel.DeactivateSloth(playersTeam1[playerTurn2]);
+                changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
                 playersTeam1[playerTurn2].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
             }
             else
@@ -130,16 +146,16 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(2, playerTurn2);
             changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
-            ChangeUIStats();
+
         }
-           
+        ChangeUIStats();  
     }
 
     private void ChangeUIStats(){
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModel.GetCurrentSloth().GetHp().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModel.GetCurrentSloth().GetAttack().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModel.GetCurrentSloth().GetDefense().ToString();
-        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetCurrentSloth().GetAp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetApCurrentSloth().ToString();
     }
     private void FixedBugs()
     {
