@@ -2148,6 +2148,7 @@ GameObject:
   - component: {fileID: 4867609162460136}
   - component: {fileID: 23852334699325712}
   - component: {fileID: 102748888168397342}
+  - component: {fileID: 114632438571863768}
   m_Layer: 0
   m_Name: health
   m_TagString: Untagged
@@ -3562,7 +3563,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1951293010594174}
-  m_LocalRotation: {x: -0.1577473, y: 0.7078418, z: 0.6801746, w: 0.106950626}
+  m_LocalRotation: {x: -0.15774728, y: 0.70784175, z: 0.6801745, w: 0.10695061}
   m_LocalPosition: {x: -0.29798508, y: -0.1809284, z: 0.16988422}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000007}
   m_Children:
@@ -5296,6 +5297,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b2eecf02afb5e44a261d2f02b03a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ForceBar: {fileID: 0}
+--- !u!114 &114632438571863768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1872648807931370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9217be4c5654d8545809336a807839ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1282837613802420, guid: ede352e1979504fb1b89e9a790ea4152, type: 2}
 --- !u!137 &137142531922680238
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

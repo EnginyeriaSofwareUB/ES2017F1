@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour {
+    public GameObject healthBar;
     private double health = 100;
 	private GameObject hp;
 	private GameObject shield;
 	private GameObject shieldEffect = null;
 	// Use this for initialization
 	void Awake () {
+        healthBar = (GameObject) Instantiate(Resources.Load("Objects/HealthBar"), this.transform.position + new Vector3(-1, 1, 0),Quaternion.identity);
 		hp = (GameObject) Instantiate(Resources.Load("Prefabs/health"),this.transform.position + new Vector3(-1,1,0),Quaternion.identity);
 		shield = (GameObject) Instantiate(Resources.Load("Prefabs/shield"),this.transform.position + new Vector3(0.5f,1,0),Quaternion.identity);
 		shield.SetActive (false);
@@ -16,6 +18,7 @@ public class HealthScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		hp.transform.position = this.transform.position + new Vector3 (-1, 1, 0);
+        healthBar.transform.position = this.transform.position + new Vector3(-1, 1, 0);
 		if (shieldEffect != null) {
 			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
 			shieldEffect.transform.position = this.transform.position + new Vector3 (0, 0, -0.5f);
