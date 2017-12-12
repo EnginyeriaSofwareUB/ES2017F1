@@ -267,7 +267,7 @@ public class GameController : MonoBehaviour
             playerTeam2.Add(new AnimPlayer());
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
-
+        Debug.Log(teamSprite1.Count);
         TurnController.Instance.SetTeamSprite1(teamSprite1);
         TurnController.Instance.SetTeamSprite2(teamSprite2);
 
