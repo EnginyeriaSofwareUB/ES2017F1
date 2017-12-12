@@ -8,7 +8,8 @@ public class ChangeTurnView: MonoBehaviour {
     private ChangeTurnModel changeTurnModel;
     private AbilityModel abilityModel;
     private bool endTurnOfPlayer;
-    private static bool beginStopped,isButtonPressed;
+    private static bool beginStopped;
+    private static bool isButtonPressed, auxIsButtonPressed;
     private static int playerTurn1, playerTurn2;
     private static List<GameObject> playersTeam1, playersTeam2;
     private List<Sloth> slothTeam1, slothTeam2;
@@ -33,18 +34,24 @@ public class ChangeTurnView: MonoBehaviour {
     }
     private void Update()
     {
+        auxIsButtonPressed = !isButtonPressed;
         isButtonPressed = changeTurnModel.GetIsButtonPressed();
+
+        
+        Debug.Log("ESTADO AUX" + auxIsButtonPressed);
+        Debug.Log("ESTADO PRESSED" + isButtonPressed);
         if (playersTeam1.Count == 0) {
             //ChangeUIStats();
             UpdateSlothTeams();
             FinishTurn();
             
         }
-        if (isButtonPressed)
+        if (isButtonPressed == auxIsButtonPressed)
         {
+            Debug.Log("HOLA");
             FinishTurn();
-            isButtonPressed = false;
         }
+
 
         FixedBugs();
         
@@ -129,7 +136,7 @@ public class ChangeTurnView: MonoBehaviour {
 
             } else if (playerTurn2 > playerTurn1)
             {
-                changeTurnModel.DeactivateSloth(playersTeam1[playerTurn2]);
+                changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
                 playersTeam1[playerTurn2].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
             }
             else

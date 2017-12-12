@@ -119,7 +119,7 @@ public class AnimPlayer : MonoBehaviour {
                 newPosition = transform.position + new Vector3(0f, -1f, 0f);
                 ss.IsMoving(0);
                 
-changeTurnModel.DecrementApCurrentSloth(1);
+                changeTurnModel.DecrementApCurrentSloth(1);
             }
         }
         else
