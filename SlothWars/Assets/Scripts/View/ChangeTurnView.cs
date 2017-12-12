@@ -122,7 +122,6 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
-            ChangeUIStats();
 
         }
         else
@@ -147,16 +146,16 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(2, playerTurn2);
             changeTurnModel.SetCurrentSloth(slothTeam2[playerTurn2]);
             changeTurnModel.SetApCurrentSloth(slothTeam2[playerTurn2].GetAp());
-            ChangeUIStats();
+
         }
-           
+        ChangeUIStats();  
     }
 
     private void ChangeUIStats(){
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModel.GetCurrentSloth().GetHp().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModel.GetCurrentSloth().GetAttack().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModel.GetCurrentSloth().GetDefense().ToString();
-        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetCurrentSloth().GetAp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetApCurrentSloth().ToString();
     }
     private void FixedBugs()
     {

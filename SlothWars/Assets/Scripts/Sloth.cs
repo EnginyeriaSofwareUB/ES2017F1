@@ -117,6 +117,7 @@ public class Sloth
 
     public int GetAp(){ return ap;}
 
+
     public void SumToHp(double dmg_heal)
     {
 		if (dmg_heal < 0) {

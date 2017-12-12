@@ -74,8 +74,12 @@ public class ChangeTurnModel
     public void SetCurrentSloth(Sloth sloth) { currentSloth = sloth;}
 
     public int GetApCurrentSloth() { return apCurrentSloth; }
-    public void SetApCurrentSloth(int ap ) { apCurrentSloth = ap;}
-    public void DecrementApCurrentSloth(int ap){ apCurrentSloth -= ap;}
+    public void SetApCurrentSloth(int ap ) { 
+        apCurrentSloth = ap;
+    }
+    public void DecrementApCurrentSloth(int ap){ 
+        apCurrentSloth -= ap;
+    }
 
 
     public void SetTurnPlayers(int turnControllerPlayer1, int turnControllerPlayer2)
