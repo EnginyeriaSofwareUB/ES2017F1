@@ -108,7 +108,15 @@ public class TurnController{
     public void SetPressedButton()
     {
         beginStopped = false;
-        isButtonPressed = true;
+
+        if (isButtonPressed)
+        {
+            isButtonPressed = false;
+        }
+        else
+        {
+            isButtonPressed = true;
+        }
 
         //We comunicate to the View that the game starts.
         Debug.Log("Comunico a Model que he pulsado el boton " + isButtonPressed);

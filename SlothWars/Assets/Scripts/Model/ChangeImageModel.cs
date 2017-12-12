@@ -24,10 +24,12 @@ public class ChangeImageModel
     private  string s;
     private int lastId;
     private string name;
+    private ChangeTurnModel changeTurnModel;
 
     protected ChangeImageModel() {
         s = ((TextAsset)Resources.Load("slothapedia")).text;
         n = JSON.Parse(s);
+        changeTurnModel = ChangeTurnModel.Instance;
     }
 
 
@@ -75,4 +77,5 @@ public class ChangeImageModel
         }
         return name;
     }
+
 }

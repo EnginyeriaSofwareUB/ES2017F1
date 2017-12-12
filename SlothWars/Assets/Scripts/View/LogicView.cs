@@ -88,6 +88,7 @@ public class LogicView : MonoBehaviour {
         int ab1ap = changeTurnModel.GetCurrentSloth().GetAbility1().GetAp();
         int ab2ap = changeTurnModel.GetCurrentSloth().GetAbility2().GetAp();
         int ab3ap = changeTurnModel.GetCurrentSloth().GetAbility3().GetAp();
+        
         abilityModel.DeactivateButtonsIfNecessary(ab1ap, ab2ap, ab3ap, changeTurnModel.GetApCurrentSloth());
     }
 }
