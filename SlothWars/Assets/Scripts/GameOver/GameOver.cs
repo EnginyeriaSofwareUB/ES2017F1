@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
 	private string winner;
+	public List<GameObject> sloths;
 	// Use this for initialization
 	void Start () {
 		winner = StorePersistentVariables.Instance.winner;
@@ -15,10 +16,19 @@ public class GameOver : MonoBehaviour {
 			GameObject.Find("WinnerName").GetComponent<Text>().color = Color.blue;
 		}
 		GameObject.Find("WinnerName").GetComponent<Text>().text = StorePersistentVariables.Instance.winner;
+
+
 	}
 
 	//Return to main menu
 	public void ReturnToMenu(){
 		SceneManager.LoadScene("MainMenu");
+	}
+
+
+	public void Update(){
+		foreach(GameObject sloth in sloths){
+			sloth.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-200f, 200f), Random.Range(-200f, 200f), Random.Range(-200f, 200f)));
+		}
 	}
 }

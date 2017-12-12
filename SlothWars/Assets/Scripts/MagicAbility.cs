@@ -15,6 +15,9 @@ public class MagicAbility: Ability
     private int residualTurns;
     private float hitRadius = 2f;
     private int ap;
+	private string projectile;
+	private string source;
+	private bool explosive;
     AbilityController abilityController = AbilityController.Instance;
 
     public MagicAbility(string id, JSONNode json)
@@ -31,6 +34,9 @@ public class MagicAbility: Ability
         this.residualTurns = json[id]["residual turns"];
         this.hitRadius = json[id]["hitRadius"];
         this.ap = json[id]["ap"];
+		this.projectile = json[id]["projectile"];
+		this.explosive = json[id]["explosive"];
+		this.source = json[id]["source"];
     }
     public MagicAbility()
     {
@@ -39,7 +45,7 @@ public class MagicAbility: Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        abilityController.SumToHpBar(-dmg);
+		abilityController.UpdateHpBar(target.GetHp(),target.GetShield());
         //abilityController.SumResidual(target, -residual, residualTurns);
     }
 
@@ -70,4 +76,13 @@ public class MagicAbility: Ability
     public bool GetAlterTerrain() {
         return "true".Equals(this.alterTerrain);
     }
+	public string GetProjectile(){
+		return projectile;
+	}
+	public bool GetExplosive(){
+		return explosive;
+	}
+	public string GetSource(){
+		return source;
+	}
 }

@@ -17,7 +17,7 @@ public class AnimPlayer : MonoBehaviour {
     HealthScript hs;
     private bool falling;
 	Vector3 aPos;
-
+    public Sloth sloth;
     public AnimPlayer(){}
 
     void Start()
@@ -226,6 +226,14 @@ changeTurnModel.DecrementApCurrentSloth(1);
     public void Die()
     {
         Destroy(gameObject);
+    }
+    public Sloth GetSloth()
+    {
+        return sloth;
+    }
+    public void SetSloth(Sloth sl)
+    {
+        sloth = sl;
     }
 }
 

@@ -1,15 +1,14 @@
 {
   "M0": {
 	"desc":"Shoots a fire discharge that deals damage in a short radius",
-    "elem": "fire",
-    "onHit": "burnt",
-    "oHitProb": 0.1,
     "dmg": 20,
-    "distance": "ranged",
     "alterTerrain": true,
     "reach": 10,
-	  "hitRadius": 0.5,
-    "ap": 1
+	"hitRadius": 0.5,
+    "ap": 1,
+    "explosive":true,
+    "projectile": "xyz",
+    "source": "Objects/FireBall"
   },
   
    "M1": {
@@ -22,7 +21,10 @@
     "alterTerrain": true,
     "reach": 10,
 	  "hitRadius": 0.5,
-    "ap": 1
+    "ap": 1,
+    "explosive":true,
+    "projectile": "xyz",
+    "source": "Objects/FireBall"
   },
   
    "M2": {
@@ -35,33 +37,37 @@
     "alterTerrain": false,
     "reach": 15,
 	  "hitRadius": 0.5,
-    "ap": 1
+    "ap": 1,
+    "explosive":true,
+    "projectile": "xyz",
+    "source": "Objects/FireBall"
   },
   
   "T0": {
-	  "desc":"Generates a shield around caster that increases sloth defense.",
-    "shield": true,
-    "boostDef": 30,
-    "durBoostDef": 5,
-    "boostHp": 0,
-    "durBoostHp": 0,
-    "hpShield": 40,
-    "blockAb": false,
-	  "hitRadius": 0.5,
-	  "ap": 1
+	"desc":"Shoots an axe",
+    "dmg": 20,
+    "alterTerrain": false,
+    "reach": 10,
+	"hitRadius": 0.5,
+    "ap": 1,
+    "explosive":false,
+    "projectile": "xyz",
+    "source": "Objects/AxeProjectile"
   },
   
    "T1": {
-	"desc":"Boosts user HP.",
-    "shield": false,
+	"desc":"apply a shield",
+    "shield": true,
     "boostDef": 0,
     "durBoostDef": 0,
     "boostHp": 100,
     "durBoostHp": 10,
-    "hpShield": 0,
+    "hpShield": 20,
     "blockAb": false,
 	"hitRadius": 0.5,
-		"ap": 1
+		"ap": 1,
+	"projectile": "autoApply",
+    "source": "Objects/Shield"
   },
   
    "T2": {
@@ -74,60 +80,69 @@
     "hpShield": 40,
     "blockAb": true,
 	  "hitRadius": 0.5,
-		"ap": 1
+		"ap": 1,
+		"projectile": "autoApply",
+    "source": "Objects/shield"
   },
   
   "P0": {
-	"desc":"Deals damage in a short range.",
-    "dmg": 50,
-    "reach": 15,
+	"desc":"shoots an arrow that deals little damage in a long range.",
+    "dmg": 5,
+    "reach": 20,
 	"hitRadius": 0.5,
-	"ap":1
+	"ap":1,
+	"projectile": "xyz",
+	"explosive":false,
+    "source": "Objects/NormalArrow"
   },
   
   "P1": {
-	"ap": 1,
-	"desc":"Deals massive damage in a long range.",
-  "dmg": 60,
-  "reach": 30,
+	"desc":"shoots a electric arrow that explodes and deals little damage in a small radius and cast 3 lightning bolt that apply the damage again to the 3 nearest sloths.",
+    "dmg": 5,
+    "reach": 20,
 	"hitRadius": 0.5,
-	"ap": 1
+	"ap":1,
+	"projectile": "xyz",
+	"explosive":true,
+    "source": "Objects/Electric Arrow"
 
   },
   
   "P2": {
-	"desc":"Deals little damage in a very short range.",
-  "dmg": 10,
-  "reach": 20,
+	"desc":"shoots an arrow that deals little damage in a long range.",
+    "dmg": 5,
+    "reach": 20,
 	"hitRadius": 0.5,
-	"ap": 1
+	"ap":1,
+	"projectile": "xyz",
+	"explosive":false,
+    "source": "Objects/NormalArrow"
   },
 
   "H0": {
-	"desc":"Generates a shield around caster that increases sloth defense.",
-    "shield": 40,
+	"desc":"shoots a heal ball that explodes healing in a small radius.",
+    "shield": 0,
     "durShield": 5,
-    "healHp": 0,
+    "healHp": 40,
     "healEffects": false,
     "boostDef": 0,
     "durBoostDef": 0,
 	"hitRadius": 0.5,
-		"ap": 1,
-		"reach": 15
+	"ap": 1,
+	"reach": 15,
+	"projectile": "xy",
+	"explosive":true,
+    "source": "Objects/HealBall"
 
   },
   
-  "H1": {
-	"desc":"Heals objective of this ability.",
-    "shield": 0,
-    "durShield": 0,
-    "healHp": 50,
-    "healEffects": false,
-    "boostDef": 0,
-    "durBoostDef": 0,
-	"hitRadius": 0.5,
-		"ap": 1,
-		"reach": 15
+  "DH1": {
+	"desc":"Heals/damage the target and the members of a chain with size 2",
+    "damage": 5,
+    "healHP": 5,
+	"ap": 1,
+	"reach": 15,
+	"projectile": "targetChain"
 
   },
   
@@ -147,17 +162,15 @@
   "U0": {
 	"desc":"Spawns impassable terrain in a zone.",
     "buildTerrain": true,
-    "terrainType": "Tree",
+    "terrainType": "Wall",
     "terrainSize": 4,
     "alterTerrain": false,
     "durAlterTerrain": 0,
     "alterationSize": 0,
-    "boostAp": 4,
-    "boostAtt": 30,
-    "durBoostAtt": 5,
-	"hitRadius": 0.5,
-		"ap": 1,
-		"reach": 15
+	"ap": 1,
+	"reach": 15,
+	"projectile": "terrain",
+    "source": "Objects/WallCube"
   },
   
   "U1": {

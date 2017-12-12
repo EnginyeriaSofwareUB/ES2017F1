@@ -8,7 +8,7 @@ public class ChangeTurnView: MonoBehaviour {
     private ChangeTurnModel changeTurnModel;
     private AbilityModel abilityModel;
     private bool endTurnOfPlayer;
-    private static bool beginStopped;
+    private static bool beginStopped,isButtonPressed;
     private static int playerTurn1, playerTurn2;
     private static List<GameObject> playersTeam1, playersTeam2;
     private List<Sloth> slothTeam1, slothTeam2;
@@ -21,6 +21,9 @@ public class ChangeTurnView: MonoBehaviour {
 
         endTurnButton = changeTurnModel.GetEndTurnButton();
 
+        //This should be false at the beggining.
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
+
         playersTeam1 = new List<GameObject>();
         playersTeam2 = new List<GameObject>();
         
@@ -30,13 +33,19 @@ public class ChangeTurnView: MonoBehaviour {
     }
     private void Update()
     {
-        
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
         if (playersTeam1.Count == 0) {
             //ChangeUIStats();
             UpdateSlothTeams();
             FinishTurn();
             
         }
+        if (isButtonPressed)
+        {
+            FinishTurn();
+            isButtonPressed = false;
+        }
+
         FixedBugs();
         
     }
@@ -62,6 +71,7 @@ public class ChangeTurnView: MonoBehaviour {
         playerTurn1 = changeTurnModel.GetTurnPlayer1();
         playerTurn2 = changeTurnModel.GetTurnPlayer2();
         beginStopped = changeTurnModel.GetBeginStopped();
+        isButtonPressed = changeTurnModel.GetIsButtonPressed();
 
         abilityModel.SetBeginStopped(beginStopped);
         abilityModel.SetTurnPlayer1(playerTurn1);

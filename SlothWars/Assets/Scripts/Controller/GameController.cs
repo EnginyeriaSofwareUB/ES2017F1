@@ -11,23 +11,6 @@ using System.Security.Cryptography.X509Certificates;
 public class GameController : MonoBehaviour
 {
 
-    //SINGLETON
-    private static GameController instance;
-    public static GameController Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new GameController();
-            }
-            return instance;
-        }
-    }
-    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
-
-    ///////*****///////
-
     // Random Generator
     System.Random random = new System.Random();
 
@@ -100,7 +83,6 @@ public class GameController : MonoBehaviour
 
     private void InitializePlayer()
     {
-
         playerTeam1 = new List<AnimPlayer>();
         playerTeam2 = new List<AnimPlayer>();
         teamSprite1 = new List<Sprite>();
@@ -141,7 +123,7 @@ public class GameController : MonoBehaviour
                     Quaternion.Euler (90, 180, 0));
                 // Delete valid position of the field to avoid possible repetitions
                 TerrainCreator.GetAvailablePlaces().RemoveAt(point);
-
+                sloth.tag = "sloth";
 
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
@@ -152,12 +134,12 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
 
                 sloth.GetComponent<Rigidbody>().useGravity = false;
-                Debug.Log(sloth.GetComponent<Rigidbody>().useGravity);
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
@@ -182,6 +164,7 @@ public class GameController : MonoBehaviour
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                         TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
+                sloth.tag = "sloth";
                 // Delete valid position of the field to avoid possible repetitions
                TerrainCreator.GetAvailablePlaces().RemoveAt(point);
 
@@ -196,6 +179,7 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;

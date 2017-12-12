@@ -46,7 +46,7 @@
     "ap": 4,
     "photo": "slothHealer",
     "idAb1": "H0",
-    "idAb2": "H1",
+    "idAb2": "DH1",
     "idAb3": "H2",
     "model": "sloth_healer"
   },
