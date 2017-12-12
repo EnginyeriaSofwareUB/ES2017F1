@@ -138,7 +138,7 @@ public class ChangeTurnView: MonoBehaviour {
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModel.GetCurrentSloth().GetHp().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModel.GetCurrentSloth().GetAttack().ToString();
         GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModel.GetCurrentSloth().GetDefense().ToString();
-        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetCurrentSloth().GetAp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModel.GetApCurrentSloth().ToString();
     }
     private void FixedBugs()
     {

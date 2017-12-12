@@ -72,11 +72,9 @@ public class ChangeTurnModel
     public int GetApCurrentSloth() { return apCurrentSloth; }
     public void SetApCurrentSloth(int ap ) { 
         apCurrentSloth = ap;
-        currentSloth.SetAp(apCurrentSloth);
     }
     public void DecrementApCurrentSloth(int ap){ 
         apCurrentSloth -= ap;
-        currentSloth.SetAp(apCurrentSloth);
     }
 
 
