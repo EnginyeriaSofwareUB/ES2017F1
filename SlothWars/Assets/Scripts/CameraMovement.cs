@@ -4,7 +4,7 @@ public class CameraMovement : MonoBehaviour {
 
     float speed = 10.0f;
     float cameraDistance = -12.0f;
-    float cameraHeight = 7.0f;
+    float cameraHeight = 5.0f;
     GameObject[] projectile;
     GameObject[] explosion;
 	int Boundary = 50;
