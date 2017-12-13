@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LogicView : MonoBehaviour {
+
+    public static LogicView lv;
 
     private LogicModel logicModel;
     private AbilityModel abilityModel;
@@ -18,6 +19,8 @@ public class LogicView : MonoBehaviour {
 
         teamSloths1 = changeTurnModel.GetTeam1();
         teamSloths2 = changeTurnModel.GetTeam2();
+
+        lv = this;
 	}
 	
 	// Update is called once per frame
@@ -31,14 +34,19 @@ public class LogicView : MonoBehaviour {
         }
 	}
 
+    public void DestroySlothSafely(GameObject g)
+    {
+        bool b1 = teamSloths1.Remove(g);
+        bool b2 = teamSloths2.Remove(g);
+        Debug.Log(b1 + "check " + b2);
+        g.GetComponent<AnimPlayer>().Die();
+    }
+
     public void CheckSlothAlive(GameObject g)
     {
         if (g.GetComponent<HealthScript>().getHealth() <= 0)
         {
-            g.GetComponent<AnimPlayer>().Die();
-            bool b1 = teamSloths1.Remove(g);
-            bool b2 = teamSloths2.Remove(g);
-            Debug.Log(b1 + "check " + b2);
+            DestroySlothSafely(g);   
         }
         double health;
         AnimPlayer pla;
