@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
-
+    private bool shot = false;
     float speed = 10.0f;
     float cameraDistance = -12.0f;
-    float cameraHeight = 5.0f;
+    float cameraHeight = 7.0f;
     GameObject[] projectile;
     GameObject[] explosion;
 	int Boundary = 50;
@@ -51,13 +51,19 @@ public class CameraMovement : MonoBehaviour {
         }
         else if (projectile != null)
         {
-            if(projectile.Length > 0)
+            if (projectile.Length > 0)
+            {
+                shot = true;
                 transform.position = new Vector3(projectile[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
+            }
         }
         else if (explosion != null)
         {
-            if(explosion.Length > 0)
+            if (explosion.Length > 0)
+            {
+                shot = true;
                 transform.position = new Vector3(explosion[0].transform.position.x, projectile[0].transform.position.y, cameraDistance);
+            }
         }
 
 		if (turn != TurnController.Instance.GetActiveSloth ()) 
@@ -66,11 +72,12 @@ public class CameraMovement : MonoBehaviour {
                 TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
 			turn = TurnController.Instance.GetActiveSloth ();
 		}
-        if(explosion != null && projectile != null && explosion.Length == 0 && projectile.Length == 0)
+        if(explosion != null && projectile != null && explosion.Length == 0 && projectile.Length == 0 && shot)
         {
+            shot = false;
             transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x,
                 TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
-        }
+        } 
         projectile = new GameObject[] {};
         explosion = new GameObject[] {};
 	}
