@@ -12,6 +12,7 @@ public class NormalCollisionScript : MonoBehaviour
     private bool colided = false;
     public bool capsuleCol = false;
     AbilityController abilityController = AbilityController.Instance;
+    bool target = false;
     // Use this for initialization
     void Start()
     {
@@ -25,6 +26,10 @@ public class NormalCollisionScript : MonoBehaviour
         {
             this.transform.Rotate(torque * Time.deltaTime);
         }
+        if(this.transform.position.z >= 1.5f)
+        {
+            Destroy(this.gameObject);
+        }
     }
     void FixedUpdate()
     {
@@ -34,6 +39,14 @@ public class NormalCollisionScript : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "sloth")
+        {
+            if (!target)
+            {
+                AbilityController.Instance.ApplyDestroyTerrainAbility(collision.gameObject);
+                target = true;
+            }
+        }
         if (!colided)
         {
             colided = true;
