@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
             {
                 // Instantiate sloths in random valid positions of the field
                 int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
-                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()), 
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()+"A"), 
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                        TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
@@ -135,6 +135,7 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+
                 pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
                 pla.sloth.SetTeam(1);
 
@@ -145,8 +146,6 @@ public class GameController : MonoBehaviour
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").position = new Vector3(i + 20, 2, 0);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
 
@@ -162,7 +161,7 @@ public class GameController : MonoBehaviour
             {
                 // Instantiate sloths in random valid positions of the field
                 int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
-                sloth = (GameObject)Instantiate(Resources.Load("3D Models/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()), 
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()+"B"), 
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                         TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
@@ -180,6 +179,7 @@ public class GameController : MonoBehaviour
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
+
                 pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
                 pla.sloth.SetTeam(2);
 
@@ -191,8 +191,6 @@ public class GameController : MonoBehaviour
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").position = new Vector3(i + 10, 2, 0);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
        

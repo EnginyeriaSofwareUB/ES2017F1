@@ -103,6 +103,9 @@ public class AnimPlayer : MonoBehaviour {
     // Checking movement of the player using arrow keys or W and S keys
     void Up_Or_Down() {
         if (!move) {
+
+            selected.enabled = false;
+            selected.Active(false);
             //anim.SetFloat("inputV", inputV);
             if (inputV > 0.1)
             {
@@ -111,6 +114,10 @@ public class AnimPlayer : MonoBehaviour {
                 newPosition = transform.position + new Vector3(0f, 1f, 0f);
                 ss.IsMoving(0);
                 changeTurnModel.DecrementApCurrentSloth(1);
+                //selected.GetLeaf().transform.position = newPosition;
+                //selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
+
+                //selected.SetSlothPosition(newPosition);
             }
             if (inputV < -0.1)
             {
@@ -118,9 +125,14 @@ public class AnimPlayer : MonoBehaviour {
                 inputV = -1;
                 newPosition = transform.position + new Vector3(0f, -1f, 0f);
                 ss.IsMoving(0);
-                
                 changeTurnModel.DecrementApCurrentSloth(1);
+                //selected.GetLeaf().transform.position = newPosition;
+                //selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
+                //selected.SetSlothPosition(newPosition);
             }
+
+            selected.enabled = true;
+            selected.Active(true);
         }
         else
         {
@@ -143,6 +155,9 @@ public class AnimPlayer : MonoBehaviour {
     {
         if (!move && !ss.GetShotLoad())
         {
+
+            selected.enabled = false;
+            selected.Active(false);
             if (inputH > 0.1)
             {
                 move = true;
@@ -151,8 +166,6 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(0);
                 hs.turnRight();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition + new Vector3(-1, 2, 0);
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
             }
             if (inputH < -0.1)
             {
@@ -162,9 +175,9 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(1);
                 hs.turnLeft();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition + new Vector3(+1, 2, 0);
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(0, 90, 90);
             }
+            selected.enabled = true;
+            selected.Active(true);
         }
         else
         {

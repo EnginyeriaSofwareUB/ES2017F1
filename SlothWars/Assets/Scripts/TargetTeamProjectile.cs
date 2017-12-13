@@ -16,7 +16,7 @@ public class TargetTeamProjectile : Projectile
         if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
         {
             abilityController.ApplyLastAbility(hit.collider.gameObject);
-           
+
         }
     }
 
@@ -33,7 +33,7 @@ public class TargetTeamProjectile : Projectile
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
         {
-            if(mark == null)
+            if (mark == null)
             {
                 mark = (GameObject)GameObject.Instantiate(Resources.Load(resource), hit.transform.position + new Vector3(0, 0, -0.5f), Quaternion.identity);
             }

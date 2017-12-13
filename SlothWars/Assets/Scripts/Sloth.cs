@@ -137,6 +137,7 @@ public class Sloth
     }
     public Ability GetAbility1()
     {
+        Debug.Log(this.ab1);
         return this.ab1;
     }
     public Ability GetAbility2()

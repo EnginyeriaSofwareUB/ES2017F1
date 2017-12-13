@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-guid: 50dc3a130479bec49812e69cab8c2f1c
-timeCreated: 1511716871
-=======
-guid: a1718059987431043b1a1c0c7733afae
-timeCreated: 1511710918
->>>>>>> Stashed changes
-licenseType: Free
+guid: 55a5f6436662e4de6bc01f7d1e5886e2
 NativeFormatImporter:
-  mainObjectFileID: 2100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

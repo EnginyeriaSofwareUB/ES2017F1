@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: f6617419bfe9f49a28ae1b09a85f2ef5
-timeCreated: 1511536423
-=======
-guid: 05e79589e84e12c4581bef661124b23e
-timeCreated: 1511554719
->>>>>>> origin/Tree-climbing
-licenseType: Free
+guid: c5438846513e14ed0aca5a6403362615
 NativeFormatImporter:
-  mainObjectFileID: 2100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

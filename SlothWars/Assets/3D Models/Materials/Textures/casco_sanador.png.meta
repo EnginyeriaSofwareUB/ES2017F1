@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: d935a62d033bc4903b01dd05f48d26a5
-timeCreated: 1511536421
-=======
-guid: 496aa8e6e4762664783d0b7ba10f75b6
-timeCreated: 1511554679
->>>>>>> origin/Tree-climbing
-licenseType: Free
+guid: a31c27816dcac4277a3b61309bf37d4a
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
