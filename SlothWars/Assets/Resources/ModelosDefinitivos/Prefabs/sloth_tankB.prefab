@@ -565,9 +565,10 @@ GameObject:
   - component: {fileID: 54492391166786696}
   - component: {fileID: 114779297399496722}
   - component: {fileID: 65400462871952928}
+  - component: {fileID: 114233731310473960}
   m_Layer: 0
   m_Name: sloth_tankB
-  m_TagString: Untagged
+  m_TagString: sloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4073,7 +4074,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762126802171996}
-  m_LocalRotation: {x: -0.15774728, y: 0.70784175, z: 0.6801745, w: 0.10695061}
+  m_LocalRotation: {x: -0.15774728, y: 0.70784175, z: 0.6801745, w: 0.1069506}
   m_LocalPosition: {x: -0.29798508, y: -0.1809284, z: 0.16988422}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000007}
   m_Children:
@@ -5285,6 +5286,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278215448
+--- !u!114 &114233731310473960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226559958869150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c8458a821b9ce438c67e6f5df8b648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbody: {fileID: 0}
 --- !u!114 &114779297399496722
 MonoBehaviour:
   m_ObjectHideFlags: 1

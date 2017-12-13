@@ -2166,9 +2166,10 @@ GameObject:
   - component: {fileID: 54178402946219924}
   - component: {fileID: 114150083029781654}
   - component: {fileID: 65062020087245870}
+  - component: {fileID: 114729975390873134}
   m_Layer: 0
   m_Name: sloth_wizardB
-  m_TagString: Untagged
+  m_TagString: sloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3648,7 +3649,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1240597077974232}
-  m_LocalRotation: {x: -0.15774728, y: 0.70784175, z: 0.6801745, w: 0.10695061}
+  m_LocalRotation: {x: -0.15774728, y: 0.70784175, z: 0.6801745, w: 0.1069506}
   m_LocalPosition: {x: -0.29798508, y: -0.1809284, z: 0.16988422}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000007}
   m_Children:
@@ -5297,6 +5298,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceBar: {fileID: 1638866425143238, guid: 27ff1f3cc995c544db3450c4786de7bf, type: 2}
+--- !u!114 &114729975390873134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831740940875144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c8458a821b9ce438c67e6f5df8b648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbody: {fileID: 0}
 --- !u!137 &137045061385103538
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

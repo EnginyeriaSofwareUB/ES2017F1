@@ -2246,10 +2246,11 @@ GameObject:
   - component: {fileID: 95541866031862374}
   - component: {fileID: 54129163438125156}
   - component: {fileID: 114872130464030236}
+  - component: {fileID: 114455517483323528}
   - component: {fileID: 65083713186088614}
   m_Layer: 0
   m_Name: sloth_archerA
-  m_TagString: Untagged
+  m_TagString: sloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5495,6 +5496,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278215448
+--- !u!114 &114455517483323528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1839514615443442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c8458a821b9ce438c67e6f5df8b648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbody: {fileID: 0}
 --- !u!114 &114872130464030236
 MonoBehaviour:
   m_ObjectHideFlags: 1
