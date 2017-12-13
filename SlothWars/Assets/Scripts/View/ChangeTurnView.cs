@@ -122,6 +122,7 @@ public class ChangeTurnView: MonoBehaviour {
             changeTurnModel.SetCurrentTurn(1, playerTurn1);
             changeTurnModel.SetCurrentSloth(slothTeam1[playerTurn1]);
             changeTurnModel.SetApCurrentSloth(slothTeam1[playerTurn1].GetAp());
+            //changeTurnModel.GetCurrentSloth().SumToHp(-20);
 
         }
         else

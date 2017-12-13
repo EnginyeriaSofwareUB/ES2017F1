@@ -107,6 +107,10 @@ public class Sloth
         return this.hp;
     }
 
+    public double GetMaxHp(){
+        return this.maxhp;
+    }
+
     public double GetAttack(){
         return this.attack;
     }
