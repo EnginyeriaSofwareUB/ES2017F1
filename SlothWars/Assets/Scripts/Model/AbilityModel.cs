@@ -6,14 +6,28 @@ using UnityEngine.SceneManagement;
 
 
 public class AbilityModel {
+    //SINGLETON
+    private static AbilityModel instance;
 
-    private static Button firstAbility, secondAbility, thirdAbility;
-    private static List<Button> listAbilities;
-    private static bool beginStopped;
-    private static int turnPlayer1, turnPlayer2;
-    private static Ability lastAbility;
+    public static AbilityModel Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new AbilityModel();
+            }
+            return instance;
+        }
+    }
+    ///////*****///////
+    private Button firstAbility, secondAbility, thirdAbility;
+    private List<Button> listAbilities;
+    private bool beginStopped;
+    private int turnPlayer1, turnPlayer2;
+    private Ability lastAbility;
 
-    public AbilityModel() { }
+    protected AbilityModel() { }
 
 
     public void SetFirstAbility(Button firstAbilityCont) { firstAbility = firstAbilityCont; }
@@ -37,7 +51,7 @@ public class AbilityModel {
     public void SetTurnPlayer2(int turnPlayer2FromTurns) { turnPlayer2 = turnPlayer2FromTurns; }
     public int GetTurnPlayer2() { return turnPlayer2; }
 
-    public void SetLastAbility(Ability onLastAbility) { lastAbility = onLastAbility; Debug.Log(lastAbility); }
+    public void SetLastAbility(Ability onLastAbility) { lastAbility = onLastAbility; }
     public Ability GetLastAbility() { Debug.Log(lastAbility); return lastAbility; }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){

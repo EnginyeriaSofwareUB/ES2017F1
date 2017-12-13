@@ -32,6 +32,7 @@ TagManager:
   - projectile
   - leaf
   - Destroyable
+  - soundManager
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - sloth
   - 
   - 
   - 

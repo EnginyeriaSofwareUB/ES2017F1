@@ -8,7 +8,8 @@
     "photo": "slothWizard",
     "idAb1": "M0",
     "idAb2": "M1",
-    "idAb3": "M2"
+    "idAb3": "M2",
+    "model": "sloth_wizard"
   },
   
    "1": {
@@ -18,9 +19,10 @@
     "def": 60,
     "ap": 3,
     "photo": "slothTank",
-    "idAb1": "T0",
+    "idAb1": "P3",
     "idAb2": "T1",
-    "idAb3": "T2"
+    "idAb3": "T2",
+    "model": "sloth_tank"
   },
   
    "2": {
@@ -32,7 +34,8 @@
     "photo": "slothArcher",
     "idAb1": "P0",
     "idAb2": "P1",
-    "idAb3": "P2"
+    "idAb3": "P2",
+    "model": "sloth_archer"
   },
   
    "3": {
@@ -43,8 +46,9 @@
     "ap": 4,
     "photo": "slothHealer",
     "idAb1": "H0",
-    "idAb2": "H1",
-    "idAb3": "H2"
+    "idAb2": "DH1",
+    "idAb3": "T3",
+    "model": "sloth_healer"
   },
   
    "4": {
@@ -56,7 +60,8 @@
     "photo": "slothUtility",
     "idAb1": "U0",
     "idAb2": "U1",
-    "idAb3": "U2"
+    "idAb3": "U2",
+    "model": "sloth_utility"
   }
 
 }

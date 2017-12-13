@@ -11,55 +11,39 @@ using System.Security.Cryptography.X509Certificates;
 public class GameController : MonoBehaviour
 {
 
-    //SINGLETON
-    private static GameController instance;
-    public static GameController Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new GameController();
-            }
-            return instance;
-        }
-    }
-    protected GameController() { } // guarantee this will be always a singleton only - can't use the constructor!
-
-    ///////*****///////
+    // Random Generator
+    System.Random random = new System.Random();
 
     //GameObjects (sloths) in the scene
-    public static List<GameObject> teamSloths1;
-    public static List<GameObject> teamSloths2;
+    public List<GameObject> teamSloths1, teamSloths2;
 
     //Player Lists to attach to the gameObjects in the scene.
     public List<AnimPlayer> playerTeam1, playerTeam2;
 
     //PLACEPLAYERS VARIABLES: Variables created in order to place the sloths in the scene. 
-    private int i = 0;
-    private int checkAwake = 0;
-    private static int checkPlayer = 0;
-    private static int checkTurn = 0;
+    protected int i = 0;
+    protected int checkAwake = 0;
+    protected int checkPlayer = 0;
+    protected int checkTurn = 0;
+    protected int checkAbility = 0;
 
     //TURNCONTROLLER VARIABLES
-    private TurnController turnController;
-    public static List<Sprite> teamSprite1, teamSprite2;
+    protected TurnController turnControllerInstance = TurnController.Instance;
+    public List<Sprite> teamSprite1, teamSprite2;
     public Button endTurnButton;
-    private Text turnLabel;
+    public Text turnLabel;
 
     //LOGICCONTROLLER VARIABLES
-    private LogicController logicController;
-    private GameObject prove;
+    protected LogicController logicControllerInstance = LogicController.Instance;
 
     //UICONTROLLER VARIABLES
-    private UIController uiController;
+    protected UIController uiControllerInstance = UIController.Instance;
     public Image panelMain;
     public Image panelOpts;
 
     //ABILITY VARIABLES
-    private Transform createGun;
-    private AbilityController abilityController;
-    private Button buttonAbility1, buttonAbility2, buttonAbility3;
+    protected AbilityController abilityControllerInstance = AbilityController.Instance;
+    public Button buttonAbility1, buttonAbility2, buttonAbility3;
     public static List<Transform> listGunTeam1 = new List<Transform>();
     public static List<Transform> listGunTeam2 = new List<Transform>();
 
@@ -86,7 +70,7 @@ public class GameController : MonoBehaviour
             //Place the players in the scene.
             //TODO: Put this method in another class.
             PlacePlayers();
-
+            
             //Initialize all the variables for the rest of controllers (Getting from the scene)
             //Initialize controllers.
             InitializeTurnVariables();
@@ -97,7 +81,7 @@ public class GameController : MonoBehaviour
 
     }
 
-    private void InitializePlayer()
+    protected void InitializePlayer()
     {
 
         playerTeam1 = new List<AnimPlayer>();
@@ -110,92 +94,127 @@ public class GameController : MonoBehaviour
         GameObject.Find("GameController").GetComponent<AnimPlayer>().enabled = false;
     }
 
-    private void InitializeTerrain()
+    protected void InitializeTerrain()
     {
-        //Call the TerrainCreator.cs in order to execute Start method in that cs.
-        //TODO: Coroutines.
-        GameObject.Find("EmptyTerrain").GetComponent<TerrainCreator>().enabled = true;
+        TerrainCreator.LoadMap();
     }
-
-    private void PlacePlayers()
+        
+    protected void PlacePlayers()
     {
+        
         GameObject sloth;
         AnimPlayer pla;
         HealthScript health;
         Animator anim;
         ShotScript shot;
         SlothSelected selected;
+        GameObject healthBar;
         if (checkPlayer == 0)
         {
+            
             checkPlayer = 1;
             teamSloths1 = new List<GameObject>();
             teamSloths2 = new List<GameObject>();
             foreach (AnimPlayer playerSloth in playerTeam1)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 20, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
+                // Instantiate sloths in random valid positions of the field
+                int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()+"A"), 
+                    new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                       TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
+                    Quaternion.Euler (90, 180, 0));
+                // Delete valid position of the field to avoid possible repetitions
+                TerrainCreator.GetAvailablePlaces().RemoveAt(point);
+
+
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(playerSloth.GetSloth().GetHp());
+                health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
+                health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
                 health.enabled = true;
+
+                healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), sloth.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
+                healthBar.transform.parent = sloth.transform;
+                health.SetHealthBar(healthBar);
                 anim = sloth.GetComponent<Animator>();
                 anim.enabled = true;
 
                 pla = sloth.AddComponent<AnimPlayer>();
-                pla.SetSloth(playerSloth.GetSloth());
                 pla.enabled = true;
+
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
+                pla.sloth.SetTeam(1);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
 
+                sloth.GetComponent<Rigidbody>().useGravity = false;
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").position = new Vector3(i + 20, 2, 0);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
-
 
 
                 teamSloths1.Add(sloth);
 
                 i++;
             }
+            turnControllerInstance.SetTeamSloths1(teamSloths1);
+           
             i = 0;
             foreach (AnimPlayer playerSloth in playerTeam2)
             {
-				sloth = (GameObject)Instantiate(Resources.Load("Prefabs/Sloth"), new Vector3(i + 10, 1.05f, 0.5f), Quaternion.Euler (90, 180, 0));
-				// setting health
+                // Instantiate sloths in random valid positions of the field
+                int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()+"B"), 
+                    new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                        TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
+                    Quaternion.Euler (90, 180, 0));
+                // Delete valid position of the field to avoid possible repetitions
+               TerrainCreator.GetAvailablePlaces().RemoveAt(point);
+                // setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(playerSloth.GetSloth().GetHp());
+                health.setHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
+                health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
                 health.enabled = true;
+
+                healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), sloth.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                healthBar.GetComponent<RectTransform>().transform.rotation = Quaternion.Euler(90, 0, 0);
+                healthBar.transform.parent = sloth.transform;
+
+                health.SetHealthBar(healthBar);
                 //Start the animation
                 anim = sloth.GetComponent<Animator>();
                 anim.enabled = true;
 
                 pla = sloth.AddComponent<AnimPlayer>();
-                pla.SetSloth(playerSloth.GetSloth());
                 pla.enabled = true;
+
+                pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
+                pla.sloth.SetTeam(2);
 
                 shot = sloth.GetComponent<ShotScript>();
                 shot.enabled = true;
 
+                sloth.GetComponent<Rigidbody>().useGravity = false;
+                Debug.Log(sloth.GetComponent<Rigidbody>().useGravity);
                 selected = sloth.AddComponent<SlothSelected>();
                 selected.SetLeaf(sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").gameObject);
                 Destroy(sloth.GetComponentInChildren<Transform>().Find("leaf_teamA").gameObject);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").position = new Vector3(i + 10, 2, 0);
-                sloth.GetComponentInChildren<Transform>().Find("leaf_teamB").rotation = Quaternion.Euler(0, 90, 90);
                 selected.Active(true);
                 selected.enabled = true;
-
+       
 
                 teamSloths2.Add(sloth);
                 i++;
             }
+            turnControllerInstance.SetTeamSloths2(teamSloths2);
         }
     }
 
-    private void InitializeTurnVariables()
+    protected void InitializeTurnVariables()
     {
         if (checkTurn == 0)
         {
@@ -203,34 +222,34 @@ public class GameController : MonoBehaviour
             turnLabel = GameObject.Find("TurnText").GetComponent<Text>();
             endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
 
-            //TODO: Change the design in order to avoid calling the constructor.
-            //It also initializes the start method.
-            turnController = new TurnController(teamSloths1, teamSloths2, teamSprite1, teamSprite2, endTurnButton, turnLabel);
-
+            turnControllerInstance.SetEndTurnButton(endTurnButton);
+            turnControllerInstance.SetTurnLabel(turnLabel);
+            turnControllerInstance.StartTurns();
         }
 
     }
 
-    private void InitializeAbilityVariables()
+    protected void InitializeAbilityVariables()
     {
-
+        
         buttonAbility1 = GameObject.Find("buttonAbility1").GetComponent<Button>();
         buttonAbility2 = GameObject.Find("buttonAbility2").GetComponent<Button>();
         buttonAbility3 = GameObject.Find("buttonAbility3").GetComponent<Button>();
-        abilityController = new AbilityController(buttonAbility1, buttonAbility2, buttonAbility3);
+
+        abilityControllerInstance.SetAbility1(buttonAbility1);
+        abilityControllerInstance.SetAbility2(buttonAbility2);
+        abilityControllerInstance.SetAbility3(buttonAbility3);
+
+        abilityControllerInstance.StartAbilities();
+
     }
 
-    private void InitializeLogicVariables()
+    protected void InitializeLogicVariables()
     {
-
-
-        //TODO: Change the design in order to avoid calling the constructor.
-        //It also initializes the start method.
-        logicController = new LogicController(teamSloths1, teamSloths2);
-
+        logicControllerInstance.StartLogic();
     }
 
-    private void InitializeUIVariables()
+    protected void InitializeUIVariables()
     {
 
         panelMain = GameObject.Find("MainUIPanel").GetComponent<Image>();
@@ -238,32 +257,34 @@ public class GameController : MonoBehaviour
 
         //TODO: Change the design in order to avoid calling the constructor.
         //It also initializes the start method.
-        uiController = new UIController(panelMain, panelOpts);
+
+        uiControllerInstance.SetPanelMain(panelMain);
+        uiControllerInstance.SetPanelOpts(panelOpts);
+
+        //GameObject.Find("GameController").GetComponent<UIController>().enabled = true;
 
 
     }
 
     //Method to store in the lists the elements from the previous Scene (Stored in 
     //StorePersistentVariables.cs)
-    private void CreateTeamsSetSprites()
+    protected void CreateTeamsSetSprites()
     {
 
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam1)
         {
-            playerTeam1.Add(new AnimPlayer(sloth));
+            playerTeam1.Add(new AnimPlayer());
             teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
         foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam2)
         {
-            playerTeam2.Add(new AnimPlayer(sloth));
+            playerTeam2.Add(new AnimPlayer());
             teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
         }
+        Debug.Log(teamSprite1.Count);
+        TurnController.Instance.SetTeamSprite1(teamSprite1);
+        TurnController.Instance.SetTeamSprite2(teamSprite2);
 
-    }
-
-    public TurnController GetTurnController()
-    {
-        return turnController;
     }
 
 }

@@ -9,10 +9,12 @@ public class UIView : MonoBehaviour {
     // Use this for initialization
 
     private UIModel uiModel;
+    private ChangeTurnModel changeTurnModelInstance;
 
     private void Start()
     {
-        uiModel = new UIModel();
+        uiModel = UIModel.Instance;
+        changeTurnModelInstance = ChangeTurnModel.Instance;
     }
 
     private void Update()
@@ -35,7 +37,21 @@ public class UIView : MonoBehaviour {
             }
 
         }
+        ChangeUIStats();
+
     }
+
+    private void ChangeUIStats()
+    {
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[0].text = changeTurnModelInstance.GetCurrentSloth().GetHp().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[1].text = changeTurnModelInstance.GetCurrentSloth().GetAttack().ToString();
+        GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[2].text = changeTurnModelInstance.GetCurrentSloth().GetDefense().ToString();
+        if (changeTurnModelInstance.GetApCurrentSloth() >= 0)
+        {
+            GameObject.Find("AbilitiesPanel").GetComponentsInChildren<Text>()[3].text = changeTurnModelInstance.GetApCurrentSloth().ToString();
+        }
+    }
+
     public void ResumeSelected()
     {
         uiModel.GetPanelOpts().gameObject.SetActive(false);
@@ -46,5 +62,18 @@ public class UIView : MonoBehaviour {
     {
         uiModel.GetPanelOpts().gameObject.SetActive(false);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SurrenderGame()
+    {
+        if (changeTurnModelInstance.GetText().text == "Blue Turn")
+        {
+            StorePersistentVariables.Instance.winner = "Red"; 
+        }
+        else
+        {
+            StorePersistentVariables.Instance.winner = "Blue";     
+        }
+        SceneManager.LoadScene("GameOverScene");
     }
 }

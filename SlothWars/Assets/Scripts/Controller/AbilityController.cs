@@ -5,20 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class AbilityController : MonoBehaviour {
+public class AbilityController{
     //SINGLETON
-    private static AbilityController instance;
-    private static Button buttonAbility1, buttonAbility2, buttonAbility3;
-    private static ChangeTurnModel changeTurnModel;
-    private static GameObject lastTarget;
-
+    private static AbilityController instance; 
     public static AbilityController Instance
     {
         get
         {
             if (instance == null)
             {
-                //TODO: FIX THIS TO MAKE IT SINGLETON
                 instance = new AbilityController();
             }
             return instance;
@@ -26,28 +21,29 @@ public class AbilityController : MonoBehaviour {
     }
     ///////*****///////
 
-    private static AbilityModel abilityModel;
-    private Ability ability;
-
-	public AbilityController(Button bnAbility1, Button bnAbility2, Button bnAbility3)
-    {
-        buttonAbility1 = bnAbility1;
-        buttonAbility2 = bnAbility2;
-        buttonAbility3 = bnAbility3;
-        changeTurnModel  = new ChangeTurnModel();
-        abilityModel = new AbilityModel();
-    }
-
-    //TODO: FIX THIS
+    private  Ability ability;
+    private  Button buttonAbility1, buttonAbility2, buttonAbility3;
+    private  GameObject lastTarget;
+    
     protected AbilityController(){
 
     }
-    
+
+    //private void Start(){}
     //sums dmg_heal to the hp bar asociated to target
 
-    public void SumToHpBar(double dmg_Heal)
+    public void StartAbilities()
     {
-        lastTarget.GetComponent<HealthScript>().SumToHP(Mathf.FloorToInt((float)dmg_Heal));
+        buttonAbility1.onClick.AddListener(delegate { TriggerAbility1(); });
+        buttonAbility2.onClick.AddListener(delegate { TriggerAbility2(); });
+        buttonAbility3.onClick.AddListener(delegate { TriggerAbility3(); });
+
+    }
+
+    public void UpdateHpBar(double hp, double shield)
+    {
+        Debug.Log("upt");
+        lastTarget.GetComponent<HealthScript>().UpdateHP(Mathf.FloorToInt((float)hp), Mathf.FloorToInt((float)shield));
         GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
     // sums residual during t turns
@@ -58,37 +54,76 @@ public class AbilityController : MonoBehaviour {
     // apply last ability to the target
     public void ApplyLastAbility(GameObject g)
     {
-        ability = abilityModel.GetLastAbility();
+        ability = AbilityModel.Instance.GetLastAbility();
         if (g.gameObject.tag == "sloth") {
             lastTarget = g;
             ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
+            //ability.Apply(g);
         }
         else{ability.Apply(g); }
     }
+    public void ApplyLastAbility(Vector3 position)
+    {
+        AbilityModel.Instance.GetLastAbility().Apply(position);
+    }
     // apply last ability to terrain blocks in range
     public void ApplyDestroyTerrainAbility(GameObject destroyable) {
-        ability = abilityModel.GetLastAbility();
+        ability = AbilityModel.Instance.GetLastAbility();
         if (ability.GetAlterTerrain())
         {
-            Destroy(destroyable);
+            GameObject.Destroy(destroyable);
         }
     }
     public void TriggerAbility1()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility1());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
+                break;
+        }
+            
     }
 
     public void TriggerAbility2()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility2());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
+                break;
+        }
     }
 
     public void TriggerAbility3()
     {
+        int id = ChangeTurnModel.Instance.GetId();
+        int currentTurn = ChangeTurnModel.Instance.GetCurrentTurn();
+
         GameObject s = TurnController.Instance.GetActiveSloth();
-        s.GetComponent<ShotScript>().Shot(s.GetComponent<AnimPlayer>().sloth.GetAbility3());
+        switch (id)
+        {
+            case 1:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
+                break;
+            case 2:
+                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
+                break;
+        }
     }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){
@@ -97,16 +132,29 @@ public class AbilityController : MonoBehaviour {
         }else{
             buttonAbility1.interactable = true;
         }
-        if(ab1ap > currentAp){
+        if (ab2ap > currentAp){
             buttonAbility2.interactable = false;
         }else{
             buttonAbility2.interactable = true;
         }
-        if(ab1ap > currentAp){
+        if(ab3ap > currentAp){
             buttonAbility3.interactable = false;
         }else{
             buttonAbility3.interactable = true;
         }
         
+    }
+
+    public void SetAbility1(Button ability1Cont)
+    {
+        buttonAbility1 = ability1Cont;
+    }
+    public void SetAbility2(Button ability2Cont)
+    {
+        buttonAbility2 = ability2Cont;
+    }
+    public void SetAbility3(Button ability3Cont)
+    {
+        buttonAbility3 = ability3Cont;
     }
 }

@@ -11,11 +11,15 @@ public class TankAbility : Ability
     private double hpShield;
     private bool blockAb;
     private int ap;
-
+    private string projectile;
+    private string source;
+    private bool mark;
+    AbilityController abilityController = AbilityController.Instance;
     public TankAbility(string id, JSONNode json)
     {
 
         this.shield = json[id]["shield"];
+        this.mark = json[id]["mark"];
         this.boostDef = json[id]["boostDef"];
         this.durBoostDef = json[id]["durBoostDef"];
         this.boostHp = json[id]["boostHp"];
@@ -23,19 +27,22 @@ public class TankAbility : Ability
         this.hpShield = json[id]["hpShield"];
         this.blockAb = json[id]["blockAb"];
         this.ap = json[id]["ap"];
+        this.projectile = json[id]["projectile"];
+        this.source = json[id]["source"];
     }
 
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
-
+        target.SetShield(hpShield);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
 
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
     }
-
+    public void Apply(Vector3 p) { }
     public float GetRange()
     {
         return 10;
@@ -46,12 +53,25 @@ public class TankAbility : Ability
     }
     public bool GetBuildTerrain() { return false; }
     public int GetTerrainSize() { return 0; }
-	public int GetAp(){
+    public int GetAp()
+    {
         return ap;
     }
-
+    public bool GetMark() { return this.mark; }
     public bool GetAlterTerrain()
     {
         return false;
+    }
+    public string GetProjectile()
+    {
+        return projectile;
+    }
+    public bool GetExplosive()
+    {
+        return false;
+    }
+    public string GetSource()
+    {
+        return source;
     }
 }

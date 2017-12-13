@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 
 //TurnController: Created as a controller for logic issues as death rom sloths and abilities.
-public class LogicController: MonoBehaviour{
+public class LogicController{
     //SINGLETON
     private static LogicController instance;
     public static LogicController Instance
@@ -22,9 +22,8 @@ public class LogicController: MonoBehaviour{
     }
     protected  LogicController() { }
     ///////*****///////
-    private static LogicModel logicModel;
-    private static List<GameObject> teamSloths1 = new List<GameObject>();
-    private static List<GameObject> teamSloths2 = new List<GameObject>();
+    private  List<GameObject> teamSloths1 = new List<GameObject>();
+    private  List<GameObject> teamSloths2 = new List<GameObject>();
 
 
     public LogicController(List<GameObject> teamSloths1Cont, List<GameObject> teamSloths2Cont)
@@ -33,12 +32,11 @@ public class LogicController: MonoBehaviour{
         teamSloths1 = teamSloths1Cont;
         teamSloths2 = teamSloths2Cont;
     }
-    private void OnEnable()
+    public void StartLogic()
     {
-        logicModel = new LogicModel();
-
-        logicModel.SetTeamSloths1(teamSloths1);
-        logicModel.SetTeamSloths2(teamSloths2);
+        
+        LogicModel.Instance.SetTeamSloths1(teamSloths1);
+        LogicModel.Instance.SetTeamSloths2(teamSloths2);
     }
 
 

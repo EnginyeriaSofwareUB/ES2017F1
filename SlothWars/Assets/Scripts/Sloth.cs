@@ -8,12 +8,16 @@ public class Sloth
     private double defense;
     private int ap;
     private double hp;
+	private double maxhp;
+	private double shield = 0;
     private int id;
+	private int team;
     private string typeName;
     private string idAb1;
     private string idAb2;
     private string idAb3;
     private string sprite;
+    private string model;
     Ability ab1;
     Ability ab2;
     Ability ab3;
@@ -35,13 +39,15 @@ public class Sloth
             {
                 this.attack = n[i]["att"];
                 this.defense = n[i]["def"];
-                this.hp = n[i]["hp"];
+                this.maxhp = n[i]["hp"];
+				this.hp = this.maxhp;
                 this.ap = n[i]["ap"];
                 this.typeName = n[i]["type"];
                 this.idAb1 = n[i]["idAb1"];
                 this.idAb2 = n[i]["idAb2"];
                 this.idAb3 = n[i]["idAb3"];
                 this.sprite = n[i]["photo"];
+                this.model = n[i]["model"];
                 end = true;
             }
             i++;
@@ -69,10 +75,16 @@ public class Sloth
         this.idAb2 = n[id]["idAb2"];
         this.idAb3 = n[id]["idAb3"];
         this.sprite = n[id]["photo"];
+        this.model = n[id]["model"];
 
         this.ab1 = factory.getAbility(idAb1);
         this.ab2 = factory.getAbility(idAb2);
         this.ab3 = factory.getAbility(idAb3);
+    }
+
+    public String GetModel()
+    {
+        return this.model;
     }
 
     public String GetPath()
@@ -95,6 +107,10 @@ public class Sloth
         return this.hp;
     }
 
+    public double GetMaxHp(){
+        return this.maxhp;
+    }
+
     public double GetAttack(){
         return this.attack;
     }
@@ -105,13 +121,27 @@ public class Sloth
 
     public int GetAp(){ return ap;}
 
+
     public void SumToHp(double dmg_heal)
     {
-        hp += dmg_heal;
+		if (dmg_heal < 0) {
+			shield += dmg_heal;
+			if (shield < 0) {
+				hp += shield;
+				shield = 0;
+			}
+		}
+		else {
+			hp += dmg_heal;
+			if (hp > maxhp) {
+				hp = maxhp;
+			}
+		}
 
     }
     public Ability GetAbility1()
     {
+        Debug.Log(this.ab1);
         return this.ab1;
     }
     public Ability GetAbility2()
@@ -122,6 +152,18 @@ public class Sloth
     {
         return this.ab3;
     }
+	public int GetTeam(){
+		return team;
+	}
+	public void SetTeam(int t){
+		team = t;
+	}
+	public void SetShield(double s){
+		shield += s;
+	}
+	public double GetShield(){
+		return shield;
+	}
 
 
 }

@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: 0f9af66e4425b40998b44b09cad283de
+guid: 7add8e5c05fbe074dad8a445190b08cd
+timeCreated: 1512297657
+licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -165,6 +167,10 @@ ModelImporter:
     100318: tongue_002
     100320: upper_arm_L
     100322: upper_arm_R
+    100324: Camera
+    100326: Lamp_002
+    100328: Lamp_003
+    100330: Sphere
     400000: breast_L
     400002: breast_R
     400004: brow_B_L
@@ -327,10 +333,20 @@ ModelImporter:
     400318: tongue_002
     400320: upper_arm_L
     400322: upper_arm_R
+    400324: Camera
+    400326: Lamp_002
+    400328: Lamp_003
+    400330: Sphere
+    2000000: Camera
+    2300000: Sphere
+    3300000: Sphere
     4300000: Cube
+    4300002: Sphere
     7400000: Default Take
     7400002: Action
     9500000: //RootNode
+    10800000: Lamp_002
+    10800002: Lamp_003
     13700000: Cube
   materials:
     importMaterials: 1

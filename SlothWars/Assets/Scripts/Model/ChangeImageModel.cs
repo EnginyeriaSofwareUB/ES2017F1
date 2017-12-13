@@ -19,23 +19,28 @@ public class ChangeImageModel
         }
     }
 
-    private static Sprite slothSpriteSelected;
+    private Sprite slothSpriteSelected;
     private JSONNode n;
-    private static string s;
+    private  string s;
     private int lastId;
     private string name;
+    private ChangeTurnModel changeTurnModel;
 
     protected ChangeImageModel() {
         s = ((TextAsset)Resources.Load("slothapedia")).text;
         n = JSON.Parse(s);
+        changeTurnModel = ChangeTurnModel.Instance;
     }
 
 
     //Getters and Setters
     public Sprite GetSprite() { return slothSpriteSelected; }
     public void SetSprite(Sprite spriteFromPreviousScene) { slothSpriteSelected = spriteFromPreviousScene; }
+
     public void SendSlothInfo(string type)
     {
+		Debug.Log ("tipodesloth");
+		Debug.Log (type);
         switch(type){
             case "Wizard":
                 lastId = 0;
@@ -75,4 +80,5 @@ public class ChangeImageModel
         }
         return name;
     }
+
 }

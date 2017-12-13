@@ -6,7 +6,7 @@ public class LightningBoltCaster : MonoBehaviour {
 
 	// Use this for initialization
     public int lnumber= 3;
-    private float range = 4.5f;
+    private float range = 20f;
     public string lpath= "Objects/LightningBolt/SimpleLightningBoltPrefab";
     AbilityController abilityController = AbilityController.Instance;
     void Start () {

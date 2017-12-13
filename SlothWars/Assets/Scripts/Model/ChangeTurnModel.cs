@@ -4,20 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeTurnModel
-{
-    private static Button endTurnButton;
-    private static List<GameObject> teamSloths1 = new List<GameObject>();
-    private static List<GameObject> teamSloths2 = new List<GameObject>();
-    private static bool endTurnOfPlayer;
-    private static bool endTurnButtonStatus;
-    private static bool beginStopped;
-    private static int turnPlayer1;
-    private static int turnPlayer2;
-    private static Text turnLabel;
-    private static Sloth currentSloth;
-    private static int apCurrentSloth;
+{    //SINGLETON
+    private static ChangeTurnModel instance;
 
-    public ChangeTurnModel() {}
+    public static ChangeTurnModel Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                //TODO: FIX THIS TO MAKE IT SINGLETON
+                instance = new ChangeTurnModel();
+            }
+            return instance;
+        }
+    }
+    ///////*****///////
+    private  Button endTurnButton;
+    private  List<GameObject> teamSloths1;
+    private  List<GameObject> teamSloths2;
+    private  bool endTurnOfPlayer;
+    private  bool endTurnButtonStatus;
+    private  bool beginStopped;
+    private bool isButtonPressed;
+    private  int turnPlayer1;
+    private  int turnPlayer2;
+    private  Text turnLabel;
+    private  Sloth currentSloth;
+    private  int id, currentTurn;
+    private  int apCurrentSloth;
+
+    protected ChangeTurnModel() {  }
   
     public void SetEndTurnButton(Button endTurnButtonController) { endTurnButton = endTurnButtonController; }
     public Button GetEndTurnButton() { return endTurnButton; }
@@ -33,10 +50,19 @@ public class ChangeTurnModel
 
     public void SetTeams(List<GameObject> playerControllerTeam1, List<GameObject> playerControllerTeam2)
     {
+        teamSloths1 = new List<GameObject>();
+        teamSloths2 = new List<GameObject>();
         foreach (GameObject player in playerControllerTeam1) { teamSloths1.Add(player); }
         foreach (GameObject player in playerControllerTeam2) { teamSloths2.Add(player); }
         
     }
+
+    public void SetIsButtonPressed(bool isButtonPressed){ this.isButtonPressed = isButtonPressed; }
+    public bool GetIsButtonPressed() { return isButtonPressed; }
+
+    public void SetCurrentTurn(int idCont, int currentTurnCont) { id = idCont; currentTurn = currentTurnCont; }
+    public int GetId() { return id; }
+    public int GetCurrentTurn() { return currentTurn;}
 
     public bool GetEndTurnOfPlayer() { return endTurnOfPlayer; }
     public void SetEndTurnOfPlayer(bool endTurnOfPlayerController) { endTurnOfPlayer = endTurnOfPlayerController; }
@@ -48,8 +74,12 @@ public class ChangeTurnModel
     public void SetCurrentSloth(Sloth sloth) { currentSloth = sloth;}
 
     public int GetApCurrentSloth() { return apCurrentSloth; }
-    public void SetApCurrentSloth(int ap ) { apCurrentSloth = ap;}
-    public void DecrementApCurrentSloth(int ap){ apCurrentSloth -= ap;}
+    public void SetApCurrentSloth(int ap ) { 
+        apCurrentSloth = ap;
+    }
+    public void DecrementApCurrentSloth(int ap){ 
+        apCurrentSloth -= ap;
+    }
 
 
     public void SetTurnPlayers(int turnControllerPlayer1, int turnControllerPlayer2)

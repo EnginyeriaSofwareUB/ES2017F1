@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ShotScript : MonoBehaviour
 {
     public GameObject ForceBar; //force/range bar gameObject
-    private static bool beginStopped;
     private Transform gun;  // aim vector transform
     private AbilityModel abilityModel;
     private ChangeTurnModel changeTurnModel;
@@ -20,8 +19,9 @@ public class ShotScript : MonoBehaviour
     //initialization
     void Start()
     {
-        abilityModel = new AbilityModel();
-        changeTurnModel = new ChangeTurnModel();
+		
+        abilityModel = AbilityModel.Instance;
+        changeTurnModel = ChangeTurnModel.Instance;
         gun = transform;
 		gun.position = new Vector3(gun.position.x,gun.position.y,gun.position.z-0.5f);
     }
@@ -34,6 +34,7 @@ public class ShotScript : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 ShootAfterBar();
+				GameObject.FindGameObjectWithTag("soundManager").GetComponent<SoundEffects>().playLaunchEffect ();
             }
         }
        
@@ -54,18 +55,18 @@ public class ShotScript : MonoBehaviour
     }
     private void MarkBuildTerrain()
     {
-        if (onloadAbility.GetBuildTerrain()) {
+        if (onloadAbility.GetMark()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize());
+			onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
             onLoad.Mark();
         }
     }
     // creates a force bar
     private void Bar()
     {
-        if (!onloadAbility.GetBuildTerrain())
+        if (!onloadAbility.GetMark())
         {
-            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 2, 0), gun.rotation);
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 0.8f, 0), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
         }
         shotLoad = true;
@@ -73,27 +74,28 @@ public class ShotScript : MonoBehaviour
     // creates a projectile and shoots it then destroys de force bar
     private void ShootAfterBar()
     {
-        if (onloadAbility.GetBuildTerrain())
+        if (onloadAbility.GetMark())
         {
             if (onLoad.GetApply())
             {
+				onLoad.SetAll(gun.position,new Vector3(0,0,0),Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
                 shotLoad = false;
                 Active(false);
                 onLoad.ApplyLogic();
-                changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
+                changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
+
             }
         }
         else
         {
             float radAngle = gun.eulerAngles[2]  * Mathf.Deg2Rad;
             Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
-            Debug.Log("rangeeeeeeeee"+(float)onloadAbility.GetRange());
-            onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius());
+			onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(),onloadAbility.GetExplosive(),onloadAbility.GetSource());
             onLoad.ApplyLogic();
             st.Destroy();
             shotLoad = false;
             Active(false);
-            changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp());
+            changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
         }
     }
     // r = 0 when right moving , left moving r = 1
@@ -116,7 +118,7 @@ public class ShotScript : MonoBehaviour
             gun = this.transform;
         }
         else{
-            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position, Quaternion.identity);
             gun = g.transform;
         }
         //gun.gameObject.SetActive(b);
@@ -136,11 +138,19 @@ public class ShotScript : MonoBehaviour
             {
                 ProjectileFactory pf = ProjectileFactory.Instance;
                 onLoad = pf.getProjectile(a);
+				Debug.Log("The type of the used projectile is " + a.GetHashCode());
                 Debug.Log("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
                 abilityModel.SetLastAbility(a);
-                Bar();
-				Active(true);            
+
+
+				if (a.GetProjectile ().Equals ("autoApply")) {
+					onLoad.ApplyLogic ();
+                    changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
+                } else {
+					Bar ();
+					Active (true);
+				}
 			}
         }
     }

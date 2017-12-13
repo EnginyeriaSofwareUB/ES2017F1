@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //TurnController: Created as a controller for changing turns and changing images during the game.
-public class TurnController: MonoBehaviour{
+public class TurnController{
     //SINGLETON
     private static TurnController instance;
     public static TurnController Instance
@@ -19,52 +19,48 @@ public class TurnController: MonoBehaviour{
             return instance;
         }
     }
-    protected  TurnController() { }
+    protected  TurnController()
+    {
+
+    }
     ///////*****///////
 
     //Get an instance of ChangeTurnModel in order to set the values updated by the user. 
-    private static ChangeTurnModel changeTurnModel;
-    private static List<GameObject> newTeamSloths1, newTeamSloths2;
-    private static List<Sprite> teamSprite1 = new List<Sprite>();
-    private static List<Sprite> teamSprite2 = new List<Sprite>();
+    private List<GameObject> newTeamSloths1, newTeamSloths2;
+    private List<Sprite> teamSprite1;
+    private List<Sprite> teamSprite2;
     private static int turnPlayer1, turnPlayer2;
-    private static Text turnLabel;
-    private static bool beginStopped, endTurnOfPlayer, isButtonPressed;
-    private static Sprite spriteFromPreviousScene;
+    private Text turnLabel;
+    private bool beginStopped, endTurnOfPlayer, isButtonPressed;
+    private Sprite spriteFromPreviousScene;
 
     //Get an instance of ChangeImageModel in order to set the values updated by the user.
-    private static ChangeImageModel changeImageModel;
+    private ChangeImageModel changeImageModel;
+    private ChangeTurnModel changeTurnModel;
     private static Button endTurnButton;
 
-    public TurnController(List<GameObject> teamSloths1, List<GameObject> teamSloths2, List<Sprite> teamSprite1Cont, List<Sprite> teamSprite2Cont, Button endTurnButtonCont, Text turnLabelCont)
-    {
+    // Use this for initialization
+    public void StartTurns () {
+
         beginStopped = true;
         isButtonPressed = false;
         endTurnOfPlayer = true;
         turnPlayer1 = 0;
         turnPlayer2 = 0;
-        teamSprite1 = teamSprite1Cont;
-        teamSprite2 = teamSprite2Cont;
-        newTeamSloths1 = teamSloths1;
-        newTeamSloths2 = teamSloths2;
-        endTurnButton = endTurnButtonCont;
-        turnLabel = turnLabelCont;
         //We start with the sprite of the first sloth in blue team, being the one who starts the game
         //See DeactivateAllExceptOne() in ChangeTurnModel.cs
         spriteFromPreviousScene = teamSprite1[0];
-    }
-    // Use this for initialization
-    private void OnEnable () {
 
         changeImageModel = ChangeImageModel.Instance;
-        changeTurnModel = new ChangeTurnModel();
+        changeTurnModel = ChangeTurnModel.Instance;
+
         changeTurnModel.SetEndTurnButton(endTurnButton);
 
         changeTurnModel.SetText(turnLabel);
         //We comunicate to View (By setting the beginStopped value in Model) that the game is beginning (=> beginStopped=true).
         changeTurnModel.SetBeginStopped(beginStopped);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
-
+        changeTurnModel.SetIsButtonPressed(isButtonPressed);
         //Set the player teams in Model in order to get captured by view and show them in the scene.
         //Set the turns for team1 and team2.
         changeTurnModel.SetTeams(newTeamSloths1, newTeamSloths2);
@@ -74,9 +70,12 @@ public class TurnController: MonoBehaviour{
         //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
         changeImageModel.SetSprite(spriteFromPreviousScene);
-        changeImageModel.SendSlothInfo(newTeamSloths1[0].GetComponent<AnimPlayer>().GetSloth().GetTypeName());
+        changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[0].GetTypeName());
 
-       
+        endTurnButton.onClick.AddListener(delegate { FinishTurnOfPlayer(); });
+        endTurnButton.onClick.AddListener(delegate { SetEndTurnOfPlayer(); });
+        endTurnButton.onClick.AddListener(delegate { SetPressedButton(); });
+
     }
 
     //Method to update the values from turnPlayer1 and turnPlayer2 when the button is pressed.
@@ -110,21 +109,26 @@ public class TurnController: MonoBehaviour{
     {
         beginStopped = false;
 
+        if (isButtonPressed)
+        {
+            isButtonPressed = false;
+        }
+        else
+        {
+            isButtonPressed = true;
+        }
+
         //We comunicate to the View that the game starts.
+        Debug.Log("Comunico a Model que he pulsado el boton " + isButtonPressed);
         changeTurnModel.SetBeginStopped(beginStopped);
+        changeTurnModel.SetIsButtonPressed(isButtonPressed);
 
         //We change the new values in Model in order to comunicate to View and show the results.
         changeTurnModel.SetTurnPlayers(turnPlayer1, turnPlayer2);
         changeTurnModel.SetEndTurnOfPlayer(endTurnOfPlayer);
 
-
-        //To fix possible bugs in changing turns.
-        //Quit comments when animator is integrated
-        //FixedBugs();
-
         //Call the method in order to establish the selected image to show.
         GetSelectedPlayerImage();
-
     }
 
     //Method to update the image selected when the button is pressed.
@@ -134,27 +138,73 @@ public class TurnController: MonoBehaviour{
         {
             spriteFromPreviousScene = teamSprite2[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
-            changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
+            changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2].GetTypeName());
         }
         else 
         {
-            if (turnPlayer1 == turnPlayer2)
-            {
-                spriteFromPreviousScene = teamSprite1[turnPlayer1];
-                changeImageModel.SetSprite(spriteFromPreviousScene);
-                changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
-            } else if (turnPlayer2 - turnPlayer1 < -1)
-            {
-                spriteFromPreviousScene = teamSprite1[turnPlayer2];
-                changeImageModel.SetSprite(spriteFromPreviousScene);
-                changeImageModel.SendSlothInfo(GetActiveSloth().GetComponent<AnimPlayer>().GetSloth().GetTypeName());
-            }
+			if (turnPlayer1 == turnPlayer2) {
+				spriteFromPreviousScene = teamSprite1 [turnPlayer1];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam1 [turnPlayer1].GetTypeName ());
+
+			} else if (turnPlayer2 - turnPlayer1 < -1) {
+				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+			} else {
+				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+			}
         }
 
     }
     public GameObject GetActiveSloth()
     {
-        if (turnPlayer1 == turnPlayer2) { return changeTurnModel.GetTeam1()[turnPlayer1]; }
-        else { return changeTurnModel.GetTeam2()[turnPlayer2]; }
+        if (turnPlayer1 == 0 && turnPlayer2 == 0) { return newTeamSloths1[turnPlayer1]; }
+        else if (turnPlayer1 == turnPlayer2) { return newTeamSloths1[turnPlayer1]; }
+        else if (turnPlayer2 -turnPlayer1<-1){ return newTeamSloths1[turnPlayer2]; }
+        else { return newTeamSloths2[turnPlayer2]; }
+    }
+	public int GetActualTurnTeam(){
+		if (turnPlayer1 == 0 && turnPlayer2 == 0) { return 1; }
+		else if (turnPlayer1 == turnPlayer2) { return 1; }
+		else if (turnPlayer2 -turnPlayer1<-1){ return 2; }
+		else { return 2; }
+	}
+
+    public void SetTeamSprite1(List<Sprite> spriteTeamCont)
+    {
+        teamSprite1 = new List<Sprite>();
+        teamSprite1 = spriteTeamCont;
+    }
+
+    public void SetTeamSprite2(List<Sprite> spriteTeamCont)
+    {
+        teamSprite2 = new List<Sprite>();
+        teamSprite2 = spriteTeamCont;
+    }
+
+    public void SetTeamSloths1(List<GameObject> slothTeamCont)
+    {
+
+        newTeamSloths1 = new List<GameObject>();
+        newTeamSloths1 = slothTeamCont;
+    }
+
+    public void SetTeamSloths2(List<GameObject> slothTeamCont)
+    {
+        newTeamSloths2 = new List<GameObject>();
+        newTeamSloths2 = slothTeamCont;
+    }
+
+    public void SetEndTurnButton(Button endTurnButtonCont)
+    {
+        endTurnButton = endTurnButtonCont;
+    }
+
+    public void SetTurnLabel(Text labelTextCont)
+    {
+        turnLabel = labelTextCont;
     }
 }

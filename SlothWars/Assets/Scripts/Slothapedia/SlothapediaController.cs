@@ -14,7 +14,9 @@ public class SlothapediaController : MonoBehaviour {
     private GameObject panelSlothInfo;
     private GameObject panelAbilityInfo;
     private GameObject slothModel;
+    private GameObject rawImage;
     private Quaternion quaternion;
+	public AudioSource slothapediaSound;
     //Slothapedia json and slothability json
     private JSONNode n;
     private JSONNode m;
@@ -24,6 +26,7 @@ public class SlothapediaController : MonoBehaviour {
         canvas = GameObject.Find("Canvas");
         GameObject background = GameObject.Find("backgroundMatrix");
         slothModel = GameObject.Find("slothModel");
+        rawImage = GameObject.Find("RawImage");
         quaternion = Quaternion.Euler(0, 5f, 0);
         // Sizes in which we will apply the factor conversion
         int width = Screen.width;
@@ -53,7 +56,7 @@ public class SlothapediaController : MonoBehaviour {
                     });
 
 				name = n [currentSloth.ToString ()] ["photo"];
-				name = name.Insert (0, "f");
+				name = name.Insert (0, "Slothapedia/f");
 				Debug.Log (name);
 				b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
                 //Properly place the button
@@ -78,7 +81,7 @@ public class SlothapediaController : MonoBehaviour {
                 showSlothInfo(a);     
             });
 			name = n [currentSloth.ToString ()] ["photo"];
-			name = name.Insert (0, "f");
+			name = name.Insert (0, "Slothapedia/f");
 			Debug.Log (name);
 			b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
             //b.GetComponent<Image>().sprite = Resources.Load<Sprite>(n[currentSloth.ToString()]["photo"]);
@@ -92,6 +95,7 @@ public class SlothapediaController : MonoBehaviour {
         //Place the slothResume panel where we can find the model of the sloth, its stats and its abilities
         panelSlothInfo= GameObject.Find("SlothResume");
         panelSlothInfo.GetComponent<RectTransform>().sizeDelta = new Vector2(width * slothWidth, height*0.6f);
+        rawImage.GetComponent<RectTransform>().sizeDelta = new Vector2(height*0.6f*0.66f, height*0.6f*0.66f);
         //stats
         GameObject panelStatsInfo = GameObject.Find("StatsResume");
         panelStatsInfo.GetComponent<RectTransform>().sizeDelta = new Vector2((width * slothWidth)*0.5f, height*0.6f*0.33f);
@@ -105,21 +109,41 @@ public class SlothapediaController : MonoBehaviour {
 
 
 
-        //this panels must start being disabled
-        panelSlothInfo.SetActive(false);
-        panelAbilityInfo.SetActive(false);
+        //this panels must start being enabled
+        panelSlothInfo.SetActive(true);
+        panelAbilityInfo.SetActive(true);
+		GameObject.Find("Ability1").GetComponent<Button>().gameObject.SetActive(false);
+		GameObject.Find("Ability2").GetComponent<Button>().gameObject.SetActive(false);
+		GameObject.Find("Ability3").GetComponent<Button>().gameObject.SetActive(false);
+
     
     }
 
     public void showSlothInfo(int currentSloth){
-        //When we press a button of a sloth, first we activate the panel sloth info
-        panelSlothInfo.SetActive(true);
-        panelAbilityInfo.SetActive(false);
-        //Place the correct values on the stats icon
+        //if passes Sprint 4 review delete this lines below
+		//When we press a button of a sloth, first we activate the panel sloth info
+        //panelSlothInfo.SetActive(true);
+        //panelAbilityInfo.SetActive(false);
+
+		//reactivate all inactive buttons
+		Button [] abilityButtons;
+		abilityButtons = GameObject.Find("AbilityIconResume").GetComponentsInChildren<Button>(true);
+		foreach (Button abButton in abilityButtons) {
+			abButton.gameObject.SetActive (true);
+		}
+		//clean ability description
+		GameObject.Find("AbilityDescription").GetComponent<Text>().text = "";
+
+		//Place the correct values on the stats icon
         GameObject.Find("health1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["hp"].ToString();
         GameObject.Find("attack1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["att"].ToString();
         GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
         GameObject.Find("action1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["ap"].ToString();
+        Destroy(slothModel);
+        GameObject kk = Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+n[currentSloth.ToString()]["model"]);
+        slothModel = Instantiate(kk);
+        slothModel.transform.position = new Vector3(-100f, -100.023f, 0.0489f);
+        
         //Add via software the delegate. Note that this is also mandatory since this buttons are created on time execution too.
         ((Button)GameObject.Find("Ability1").GetComponent<Button>()).onClick.AddListener(delegate{
                 showAbilityInfo(n[currentSloth.ToString()]["idAb1"]);     
@@ -158,7 +182,7 @@ public class SlothapediaController : MonoBehaviour {
 
     public void showAbilityInfo(string abilityID){
         //Activate the panel and show the description.
-        panelAbilityInfo.SetActive(true);
+        //panelAbilityInfo.SetActive(true);
         GameObject.Find("AbilityDescription").GetComponent<Text>().text = m[abilityID]["desc"];
     }
 
@@ -168,6 +192,8 @@ public class SlothapediaController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		slothModel.transform.Rotate(quaternion.eulerAngles*Time.deltaTime);
+        if(slothModel != null){
+		    slothModel.transform.Rotate(quaternion.eulerAngles*Time.deltaTime);
+        }
 	}
 }

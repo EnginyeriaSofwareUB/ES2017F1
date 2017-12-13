@@ -24,56 +24,63 @@ public class ProjectileFactory
     //Pass abilityID to instantiate a projectile
     public Projectile getProjectile(string projectileID)
     {
-        if (projectileID[0] == 'M')
-        {
-            return new MagicProjectile();
+        /* if (projectileID[0] == 'M')
+         {
+             return new MagicProjectile();
 
-        }
-        else if (projectileID[0] == 'T')
-        {
-            return null;
+         }
+         else if (projectileID[0] == 'T')
+         {
+             return null;
 
-        }
-        else if (projectileID[0] == 'P')
-        {
-            return new BulletProjectile();
-        }
-        else if (projectileID[0] == 'H')
-        {
-            return new HealingProjectile();
-        }
-        else if (projectileID[0] == 'U')
-        {
-            return null;
-        }
-
+         }
+         else if (projectileID[0] == 'P')
+         {
+             return new BulletProjectile();
+         }
+         else if (projectileID[0] == 'H')
+         {
+             return new HealingProjectile();
+         }
+         else if (projectileID[0] == 'U')
+         {
+             return null;
+         }
+     */
         return null;
 
     }
     public Projectile getProjectile(Ability a)
     {
-        if (a is ProjectileAbility)
+        if (a.GetProjectile().Equals("xyz"))
         {
-            return new BulletProjectile();
+            return new xyzProjectile();
 
         }
-        else if (a is HealingAbility)
+        else if (a.GetProjectile().Equals("xy"))
         {
-            return new HealingProjectile();
+            return new xyProjectile();
 
         }
-        else if (a is MagicAbility)
-        {
-            return new MagicProjectile();
-        }
-
-        else if (a is UtilityAbility)
+        else if (a.GetProjectile().Equals("terrain"))
         {
             return new ProjectileTerrain();
         }
+        else if (a.GetProjectile().Equals("targetChain"))
+        {
+            return new ChainProjectile();
+        }
+        else if (a.GetProjectile().Equals("autoApply"))
+        {
+            return new AutoApplyProjectile();
+        }
+        else if (a.GetProjectile().Equals("allyTarget"))
+        {
+            return new TargetTeamProjectile();
+        }
         else
         {
-            return new BulletProjectile();
+            return null;
         }
 
     }

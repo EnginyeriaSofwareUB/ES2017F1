@@ -3,9 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LogicModel{
-    private static List<GameObject> teamSloths1, teamSloths2;
+    //SINGLETON
+    private static LogicModel instance;
 
-    public LogicModel() { }
+    public static LogicModel Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                //TODO: FIX THIS TO MAKE IT SINGLETON
+                instance = new LogicModel();
+            }
+            return instance;
+        }
+    }
+    ///////*****///////
+
+    private  List<GameObject> teamSloths1, teamSloths2;
+
+    protected LogicModel() { }
 
     public void SetTeamSloths1(List<GameObject> teamSlothsCont1) { teamSloths1 = teamSlothsCont1; }
     public List<GameObject> GetTeamSloths1(){ return teamSloths1; }

@@ -1,9 +1,9 @@
 ﻿using System;
 using SimpleJSON;
 using UnityEngine;
-public class HealingAbility: Ability
+public class HealingAbility : Ability
 {
-    
+
     private double shield;
     private int durShield;
     private double healHp;
@@ -11,11 +11,15 @@ public class HealingAbility: Ability
     private double boostDef;
     private int durBoostDef;
     private float range = 15;
-    private float hitRadius= 2f;
+    private float hitRadius = 2f;
     private int ap;
+    private string projectile;
+    private bool explosive;
+    private string source;
+    private bool mark;
     AbilityController abilityController = AbilityController.Instance;
     public HealingAbility(string id, JSONNode json)
-	{
+    {
 
         this.shield = json[id]["shield"];
         this.durShield = json[id]["durShield"];
@@ -26,6 +30,10 @@ public class HealingAbility: Ability
         this.range = json[id]["reach"];
         this.hitRadius = json[id]["hitRadius"];
         this.ap = json[id]["ap"];
+        this.projectile = json[id]["projectile"];
+        this.explosive = json[id]["explosive"];
+        this.source = json[id]["source"];
+        this.mark = json[id]["mark"];
     }
     public HealingAbility()
     {
@@ -36,12 +44,13 @@ public class HealingAbility: Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(healHp);
-        abilityController.SumToHpBar(healHp);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
     }
+    public void Apply(Vector3 p) { }
     public float GetRange()
     {
         return range;
@@ -52,7 +61,8 @@ public class HealingAbility: Ability
     }
     public bool GetBuildTerrain() { return false; }
     public int GetTerrainSize() { return 0; }
-	public int GetAp(){
+    public int GetAp()
+    {
         return ap;
     }
 
@@ -60,5 +70,17 @@ public class HealingAbility: Ability
     {
         return false;
     }
-
+    public string GetProjectile()
+    {
+        return projectile;
+    }
+    public bool GetExplosive()
+    {
+        return explosive;
+    }
+    public string GetSource()
+    {
+        return source;
+    }
+    public bool GetMark() { return this.mark; }
 }
