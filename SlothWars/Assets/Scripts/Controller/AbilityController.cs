@@ -42,6 +42,7 @@ public class AbilityController{
 
     public void UpdateHpBar(double hp, double shield)
     {
+        Debug.Log("upt");
         lastTarget.GetComponent<HealthScript>().UpdateHP(Mathf.FloorToInt((float)hp), Mathf.FloorToInt((float)shield));
         GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
