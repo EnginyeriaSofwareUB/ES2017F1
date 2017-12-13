@@ -56,7 +56,7 @@ public class SlothapediaController : MonoBehaviour {
                     });
 
 				name = n [currentSloth.ToString ()] ["photo"];
-				name = name.Insert (0, "f");
+				name = name.Insert (0, "Slothapedia/f");
 				Debug.Log (name);
 				b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
                 //Properly place the button
@@ -81,7 +81,7 @@ public class SlothapediaController : MonoBehaviour {
                 showSlothInfo(a);     
             });
 			name = n [currentSloth.ToString ()] ["photo"];
-			name = name.Insert (0, "f");
+			name = name.Insert (0, "Slothapedia/f");
 			Debug.Log (name);
 			b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
             //b.GetComponent<Image>().sprite = Resources.Load<Sprite>(n[currentSloth.ToString()]["photo"]);
