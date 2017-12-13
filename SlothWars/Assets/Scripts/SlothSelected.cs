@@ -20,6 +20,7 @@ public class SlothSelected : MonoBehaviour {
 
     public void SetLeaf(GameObject leafScene){
         leaf = leafScene;
+        leaf.transform.position = leaf.transform.position + new Vector3(0f, 1f, 0f);
     }
 
     public GameObject GetLeaf(){
@@ -32,7 +33,6 @@ public class SlothSelected : MonoBehaviour {
 
     public void SetSlothPosition(Vector3 slothPosition){
         this.slothPosition = slothPosition;
-        leaf.transform.position = slothPosition + new Vector3(0f, 1f, 0f);
     }
 
 }

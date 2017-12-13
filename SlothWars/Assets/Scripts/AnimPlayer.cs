@@ -114,10 +114,10 @@ public class AnimPlayer : MonoBehaviour {
                 newPosition = transform.position + new Vector3(0f, 1f, 0f);
                 ss.IsMoving(0);
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition;
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
+                //selected.GetLeaf().transform.position = newPosition;
+                //selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
 
-                selected.SetSlothPosition(newPosition);
+                //selected.SetSlothPosition(newPosition);
             }
             if (inputV < -0.1)
             {
@@ -126,9 +126,9 @@ public class AnimPlayer : MonoBehaviour {
                 newPosition = transform.position + new Vector3(0f, -1f, 0f);
                 ss.IsMoving(0);
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition;
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
-                selected.SetSlothPosition(newPosition);
+                //selected.GetLeaf().transform.position = newPosition;
+                //selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
+                //selected.SetSlothPosition(newPosition);
             }
 
             selected.enabled = true;
@@ -166,9 +166,6 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(0);
                 hs.turnRight();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition;
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
-                selected.SetSlothPosition(newPosition);
             }
             if (inputH < -0.1)
             {
@@ -178,9 +175,6 @@ public class AnimPlayer : MonoBehaviour {
                 ss.IsMoving(1);
                 hs.turnLeft();
                 changeTurnModel.DecrementApCurrentSloth(1);
-                selected.GetLeaf().transform.position = newPosition;
-                selected.GetLeaf().transform.rotation = Quaternion.Euler(-180, 0, -90);
-                selected.SetSlothPosition(newPosition);
             }
             selected.enabled = true;
             selected.Active(true);

@@ -38,12 +38,13 @@ public class NormalCollisionScript : MonoBehaviour
         {
             colided = true;
             abilityController.ApplyLastAbility(collision.gameObject);
-            //this.transform.position += dir*0.3f;
+            this.transform.position += dir*0.3f;
             if (rotative)
             {
                 Vector3 v = transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
                 //this.transform.Rotate(0, 90, 0);
-                this.transform.rotation = Quaternion.Euler(0, rot, 0);
+                //this.transform.rotation = Quaternion.Euler(0, rot, 0);
+                this.transform.rotation = Quaternion.Euler(0, rot + Random.Range(-20, 20), 0);
                 v -= transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
                 this.transform.position += v;
             }

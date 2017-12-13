@@ -89,7 +89,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6489a97e9011f894c9aba7fe384d5448, type: 2}
+  - {fileID: 2100000, guid: 982a682a90950104ca81b25dde3e86ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62a0d67bba361b41a8dcc4f9839b3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePath: Objects/HealExplosion
+  namePath: Objects/FireExplosion
   DieIn: 2
   d_h: 30
   xy: 1
@@ -218,7 +218,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 374545345
+  randomSeed: 1962228781
   InitialModule:
     serializedVersion: 3
     enabled: 1
