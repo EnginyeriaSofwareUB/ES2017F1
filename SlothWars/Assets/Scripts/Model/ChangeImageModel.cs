@@ -36,8 +36,11 @@ public class ChangeImageModel
     //Getters and Setters
     public Sprite GetSprite() { return slothSpriteSelected; }
     public void SetSprite(Sprite spriteFromPreviousScene) { slothSpriteSelected = spriteFromPreviousScene; }
+
     public void SendSlothInfo(string type)
     {
+		Debug.Log ("tipodesloth");
+		Debug.Log (type);
         switch(type){
             case "Wizard":
                 lastId = 0;

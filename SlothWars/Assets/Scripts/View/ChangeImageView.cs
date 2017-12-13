@@ -21,10 +21,8 @@ public class ChangeImageView : MonoBehaviour {
 
     private void Update()
     {
-        newSprite.sprite = changeImageModel.GetSprite();
-        GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(1));
-        GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(2));
-        GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>(changeImageModel.LoadAbillitySprites(3));
+		ShowImage ();
+       
     }
 
     // Method to show the image in the scene. Called by end turn Button in order to show the image corresponding to the sloth's turn.

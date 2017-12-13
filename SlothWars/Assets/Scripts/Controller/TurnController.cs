@@ -138,21 +138,24 @@ public class TurnController{
         {
             spriteFromPreviousScene = teamSprite2[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
-            changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[turnPlayer2].GetTypeName());
+            changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2].GetTypeName());
         }
         else 
         {
-            if (turnPlayer1 == turnPlayer2)
-            {
-                spriteFromPreviousScene = teamSprite1[turnPlayer1];
-                changeImageModel.SetSprite(spriteFromPreviousScene);
-                changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[turnPlayer1].GetTypeName());
-            } else if (turnPlayer2 - turnPlayer1 < -1)
-            {
-                spriteFromPreviousScene = teamSprite2[turnPlayer2];
-                changeImageModel.SetSprite(spriteFromPreviousScene);
-                changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2].GetTypeName());
-            }
+			if (turnPlayer1 == turnPlayer2) {
+				spriteFromPreviousScene = teamSprite1 [turnPlayer1];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam1 [turnPlayer1].GetTypeName ());
+
+			} else if (turnPlayer2 - turnPlayer1 < -1) {
+				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+			} else {
+				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
+				changeImageModel.SetSprite (spriteFromPreviousScene);
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+			}
         }
 
     }
