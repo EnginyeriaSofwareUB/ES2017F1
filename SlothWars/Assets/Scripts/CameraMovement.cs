@@ -66,7 +66,11 @@ public class CameraMovement : MonoBehaviour {
                 TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
 			turn = TurnController.Instance.GetActiveSloth ();
 		}
-
+        if(explosion != null && projectile != null && explosion.Length == 0 && projectile.Length == 0)
+        {
+            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x,
+                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+        }
         projectile = new GameObject[] {};
         explosion = new GameObject[] {};
 	}
