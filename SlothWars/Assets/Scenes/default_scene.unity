@@ -428,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &328900376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 0}
+  sloth: {fileID: 0}
 --- !u!1 &347491513
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30900002, y: 0.6256352}
   m_AnchorMax: {x: 0.38200003, y: 0.7801847}
-  m_AnchoredPosition: {x: -0.099998474, y: -0.099998474}
+  m_AnchoredPosition: {x: -0.099990845, y: -0.099998474}
   m_SizeDelta: {x: 0, y: -0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518456816
@@ -1387,6 +1388,8 @@ GameObject:
   - component: {fileID: 602930571}
   - component: {fileID: 602930573}
   - component: {fileID: 602930572}
+  - component: {fileID: 602930574}
+  - component: {fileID: 602930575}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1471,7 +1474,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602930564}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 505b0b3be746047dcaf37b619742b54e, type: 3}
   m_Name: 
@@ -1647,6 +1650,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &602930574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2815aed0c03109a46a772cd036433c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
+  slothWizard: {fileID: 1693439819590300, guid: 94058a7e73b7843a1871da28f225a1e2,
+    type: 2}
+  slothArcher: {fileID: 1693439819590300, guid: 94058a7e73b7843a1871da28f225a1e2,
+    type: 2}
+  slothTank: {fileID: 1007164206151914, guid: b03dc0b9cf9414fd698b72934253cf9f, type: 2}
+  slothHealer: {fileID: 1433268276704384, guid: be5b687a8a4e94b459328ae6bf4918f2,
+    type: 2}
+  slothUtility: {fileID: 1693439819590300, guid: 94058a7e73b7843a1871da28f225a1e2,
+    type: 2}
+--- !u!114 &602930575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9c7e9a8deac2a4f8fd6325a0c7545f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &615238780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,7 +2725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30900002, y: 0.48600003}
   m_AnchorMax: {x: 0.38200003, y: 0.6256352}
-  m_AnchoredPosition: {x: 0.23000336, y: 0.13999939}
+  m_AnchoredPosition: {x: 0.22999573, y: 0.13999939}
   m_SizeDelta: {x: -1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286703246
@@ -3550,7 +3586,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2002065616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 501bf0f766c3a55429d94fba50941bdc, type: 3}
   m_Name: 
@@ -3561,7 +3597,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2002065616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 005e44a23c5478d4592594a4c6f26ae5, type: 3}
   m_Name: 

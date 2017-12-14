@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class TeamSelection : MonoBehaviour
 {
-    private static bool awaked = false;
+
     private static bool created = false;
 
     private const int maxTeamSloths = 4;
@@ -163,7 +163,7 @@ public class TeamSelection : MonoBehaviour
             }
             else
             {
-                StorePersistentVariables.Instance.slothTeam1.Add(new Sloth(type));
+                StorePersistentVariables.Instance.slothTeam1.Add(type);
 
                 //slothTeam1.Add(new Sloth(type));
                 Debug.Log(type + " sloth added to team 1");
@@ -180,7 +180,7 @@ public class TeamSelection : MonoBehaviour
             }
             else
             {
-                StorePersistentVariables.Instance.slothTeam2.Add(new Sloth(type));
+                StorePersistentVariables.Instance.slothTeam2.Add(type);
                 //slothTeam2.Add (new Sloth(type));
                 Debug.Log(type + " sloth added to team 2");
                 SetTeamSlotPic("2", slot, StorePersistentVariables.Instance.slothTeam2.Count);
@@ -196,16 +196,9 @@ public class TeamSelection : MonoBehaviour
         }
     }
 
-    private bool CompareSloths(List<Sloth> list, string type)
+    private bool CompareSloths(List<string> list, string type)
     {
-        foreach (Sloth sloth in list)
-        {
-            if (sloth.GetTypeName().Equals(type))
-            {
-                return true;
-            }
-        }
-        return false;
+        return list.Contains(type);
 
     }
 
@@ -310,7 +303,6 @@ public class TeamSelection : MonoBehaviour
         {
             prevPage.gameObject.SetActive(false);
         }
-        awaked = false; 
         UpdateSlots();
     }
 
@@ -326,14 +318,11 @@ public class TeamSelection : MonoBehaviour
         {
             nextPage.gameObject.SetActive(false);
         }
-        awaked = false;
         UpdateSlots();
     }
 
     void UpdateSlots()
     {
-        if (!awaked)
-        {
             int i = currentPage * 3;
 
             slot1Type.text = node[i]["type"];
@@ -371,7 +360,5 @@ public class TeamSelection : MonoBehaviour
                 slot3Action.text = node[i + 2]["ap"];
             }
         }
-        awaked = true;
-    }
 
 }

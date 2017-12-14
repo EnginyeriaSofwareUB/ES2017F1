@@ -82,10 +82,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
                 break;
         }
             
@@ -100,10 +100,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
+               //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
                 break;
         }
     }
@@ -117,10 +117,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
                 break;
         }
     }

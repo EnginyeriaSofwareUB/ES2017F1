@@ -53,7 +53,8 @@ public class LogicView : MonoBehaviour {
         int i = 0;
         foreach (GameObject sloth in teamSloths1)
         {
-            health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
+            //health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
+            health = 1;
             
             if (health <= 0)
             {
@@ -68,7 +69,8 @@ public class LogicView : MonoBehaviour {
         i = 0;
         foreach (GameObject sloth in teamSloths2)
         {
-            health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
+            //health = StorePersistentVariables.Instance.slothTeam1[i].GetHp();
+            health = 1;
 
             if (health <= 0)
             {

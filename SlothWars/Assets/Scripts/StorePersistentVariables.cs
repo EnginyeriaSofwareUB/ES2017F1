@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StorePersistentVariables : PersistentVariablesSingleton<StorePersistentVariables> {
+public class StorePersistentVariables{
 
     // Here we will have the variables that we want to persist between scenes. In our case,
     // it will be the sloth teams created in TeamSelection scene.
@@ -18,9 +18,10 @@ public class StorePersistentVariables : PersistentVariablesSingleton<StorePersis
     */
 
     // PERSISTENT (PUBLIC) VARIABLES HERE:
-	public List<Sloth> slothTeam1 = new List<Sloth>();
-	public List<Sloth> slothTeam2 = new List<Sloth>();
-    public string winner = "BatmanWinner";
+	public List<string> slothTeam1 = new List<string>();
+	public List<string> slothTeam2 = new List<string>();
+    private static StorePersistentVariables instance;
+    public int winner = 0;
     
     //
 
@@ -28,11 +29,14 @@ public class StorePersistentVariables : PersistentVariablesSingleton<StorePersis
     {
         get
         {
-            return ((StorePersistentVariables)mInstance);
+            if(instance == null){
+                instance = new StorePersistentVariables();
+            }
+            return instance;
         }
         set
         {
-            mInstance = value;
+            instance = value;
         }
     }
     protected StorePersistentVariables() { }

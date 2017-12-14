@@ -70,7 +70,7 @@ public class TurnController{
         //Need to put it on Start because team1SlothImages and team2SlothImages are captured in the Awake method of GameController.
         //We send to View (via Model), the image selected.
         changeImageModel.SetSprite(spriteFromPreviousScene);
-        changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[0].GetTypeName());
+        changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam1[0]);
 
         endTurnButton.onClick.AddListener(delegate { FinishTurnOfPlayer(); });
         endTurnButton.onClick.AddListener(delegate { SetEndTurnOfPlayer(); });
@@ -138,23 +138,23 @@ public class TurnController{
         {
             spriteFromPreviousScene = teamSprite2[turnPlayer2];
             changeImageModel.SetSprite(spriteFromPreviousScene);
-            changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2].GetTypeName());
+            changeImageModel.SendSlothInfo(StorePersistentVariables.Instance.slothTeam2[turnPlayer2]);
         }
         else 
         {
 			if (turnPlayer1 == turnPlayer2) {
 				spriteFromPreviousScene = teamSprite1 [turnPlayer1];
 				changeImageModel.SetSprite (spriteFromPreviousScene);
-				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam1 [turnPlayer1].GetTypeName ());
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam1 [turnPlayer1]);
 
 			} else if (turnPlayer2 - turnPlayer1 < -1) {
 				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
 				changeImageModel.SetSprite (spriteFromPreviousScene);
-				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2]);
 			} else {
 				spriteFromPreviousScene = teamSprite2 [turnPlayer2];
 				changeImageModel.SetSprite (spriteFromPreviousScene);
-				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2].GetTypeName ());
+				changeImageModel.SendSlothInfo (StorePersistentVariables.Instance.slothTeam2 [turnPlayer2]);
 			}
         }
 

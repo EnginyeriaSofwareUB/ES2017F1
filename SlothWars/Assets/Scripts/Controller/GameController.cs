@@ -119,7 +119,7 @@ public class GameController : MonoBehaviour
             {
                 // Instantiate sloths in random valid positions of the field
                 int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
-                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i].GetModel()+"A"), 
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam1[i]+"A"), 
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                        TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
@@ -129,8 +129,8 @@ public class GameController : MonoBehaviour
 
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
-                health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
+                //health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
+                //health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
                 health.enabled = true;
 
                 healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), sloth.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -143,7 +143,7 @@ public class GameController : MonoBehaviour
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
 
-                pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
+                //pla.SetSloth(StorePersistentVariables.Instance.slothTeam1[i]);
                 pla.sloth.SetTeam(1);
 
                 shot = sloth.GetComponent<ShotScript>();
@@ -168,7 +168,7 @@ public class GameController : MonoBehaviour
             {
                 // Instantiate sloths in random valid positions of the field
                 int point = random.Next(0, TerrainCreator.GetAvailablePlaces().Count);
-                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i].GetModel()+"B"), 
+                sloth = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/" + StorePersistentVariables.Instance.slothTeam2[i]+"B"), 
                     new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
                         TerrainCreator.GetAvailablePlaces()[point].y_coord+0.05f, 0.5f), 
                     Quaternion.Euler (90, 180, 0));
@@ -176,8 +176,8 @@ public class GameController : MonoBehaviour
                TerrainCreator.GetAvailablePlaces().RemoveAt(point);
                 // setting health
                 health = sloth.AddComponent<HealthScript>();
-                health.setHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
-                health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
+                //health.setHealth(StorePersistentVariables.Instance.slothTeam2[i]);
+                //health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i]);
                 health.enabled = true;
 
                 healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), sloth.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -192,7 +192,7 @@ public class GameController : MonoBehaviour
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;
 
-                pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
+                //pla.SetSloth(StorePersistentVariables.Instance.slothTeam2[i]);
                 pla.sloth.SetTeam(2);
 
                 shot = sloth.GetComponent<ShotScript>();
@@ -270,20 +270,6 @@ public class GameController : MonoBehaviour
     //StorePersistentVariables.cs)
     protected void CreateTeamsSetSprites()
     {
-
-        foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam1)
-        {
-            playerTeam1.Add(new AnimPlayer());
-            teamSprite1.Add(Resources.Load<Sprite>(sloth.GetSprite()));
-        }
-        foreach (Sloth sloth in StorePersistentVariables.Instance.slothTeam2)
-        {
-            playerTeam2.Add(new AnimPlayer());
-            teamSprite2.Add(Resources.Load<Sprite>(sloth.GetSprite()));
-        }
-        Debug.Log(teamSprite1.Count);
-        TurnController.Instance.SetTeamSprite1(teamSprite1);
-        TurnController.Instance.SetTeamSprite2(teamSprite2);
 
     }
 

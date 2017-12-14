@@ -14,9 +14,9 @@ public class TutorialController : GameController {
         if (checkAwakeTu == 0)
         {
             checkAwakeTu = 1;
-			StorePersistentVariables.Instance.slothTeam1.Add(new Sloth("Wizard"));
-			Debug.Log(new Sloth("Wizard").GetSprite());
-			StorePersistentVariables.Instance.slothTeam2.Add(new Sloth("Wizard"));
+			//StorePersistentVariables.Instance.slothTeam1.Add(new Sloth("Wizard"));
+			//Debug.Log(new Sloth("Wizard").GetSprite());
+			//StorePersistentVariables.Instance.slothTeam2.Add(new Sloth("Wizard"));
             InitializePlayer();
             InitializeTerrain();
             PlacePlayers();
