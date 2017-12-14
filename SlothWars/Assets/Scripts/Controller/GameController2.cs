@@ -38,6 +38,7 @@ public class GameController2 : MonoBehaviour {
 		}
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
+			tmpSloth.tag = "sloth";
 			GameObject logic = new GameObject("slothlogic");
 			logic.transform.SetParent(tmpSloth.transform);
 			GameObject model;
@@ -77,11 +78,20 @@ public class GameController2 : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
+
+			HealthScript health = logic.AddComponent<HealthScript>();
+            health.enabled = true;
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
+            healthBar.transform.parent = logic.transform;
+            health.SetHealthBar(healthBar);
+
 			teamSloths1.Add(logic.GetComponent<Sloth>());
 		}
 
 		foreach(string sloth in lista2){
 			GameObject tmpSloth = new GameObject(sloth+"P2");
+			tmpSloth.tag = "sloth";
 			GameObject logic = new GameObject("slothlogic");
 			logic.transform.SetParent(tmpSloth.transform);
 			GameObject model;
@@ -121,6 +131,15 @@ public class GameController2 : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
+
+     		HealthScript health = logic.AddComponent<HealthScript>();
+            health.enabled = true;
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            healthBar.transform.parent = logic.transform;
+			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
+
+            health.SetHealthBar(healthBar);
+
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 
@@ -168,6 +187,8 @@ public class GameController2 : MonoBehaviour {
 		}
 
 		uiController.DisplaySlothAbilities(currentSloth);
+		uiController.DisplaySlothStats(currentSloth);
+		uiController.UpdateTurnPlayerInfo(player);
 		currentAp = currentSloth.GetAp();
 		CheckAbilitiesAp();
 

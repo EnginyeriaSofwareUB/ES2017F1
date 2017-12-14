@@ -40,6 +40,7 @@ public class InputController : MonoBehaviour {
 	public void ChangeTurn(){
 		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
 			gameController.EndTurn();
+			
 		}
 	}
 

@@ -11,17 +11,18 @@ public class HealthScript : MonoBehaviour {
 	private GameObject shieldEffect = null;
 	// Use this for initialization
 	void Awake () {
-      	hp = (GameObject) Instantiate(Resources.Load("Prefabs/health"),this.transform.position + new Vector3(-1,1,0),Quaternion.identity);
+      	//hp = (GameObject) Instantiate(Resources.Load("Prefabs/health"),this.transform.position + new Vector3(-1,1,0),Quaternion.identity);
 		shield = (GameObject) Instantiate(Resources.Load("Prefabs/shield"),this.transform.position + new Vector3(0.5f,1,0),Quaternion.identity);
 		shield.SetActive (false);
 	}
 	// Update is called once per frame
 	void Update () {
-        health = this.GetComponentInParent<AnimPlayer>().GetSloth().GetHp();
+		maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
+        health = gameObject.GetComponent<Sloth>().GetHp();
         Debug.Log(health);
         Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(health/maxHealth);
-		hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
+		//hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
 		if (shieldEffect != null) {
 			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
 			shieldEffect.transform.position = this.transform.position + new Vector3 (0, 0, -0.5f);
@@ -44,7 +45,7 @@ public class HealthScript : MonoBehaviour {
 
 	public void setHealth(double health){
 		this.health = health;
-		hp.GetComponent<TextMesh> ().text = "" + health;
+		//hp.GetComponent<TextMesh> ().text = "" + health;
 	}
 
 	public double getHealth(){
@@ -57,7 +58,7 @@ public class HealthScript : MonoBehaviour {
 
 	public void UpdateHP(int hp,int shield)
     {
-        health = hp;
+        //health = hp;
 		if (shield > 0) {
 			if (shieldEffect == null) {
 				this.shield.SetActive (true);
@@ -69,7 +70,7 @@ public class HealthScript : MonoBehaviour {
 			shieldEffect = null;
 			this.shield.SetActive (false);
 		}
-		this.hp.GetComponent<TextMesh>().text= "" + health;
+		//this.hp.GetComponent<TextMesh>().text= "" + health;
     }
 
 }

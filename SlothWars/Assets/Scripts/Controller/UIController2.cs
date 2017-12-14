@@ -53,5 +53,21 @@ public class UIController2 : MonoBehaviour {
 		((Button)GameObject.Find("buttonAbility3").GetComponent<Button>()).interactable = b;
 	}
 
+	public void DisplaySlothStats(Sloth sloth){
+		GameObject.Find("lifeSlothText").GetComponent<Text>().text = ((int)sloth.GetMaxHp()).ToString();
+		GameObject.Find("attackSlothText").GetComponent<Text>().text = sloth.GetAttack().ToString();
+		GameObject.Find("shieldSlothText").GetComponent<Text>().text = sloth.GetDefense().ToString();
+		GameObject.Find("actionSlothText").GetComponent<Text>().text = sloth.GetAp().ToString();
+		GameObject.Find("slothImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(sloth.GetSprite());
+	}
+
+	public void UpdateTurnPlayerInfo(bool p){
+		if (p){
+			GameObject.Find("TurnText").GetComponent<Text>().text = "Blue";
+		} else {
+			GameObject.Find("TurnText").GetComponent<Text>().text = "Red";
+		}
+	}
+
 	
 }
