@@ -26,7 +26,7 @@ public class UIController2 : MonoBehaviour {
 	}
 
 	public void SetActiveOptsPanel(bool b){
-		optionPanel.SetActive(b);
+		optsPanel.SetActive(b);
 	}
 
 	public void SetActiveAbilitiesPanel(bool b){

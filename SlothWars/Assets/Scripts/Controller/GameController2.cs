@@ -95,7 +95,7 @@ public class GameController2 : MonoBehaviour {
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 
-		status = WAITING_FOR_INPUT;
+		status = GameControllerStatus.WAITING_FOR_INPUT;
 		player = true;
 		turns = 0;
 		currentSloth = teamSloths1[turns % teamSloths1.Count];
@@ -103,7 +103,7 @@ public class GameController2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(status == LOGIC){
+		if(status == GameControllerStatus.LOGIC){
 			CheckLogic();
 		}
 	}
@@ -116,11 +116,11 @@ public class GameController2 : MonoBehaviour {
 		//Check if a team of sloths is dead. Maybe end the game.
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 1;
-			status = GAME_OVER;
+			status = GameControllerStatus.GAME_OVER;
 		}
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 0;
-			status = GAME_OVER;
+			status = GameControllerStatus.GAME_OVER;
 		}
 
 		player = !player;
@@ -129,13 +129,13 @@ public class GameController2 : MonoBehaviour {
 			currentSloth = teamSloths1[turns % teamSloths1.Count];
 		} else {
 			currentSloth = teamSloths2[turns % teamSloths2.Count];
-			tunrs++;
+			turns++;
 		}
 
 
 
 
-		status = WAITING_FOR_INPUT;
+		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
 	public GameControllerStatus GetStatus(){
@@ -143,7 +143,7 @@ public class GameController2 : MonoBehaviour {
 	}
 
 	public void NotifyActionEnded(){
-		status = LOGIC;
+		status = GameControllerStatus.LOGIC;
 	}
 
 	public enum GameControllerStatus{

@@ -86,10 +86,10 @@ public class LogicView : MonoBehaviour {
 
     private void CheckGameOver(){
         if(teamSloths1.Count == 0){
-            StorePersistentVariables.Instance.winner = "Blue";
+            //StorePersistentVariables.Instance.winner = "Blue";
             SceneManager.LoadScene("GameOverScene");
         } else if(teamSloths2.Count == 0){
-            StorePersistentVariables.Instance.winner = "Red";
+            //StorePersistentVariables.Instance.winner = "Red";
             SceneManager.LoadScene("GameOverScene");
         }
     }

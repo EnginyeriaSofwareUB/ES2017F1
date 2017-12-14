@@ -5,17 +5,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
-	private string winner;
+	private int winner;
+	private string text;
 	public List<GameObject> sloths;
 	// Use this for initialization
 	void Start () {
 		winner = StorePersistentVariables.Instance.winner;
-		if (winner == "Red"){
-			GameObject.Find("WinnerName").GetComponent<Text>().color = Color.red;
-		}else{
+		if (winner == 0){
 			GameObject.Find("WinnerName").GetComponent<Text>().color = Color.blue;
+			text = "BLUE TEAM WINS!";
+		}else{
+			GameObject.Find("WinnerName").GetComponent<Text>().color = Color.red;
+			text = "RED TEAM WINS!";
 		}
-		GameObject.Find("WinnerName").GetComponent<Text>().text = StorePersistentVariables.Instance.winner;
+		GameObject.Find("WinnerName").GetComponent<Text>().text = text;
 
 
 	}

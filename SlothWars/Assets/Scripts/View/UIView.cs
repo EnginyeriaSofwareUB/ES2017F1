@@ -68,11 +68,11 @@ public class UIView : MonoBehaviour {
     {
         if (changeTurnModelInstance.GetText().text == "Blue Turn")
         {
-            StorePersistentVariables.Instance.winner = "Red"; 
+            //StorePersistentVariables.Instance.winner = "Red"; 
         }
         else
         {
-            StorePersistentVariables.Instance.winner = "Blue";     
+            //StorePersistentVariables.Instance.winner = "Blue";     
         }
         SceneManager.LoadScene("GameOverScene");
     }
