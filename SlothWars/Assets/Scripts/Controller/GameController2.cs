@@ -10,6 +10,7 @@ public class GameController2 : MonoBehaviour {
 	private GameControllerStatus status;
 	private int turns;
 	private bool player;
+	private int currentAp;
 
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
@@ -29,7 +30,7 @@ public class GameController2 : MonoBehaviour {
 			lista.Add("Wizard");
 		}
 		if(lista2.Count == 0){
-			lista2.Add("Wizard");
+			lista2.Add("Tank");
 		}
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
@@ -95,16 +96,20 @@ public class GameController2 : MonoBehaviour {
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 
-		status = GameControllerStatus.WAITING_FOR_INPUT;
-		player = true;
+		status = GameControllerStatus.LOGIC;
+		player = false;
 		turns = 0;
-		currentSloth = teamSloths1[turns % teamSloths1.Count];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(status == GameControllerStatus.LOGIC){
-			CheckLogic();
+		switch(status){
+			case GameControllerStatus.LOGIC:
+				CheckLogic();
+				break;
+			case GameControllerStatus.ABILITY_LOGIC:
+				CheckAbilitiesAp();
+				break;
 		}
 	}
 
@@ -132,21 +137,59 @@ public class GameController2 : MonoBehaviour {
 			turns++;
 		}
 
+		uiController.DisplaySlothAbilities(currentSloth);
+		currentAp = currentSloth.GetAp();
+		CheckAbilitiesAp();
+
 
 
 
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
+	private void CheckAbilitiesAp(){
+		if(currentSloth.GetAbility1().GetAp() < currentAp){
+			uiController.SetActiveAb1(true);
+		} else {
+			uiController.SetActiveAb1(false);
+		}
+		if(currentSloth.GetAbility2().GetAp() < currentAp){
+			uiController.SetActiveAb2(true);
+		} else {
+			uiController.SetActiveAb2(false);
+		}
+		if(currentSloth.GetAbility3().GetAp() < currentAp){
+			uiController.SetActiveAb3(true);
+		} else {
+			uiController.SetActiveAb3(false);
+		}
+	}
+
 	public GameControllerStatus GetStatus(){
 		return status;
 	}
 
-	public void NotifyActionEnded(){
+	public void EndTurn(){
 		status = GameControllerStatus.LOGIC;
 	}
 
+	public void NotifyActionEnded(){
+		status = GameControllerStatus.ABILITY_LOGIC;
+	}
+
+	public void CastAbility1(){
+
+	}
+
+	public void CastAbility2(){
+
+	}
+
+	public void CastAbility3(){
+
+	}
+
 	public enum GameControllerStatus{
-		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER
+		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC
 	}
 }

@@ -139,6 +139,17 @@ public class GameController : MonoBehaviour
                 health.SetHealthBar(healthBar);
                 anim = sloth.GetComponent<Animator>();
                 anim.enabled = true;
+                health = sloth.AddComponent<HealthScript>();
+                //health.setHealth(StorePersistentVariables.Instance.slothTeam1[i].GetHp());
+                //health.SetMaxHealth(StorePersistentVariables.Instance.slothTeam2[i].GetHp());
+                health.enabled = true;
+
+                healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), sloth.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
+                healthBar.transform.parent = sloth.transform;
+                health.SetHealthBar(healthBar);
+                anim = sloth.GetComponent<Animator>();
+                anim.enabled = true;
 
                 pla = sloth.AddComponent<AnimPlayer>();
                 pla.enabled = true;

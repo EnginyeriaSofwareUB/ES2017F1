@@ -145,7 +145,6 @@ public class Sloth: MonoBehaviour {
     }
     public Ability GetAbility1()
     {
-        Debug.Log(this.ab1);
         return this.ab1;
     }
     public Ability GetAbility2()
@@ -175,6 +174,18 @@ public class Sloth: MonoBehaviour {
     public void QuitTank()
     {
         tanking = null;
+    }
+
+    public string GetIdAb1(){
+        return idAb1;
+    }
+
+    public string GetIdAb2(){
+        return idAb2;
+    }
+
+    public string GetIdAb3(){
+        return idAb3;
     }
 
 }

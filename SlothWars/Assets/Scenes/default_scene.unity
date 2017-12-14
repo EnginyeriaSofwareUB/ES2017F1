@@ -1390,6 +1390,7 @@ GameObject:
   - component: {fileID: 602930572}
   - component: {fileID: 602930574}
   - component: {fileID: 602930575}
+  - component: {fileID: 602930576}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1672,6 +1673,7 @@ MonoBehaviour:
     type: 2}
   slothUtility: {fileID: 1693439819590300, guid: 94058a7e73b7843a1871da28f225a1e2,
     type: 2}
+  currentSloth: {fileID: 0}
 --- !u!114 &602930575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,6 +1683,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f9c7e9a8deac2a4f8fd6325a0c7545f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainPanel: {fileID: 0}
+  optsPanel: {fileID: 0}
+  abilitiesPanel: {fileID: 0}
+--- !u!114 &602930576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61e408eba628bb4b983c7b96471bff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &615238780
@@ -2357,28 +2373,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328900379}
-        m_MethodName: FinishTurn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 328900380}
-        m_MethodName: ShowImage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 948163452}
         m_MethodName: PlayOneShot
         m_Mode: 2
@@ -2391,6 +2385,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
+      - m_Target: {fileID: 602930576}
+        m_MethodName: ChangeTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1135352998

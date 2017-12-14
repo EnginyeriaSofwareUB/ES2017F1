@@ -18,4 +18,30 @@ public class InputController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+
+	public void ChangeTurn(){
+		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
+			gameController.EndTurn();
+		}
+	}
+
+
+	public void CastAbility1(){
+		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
+			gameController.CastAbility1();
+		}
+	}
+
+	public void CastAbility2(){
+		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
+			gameController.CastAbility2();
+		}
+	}
+
+	public void CastAbility3(){
+		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
+			gameController.CastAbility3();
+		}
+	}
 }
