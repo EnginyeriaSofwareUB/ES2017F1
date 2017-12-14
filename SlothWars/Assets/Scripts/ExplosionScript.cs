@@ -81,7 +81,7 @@ public class ExplosionScript : MonoBehaviour
         }
 
         explosion = (GameObject)Instantiate(Resources.Load(namePath), this.transform.position, this.transform.rotation);
-        Destroy(explosion, 3);
+		Destroy (explosion, 1.25f);
         Destroy(this.gameObject);
     }
 

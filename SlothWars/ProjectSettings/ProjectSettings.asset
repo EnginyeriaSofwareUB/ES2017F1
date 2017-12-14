@@ -234,37 +234,30 @@ PlayerSettings:
       m_Icon: {fileID: 2800000, guid: d1abff83f74c96347966804ba7e651f5, type: 3}
       m_Width: 1024
       m_Height: 1024
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 512
       m_Height: 512
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 256
       m_Height: 256
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 128
       m_Height: 128
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 48
       m_Height: 48
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 32
       m_Height: 32
-      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
       m_Width: 16
       m_Height: 16
-      m_Kind: 0
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
@@ -536,7 +529,14 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: CROSS_PLATFORM_INPUT
+    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    14: MOBILE_INPUT
+    17: MOBILE_INPUT
+    20: MOBILE_INPUT
+    22: MOBILE_INPUT
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
