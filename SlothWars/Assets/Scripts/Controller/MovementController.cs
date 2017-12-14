@@ -32,4 +32,8 @@ public class MovementController : MonoBehaviour {
 		speedVector =  (position - transform.parent.position)/speed;
 		speedVector.z = 0;
 	}
+
+	public bool IsMoving(){
+		return moving;
+	}
 }

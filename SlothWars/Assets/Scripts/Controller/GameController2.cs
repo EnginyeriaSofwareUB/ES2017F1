@@ -252,6 +252,10 @@ public class GameController2 : MonoBehaviour {
 			Destroy(sloth.transform.parent.gameObject);
 		}
 	}
+
+	public Sloth GetCurrentSloth(){
+		return currentSloth;
+	}
 	
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE

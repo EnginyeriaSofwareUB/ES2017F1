@@ -1760,6 +1760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 0}
+  sloth: {fileID: 0}
 --- !u!1001 &329744379
 Prefab:
   m_ObjectHideFlags: 0
@@ -3130,7 +3131,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 602930576}
+      - m_Target: {fileID: 602930574}
         m_MethodName: CastAbility3
         m_Mode: 1
         m_Arguments:
@@ -3264,7 +3265,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 602930576}
+      - m_Target: {fileID: 602930574}
         m_MethodName: CastAbility1
         m_Mode: 1
         m_Arguments:
@@ -3398,7 +3399,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 602930576}
+      - m_Target: {fileID: 602930574}
         m_MethodName: CastAbility2
         m_Mode: 1
         m_Arguments:
@@ -3584,9 +3585,9 @@ GameObject:
   - component: {fileID: 602930571}
   - component: {fileID: 602930573}
   - component: {fileID: 602930572}
-  - component: {fileID: 602930574}
-  - component: {fileID: 602930575}
   - component: {fileID: 602930576}
+  - component: {fileID: 602930575}
+  - component: {fileID: 602930574}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3671,7 +3672,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602930564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 505b0b3be746047dcaf37b619742b54e, type: 3}
   m_Name: 
@@ -3847,6 +3848,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &602930574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61e408eba628bb4b983c7b96471bff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &602930575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9c7e9a8deac2a4f8fd6325a0c7545f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainPanel: {fileID: 0}
+  optsPanel: {fileID: 0}
+  abilitiesPanel: {fileID: 0}
+--- !u!114 &602930576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602930564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2815aed0c03109a46a772cd036433c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamSloths1: []
+  teamSloths2: []
+  slothWizard: {fileID: 0}
+  slothArcher: {fileID: 0}
+  slothTank: {fileID: 0}
+  slothHealer: {fileID: 0}
+  slothUtility: {fileID: 0}
+  currentSloth: {fileID: 0}
 --- !u!1001 &604482496
 Prefab:
   m_ObjectHideFlags: 0
@@ -6512,7 +6557,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
-      - m_Target: {fileID: 602930576}
+      - m_Target: {fileID: 602930574}
         m_MethodName: ChangeTurn
         m_Mode: 1
         m_Arguments:
@@ -8382,7 +8427,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 602930576}
+      - m_Target: {fileID: 602930574}
         m_MethodName: UnPause
         m_Mode: 1
         m_Arguments:

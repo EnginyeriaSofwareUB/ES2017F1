@@ -3,6 +3,8 @@
 public class CameraMovement : MonoBehaviour {
     private bool shot = false;
     float cameraDistance = -12.0f;
+
+    private GameController2 gameController;
    
     GameObject[] projectile;
     GameObject[] explosion;
@@ -22,7 +24,8 @@ public class CameraMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-		turn = TurnController.Instance.GetActiveSloth ();
+        gameController = GameObject.Find("Main Camera").GetComponent<GameController2>();
+		turn = null;
         if (turn != null)
         {
             transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y, cameraDistance);
@@ -35,17 +38,19 @@ public class CameraMovement : MonoBehaviour {
         projectile = GameObject.FindGameObjectsWithTag("projectile");
         explosion = GameObject.FindGameObjectsWithTag("explosion");
         //print("IS MOVING: " + TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving().ToString());
-
-        if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
+        if(turn == null){
+            turn = gameController.GetCurrentSloth().gameObject;
+            transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y, cameraDistance);
+        } else if (turn.GetComponent<MovementController>().IsMoving())
         {
 			
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
+            transform.position = new Vector3(gameController.GetCurrentSloth().gameObject.transform.position.x, 
                 
-				TurnController.Instance.GetActiveSloth().transform.position.y , 
+				gameController.GetCurrentSloth().gameObject.transform.position.y , 
 
 				cameraDistance);
         }
-        else if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving()
+        else if (!turn.GetComponent<MovementController>().IsMoving()
 
             && projectile.Length == 0
             && explosion.Length == 0)
@@ -69,17 +74,17 @@ public class CameraMovement : MonoBehaviour {
             }
         }
 
-		if (turn != TurnController.Instance.GetActiveSloth ()) 
+		if (turn != gameController.GetCurrentSloth().gameObject) 
 		{
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
-                TurnController.Instance.GetActiveSloth().transform.position.y , cameraDistance);
-			turn = TurnController.Instance.GetActiveSloth ();
+            transform.position = new Vector3(gameController.GetCurrentSloth().gameObject.transform.position.x, 
+                gameController.GetCurrentSloth().gameObject.transform.position.y , cameraDistance);
+			turn = gameController.GetCurrentSloth().gameObject;
 		}
         if(explosion != null && projectile != null && explosion.Length == 0 && projectile.Length == 0 && shot)
         {
             shot = false;
-            transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x,
-                TurnController.Instance.GetActiveSloth().transform.position.y, cameraDistance);
+            transform.position = new Vector3(gameController.GetCurrentSloth().gameObject.transform.position.x,
+                gameController.GetCurrentSloth().gameObject.transform.position.y, cameraDistance);
         } 
         projectile = new GameObject[] {};
         explosion = new GameObject[] {};
