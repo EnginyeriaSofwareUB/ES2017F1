@@ -25,6 +25,13 @@ public class InputController : MonoBehaviour {
 				gameController.MoveSloth(1, 0);
 			} else if (Input.GetKey("left") || Input.GetKey("a")){
 				gameController.MoveSloth(-1, 0);
+			} else if (Input.GetKeyDown(KeyCode.Escape)){
+				uiController.SetActiveOptsPanel(true);
+				gameController.PauseGame();
+			}
+		} else{
+			if(gameController.GetStatus() == GameController2.GameControllerStatus.PAUSE && Input.GetKeyDown(KeyCode.Escape)){
+				UnPause();
 			}
 		}
 	}
@@ -53,5 +60,10 @@ public class InputController : MonoBehaviour {
 		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
 			gameController.CastAbility3();
 		}
+	}
+
+	public void UnPause(){
+		uiController.SetActiveOptsPanel(false);
+		gameController.UnPauseGame();
 	}
 }

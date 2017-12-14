@@ -234,6 +234,14 @@ public class GameController2 : MonoBehaviour {
 		}
 	}
 
+	public void PauseGame(){
+		status = GameControllerStatus.PAUSE;
+	}
+
+	public void UnPauseGame(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
+	}
+
 	public void onDieSloth(Sloth sloth){
 		if(teamSloths1.Contains(sloth)){
 			teamSloths1.Remove(sloth);
@@ -246,6 +254,6 @@ public class GameController2 : MonoBehaviour {
 	}
 	
 	public enum GameControllerStatus{
-		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC
+		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}
 }
