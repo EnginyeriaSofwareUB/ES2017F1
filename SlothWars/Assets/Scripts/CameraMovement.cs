@@ -2,13 +2,12 @@
 
 public class CameraMovement : MonoBehaviour {
     private bool shot = false;
-    float speed = 10.0f;
     float cameraDistance = -12.0f;
-    float cameraHeight = 7.0f;
+   
     GameObject[] projectile;
     GameObject[] explosion;
 	int Boundary = 50;
-
+	float centerCorrection;
     // Screen Size
 	int theScreenWidth = Screen.width;
 	int theScreenHeight = Screen.height;
@@ -26,7 +25,7 @@ public class CameraMovement : MonoBehaviour {
 		turn = TurnController.Instance.GetActiveSloth ();
         if (turn != null)
         {
-            transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y + cameraHeight, cameraDistance);
+            transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y, cameraDistance);
         }
 	}
 	
@@ -39,11 +38,15 @@ public class CameraMovement : MonoBehaviour {
 
         if (TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving())
         {
+			
             transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
-                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+                
+				TurnController.Instance.GetActiveSloth().transform.position.y , 
+
+				cameraDistance);
         }
         else if (!TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving()
-            && !TurnController.Instance.GetActiveSloth().GetComponent<ShotScript>().GetShotLoad()
+
             && projectile.Length == 0
             && explosion.Length == 0)
         {
@@ -69,14 +72,14 @@ public class CameraMovement : MonoBehaviour {
 		if (turn != TurnController.Instance.GetActiveSloth ()) 
 		{
             transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x, 
-                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+                TurnController.Instance.GetActiveSloth().transform.position.y , cameraDistance);
 			turn = TurnController.Instance.GetActiveSloth ();
 		}
         if(explosion != null && projectile != null && explosion.Length == 0 && projectile.Length == 0 && shot)
         {
             shot = false;
             transform.position = new Vector3(TurnController.Instance.GetActiveSloth().transform.position.x,
-                TurnController.Instance.GetActiveSloth().transform.position.y + cameraHeight, cameraDistance);
+                TurnController.Instance.GetActiveSloth().transform.position.y, cameraDistance);
         } 
         projectile = new GameObject[] {};
         explosion = new GameObject[] {};
@@ -84,25 +87,36 @@ public class CameraMovement : MonoBehaviour {
 
     public void MoveCameraFreely()
     {
-		if (Input.mousePosition.x > theScreenWidth - Boundary)
-		{
-			transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
+		Vector3 mousePos;
+		float scrollSpeed = 0.1f;
+		mousePos = Input.mousePosition; //We need to get the new position every frame
+
+		//if mouse is 50 pixels and less from the left side of the
+		//screen, we move the camera in that direction at scrollSpeed
+		if (mousePos.x < 50) {
+			if (!(gameObject.transform.position.x < 13.5f)) {
+				gameObject.transform.Translate (-scrollSpeed, 0, 0);
+			}
+		}
+		//if 50px or less from the right side, move right at scrollSpeeed
+		if (mousePos.x > Screen.width - 50) {
+			if (!(gameObject.transform.position.x > 90.7f)) {
+				gameObject.transform.Translate (scrollSpeed, 0, 0);
+			}
+		}
+		//move up
+		if (mousePos.y < 10) {
+			if ((gameObject.transform.position.y > 0.8f)) {
+				gameObject.transform.Translate (0, -scrollSpeed, 0);
+			}
+		}
+			//move down
+		if (mousePos.y > Screen.height - 50){
+			if ((gameObject.transform.position.y < 15.3f)) {
+				gameObject.transform.Translate (0, scrollSpeed, 0);
+			}
 		}
 
-		if (Input.mousePosition.x < 0 + Boundary)
-		{
-			transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0.0f);    
-		}
-
-        if (Input.mousePosition.y > theScreenHeight - Boundary)
-        {
-            transform.position += new Vector3(0.0f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed, 0.0f);   
-        }
-
-        if (Input.mousePosition.y < 0 + Boundary)
-        {
-            transform.position += new Vector3(0.0f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed, 0.0f);   
-        }
 
         float fov = Camera.main.fieldOfView;
         fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
