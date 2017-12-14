@@ -19,6 +19,9 @@ public class GameController2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//To place sloths
+		int point;
+
 		teamSloths1 = new List<Sloth>();
 		teamSloths2 = new List<Sloth>();
 		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
@@ -26,6 +29,7 @@ public class GameController2 : MonoBehaviour {
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
 
+		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
 			lista.Add("Wizard");
 		}
@@ -39,27 +43,37 @@ public class GameController2 : MonoBehaviour {
 			GameObject model;
 			switch(sloth){
 				case "Wizard":
-					model = (GameObject)Instantiate(slothWizard);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_wizard"));
 				break;
 				case "Archer":
-					model = (GameObject)Instantiate(slothArcher);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_archer"));
 				break;
 				case "Tank":
-					model = (GameObject)Instantiate(slothTank);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_tank"));
 				break;
 				case "Healer":
-					model = (GameObject)Instantiate(slothHealer);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_healer"));
 				break;
 				case "Utility":
-					model = (GameObject)Instantiate(slothUtility);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_utility"));
 				break;
 				default:
-					model = new GameObject("EmptyModel");
+					model = new GameObject("EmptyObject");
 				break;
-			}
-
+			}		
 			model.transform.SetParent(tmpSloth.transform);
-			model.transform.localPosition = new Vector3(0f, 0f, 0f);
+			//Hay que reescalar los bichos
+			model.transform.localScale = new Vector3(27f, 27f, 27f);
+			model.transform.Rotate(new Vector3 (90f, 180f, 0f));
+			//Los fbx tienen una camara, hay que quitarla
+			Destroy(model.transform.Find("Camera").gameObject);
+			//Colocar el bichurro en un sitio random
+			point = Random.Range(0, TerrainCreator.GetAvailablePlaces().Count);
+            TerrainCreator.GetAvailablePlaces().RemoveAt(point);
+			
+			model.transform.parent.position = new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                       TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f);
+			
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
@@ -73,27 +87,37 @@ public class GameController2 : MonoBehaviour {
 			GameObject model;
 			switch(sloth){
 				case "Wizard":
-					model = (GameObject)Instantiate(slothWizard);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_wizard"));
 				break;
 				case "Archer":
-					model = (GameObject)Instantiate(slothArcher);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_archer"));
 				break;
 				case "Tank":
-					model = (GameObject)Instantiate(slothTank);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_tank"));
 				break;
 				case "Healer":
-					model = (GameObject)Instantiate(slothHealer);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_healer"));
 				break;
 				case "Utility":
-					model = (GameObject)Instantiate(slothUtility);
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_utility"));
 				break;
 				default:
-					model = new GameObject("EmptyModel");
+					model = new GameObject("EmptyObject");
 				break;
 			}
 
 			model.transform.SetParent(tmpSloth.transform);
-			model.transform.localPosition = new Vector3(0f, 0f, 0f);
+			//Hay que reescalar los bichos
+			model.transform.localScale = new Vector3(27f, 27f, 27f);
+			model.transform.Rotate(new Vector3 (90f, 180f, 0f));
+			//Los fbx tienen una camara, hay que quitarla
+			Destroy(model.transform.Find("Camera").gameObject);
+			//Colocar el bichurro en un sitio random
+			point = Random.Range(0, TerrainCreator.GetAvailablePlaces().Count);
+            TerrainCreator.GetAvailablePlaces().RemoveAt(point);
+			
+			model.transform.parent.position = new Vector3(TerrainCreator.GetAvailablePlaces()[point].x_coord, 
+                       TerrainCreator.GetAvailablePlaces()[point].y_coord + 0.05f, 0.5f);
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
@@ -103,6 +127,8 @@ public class GameController2 : MonoBehaviour {
 		status = GameControllerStatus.LOGIC;
 		player = false;
 		turns = 0;
+
+
 	}
 	
 	// Update is called once per frame
@@ -205,6 +231,17 @@ public class GameController2 : MonoBehaviour {
 			currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
 			currentAp--;
 			status = GameControllerStatus.ANIMATING;
+		}
+	}
+
+	public void onDieSloth(Sloth sloth){
+		if(teamSloths1.Contains(sloth)){
+			teamSloths1.Remove(sloth);
+			Destroy(sloth.transform.parent.gameObject);
+		}
+		if(teamSloths2.Contains(sloth)){
+			teamSloths2.Remove(sloth);
+			Destroy(sloth.transform.parent.gameObject);
 		}
 	}
 	
