@@ -61,6 +61,7 @@ public class GameController2 : MonoBehaviour {
 			model.transform.SetParent(tmpSloth.transform);
 			model.transform.localPosition = new Vector3(0f, 0f, 0f);
 			logic.AddComponent<Sloth>().initSloth(sloth);
+			logic.AddComponent<ShotScript>();
 			teamSloths1.Add(logic.GetComponent<Sloth>());
 		}
 
@@ -93,6 +94,7 @@ public class GameController2 : MonoBehaviour {
 			model.transform.SetParent(tmpSloth.transform);
 			model.transform.localPosition = new Vector3(0f, 0f, 0f);
 			logic.AddComponent<Sloth>().initSloth(sloth);
+			logic.AddComponent<ShotScript>();
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 
@@ -163,6 +165,7 @@ public class GameController2 : MonoBehaviour {
 		} else {
 			uiController.SetActiveAb3(false);
 		}
+		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
 	public GameControllerStatus GetStatus(){
@@ -178,15 +181,21 @@ public class GameController2 : MonoBehaviour {
 	}
 
 	public void CastAbility1(){
-
+		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
+		currentAp -= currentSloth.GetAbility1().GetAp();
+		NotifyActionEnded();
 	}
 
 	public void CastAbility2(){
-
+		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
+		currentAp -= currentSloth.GetAbility2().GetAp();
+		NotifyActionEnded();
 	}
 
 	public void CastAbility3(){
-
+		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
+		currentAp -= currentSloth.GetAbility3().GetAp();
+		NotifyActionEnded();
 	}
 
 	public enum GameControllerStatus{
