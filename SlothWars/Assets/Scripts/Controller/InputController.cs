@@ -16,7 +16,17 @@ public class InputController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(gameController.GetStatus() == GameController2.GameControllerStatus.WAITING_FOR_INPUT){
+			if(Input.GetKey("up") || Input.GetKey("w")){
+				gameController.MoveSloth(0, 1);
+			} else if (Input.GetKey("down") || Input.GetKey("s")){
+				gameController.MoveSloth(0, -1);
+			} else if (Input.GetKey("right") || Input.GetKey("d")){
+				gameController.MoveSloth(1, 0);
+			} else if (Input.GetKey("left") || Input.GetKey("a")){
+				gameController.MoveSloth(-1, 0);
+			}
+		}
 	}
 
 

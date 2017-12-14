@@ -62,6 +62,7 @@ public class GameController2 : MonoBehaviour {
 			model.transform.localPosition = new Vector3(0f, 0f, 0f);
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
+			logic.AddComponent<MovementController>();
 			teamSloths1.Add(logic.GetComponent<Sloth>());
 		}
 
@@ -95,6 +96,7 @@ public class GameController2 : MonoBehaviour {
 			model.transform.localPosition = new Vector3(0f, 0f, 0f);
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
+			logic.AddComponent<MovementController>();
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 
@@ -150,17 +152,17 @@ public class GameController2 : MonoBehaviour {
 	}
 
 	private void CheckAbilitiesAp(){
-		if(currentSloth.GetAbility1().GetAp() < currentAp){
+		if(currentSloth.GetAbility1().GetAp() <= currentAp){
 			uiController.SetActiveAb1(true);
 		} else {
 			uiController.SetActiveAb1(false);
 		}
-		if(currentSloth.GetAbility2().GetAp() < currentAp){
+		if(currentSloth.GetAbility2().GetAp() <= currentAp){
 			uiController.SetActiveAb2(true);
 		} else {
 			uiController.SetActiveAb2(false);
 		}
-		if(currentSloth.GetAbility3().GetAp() < currentAp){
+		if(currentSloth.GetAbility3().GetAp() <= currentAp){
 			uiController.SetActiveAb3(true);
 		} else {
 			uiController.SetActiveAb3(false);
@@ -198,6 +200,14 @@ public class GameController2 : MonoBehaviour {
 		NotifyActionEnded();
 	}
 
+	public void MoveSloth(int x, int y){
+		if(currentAp > 0){
+			currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
+			currentAp--;
+			status = GameControllerStatus.ANIMATING;
+		}
+	}
+	
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC
 	}
