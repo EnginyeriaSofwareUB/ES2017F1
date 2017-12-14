@@ -35,12 +35,13 @@ public class ProjectileAbility : Ability
     }
     public ProjectileAbility()
     {
-
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-
+        Sloth target = g.GetComponent<AnimPlayer>().sloth;
+        target.SumToHp(-dmg);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

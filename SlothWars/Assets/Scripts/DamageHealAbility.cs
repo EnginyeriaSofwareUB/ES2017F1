@@ -46,6 +46,16 @@ public class DamageHealAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
+        Sloth target = g.GetComponent<AnimPlayer>().sloth;
+        if (target.GetTeam() == TurnController.Instance.GetActualTurnTeam())
+        {
+            target.SumToHp(healHp);
+        }
+        else
+        {
+            target.SumToHp(-dmg);
+        }
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

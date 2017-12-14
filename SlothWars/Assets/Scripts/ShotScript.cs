@@ -57,7 +57,7 @@ public class ShotScript : MonoBehaviour
     {
         if (onloadAbility.GetMark()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			onLoad.SetAll(ray.origin,ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
+			onLoad.SetAll(gun.position, ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
             onLoad.Mark();
         }
     }

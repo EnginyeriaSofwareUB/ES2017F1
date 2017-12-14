@@ -21,7 +21,7 @@ public class Sloth
     Ability ab1;
     Ability ab2;
     Ability ab3;
-
+    Sloth tanking = null;
     AbilityFactory factory = AbilityFactory.Instance;
 
 
@@ -125,7 +125,12 @@ public class Sloth
     public void SumToHp(double dmg_heal)
     {
 		if (dmg_heal < 0) {
-			shield += dmg_heal;
+            if (tanking != null)
+            {
+                dmg_heal = dmg_heal / 2;
+                tanking.SumToHp(dmg_heal);
+            }
+            shield += dmg_heal;
 			if (shield < 0) {
 				hp += shield;
 				shield = 0;
@@ -164,6 +169,13 @@ public class Sloth
 	public double GetShield(){
 		return shield;
 	}
-
+    public void SetTank(Sloth T)
+    {
+        tanking = T;
+    }
+    public void QuitTank()
+    {
+        tanking = null;
+    }
 
 }

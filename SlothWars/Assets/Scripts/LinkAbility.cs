@@ -1,7 +1,9 @@
-﻿using System;
-using SimpleJSON;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-public class TankAbility : Ability
+using SimpleJSON;
+
+public class LinkAbility : Ability
 {
     private bool shield;
     private double boostDef;
@@ -14,38 +16,38 @@ public class TankAbility : Ability
     private string projectile;
     private string source;
     private bool mark;
-    AbilityController abilityController = AbilityController.Instance;
-    public TankAbility(string id, JSONNode json)
+    private Sloth link = null;
+    GameObject linkObject = null;
+    public LinkAbility(string id, JSONNode json)
     {
-
-        this.shield = json[id]["shield"];
         this.mark = json[id]["mark"];
-        this.boostDef = json[id]["boostDef"];
-        this.durBoostDef = json[id]["durBoostDef"];
-        this.boostHp = json[id]["boostHp"];
-        this.durBoostHp = json[id]["durBoosthp"];
-        this.hpShield = json[id]["hpShield"];
-        this.blockAb = json[id]["blockAb"];
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];
-        this.source = json[id]["source"];
     }
 
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
-        target.SetShield(hpShield);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
+   
     }
 
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-        Sloth target = g.GetComponent<AnimPlayer>().sloth;
-        target.SetShield(hpShield);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
+        if(link != null)
+        {
+            link.QuitTank();
+            link = g.GetComponent<AnimPlayer>().sloth;
+            GameObject.Destroy(linkObject);
+        }
+        linkObject = (GameObject)GameObject.Instantiate(Resources.Load("Objects/LightningBolt/Link"), g.transform.position, Quaternion.identity);
+        g.GetComponent<AnimPlayer>().GetSloth().SetTank(TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().sloth);
+        linkObject.GetComponent<LinkScript>().SetOrigin(TurnController.Instance.GetActiveSloth().transform);
+        linkObject.GetComponent<LinkScript>().SetEnd(g.transform);
+
     }
-    public void Apply(Vector3 p) { }
+    public void Apply(Vector3 p) {
+    }
     public float GetRange()
     {
         return 10;

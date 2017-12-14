@@ -75,20 +75,11 @@
     "source": "Objects/Shield"
   },
   
-   "T2": {
-  	"desc":"Generates a shield around castes that blocks next ability used against.",
-    "shield": true,
-    "boostDef": 0,
-    "durBoostDef": 0,
-    "boostHp": 0,
-    "durBoostHp": 0,
-    "hpShield": 40,
-    "blockAb": true,
-	  "hitRadius": 0.5,
+   "L0": {
+  	"desc":"generates a link between the tank and the target so that the tank absorbs half the damage",
 		"ap": 1,
-		"projectile": "autoApply",
-		"mark": false,
-    "source": "Objects/shield"
+		"projectile": "link",
+		"mark": true
   },
   
   "P0": {

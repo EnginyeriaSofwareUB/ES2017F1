@@ -43,6 +43,10 @@ public class AbilityFactory
 		} else if (abilityID [0] == 'D') {
 			return new DamageHealAbility (abilityID, n);
 		}
+        else if (abilityID[0] == 'L')
+        {
+            return new LinkAbility(abilityID, n);
+        }
         return null;
     }
 

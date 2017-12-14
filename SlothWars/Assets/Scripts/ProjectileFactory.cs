@@ -78,6 +78,10 @@ public class ProjectileFactory
         {
             return new TargetTeamProjectile();
         }
+        else if (a.GetProjectile().Equals("link"))
+        {
+            return new LinkProjectile();
+        }
         else
         {
             return null;

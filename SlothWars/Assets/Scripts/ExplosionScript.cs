@@ -46,7 +46,16 @@ public class ExplosionScript : MonoBehaviour
             GameObject.FindGameObjectWithTag("soundManager").GetComponent<SoundEffects>().playExplosionEffect();
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (onCollision && !colided)
+        {
+            colided = true;
+            Debug.Log("radius " + radius);
+            logicAndDestroy();
+            GameObject.FindGameObjectWithTag("soundManager").GetComponent<SoundEffects>().playExplosionEffect();
+        }
+    }
     void logicAndDestroy()
     {
         int effect_radius = 1;
@@ -65,7 +74,7 @@ public class ExplosionScript : MonoBehaviour
             }
             else if ("Destroyable".Equals(currentCollider.tag))
             {
-                Destroy(currentCollider.gameObject);
+                //Destroy(currentCollider.gameObject);
                 abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;

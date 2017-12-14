@@ -45,8 +45,11 @@ public class UtilityAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(Vector3 position)
     {
+        GameObject explosion;
         for (int i = 0; i < terrainSize; i++)
         {
+            explosion = (GameObject) GameObject.Instantiate(Resources.Load("Objects/snowExplosion"), position + i * scale * new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject.Destroy(explosion, 3);
             GameObject.Instantiate(Resources.Load("Objects/WallCube"), position + i * scale * new Vector3(0, 1, 0), Quaternion.identity);
         }
 

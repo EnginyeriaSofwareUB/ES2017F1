@@ -7,7 +7,7 @@
     "ap": 5,
     "photo": "slothWizard",
     "idAb1": "M0",
-    "idAb2": "M1",
+    "idAb2": "U0",
     "idAb3": "M2",
     "model": "sloth_wizard"
   },
@@ -21,7 +21,7 @@
     "photo": "slothTank",
     "idAb1": "P3",
     "idAb2": "T1",
-    "idAb3": "T2",
+    "idAb3": "L0",
     "model": "sloth_tank"
   },
   

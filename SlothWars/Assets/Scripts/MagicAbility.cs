@@ -54,6 +54,9 @@ public class MagicAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
+        Sloth target = g.GetComponent<AnimPlayer>().sloth;
+        target.SumToHp(-dmg);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()
@@ -78,7 +81,7 @@ public class MagicAbility : Ability
 
     public bool GetAlterTerrain()
     {
-        return "true".Equals(this.alterTerrain);
+        return this.alterTerrain;
     }
     public string GetProjectile()
     {

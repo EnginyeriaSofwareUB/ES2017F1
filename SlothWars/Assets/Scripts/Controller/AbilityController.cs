@@ -55,12 +55,11 @@ public class AbilityController{
     public void ApplyLastAbility(GameObject g)
     {
         ability = AbilityModel.Instance.GetLastAbility();
-        if (g.gameObject.tag == "sloth") {
+        if (g.gameObject.tag == "sloth")
+        {
             lastTarget = g;
-            ability.Apply(ref g.GetComponent<AnimPlayer>().sloth);
-            //ability.Apply(g);
         }
-        else{ability.Apply(g); }
+        ability.Apply(g); 
     }
     public void ApplyLastAbility(Vector3 position)
     {

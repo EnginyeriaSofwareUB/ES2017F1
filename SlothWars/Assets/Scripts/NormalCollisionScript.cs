@@ -37,20 +37,32 @@ public class NormalCollisionScript : MonoBehaviour
             rb.AddTorque (torque);
         } */
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "sloth")
+        {
+            if (!target)
+            {
+                AbilityController.Instance.ApplyLastAbility(other.gameObject);
+                target = true;
+            }
+        }
+        Destroy(this.gameObject);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "sloth")
         {
             if (!target)
             {
-                AbilityController.Instance.ApplyDestroyTerrainAbility(collision.gameObject);
+                AbilityController.Instance.ApplyLastAbility(collision.gameObject);
                 target = true;
             }
         }
         if (!colided)
         {
             colided = true;
-            abilityController.ApplyLastAbility(collision.gameObject);
+            //abilityController.ApplyLastAbility(collision.gameObject);
             this.transform.position += dir*0.3f;
             if (rotative)
             {
