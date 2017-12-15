@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController2 : MonoBehaviour {
 	private UIController2 uiController;
@@ -88,7 +89,7 @@ public class GameController2 : MonoBehaviour {
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
-            healthBar.transform.parent = logic.transform;
+            healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
 
 			teamSloths1.Add(logic.GetComponent<Sloth>());
@@ -142,7 +143,7 @@ public class GameController2 : MonoBehaviour {
      		HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            healthBar.transform.parent = logic.transform;
+            healthBar.transform.SetParent(logic.transform);
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
 
             health.SetHealthBar(healthBar);
@@ -177,10 +178,13 @@ public class GameController2 : MonoBehaviour {
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 1;
 			status = GameControllerStatus.GAME_OVER;
+			SceneManager.LoadScene("GameOverScene");
 		}
-		if(teamSloths1.Count == 0){
+		if(teamSloths2.Count == 0){
 			StorePersistentVariables.Instance.winner = 0;
 			status = GameControllerStatus.GAME_OVER;
+			SceneManager.LoadScene("GameOverScene");
+			return;
 		}
 
 		player = !player;
@@ -263,15 +267,19 @@ public class GameController2 : MonoBehaviour {
 			currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
 			currentAp--;
 			status = GameControllerStatus.ANIMATING;
+		} else {
+			uiController.NotifyNotEnoughAp();
 		}
 	}
 
 	public void PauseGame(){
 		status = GameControllerStatus.PAUSE;
+		uiController.SetActiveGameButtons(false);
 	}
 
 	public void UnPauseGame(){
 		status = GameControllerStatus.WAITING_FOR_INPUT;
+		uiController.SetActiveGameButtons(true);
 	}
 
 	public void OnDieSloth(Sloth sloth){
@@ -292,7 +300,19 @@ public class GameController2 : MonoBehaviour {
 	public Sloth GetCurrentSloth(){
 		return currentSloth;
 	}
+
+	public void Surrender(){
+		StorePersistentVariables.Instance.winner = 1;
+		if(player){
+			StorePersistentVariables.Instance.winner = 0;
+		}
+		status = GameControllerStatus.GAME_OVER;
+		SceneManager.LoadScene("GameOverScene");
+	}
 	
+	public void QuitGame(){
+		SceneManager.LoadScene("MainMenu");
+	}
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}

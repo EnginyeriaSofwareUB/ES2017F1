@@ -4,20 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController2 : MonoBehaviour {
-	public GameObject mainPanel, optsPanel, abilitiesPanel;
+	public GameObject mainPanel, optsPanel, abilitiesPanel, mainMessage;
+	private float mainMessageDuration;
+	private bool animatingMainMessage = false;
 	// Use this for initialization
 	
 	void Start () {
 		mainPanel = GameObject.Find("MainUIPanel");
 		optsPanel = GameObject.Find("OptionPanel");
 		abilitiesPanel = GameObject.Find("AbilitiesPanel");
+		mainMessage = GameObject.Find("MainMessage");
 
 		SetActiveOptsPanel(false);
 		SetActiveAbilitiesPanel(false);
+		SetActiveMainMessage(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (animatingMainMessage){
+			if(mainMessageDuration > 0f){
+				mainMessageDuration -= Time.deltaTime;
+			} else {
+				SetActiveMainMessage(false);
+				animatingMainMessage = false;
+			}
+		}
 		
 	}
 
@@ -41,6 +53,12 @@ public class UIController2 : MonoBehaviour {
 		abilitiesPanel.SetActive(b);
 	}
 
+	public void SetActiveGameButtons(bool b){
+		SetActiveAb1(b);
+		SetActiveAb2(b);
+		SetActiveAb3(b);
+		SetActiveTurn(b);
+	}
 	public void SetActiveAb1(bool b){
 		((Button)GameObject.Find("buttonAbility1").GetComponent<Button>()).interactable = b;
 	}
@@ -53,6 +71,20 @@ public class UIController2 : MonoBehaviour {
 		((Button)GameObject.Find("buttonAbility3").GetComponent<Button>()).interactable = b;
 	}
 
+	public void SetActiveTurn(bool b){
+		((Button)GameObject.Find("EndTurnButton").GetComponent<Button>()).interactable = b;
+	}
+
+	public void SetActiveMainMessage(bool b){
+		mainMessage.SetActive(b);
+	}
+
+	public void NotifyNotEnoughAp(){
+		SetActiveMainMessage(true);
+		mainMessage.GetComponent<Text>().text = "You don't have enough action points left";
+		mainMessageDuration = 1f;
+		animatingMainMessage = true;
+	}
 	public void DisplaySlothStats(Sloth sloth){
 		GameObject.Find("lifeSlothText").GetComponent<Text>().text = ((int)sloth.GetMaxHp()).ToString();
 		GameObject.Find("attackSlothText").GetComponent<Text>().text = sloth.GetAttack().ToString();
