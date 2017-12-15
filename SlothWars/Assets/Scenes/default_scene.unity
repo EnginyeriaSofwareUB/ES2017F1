@@ -3188,6 +3188,7 @@ GameObject:
   - component: {fileID: 571128270}
   - component: {fileID: 571128269}
   - component: {fileID: 571128268}
+  - component: {fileID: 571128271}
   m_Layer: 5
   m_Name: buttonAbility1
   m_TagString: Untagged
@@ -3311,6 +3312,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 571128266}
+--- !u!114 &571128271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571128266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48c0fab51ea2fc4fb83446acd81f820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &575449497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5710,7 +5722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &972900912
 Transform:
   m_ObjectHideFlags: 0
@@ -6763,6 +6775,7 @@ GameObject:
   - component: {fileID: 1153560874}
   - component: {fileID: 1153560876}
   - component: {fileID: 1153560875}
+  - component: {fileID: 1153560877}
   m_Layer: 5
   m_Name: TurnText
   m_TagString: Untagged
@@ -6809,10 +6822,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 46f50f1338b4d8a498007a63caa3764f, type: 3}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -6827,6 +6840,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153560873}
+--- !u!114 &1153560877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1153560873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1186080453
 Prefab:
   m_ObjectHideFlags: 0

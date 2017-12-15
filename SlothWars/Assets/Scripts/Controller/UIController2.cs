@@ -62,12 +62,16 @@ public class UIController2 : MonoBehaviour {
 	}
 
 	public void UpdateTurnPlayerInfo(bool p){
+		Text turnText = GameObject.Find ("TurnText").GetComponent<Text> ();
 		if (p){
-			GameObject.Find("TurnText").GetComponent<Text>().text = "Blue";
+			turnText.color = new Color(0.0f/255.0f, 97.0f/255.0f, 255.0f/255.0f);
+			turnText.text = "Blue Plays";
 		} else {
-			GameObject.Find("TurnText").GetComponent<Text>().text = "Red";
+			turnText.color = new Color(255.0f/255.0f, 0.0f/255.0f, 0.0f/255.0f);
+			turnText.text = "Red Plays";
 		}
 	}
+		
 
 	
 }
