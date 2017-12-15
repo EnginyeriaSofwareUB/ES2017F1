@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleJSON;
+
 
 public class UIController2 : MonoBehaviour {
-	public GameObject mainPanel, optsPanel, abilitiesPanel;
+	public GameObject mainPanel, optsPanel, abilitiesPanel, infoAbPanel;
+	string[] abilitiesInfo = new string[3];
+	string s;
+	JSONNode n;
 	// Use this for initialization
 	
 	void Start () {
+		s = ((TextAsset)Resources.Load("slothability")).text;
+		n = JSON.Parse(s);
 		mainPanel = GameObject.Find("MainUIPanel");
 		optsPanel = GameObject.Find("OptionPanel");
 		abilitiesPanel = GameObject.Find("AbilitiesPanel");
-
+		infoAbPanel = GameObject.Find ("abInfoPanel");
 		SetActiveOptsPanel(false);
 		SetActiveAbilitiesPanel(false);
+		SetActiveInfoAbPanel (false);
 	}
 	
 	// Update is called once per frame
@@ -25,8 +33,12 @@ public class UIController2 : MonoBehaviour {
 	public void DisplaySlothAbilities(Sloth sloth){
 		SetActiveAbilitiesPanel(true);
 		GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb1());
+
+		abilitiesInfo [0] = n[sloth.GetIdAb1 ()] ["desc"];
         GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb2());
+		abilitiesInfo [1] = n[sloth.GetIdAb2 ()] ["desc"];
         GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb3());
+		abilitiesInfo [2] = n[sloth.GetIdAb3 ()] ["desc"];
 	}
 
 	public void SetActiveMainPanel(bool b){
@@ -39,6 +51,14 @@ public class UIController2 : MonoBehaviour {
 
 	public void SetActiveAbilitiesPanel(bool b){
 		abilitiesPanel.SetActive(b);
+	}
+
+	public void SetActiveInfoAbPanel(bool b){
+		infoAbPanel.SetActive(b);
+	}
+
+	public Image getInfoAbPanel(){
+		return infoAbPanel.GetComponent<Image>();
 	}
 
 	public void SetActiveAb1(bool b){
@@ -71,6 +91,27 @@ public class UIController2 : MonoBehaviour {
 			turnText.text = "Red Plays";
 		}
 	}
+
+	public string getAbilityInfo(string nameAbButton){
+		string abText;
+		switch(nameAbButton){
+			case "buttonAbility1":
+				abText = abilitiesInfo [0];
+				break;
+			case "buttonAbility2":
+			abText =  abilitiesInfo [1];
+				break;
+			case "buttonAbility3":
+			abText =  abilitiesInfo [2];
+				break;
+			default:
+			abText =  "";
+				break;
+
+		}
+		return abText;
+	}
+
 		
 
 	

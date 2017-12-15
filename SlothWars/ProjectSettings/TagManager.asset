@@ -33,6 +33,7 @@ TagManager:
   - leaf
   - Destroyable
   - soundManager
+  - abilityText
   layers:
   - Default
   - TransparentFX
