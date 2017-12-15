@@ -39,8 +39,10 @@ public class CameraMovement : MonoBehaviour {
         explosion = GameObject.FindGameObjectsWithTag("explosion");
         //print("IS MOVING: " + TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().IsMoving().ToString());
         if(turn == null){
-            turn = gameController.GetCurrentSloth().gameObject;
-            transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y, cameraDistance);
+            if( gameController.GetCurrentSloth() != null){
+                turn = gameController.GetCurrentSloth().gameObject;
+                transform.position = new Vector3(turn.transform.position.x, turn.transform.position.y, cameraDistance);
+            }
         } else if (turn.GetComponent<MovementController>().IsMoving())
         {
 			
@@ -74,7 +76,7 @@ public class CameraMovement : MonoBehaviour {
             }
         }
 
-		if (turn != gameController.GetCurrentSloth().gameObject) 
+		if (gameController.GetCurrentSloth() != null && turn != gameController.GetCurrentSloth().gameObject) 
 		{
             transform.position = new Vector3(gameController.GetCurrentSloth().gameObject.transform.position.x, 
                 gameController.GetCurrentSloth().gameObject.transform.position.y , cameraDistance);

@@ -44,7 +44,6 @@ public class AbilityController{
     {
         Debug.Log("upt");
         lastTarget.GetComponent<HealthScript>().UpdateHP(Mathf.FloorToInt((float)hp), Mathf.FloorToInt((float)shield));
-        GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
     // sums residual during t turns
     public void SumResidual(GameObject target, Double residual, int t)
