@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AutoApplyProjectile : Projectile {
 	private string source;
-	AbilityController abilityController = AbilityController.Instance;
 	public AutoApplyProjectile()
 	{
 
@@ -14,10 +13,11 @@ public class AutoApplyProjectile : Projectile {
 	// xy trayectory 
 	public void ApplyLogic()
 	{
-		GameObject s = TurnController.Instance.GetActiveSloth ();
+		GameObject s = GameObject.Find("Main Camera").GetComponent<GameController2>().GetCurrentSloth().gaeObject;
 		//GameObject effect = (GameObject)GameObject.Instantiate (Resources.Load (source), s.transform);
 		//GameObject.Destroy (effect, 3);
-		abilityController.ApplyLastAbility (s);
+		//TODO:FIX THIS
+		//abilityController.ApplyLastAbility (s);
 	}
 	// needed to set initial parameters
 	public void SetAll(Vector3 positon, Vector3 aimVector,Quaternion rotation,float range, float radius,bool explosive,string source)

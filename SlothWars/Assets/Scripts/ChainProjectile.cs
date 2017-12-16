@@ -8,7 +8,6 @@ public class ChainProjectile : Projectile {
     private float range = 20f;
     public string lpathR = "Objects/LightningBolt/LightningBoltRed";
 	public string lpathG = "Objects/LightningBolt/LightningBoltGreen";
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
 	GameObject mark = null;
     public void ApplyLogic()
