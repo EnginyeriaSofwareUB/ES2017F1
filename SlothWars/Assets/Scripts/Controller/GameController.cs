@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 	private GameControllerStatus status;
 	private int turns;
 	private bool player;
-	private int currentAp;
+	private int currentAp, cancelAp;
 	public GameObject leaf;
 	public GameObject toTexture;
 	public Material blueLeaf;
@@ -163,11 +163,14 @@ public class GameController : MonoBehaviour {
 		switch(status){
 			case GameControllerStatus.LOGIC:
 				CheckLogic();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				break;
 			case GameControllerStatus.ABILITY_LOGIC:
 				CheckAbilitiesAp();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				break;
 			case GameControllerStatus.WAITING_FOR_INPUT:
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				if(ia != null && !player)
 				{
 					DoAction(ia.GetAction(this));
@@ -209,9 +212,10 @@ public class GameController : MonoBehaviour {
 		leaf.transform.localPosition = new Vector3(0f, 0f, 0f);
 
 		uiController.DisplaySlothAbilities(currentSloth);
-		uiController.DisplaySlothStats(currentSloth);
+        currentAp = currentSloth.GetAp();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
 		uiController.UpdateTurnPlayerInfo(player);
-		currentAp = currentSloth.GetAp();
+		
 		CheckAbilitiesAp();
 
 
@@ -253,18 +257,21 @@ public class GameController : MonoBehaviour {
 
 	public void CastAbility1(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility1().GetAp();
 		NotifyActionEnded();
 	}
 
 	public void CastAbility2(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility2().GetAp();
 		NotifyActionEnded();
 	}
 
 	public void CastAbility3(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility3().GetAp();
 		NotifyActionEnded();
 	}
@@ -357,6 +364,7 @@ public class GameController : MonoBehaviour {
 
 	public void CancelAbility(){
 		currentSloth.gameObject.GetComponent<ShotScript> ().CancelShot ();
+        currentAp += cancelAp - currentAp;
 	}
 
 	public enum GameControllerStatus{

@@ -16,9 +16,8 @@ public class HealthBarScript : MonoBehaviour
         rt = (RectTransform)GetComponent<RectTransform>();
         health = (Text)rt.Find("health").GetComponent<Text>();
         shield = (Text)rt.Find("shield_text").GetComponent<Text>();
-        goShield = rt.Find("shield");
-        ActivateShield();
-        ChangeTextShield(100);
+        goShield = (Transform)rt.Find("shield");
+        DeactivateShield();
         rt.rotation = new Quaternion(0, 0, 0, 0);
         rt = (RectTransform)rt.Find("currentHealth");
     }
@@ -53,7 +52,6 @@ public class HealthBarScript : MonoBehaviour
     }
 
     public void ActivateShield(){
-        Debug.Log("shield activated");
         goShield.gameObject.SetActive(true);
         shield.gameObject.SetActive(true);
     }

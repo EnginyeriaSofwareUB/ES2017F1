@@ -22,10 +22,18 @@ public class HealthScript : MonoBehaviour {
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeHealthText(health);
 		//hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
-		if (shieldEffect != null) {
-			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
-			shieldEffect.transform.position = this.transform.position + new Vector3 (0, 0, -0.5f);
-		}
+        if (gameObject.GetComponent<Sloth>().GetShield() >= 0){
+            healthBar.GetComponent<HealthBarScript>().ActivateShield();
+            healthBar.GetComponent<HealthBarScript>().ChangeTextShield(gameObject.GetComponent<Sloth>().GetShield());
+        }
+        else{
+            healthBar.GetComponent<HealthBarScript>().DeactivateShield();   
+        }
+        if (shieldEffect != null)
+        {
+            shield.transform.position = this.transform.position + new Vector3(0.5f, 1, 0);
+            shieldEffect.transform.position = this.transform.position + new Vector3(0, 0, -0.5f);
+        }
     }
 
     public void SetHealthBar(GameObject healthBar){
@@ -62,16 +70,12 @@ public class HealthScript : MonoBehaviour {
 			if (shieldEffect == null) {
 				this.shield.SetActive (true);
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
-                healthBar.GetComponent<HealthBarScript>().ActivateShield();
-                healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 			}
 			this.shield.GetComponent<TextMesh> ().text = "" + shield;
-            healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 		} else if (shieldEffect != null) {
 			Destroy (shieldEffect);
 			shieldEffect = null;
 			this.shield.SetActive (false);
-            healthBar.GetComponent<HealthBarScript>().DeactivateShield();
 		}
 		//this.hp.GetComponent<TextMesh>().text= "" + health;
     }

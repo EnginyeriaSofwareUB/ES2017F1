@@ -1789,19 +1789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7c8835a614f475a9863356d882ada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamSloths1: []
-  teamSloths2: []
-  playerTeam1: []
-  playerTeam2: []
-  teamSprite1: []
-  teamSprite2: []
-  endTurnButton: {fileID: 0}
-  turnLabel: {fileID: 0}
-  panelMain: {fileID: 0}
-  panelOpts: {fileID: 0}
-  buttonAbility1: {fileID: 0}
-  buttonAbility2: {fileID: 0}
-  buttonAbility3: {fileID: 0}
 --- !u!4 &328900377
 Transform:
   m_ObjectHideFlags: 0
@@ -1848,7 +1835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59cfeefcd6fc754b8f90999d98182ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSprite: {fileID: 0}
 --- !u!114 &328900382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1893,8 +1879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288536cbb8b1df84aa76397e6d6dd881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbody: {fileID: 0}
-  sloth: {fileID: 0}
 --- !u!1001 &329744379
 Prefab:
   m_ObjectHideFlags: 0
@@ -4549,6 +4533,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4564,6 +4549,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -4579,7 +4565,7 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 645022941}
-  m_Mesh: {fileID: 4300002, guid: 8a34ca4c09476654db8e1b92015d9157, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 894fbb6606aa80d41a06434a48a27d4e, type: 3}
 --- !u!4 &645022944
 Transform:
   m_ObjectHideFlags: 0
@@ -6190,6 +6176,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6205,6 +6192,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -6220,7 +6208,7 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1018758714}
-  m_Mesh: {fileID: 4300000, guid: 8a34ca4c09476654db8e1b92015d9157, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 894fbb6606aa80d41a06434a48a27d4e, type: 3}
 --- !u!1001 &1026154883
 Prefab:
   m_ObjectHideFlags: 0
