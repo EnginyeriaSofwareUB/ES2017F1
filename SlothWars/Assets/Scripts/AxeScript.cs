@@ -8,7 +8,6 @@ public class AxeScript : MonoBehaviour
     private Rigidbody rb;
     private Vector3 dir;
     private float rot = -60;
-    AbilityController abilityController = AbilityController.Instance;
     // Use this for initialization
     void Start()
     {
@@ -28,7 +27,7 @@ public class AxeScript : MonoBehaviour
     {
         if (other.gameObject.tag == "sloth")
         {
-            AbilityController.Instance.ApplyLastAbility(other.gameObject);
+            //AbilityController.Instance.ApplyLastAbility(other.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -36,7 +35,7 @@ public class AxeScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "sloth")
         {
-            AbilityController.Instance.ApplyLastAbility(collision.gameObject);
+            //AbilityController.Instance.ApplyLastAbility(collision.gameObject);
             Destroy(this.gameObject);
         }
         else

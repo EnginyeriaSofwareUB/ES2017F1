@@ -7,7 +7,6 @@ public class ExplosionScript : MonoBehaviour
     private float range = 10;
     public string namePath = "";
     private bool onCollision = true;
-    AbilityController abilityController = AbilityController.Instance;
     private float radius = 0.5f;
     public bool xy = false; //if trajectory component z is zero
     private bool colided = false;
@@ -68,11 +67,11 @@ public class ExplosionScript : MonoBehaviour
             currentCollider = hitColliders[i];
             if ("sloth".Equals(currentCollider.tag))
             {
-                abilityController.ApplyLastAbility(currentCollider.gameObject);
+                //abilityController.ApplyLastAbility(currentCollider.gameObject);
             }
             else if ("Destroyable".Equals(currentCollider.tag))
             {
-                abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
+                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
         }

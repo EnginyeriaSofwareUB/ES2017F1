@@ -8,7 +8,6 @@ public class ChainProjectile : Projectile {
     private float range = 20f;
     public string lpathR = "Objects/LightningBolt/LightningBoltRed";
 	public string lpathG = "Objects/LightningBolt/LightningBoltGreen";
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
 	GameObject mark = null;
     private bool apply = false;
@@ -34,7 +33,7 @@ public class ChainProjectile : Projectile {
 			GameObject.Destroy (lightning, 3f);
 			GameObject.Destroy (mark, 3f);
 			position = hit.transform.position;
-			abilityController.ApplyLastAbility (hit.collider.gameObject);
+			//abilityController.ApplyLastAbility (hit.collider.gameObject);
 			for (int i = 0; i < lnumber-1; i++) {
 				sloths.Sort (delegate (GameObject c1, GameObject c2) {
 					return Vector3.Distance (position, c1.transform.position).CompareTo
@@ -42,7 +41,7 @@ public class ChainProjectile : Projectile {
 				});
 				if ((position - sloths[0].transform.position).magnitude < range) {
 					// GameControl.control.ApplyLastAbility(sloths[i]);
-					abilityController.ApplyLastAbility (sloths [i]);
+					//abilityController.ApplyLastAbility (sloths [i]);
 					//sloths[i].gameObject.SendMessage("SumToHP", -10);
 					if (sloths[0].GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam()) {
 						lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
@@ -57,7 +56,7 @@ public class ChainProjectile : Projectile {
 					GameObject.Destroy (lightning, 3f);
 					GameObject.Destroy (mark, 3f);
 					position = sloths [0].transform.position;
-					abilityController.ApplyLastAbility (sloths [0]);
+					//abilityController.ApplyLastAbility (sloths [0]);
 					sloths.Remove (sloths [0]);
 				} else {
 					break;

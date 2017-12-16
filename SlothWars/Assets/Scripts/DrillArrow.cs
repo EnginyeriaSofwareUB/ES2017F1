@@ -5,7 +5,6 @@ using UnityEngine;
 public class DrillArrow : MonoBehaviour
 {
     private Rigidbody rb;
-    AbilityController abilityController = AbilityController.Instance;
     bool firstTarget =false;
     Vector3 dir;
     // Use this for initialization
@@ -28,7 +27,7 @@ public class DrillArrow : MonoBehaviour
     {
         if (other.gameObject.tag == "sloth")
         {
-            AbilityController.Instance.ApplyLastAbility(other.gameObject);
+            //AbilityController.Instance.ApplyLastAbility(other.gameObject);
             if (!firstTarget)
             {
                 firstTarget = true;
@@ -72,7 +71,7 @@ public class DrillArrow : MonoBehaviour
     {
         if (collision.gameObject.tag == "sloth")
         {
-            AbilityController.Instance.ApplyLastAbility(collision.gameObject);
+            //AbilityController.Instance.ApplyLastAbility(collision.gameObject);
             if (!firstTarget)
             {
                 firstTarget = true;

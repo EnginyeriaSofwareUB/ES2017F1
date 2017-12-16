@@ -17,7 +17,6 @@ public class HealingAbility : Ability
     private bool explosive;
     private string source;
     private bool mark;
-    AbilityController abilityController = AbilityController.Instance;
     public HealingAbility(string id, JSONNode json)
     {
 
@@ -44,14 +43,12 @@ public class HealingAbility : Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(healHp);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
         Sloth target = g.GetComponent<Sloth>();
         target.SumToHp(healHp);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

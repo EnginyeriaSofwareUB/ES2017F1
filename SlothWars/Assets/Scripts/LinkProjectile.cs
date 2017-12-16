@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LinkProjectile : Projectile
 {
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
     private GameObject mark = null;
     private string resource;
@@ -14,7 +13,7 @@ public class LinkProjectile : Projectile
     public void ApplyLogic()
     {
         GameObject.Destroy(mark);
-        abilityController.ApplyLastAbility(target);
+        //abilityController.ApplyLastAbility(target);
     }
 
     // Update is called once per frame

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TeleportProjectile : Projectile
 {
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
     private GameObject mark = null;
     private string resource;

@@ -88,8 +88,8 @@ public class PathProjectile : Projectile
     public void ApplyLogic()
     {
         GameObject.Destroy(mark);
-        AbilityController.Instance.ApplyLastAbility(direction);
-        AbilityController.Instance.ApplyLastAbility(Floor);
+        //AbilityController.Instance.ApplyLastAbility(direction);
+        //AbilityController.Instance.ApplyLastAbility(Floor);
     }
     public void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {

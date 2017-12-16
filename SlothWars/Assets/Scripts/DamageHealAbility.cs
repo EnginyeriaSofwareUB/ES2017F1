@@ -15,7 +15,6 @@ public class DamageHealAbility : Ability
     private bool explosive;
     private string source;
     private bool mark;
-    AbilityController abilityController = AbilityController.Instance;
     public DamageHealAbility(string id, JSONNode json)
     {
 
@@ -41,7 +40,6 @@ public class DamageHealAbility : Ability
         {
             target.SumToHp(-dmg);
         }
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
@@ -55,7 +53,6 @@ public class DamageHealAbility : Ability
         {
             target.SumToHp(-dmg);
         }
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()
