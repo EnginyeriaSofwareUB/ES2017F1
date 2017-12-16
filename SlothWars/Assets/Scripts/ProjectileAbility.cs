@@ -13,8 +13,8 @@ public class ProjectileAbility : Ability
     private string source;
     private bool mark;
     //private int sApoints;
-    AbilityController abilityController = AbilityController.Instance;
-    public ProjectileAbility(string id, JSONNode json)
+
+	public ProjectileAbility(string id, JSONNode json)
     {
         this.mark = json[id]["mark"];
         this.dmg = json[id]["dmg"];
@@ -30,7 +30,6 @@ public class ProjectileAbility : Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
         //GameControl.control.SubtractActionPoints(target, sApints);
     }
     public ProjectileAbility()
@@ -41,7 +40,6 @@ public class ProjectileAbility : Ability
     {
         Sloth target = g.GetComponent<Sloth>();
         target.SumToHp(-dmg);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

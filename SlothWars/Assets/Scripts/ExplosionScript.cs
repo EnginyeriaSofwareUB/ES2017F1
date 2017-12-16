@@ -7,13 +7,11 @@ public class ExplosionScript : MonoBehaviour
     private float range = 10;
     public string namePath = "";
     private bool onCollision = true;
-    AbilityController abilityController = AbilityController.Instance;
-    public float DieIn = 2;
     private float radius = 0.5f;
-    public int d_h = 20; // used while Sloth-gameobject conection doesnt exit
     public bool xy = false; //if trajectory component z is zero
     private bool colided = false;
-
+    public bool stopOnColision = false;
+    private Vector3 dir;
     GameObject explosion;
     int secondLayerZ = 1;
 
@@ -67,22 +65,44 @@ public class ExplosionScript : MonoBehaviour
         while (i < hitColliders.Length)
         {
             currentCollider = hitColliders[i];
-            Debug.Log("[TRACE] collider tag: " + currentCollider.tag);
             if ("sloth".Equals(currentCollider.tag))
             {
-                abilityController.ApplyLastAbility(currentCollider.gameObject);
+				gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(currentCollider.gameObject);
             }
             else if ("Destroyable".Equals(currentCollider.tag))
             {
-                //Destroy(currentCollider.gameObject);
-                abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
+				if (gameObject.GetComponent<AbilityContainer> ().GetAbility ().GetAlterTerrain ()) {
+					Camera.main.gameObject.GetComponent<GameController> ().DestroyTerrain (currentCollider.gameObject);
+				}
+                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
         }
 
         explosion = (GameObject)Instantiate(Resources.Load(namePath), this.transform.position, this.transform.rotation);
-		Destroy (explosion, 1.25f);
-        Destroy(this.gameObject);
+        Destroy(explosion, 3);
+        if (stopOnColision)
+        {
+            this.transform.position += dir * 0.3f;
+            this.transform.position += new Vector3(0, 0, 0.1f);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<SphereCollider>().enabled = false;
+            Destroy(this.gameObject, 20);
+            this.tag = "Untagged";
+            this.enabled = false;
+            foreach(LineRenderer l in GetComponentsInChildren<LineRenderer>())
+            {
+                l.gameObject.SetActive(false);
+            }
+            foreach (ParticleSystem s in GetComponentsInChildren<ParticleSystem>())
+            {
+                s.Stop();
+            }
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetOrigin(Vector3 p)
@@ -98,6 +118,10 @@ public class ExplosionScript : MonoBehaviour
     public void SetRadius(float r)
     {
         radius = r;
+    }
+    public void SetDirection(Vector3 v)
+    {
+        dir = v;
     }
 
 }

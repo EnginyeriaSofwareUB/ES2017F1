@@ -60,10 +60,10 @@ public class HealthScript : MonoBehaviour {
         //health = hp;
 		if (shield > 0) {
 			if (shieldEffect == null) {
-                healthBar.GetComponent<HealthBarScript>().ActivateShield();
-                healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 				this.shield.SetActive (true);
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
+                healthBar.GetComponent<HealthBarScript>().ActivateShield();
+                healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 			}
 			this.shield.GetComponent<TextMesh> ().text = "" + shield;
             healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);

@@ -36,7 +36,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Highlight: 30
-    - _InvFade: 1
+    - _InvFade: 3
     - _Shininess: 20
     m_Colors:
     - BumpMapScale: {r: 1, g: 1, b: 1, a: 1}

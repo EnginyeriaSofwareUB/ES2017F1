@@ -15,12 +15,13 @@ public class xyzProjectile : Projectile {
 	GameObject fb; // fireball gameobject
 	private string source;
 	private bool explosive;
-	public xyzProjectile()
+	public xyzProjectile(Ability a)
 	{
+		ability = a;
 	}
 
 	// xyz trayectory
-	public void ApplyLogic()
+	public override void ApplyLogic()
 	{
 		Debug.Log(source);
 		float zd = zf - zO;
@@ -29,15 +30,22 @@ public class xyzProjectile : Projectile {
 		GameObject fb = (GameObject)GameObject.Instantiate(Resources.Load(source), pos + vVector.normalized * 1.15f, rot);
 		fb.GetComponent<Transform>().Rotate(0, 90, 0);
 		fb.GetComponent<Rigidbody>().AddForce(vVector , ForceMode.VelocityChange);
+		fb.AddComponent<AbilityContainer>().SetAbility(ability);
 		if (explosive) {
 			fb.GetComponent<ExplosionScript> ().SetRadius (rd);
-		} else {
-			fb.GetComponent<NormalCollisionScript> ().SetDirection (vVector.normalized);
+            fb.GetComponent<ExplosionScript>().SetDirection(vVector.normalized);
+        }
+        else if (fb.GetComponent<AxeScript>() != null) { 
+			fb.GetComponent<AxeScript> ().SetDirection (vVector.normalized);
 		}
+        else if (fb.GetComponent<DrillArrow>() != null)
+        {
+            fb.GetComponent<DrillArrow>().SetDirection(vVector.normalized);
+        }
 
-	}
+    }
 	// needed to set initial parameters
-	public void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius,bool exp,string source)
+	public override void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius,bool exp,string source)
 	{
 		xyDir = aimVector;
 		rot = rotation;
@@ -48,6 +56,6 @@ public class xyzProjectile : Projectile {
 		Debug.Log (exp);
 		this.source = source;
 	}
-	public void Mark() { }
-	public bool GetApply() { return true; }
+	public override void Mark() { }
+	public override bool GetApply() { return true; }
 }

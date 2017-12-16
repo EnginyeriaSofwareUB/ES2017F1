@@ -13,7 +13,12 @@ public class ProjectileTerrain : Projectile {
     private bool apply = false;
     private GameObject mark;
     private bool created = false;
-    public void Mark()
+
+	public ProjectileTerrain(Ability a){
+		ability = a;
+	}
+
+    public override void Mark()
     {
         Plane playerPlane = new Plane(Vector3.forward, new Vector3(0,0,0));
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -62,14 +67,15 @@ public class ProjectileTerrain : Projectile {
             GameObject.Destroy(mark);
         }
     }
-    public void ApplyLogic()
+    public override void ApplyLogic()
     {
         GameObject.Destroy(mark);
-        AbilityController.Instance.ApplyLastAbility(position);
-    }
-	public void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source)
+		ability.Apply (position);
+	}
+	
+	public override void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source)
     {
         nCubes = radius;
     }
-    public bool GetApply(){return apply;}
+    public override bool GetApply(){return apply;}
 }

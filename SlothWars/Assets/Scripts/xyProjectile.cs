@@ -13,18 +13,19 @@ public class xyProjectile :  Projectile
 	private GameObject hp; //heal ball gameobject
 	private bool explosive;
 	private string source;
-	public xyProjectile()
+	public xyProjectile(Ability a)
 	{
-
+		ability = a;
 	}
 
 
 	// xy trayectory 
-	public void ApplyLogic()
+	public override void ApplyLogic()
 	{
 		hp = (GameObject)GameObject.Instantiate(Resources.Load(source), pos + xyDir * 1.15f, rot);
 		hp.GetComponent<Rigidbody>().AddForce(xyDir*HVelocity ,ForceMode.VelocityChange);
 		Debug.Log (rg + "rangeeeee");
+		hp.AddComponent<AbilityContainer> ().SetAbility (ability);
 		if (explosive) {
 			hp.GetComponent<ExplosionScript> ().SetOrigin (pos);
 			hp.GetComponent<ExplosionScript> ().SetRange (rg);
@@ -32,7 +33,7 @@ public class xyProjectile :  Projectile
 		}
 	}
 	// needed to set initial parameters
-	public void SetAll(Vector3 positon, Vector3 aimVector,Quaternion rotation,float range, float radius,bool explosive,string source)
+	public override void SetAll(Vector3 positon, Vector3 aimVector,Quaternion rotation,float range, float radius,bool explosive,string source)
 	{
 		xyDir = aimVector;
 		rot = rotation;
@@ -42,6 +43,6 @@ public class xyProjectile :  Projectile
 		this.explosive = explosive;
 		this.source = source;
 	}
-	public void Mark(){ }
-	public bool GetApply() { return true; }
+	public override void Mark(){ }
+	public override bool GetApply() { return true; }
 }

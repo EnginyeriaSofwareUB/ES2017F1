@@ -2,21 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleJSON;
+
 
 public class UIController2 : MonoBehaviour {
-	public GameObject mainPanel, optsPanel, abilitiesPanel, mainMessage;
+	public GameObject mainPanel, optsPanel, abilitiesPanel, infoAbPanel, mainMessage;
+	string[] abilitiesInfo = new string[3];
+	string s;
+	JSONNode n;
 	private float mainMessageDuration;
 	private bool animatingMainMessage = false;
 	// Use this for initialization
 	
 	void Start () {
+		s = ((TextAsset)Resources.Load("slothability")).text;
+		n = JSON.Parse(s);
 		mainPanel = GameObject.Find("MainUIPanel");
 		optsPanel = GameObject.Find("OptionPanel");
 		abilitiesPanel = GameObject.Find("AbilitiesPanel");
+		infoAbPanel = GameObject.Find ("abInfoPanel");
 		mainMessage = GameObject.Find("MainMessage");
 
 		SetActiveOptsPanel(false);
 		SetActiveAbilitiesPanel(false);
+		SetActiveInfoAbPanel (false);
 		SetActiveMainMessage(false);
 	}
 	
@@ -37,8 +46,12 @@ public class UIController2 : MonoBehaviour {
 	public void DisplaySlothAbilities(Sloth sloth){
 		SetActiveAbilitiesPanel(true);
 		GameObject.Find("buttonAbility1").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb1());
+
+		abilitiesInfo [0] = n[sloth.GetIdAb1 ()] ["desc"];
         GameObject.Find("buttonAbility2").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb2());
+		abilitiesInfo [1] = n[sloth.GetIdAb2 ()] ["desc"];
         GameObject.Find("buttonAbility3").GetComponent<Image>().sprite = Resources.Load<Sprite>("Spellicons/"+sloth.GetIdAb3());
+		abilitiesInfo [2] = n[sloth.GetIdAb3 ()] ["desc"];
 	}
 
 	public void SetActiveMainPanel(bool b){
@@ -51,6 +64,14 @@ public class UIController2 : MonoBehaviour {
 
 	public void SetActiveAbilitiesPanel(bool b){
 		abilitiesPanel.SetActive(b);
+	}
+
+	public void SetActiveInfoAbPanel(bool b){
+		infoAbPanel.SetActive(b);
+	}
+
+	public Image getInfoAbPanel(){
+		return infoAbPanel.GetComponent<Image>();
 	}
 
 	public void SetActiveGameButtons(bool b){
@@ -94,12 +115,37 @@ public class UIController2 : MonoBehaviour {
 	}
 
 	public void UpdateTurnPlayerInfo(bool p){
+		Text turnText = GameObject.Find ("TurnText").GetComponent<Text> ();
 		if (p){
-			GameObject.Find("TurnText").GetComponent<Text>().text = "Blue";
+			turnText.color = new Color(0.0f/255.0f, 97.0f/255.0f, 255.0f/255.0f);
+			turnText.text = "Blue Turn";
 		} else {
-			GameObject.Find("TurnText").GetComponent<Text>().text = "Red";
+			turnText.color = new Color(255.0f/255.0f, 0.0f/255.0f, 0.0f/255.0f);
+			turnText.text = "Red Turn";
 		}
 	}
+
+	public string getAbilityInfo(string nameAbButton){
+		string abText;
+		switch(nameAbButton){
+			case "buttonAbility1":
+				abText = abilitiesInfo [0];
+				break;
+			case "buttonAbility2":
+			abText =  abilitiesInfo [1];
+				break;
+			case "buttonAbility3":
+			abText =  abilitiesInfo [2];
+				break;
+			default:
+			abText =  "";
+				break;
+
+		}
+		return abText;
+	}
+
+		
 
 	
 }

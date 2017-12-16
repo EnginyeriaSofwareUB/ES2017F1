@@ -39,7 +39,16 @@ public class AbilityFactory
 		} else if (abilityID [0] == 'H') {
 			return new HealingAbility (abilityID, n);
 		} else if (abilityID [0] == 'U') {
-			return new UtilityAbility (abilityID, n);
+            switch (abilityID[1])
+            {
+                case '0':
+                    return new UtilityAbility(abilityID, n);
+                case '1':
+                    return new PathAbility(abilityID, n);
+                case '2':
+                    return new TeleportAbility(abilityID, n);
+                default: return null;
+            }
 		} else if (abilityID [0] == 'D') {
 			return new DamageHealAbility (abilityID, n);
 		}

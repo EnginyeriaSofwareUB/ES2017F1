@@ -54,33 +54,41 @@ public class ProjectileFactory
     {
         if (a.GetProjectile().Equals("xyz"))
         {
-            return new xyzProjectile();
+            return new xyzProjectile(a);
 
         }
         else if (a.GetProjectile().Equals("xy"))
         {
-            return new xyProjectile();
+            return new xyProjectile(a);
 
         }
         else if (a.GetProjectile().Equals("terrain"))
         {
-            return new ProjectileTerrain();
+            return new ProjectileTerrain(a);
+        }
+        else if (a.GetProjectile().Equals("path"))
+        {
+            return new PathProjectile(a);
+        }
+        else if (a.GetProjectile().Equals("teleport"))
+        {
+            return new TeleportProjectile(a);
         }
         else if (a.GetProjectile().Equals("targetChain"))
         {
-            return new ChainProjectile();
+            return new ChainProjectile(a);
         }
         else if (a.GetProjectile().Equals("autoApply"))
         {
-            return new AutoApplyProjectile();
+            return new AutoApplyProjectile(a);
         }
         else if (a.GetProjectile().Equals("allyTarget"))
         {
-            return new TargetTeamProjectile();
+            return new TargetTeamProjectile(a);
         }
         else if (a.GetProjectile().Equals("link"))
         {
-            return new LinkProjectile();
+            return new LinkProjectile(a);
         }
         else
         {

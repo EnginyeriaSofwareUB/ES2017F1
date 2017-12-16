@@ -17,6 +17,7 @@ public class Sloth: MonoBehaviour {
     private string idAb3;
     private string sprite;
     private string model;
+    private int ExtraAp;
     Ability ab1;
     Ability ab2;
     Ability ab3;
@@ -143,7 +144,7 @@ public class Sloth: MonoBehaviour {
 		}
 
         if(hp <= 0){
-            GameObject.Find("Main Camera").GetComponent<GameController2>().OnDieSloth(this);
+            GameObject.Find("Main Camera").GetComponent<GameController>().OnDieSloth(this);
         }
 
     }
@@ -184,12 +185,22 @@ public class Sloth: MonoBehaviour {
         return idAb1;
     }
 
+
     public string GetIdAb2(){
         return idAb2;
     }
 
     public string GetIdAb3(){
         return idAb3;
+    }
+public void SetAbility3(Ability a)
+    {
+        this.ab3 = a;
+    }
+    public void Fruit(int extraAp, float heal)
+    {
+        this.SumToHp(heal);
+
     }
 
 }

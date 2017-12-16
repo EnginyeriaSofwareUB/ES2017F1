@@ -4,7 +4,7 @@ public class CameraMovement : MonoBehaviour {
     private bool shot = false;
     float cameraDistance = -12.0f;
 
-    private GameController2 gameController;
+    private GameController gameController;
    
     GameObject[] projectile;
     GameObject[] explosion;
@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        gameController = GameObject.Find("Main Camera").GetComponent<GameController2>();
+        gameController = GameObject.Find("Main Camera").GetComponent<GameController>();
 		turn = null;
         if (turn != null)
         {
