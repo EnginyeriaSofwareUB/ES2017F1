@@ -118,10 +118,10 @@ public class UIController2 : MonoBehaviour {
 		Text turnText = GameObject.Find ("TurnText").GetComponent<Text> ();
 		if (p){
 			turnText.color = new Color(0.0f/255.0f, 97.0f/255.0f, 255.0f/255.0f);
-			turnText.text = "Blue Plays";
+			turnText.text = "Blue Turn";
 		} else {
 			turnText.color = new Color(255.0f/255.0f, 0.0f/255.0f, 0.0f/255.0f);
-			turnText.text = "Red Plays";
+			turnText.text = "Red Turn";
 		}
 	}
 

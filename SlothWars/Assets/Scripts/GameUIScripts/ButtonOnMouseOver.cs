@@ -9,6 +9,10 @@ using UnityEngine.UI;
 public class ButtonOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 	private UIController2 uiController;
 	// Use this for initialization
+
+	public void Start(){
+		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
+	}
 	public void OnPointerEnter(PointerEventData eventData)
     {
 		StartCoroutine (waiter ());
@@ -34,7 +38,6 @@ public class ButtonOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerEx
 	}
 
 	public void show(){
-		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
 		uiController.SetActiveInfoAbPanel(true);
 
 		Text abText = GameObject.Find ("abilityText").GetComponent<Text> ();
