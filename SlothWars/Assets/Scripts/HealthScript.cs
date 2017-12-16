@@ -19,9 +19,8 @@ public class HealthScript : MonoBehaviour {
 	void Update () {
 		maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
         health = gameObject.GetComponent<Sloth>().GetHp();
-        Debug.Log(health);
-        Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(health/maxHealth);
+        healthBar.GetComponent<HealthBarScript>().ChangeHealthText(health);
 		//hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
 		if (shieldEffect != null) {
 			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
@@ -61,14 +60,18 @@ public class HealthScript : MonoBehaviour {
         //health = hp;
 		if (shield > 0) {
 			if (shieldEffect == null) {
+                healthBar.GetComponent<HealthBarScript>().ActivateShield();
+                healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 				this.shield.SetActive (true);
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
 			}
 			this.shield.GetComponent<TextMesh> ().text = "" + shield;
+            healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
 		} else if (shieldEffect != null) {
 			Destroy (shieldEffect);
 			shieldEffect = null;
 			this.shield.SetActive (false);
+            healthBar.GetComponent<HealthBarScript>().DeactivateShield();
 		}
 		//this.hp.GetComponent<TextMesh>().text= "" + health;
     }
