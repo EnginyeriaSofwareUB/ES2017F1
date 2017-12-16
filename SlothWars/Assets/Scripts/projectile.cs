@@ -1,11 +1,20 @@
 ﻿using System;
 using UnityEngine;
-public interface Projectile
+public abstract class Projectile
 {
 
+    protected Ability ability;
+
+    public Ability GetAbility(){
+        return ability;
+    } 
+
+    public void SetAbility(Ability ab){
+        ability = ab;
+    }
     //subject to change
-    void ApplyLogic();
-	void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source);
-    void Mark();
-    bool GetApply();
+    public abstract void ApplyLogic();
+	public abstract void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source);
+    public abstract void Mark();
+    public abstract bool GetApply();
 }

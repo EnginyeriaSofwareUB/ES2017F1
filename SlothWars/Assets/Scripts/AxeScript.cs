@@ -27,7 +27,7 @@ public class AxeScript : MonoBehaviour
     {
         if (other.gameObject.tag == "sloth")
         {
-            //AbilityController.Instance.ApplyLastAbility(other.gameObject);
+			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -35,7 +35,7 @@ public class AxeScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "sloth")
         {
-            //AbilityController.Instance.ApplyLastAbility(collision.gameObject);
+			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(collision.gameObject);
             Destroy(this.gameObject);
         }
         else

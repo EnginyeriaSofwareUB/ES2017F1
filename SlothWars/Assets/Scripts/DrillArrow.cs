@@ -27,7 +27,7 @@ public class DrillArrow : MonoBehaviour
     {
         if (other.gameObject.tag == "sloth")
         {
-            //AbilityController.Instance.ApplyLastAbility(other.gameObject);
+			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             if (!firstTarget)
             {
                 firstTarget = true;
@@ -71,7 +71,8 @@ public class DrillArrow : MonoBehaviour
     {
         if (collision.gameObject.tag == "sloth")
         {
-            //AbilityController.Instance.ApplyLastAbility(collision.gameObject);
+			
+			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(collision.gameObject);
             if (!firstTarget)
             {
                 firstTarget = true;

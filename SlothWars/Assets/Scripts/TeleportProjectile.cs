@@ -10,7 +10,12 @@ public class TeleportProjectile : Projectile
     private bool firstCast = true;
     private bool apply = false;
     GameObject target;
-    public void ApplyLogic()
+
+	public TeleportProjectile(Ability a){
+		ability = a;
+	}
+
+    public override void ApplyLogic()
     {
         target.transform.parent.position = mark.transform.position;
         GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load("Objects/SmokeExplosion"), target.transform.position, Quaternion.identity);
@@ -20,12 +25,12 @@ public class TeleportProjectile : Projectile
 
     // Update is called once per frame
     // needed to set initial parameters
-    public void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
+	public override void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {
         this.position = positon;
         resource = source;
     }
-    public void Mark()
+    public override void Mark()
     {
         if (firstCast)
         {
@@ -88,7 +93,7 @@ public class TeleportProjectile : Projectile
             }
         }
     }
-    public bool GetApply()
+    public override bool GetApply()
     {
         if (apply && firstCast)
         {

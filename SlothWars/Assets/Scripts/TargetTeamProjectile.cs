@@ -9,7 +9,12 @@ public class TargetTeamProjectile : Projectile
     private string resource;
     GameObject target;
     private bool apply =false;
-    public void ApplyLogic()
+
+	public TargetTeamProjectile(Ability a){
+		ability = a;
+	}
+
+    public override void ApplyLogic()
     {
         GameObject.Destroy(mark);
         //abilityController.ApplyLastAbility(target);
@@ -17,12 +22,12 @@ public class TargetTeamProjectile : Projectile
 
     // Update is called once per frame
     // needed to set initial parameters
-    public void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
+    public override void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {
         this.position = positon;
         resource = source;
     }
-    public void Mark()
+    public override void Mark()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -49,7 +54,7 @@ public class TargetTeamProjectile : Projectile
         }
 
     }
-    public bool GetApply()
+    public override bool GetApply()
     {
         return apply;
     }

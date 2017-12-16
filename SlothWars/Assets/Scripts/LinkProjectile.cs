@@ -10,20 +10,26 @@ public class LinkProjectile : Projectile
     public string link = "Objects/LightningBolt/Link";
     GameObject target;
     bool apply = false;
-    public void ApplyLogic()
+
+	public LinkProjectile(Ability a){
+		ability = a;
+	}
+
+    public override void ApplyLogic()
     {
         GameObject.Destroy(mark);
-        //abilityController.ApplyLastAbility(target);
+        //abilityController.pplyLastAbility(target);
+        ability.Apply(target);
     }
 
     // Update is called once per frame
     // needed to set initial parameters
-    public void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
+    public override void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {
         this.position = positon;
         resource = source;
     }
-    public void Mark()
+    public override void Mark()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -54,7 +60,7 @@ public class LinkProjectile : Projectile
         }
 
     }
-    public bool GetApply()
+    public override bool GetApply()
     {
         return apply;
     }

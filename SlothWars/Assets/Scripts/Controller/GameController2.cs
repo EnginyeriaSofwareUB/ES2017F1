@@ -192,11 +192,11 @@ public class GameController2 : MonoBehaviour {
 
 		if(player){
 			currentSloth = teamSloths1[turns % teamSloths1.Count];
-			toTexture.GetComponent<MeshRenderer>().materials[0] = blueLeaf;
+			toTexture.GetComponent<MeshRenderer>().material = blueLeaf;
 		} else {
 			currentSloth = teamSloths2[turns % teamSloths2.Count];
 			turns++;
-			toTexture.GetComponent<MeshRenderer>().materials[0] = redLeaf;
+			toTexture.GetComponent<MeshRenderer>().material = redLeaf;
 		}
 		leaf.transform.SetParent(currentSloth.gameObject.transform);
 		leaf.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -312,6 +312,10 @@ public class GameController2 : MonoBehaviour {
 	
 	public void QuitGame(){
 		SceneManager.LoadScene("MainMenu");
+	}
+
+	public void DestroyTerrain(GameObject destroyable){
+        GameObject.Destroy(destroyable);
 	}
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE

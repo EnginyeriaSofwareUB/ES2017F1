@@ -67,10 +67,13 @@ public class ExplosionScript : MonoBehaviour
             currentCollider = hitColliders[i];
             if ("sloth".Equals(currentCollider.tag))
             {
-                //abilityController.ApplyLastAbility(currentCollider.gameObject);
+				gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(currentCollider.gameObject);
             }
             else if ("Destroyable".Equals(currentCollider.tag))
             {
+				if (gameObject.GetComponent<AbilityContainer> ().GetAbility ().GetAlterTerrain ()) {
+					Camera.main.gameObject.GetComponent<GameController2> ().DestroyTerrain (currentCollider.gameObject);
+				}
                 //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;

@@ -13,7 +13,12 @@ public class PathProjectile : Projectile
     private GameObject mark;
     private bool created = false;
     private GameObject Floor;
-    public void Mark()
+
+	public PathProjectile(Ability a){
+		ability = a;
+	}
+
+    public override void Mark()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -85,15 +90,17 @@ public class PathProjectile : Projectile
             GameObject.Destroy(mark);
         }
     }
-    public void ApplyLogic()
+    public override void ApplyLogic()
     {
         GameObject.Destroy(mark);
+        ability.Apply(direction);
+        ability.Apply(Floor);
         //AbilityController.Instance.ApplyLastAbility(direction);
         //AbilityController.Instance.ApplyLastAbility(Floor);
     }
-    public void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
+    public override void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {
         nCubes = radius;
     }
-    public bool GetApply() { return apply; }
+    public override bool GetApply() { return apply; }
 }
