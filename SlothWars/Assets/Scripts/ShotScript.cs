@@ -131,6 +131,10 @@ public class ShotScript : MonoBehaviour
     {
         return this.shotLoad;
     }
+    public void SetShotLoad(bool shot)
+    {
+        this.shotLoad = shot;
+    }
     //shots the projectile asociated to Ability a
     public void Shot(Ability a)
     {

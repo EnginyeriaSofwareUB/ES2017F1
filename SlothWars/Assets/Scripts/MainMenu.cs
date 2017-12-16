@@ -51,7 +51,8 @@ public class MainMenu : MonoBehaviour
     //this should go to new screen
     public void PlaySoloSelected()
     {
-        SceneManager.LoadScene("TeamSelection");
+        StorePersistentVariables.Instance.iaPlaying = true;
+        SceneManager.LoadScene("IATeamSelection");
     }
     //this should go 
     public void PlayFriendSelected()

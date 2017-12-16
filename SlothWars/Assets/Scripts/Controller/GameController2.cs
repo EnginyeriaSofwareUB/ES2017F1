@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController2 : MonoBehaviour {
+	private IA ia;
 	private UIController2 uiController;
 	public List<Sloth> teamSloths1, teamSloths2;
 	public GameObject slothWizard, slothArcher, slothTank, slothHealer, slothUtility;
@@ -33,6 +34,7 @@ public class GameController2 : MonoBehaviour {
 
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
+		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
 
 		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
@@ -166,6 +168,12 @@ public class GameController2 : MonoBehaviour {
 			case GameControllerStatus.ABILITY_LOGIC:
 				CheckAbilitiesAp();
 				break;
+			case GameControllerStatus.WAITING_FOR_INPUT:
+				if(ia != null && !player)
+				{
+					DoAction(ia.GetAction(this));
+				}
+				break;
 		}
 	}
 
@@ -297,6 +305,24 @@ public class GameController2 : MonoBehaviour {
 		}
 	}
 
+	private void DoAction(GameAction action)
+	{
+		switch (action.actionType)
+		{
+		case GameAction.ActionType.MOVERSE:
+			MoveSloth((int)action.x,(int)action.y);
+			break;
+		case GameAction.ActionType.EJECUTAR_HABILIDAD:
+			Debug.Log("ESTOY CERCA");
+			//CastAbility(action.gun.position,action.ray.direction,Quaternion.identity,1,action.ability.GetTerrainSize(),false,action.ability.GetSource());
+			break;
+		case GameAction.ActionType.ENDTURN:
+			EndTurn();
+			break;
+		}
+	}
+
+
 	public Sloth GetCurrentSloth(){
 		return currentSloth;
 	}
@@ -317,6 +343,19 @@ public class GameController2 : MonoBehaviour {
 	public void DestroyTerrain(GameObject destroyable){
         GameObject.Destroy(destroyable);
 	}
+
+	public List<Sloth> GetTeamBlue() { 
+		return teamSloths1; 
+	}
+
+	public List<Sloth> GetTeamRed() { 
+		return teamSloths2; 
+	}
+
+	public int GetCurrentAp(){
+		return currentAp;
+	}
+
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}
