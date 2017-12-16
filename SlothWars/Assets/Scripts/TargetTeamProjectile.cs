@@ -8,16 +8,12 @@ public class TargetTeamProjectile : Projectile
     private Vector3 position;
     private GameObject mark = null;
     private string resource;
+    GameObject target;
+    private bool apply =false;
     public void ApplyLogic()
     {
-        RaycastHit hit;
         GameObject.Destroy(mark);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
-        {
-            abilityController.ApplyLastAbility(hit.collider.gameObject);
-
-        }
+        abilityController.ApplyLastAbility(target);
     }
 
     // Update is called once per frame
@@ -31,8 +27,10 @@ public class TargetTeamProjectile : Projectile
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam())
         {
+            apply = true;
+            target = hit.collider.gameObject;
             if (mark == null)
             {
                 mark = (GameObject)GameObject.Instantiate(Resources.Load(resource), hit.transform.position + new Vector3(0, 0, -0.5f), Quaternion.identity);
@@ -45,6 +43,7 @@ public class TargetTeamProjectile : Projectile
         }
         else
         {
+            apply = false;
             GameObject.Destroy(mark);
             mark = null;
 
@@ -53,8 +52,6 @@ public class TargetTeamProjectile : Projectile
     }
     public bool GetApply()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam());
+        return apply;
     }
 }

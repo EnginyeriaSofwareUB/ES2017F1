@@ -9,16 +9,12 @@ public class LinkProjectile : Projectile
     private GameObject mark = null;
     private string resource;
     public string link = "Objects/LightningBolt/Link";
+    GameObject target;
+    bool apply = false;
     public void ApplyLogic()
     {
-        RaycastHit hit;
         GameObject.Destroy(mark);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
-        {
-            abilityController.ApplyLastAbility(hit.collider.gameObject);
-
-        }
+        abilityController.ApplyLastAbility(target);
     }
 
     // Update is called once per frame
@@ -32,24 +28,27 @@ public class LinkProjectile : Projectile
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam() && !hit.collider.gameObject.Equals(TurnController.Instance.GetActiveSloth()))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam() && !hit.collider.gameObject.Equals(Camera.main.GetComponent<GameController2>().GetCurrentSloth().gameObject))
         {
+            apply = true;
+            target = hit.collider.gameObject;
             if (mark == null)
             {
                 mark = (GameObject)GameObject.Instantiate(Resources.Load(link), position, Quaternion.identity);
                 mark.GetComponentInChildren<Transform>().Find("LightningStart").position = position;
-                mark.GetComponentInChildren<Transform>().Find("LightningEnd").position = hit.transform.position + new Vector3(0, 0.3f, 0);
+                mark.GetComponentInChildren<Transform>().Find("LightningEnd").position = hit.transform.position;
             }
             else
             {
                 mark.transform.position = hit.transform.position;
                 mark.GetComponentInChildren<Transform>().Find("LightningStart").position = position;
-                mark.GetComponentInChildren<Transform>().Find("LightningEnd").position = hit.transform.position + new Vector3(0, 0.3f, 0);
+                mark.GetComponentInChildren<Transform>().Find("LightningEnd").position = hit.transform.position;
             }
 
         }
         else
         {
+            apply = false;
             GameObject.Destroy(mark);
             mark = null;
 
@@ -58,8 +57,6 @@ public class LinkProjectile : Projectile
     }
     public bool GetApply()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam() && !hit.collider.gameObject.Equals(TurnController.Instance.GetActiveSloth()));
+        return apply;
     }
 }

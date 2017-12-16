@@ -66,6 +66,14 @@ public class ProjectileFactory
         {
             return new ProjectileTerrain();
         }
+        else if (a.GetProjectile().Equals("path"))
+        {
+            return new PathProjectile();
+        }
+        else if (a.GetProjectile().Equals("teleport"))
+        {
+            return new TeleportProjectile();
+        }
         else if (a.GetProjectile().Equals("targetChain"))
         {
             return new ChainProjectile();

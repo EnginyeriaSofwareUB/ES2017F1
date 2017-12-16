@@ -33,7 +33,7 @@ public class DamageHealAbility : Ability
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
-        if (target.GetTeam() == TurnController.Instance.GetActualTurnTeam())
+        if (target.GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam())
         {
             target.SumToHp(healHp);
         }
@@ -46,8 +46,8 @@ public class DamageHealAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-        Sloth target = g.GetComponent<AnimPlayer>().sloth;
-        if (target.GetTeam() == TurnController.Instance.GetActualTurnTeam())
+        Sloth target = g.GetComponent<Sloth>();
+        if (target.GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam())
         {
             target.SumToHp(healHp);
         }

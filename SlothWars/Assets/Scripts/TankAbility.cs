@@ -41,7 +41,7 @@ public class TankAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-        Sloth target = g.GetComponent<AnimPlayer>().sloth;
+        Sloth target = g.GetComponent<Sloth>();
         target.SetShield(hpShield);
         abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }

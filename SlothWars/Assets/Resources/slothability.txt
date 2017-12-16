@@ -43,7 +43,7 @@
     "ap": 1,
     "explosive":true,
     "projectile": "xyz",
-    "source": "Objects/FireBall"
+    "source": "Objects/CosmicProjectile"
   },
   
   "P3": {
@@ -116,10 +116,10 @@
 	"hitRadius": 0.5,
 	"ap":1,
 	"projectile": "xyz",
-	"explosive":false,
+	"explosive":true,
 	"mark": false,
 	"alterTerrain": false,
-    "source": "Objects/NormalArrow"
+    "source": "Objects/PoisonArrow"
   },
 
   "H0": {
@@ -184,35 +184,33 @@
   },
   
   "U1": {
-	"desc":"Spawns a totem in an area that increases sloth attributes.",
-    "buildTerrain": false,
-    "terrainType": "None",
-    "terrainSize": 0,
-    "alterTerrain": true,
-    "durAlterTerrain": 5,
-    "alterationSize": 4,
-    "boostAp": 4,
-    "boostAtt": 30,
-    "durBoostAtt": 5,
-	"hitRadius": 0.5,
+	"desc":"Spawns impassable terrain in a zone.",
+    "buildTerrain": true,
+    "terrainType": "Wall",
+    "terrainSize": 4,
+    "alterTerrain": false,
+    "durAlterTerrain": 0,
+    "alterationSize": 0,
+	"ap": 1,
+	"reach": 15,
+	"projectile": "path",
 	"mark": true,
-		"ap": 1
+    "source": "Objects/WallCube"
 
   },
   
   "U2": {
-	"desc":"Generates area in a selected zone that increases sloth attributes. Vanishes after a few turns.",
-    "buildTerrain": false,
-    "terrainType": "None",
-    "terrainSize": 0,
+	"desc":"Spawns impassable terrain in a zone.",
+    "buildTerrain": true,
+    "terrainType": "Wall",
+    "terrainSize": 4,
     "alterTerrain": false,
     "durAlterTerrain": 0,
     "alterationSize": 0,
-    "boostAp": 4,
-    "boostAtt": 50,
-    "durBoostAtt": 5,
-	"hitRadius": 0.5,
+	"ap": 1,
+	"reach": 15,
+	"projectile": "teleport",
 	"mark": true,
-		"ap": 1
+    "source": "Objects/SmokeMark"
   }
 }

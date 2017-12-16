@@ -91,8 +91,8 @@ public class GameController2 : MonoBehaviour {
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
             healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
-
-			teamSloths1.Add(logic.GetComponent<Sloth>());
+            logic.GetComponent<Sloth>().SetTeam(1);
+            teamSloths1.Add(logic.GetComponent<Sloth>());
 		}
 
 		foreach(string sloth in lista2){
@@ -147,7 +147,7 @@ public class GameController2 : MonoBehaviour {
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
 
             health.SetHealthBar(healthBar);
-
+            logic.GetComponent<Sloth>().SetTeam(2);
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
 

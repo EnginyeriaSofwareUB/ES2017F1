@@ -96,6 +96,15 @@ public class ShotScript : MonoBehaviour
             Active(false);
         }
     }
+    public void CancelShot()
+    {
+        shotLoad = false;
+        Active(false);
+        if (!onloadAbility.GetMark())
+        {
+            if(st != null) { st.Destroy(); }
+        }
+    }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)
     {
@@ -144,7 +153,7 @@ public class ShotScript : MonoBehaviour
 
 				if (a.GetProjectile ().Equals ("autoApply")) {
 					onLoad.ApplyLogic ();
-                    changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
+                    //changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
                 } else {
 					Bar ();
 					Active (true);
