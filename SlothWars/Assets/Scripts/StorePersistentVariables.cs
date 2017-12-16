@@ -21,6 +21,7 @@ public class StorePersistentVariables{
 	public List<string> slothTeam1 = new List<string>();
 	public List<string> slothTeam2 = new List<string>();
     private static StorePersistentVariables instance;
+    public bool iaPlaying = false;
     public int winner = 0;
     
     //
