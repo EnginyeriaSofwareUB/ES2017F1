@@ -6,9 +6,9 @@ using System.Collections.Generic;
 public class IA: IAInterface
 {
     private bool checkDistance = false;
-    private static Vector3 actualPosition = new Vector3(0f,0f,0f);
-    private static Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
-    private static Vector3 positionNearestFriendlySloth = new Vector3(0f, 0f, 0f);
+    private Vector3 actualPosition = new Vector3(0f,0f,0f);
+    private Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
+    private Vector3 positionNearestFriendlySloth = new Vector3(0f, 0f, 0f);
     private List<float> rangeListAbilities;
     private Sloth nearestSloth;
     public IA() { }
