@@ -6,11 +6,10 @@ using SimpleJSON;
 
 
 public class UIController2 : MonoBehaviour {
-	public GameObject mainPanel, optsPanel, abilitiesPanel, infoAbPanel;
+	public GameObject mainPanel, optsPanel, abilitiesPanel, infoAbPanel, mainMessage;
 	string[] abilitiesInfo = new string[3];
 	string s;
 	JSONNode n;
-	public GameObject mainPanel, optsPanel, abilitiesPanel, mainMessage;
 	private float mainMessageDuration;
 	private bool animatingMainMessage = false;
 	// Use this for initialization
