@@ -28,8 +28,8 @@ public class ChangeTurnView: MonoBehaviour {
         playersTeam1 = new List<GameObject>();
         playersTeam2 = new List<GameObject>();
         
-        slothTeam1 = StorePersistentVariables.Instance.slothTeam1;
-        slothTeam2 =StorePersistentVariables.Instance.slothTeam2;
+        //slothTeam1 = StorePersistentVariables.Instance.slothTeam1;
+        //slothTeam2 =StorePersistentVariables.Instance.slothTeam2;
         
     }
     private void Update()

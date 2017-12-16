@@ -44,7 +44,6 @@ public class AbilityController{
     {
         Debug.Log("upt");
         lastTarget.GetComponent<HealthScript>().UpdateHP(Mathf.FloorToInt((float)hp), Mathf.FloorToInt((float)shield));
-        GameObject.Find("GameController").GetComponent<LogicView>().CheckSlothAlive(lastTarget);
     }
     // sums residual during t turns
     public void SumResidual(GameObject target, Double residual, int t)
@@ -82,10 +81,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility1());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility1());
                 break;
         }
             
@@ -100,10 +99,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility2());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
+               //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility2());
                 break;
         }
     }
@@ -117,10 +116,10 @@ public class AbilityController{
         switch (id)
         {
             case 1:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam1[currentTurn].GetAbility3());
                 break;
             case 2:
-                s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
+                //s.GetComponent<ShotScript>().Shot(StorePersistentVariables.Instance.slothTeam2[currentTurn].GetAbility3());
                 break;
         }
     }

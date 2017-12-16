@@ -2,8 +2,7 @@
 using UnityEngine;
 using SimpleJSON;
 
-public class Sloth
-{
+public class Sloth: MonoBehaviour {
     private double attack;
     private double defense;
     private int ap;
@@ -24,8 +23,9 @@ public class Sloth
     Sloth tanking = null;
     AbilityFactory factory = AbilityFactory.Instance;
 
+    void Start () {}
 
-    public Sloth(string name)
+    public void initSloth(string name)
     {
         string s = ((TextAsset)Resources.Load("slothapedia")).text;
         JSONNode n = JSON.Parse(s);
@@ -59,8 +59,7 @@ public class Sloth
         
     }
 
-    public Sloth(int numId)
-    {
+    public void initSloth(int numId){
 
         string s = ((TextAsset)Resources.Load("slothapedia")).text;
         JSONNode n = JSON.Parse(s);
@@ -143,10 +142,13 @@ public class Sloth
 			}
 		}
 
+        if(hp <= 0){
+            GameObject.Find("Main Camera").GetComponent<GameController2>().OnDieSloth(this);
+        }
+
     }
     public Ability GetAbility1()
     {
-        Debug.Log(this.ab1);
         return this.ab1;
     }
     public Ability GetAbility2()
@@ -176,6 +178,18 @@ public class Sloth
     public void QuitTank()
     {
         tanking = null;
+    }
+
+    public string GetIdAb1(){
+        return idAb1;
+    }
+
+    public string GetIdAb2(){
+        return idAb2;
+    }
+
+    public string GetIdAb3(){
+        return idAb3;
     }
 
 }

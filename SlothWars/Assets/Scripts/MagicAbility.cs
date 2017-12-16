@@ -54,7 +54,7 @@ public class MagicAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-        Sloth target = g.GetComponent<AnimPlayer>().sloth;
+        Sloth target = g.GetComponent<Sloth>();
         target.SumToHp(-dmg);
         abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }

@@ -82,7 +82,6 @@ public class ShotScript : MonoBehaviour
                 shotLoad = false;
                 Active(false);
                 onLoad.ApplyLogic();
-                changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
 
             }
         }
@@ -95,7 +94,6 @@ public class ShotScript : MonoBehaviour
             st.Destroy();
             shotLoad = false;
             Active(false);
-            changeTurnModel.DecrementApCurrentSloth(changeTurnModel.GetCurrentSloth().GetAbility1().GetAp()); //cambiar
         }
     }
     // r = 0 when right moving , left moving r = 1
