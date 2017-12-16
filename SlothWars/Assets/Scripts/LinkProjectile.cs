@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class LinkProjectile : Projectile
 {
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
     private GameObject mark = null;
     private string resource;
     public string link = "Objects/LightningBolt/Link";
     public void ApplyLogic()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
+
         RaycastHit hit;
         GameObject.Destroy(mark);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
+		if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam())
         {
-            abilityController.ApplyLastAbility(hit.collider.gameObject);
+            //abilityController.ApplyLastAbility(hit.collider.gameObject);
 
         }
     }
@@ -30,9 +31,10 @@ public class LinkProjectile : Projectile
     }
     public void Mark()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam() && !hit.collider.gameObject.Equals(TurnController.Instance.GetActiveSloth()))
+		if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam() && !hit.collider.gameObject.Equals(gameController.GetCurrentSloth()))
         {
             if (mark == null)
             {
@@ -58,8 +60,9 @@ public class LinkProjectile : Projectile
     }
     public bool GetApply()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam() && !hit.collider.gameObject.Equals(TurnController.Instance.GetActiveSloth()));
+		return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam() && !hit.collider.gameObject.Equals(gameController.GetCurrentSloth()));
     }
 }

@@ -8,8 +8,8 @@ public class LightningBoltCaster : MonoBehaviour {
     public int lnumber= 3;
     private float range = 20f;
     public string lpath= "Objects/LightningBolt/SimpleLightningBoltPrefab";
-    AbilityController abilityController = AbilityController.Instance;
-    void Start () {
+
+	void Start () {
         List<GameObject> sloths = new List<GameObject>(GameObject.FindGameObjectsWithTag("sloth"));
         sloths.Sort(delegate (GameObject c1, GameObject c2) {
             return Vector3.Distance(this.transform.position, c1.transform.position).CompareTo
@@ -20,7 +20,7 @@ public class LightningBoltCaster : MonoBehaviour {
             if ((sloths[i].transform.position - this.transform.position).magnitude < range)
             {
                 // GameControl.control.ApplyLastAbility(sloths[i]);
-                abilityController.ApplyLastAbility(sloths[i]);
+                //abilityController.ApplyLastAbility(sloths[i]);
                 //sloths[i].gameObject.SendMessage("SumToHP", -10);
                 GameObject lightning = (GameObject)Instantiate(Resources.Load(lpath), this.transform.position, this.transform.rotation);
                 lightning.GetComponentInChildren<Transform>().Find("LightningStart").position = this.transform.position;

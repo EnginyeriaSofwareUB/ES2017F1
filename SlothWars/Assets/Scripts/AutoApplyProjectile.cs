@@ -13,7 +13,7 @@ public class AutoApplyProjectile : Projectile {
 	// xy trayectory 
 	public void ApplyLogic()
 	{
-		GameObject s = GameObject.Find("Main Camera").GetComponent<GameController2>().GetCurrentSloth().gaeObject;
+		GameObject s = GameObject.Find("Main Camera").GetComponent<GameController2>().GetCurrentSloth().gameObject;
 		//GameObject effect = (GameObject)GameObject.Instantiate (Resources.Load (source), s.transform);
 		//GameObject.Destroy (effect, 3);
 		//TODO:FIX THIS

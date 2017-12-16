@@ -313,6 +313,15 @@ public class GameController2 : MonoBehaviour {
 	public void QuitGame(){
 		SceneManager.LoadScene("MainMenu");
 	}
+
+	public int GetActualTeam(){
+		if (player) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}

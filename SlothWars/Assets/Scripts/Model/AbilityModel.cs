@@ -55,7 +55,7 @@ public class AbilityModel {
     public Ability GetLastAbility() { Debug.Log(lastAbility); return lastAbility; }
 
     public void DeactivateButtonsIfNecessary(int ab1ap, int ab2ap, int ab3ap, int currentAp){
-        AbilityController.Instance.DeactivateButtonsIfNecessary(ab1ap, ab2ap, ab3ap, currentAp);
+        //AbilityController.Instance.DeactivateButtonsIfNecessary(ab1ap, ab2ap, ab3ap, currentAp);
     }
 
 }

@@ -4,7 +4,7 @@ public class DeathZoneEnter : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        LogicView.lv.DestroySlothSafely(other.gameObject);
+        //LogicView.lv.DestroySlothSafely(other.gameObject);
     }
 
 }

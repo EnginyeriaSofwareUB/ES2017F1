@@ -7,7 +7,6 @@ public class ExplosionScript : MonoBehaviour
     private float range = 10;
     public string namePath = "";
     private bool onCollision = true;
-    AbilityController abilityController = AbilityController.Instance;
     public float DieIn = 2;
     private float radius = 0.5f;
     public int d_h = 20; // used while Sloth-gameobject conection doesnt exit
@@ -70,12 +69,12 @@ public class ExplosionScript : MonoBehaviour
             Debug.Log("[TRACE] collider tag: " + currentCollider.tag);
             if ("sloth".Equals(currentCollider.tag))
             {
-                abilityController.ApplyLastAbility(currentCollider.gameObject);
+                //abilityController.ApplyLastAbility(currentCollider.gameObject);
             }
             else if ("Destroyable".Equals(currentCollider.tag))
             {
                 //Destroy(currentCollider.gameObject);
-                abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
+                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
         }

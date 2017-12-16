@@ -19,7 +19,6 @@ public class MagicAbility : Ability
     private string source;
     private bool explosive;
     private bool mark;
-    AbilityController abilityController = AbilityController.Instance;
 
     public MagicAbility(string id, JSONNode json)
     {
@@ -47,7 +46,6 @@ public class MagicAbility : Ability
     public void Apply(ref Sloth target)
     {
         target.SumToHp(-dmg);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
         //abilityController.SumResidual(target, -residual, residualTurns);
     }
 
@@ -56,7 +54,6 @@ public class MagicAbility : Ability
     {
         Sloth target = g.GetComponent<Sloth>();
         target.SumToHp(-dmg);
-        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

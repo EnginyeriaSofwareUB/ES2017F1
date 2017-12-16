@@ -19,8 +19,8 @@ public class HealthScript : MonoBehaviour {
 	void Update () {
 		maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
         health = gameObject.GetComponent<Sloth>().GetHp();
-        Debug.Log(health);
-        Debug.Log(health/maxHealth);
+        //Debug.Log(health);
+        //Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(health/maxHealth);
 		//hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
 		if (shieldEffect != null) {

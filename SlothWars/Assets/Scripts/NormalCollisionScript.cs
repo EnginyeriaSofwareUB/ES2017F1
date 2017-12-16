@@ -11,7 +11,6 @@ public class NormalCollisionScript : MonoBehaviour
     public bool rotative = false;
     private bool colided = false;
     public bool capsuleCol = false;
-    AbilityController abilityController = AbilityController.Instance;
     bool target = false;
     // Use this for initialization
     void Start()
@@ -43,7 +42,7 @@ public class NormalCollisionScript : MonoBehaviour
         {
             if (!target)
             {
-                AbilityController.Instance.ApplyLastAbility(other.gameObject);
+                //AbilityController.Instance.ApplyLastAbility(other.gameObject);
                 target = true;
             }
         }
@@ -55,7 +54,7 @@ public class NormalCollisionScript : MonoBehaviour
         {
             if (!target)
             {
-                AbilityController.Instance.ApplyLastAbility(collision.gameObject);
+                //AbilityController.Instance.ApplyLastAbility(collision.gameObject);
                 target = true;
             }
         }

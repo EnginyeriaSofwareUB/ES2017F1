@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class TargetTeamProjectile : Projectile
 {
-    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
     private GameObject mark = null;
     private string resource;
     public void ApplyLogic()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
         RaycastHit hit;
         GameObject.Destroy(mark);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
+		if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam())
         {
-            abilityController.ApplyLastAbility(hit.collider.gameObject);
+            //abilityController.ApplyLastAbility(hit.collider.gameObject);
 
         }
     }
@@ -29,9 +29,11 @@ public class TargetTeamProjectile : Projectile
     }
     public void Mark()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam())
+		if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam())
         {
             if (mark == null)
             {
@@ -53,8 +55,10 @@ public class TargetTeamProjectile : Projectile
     }
     public bool GetApply()
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<AnimPlayer>().GetSloth().GetTeam() == TurnController.Instance.GetActualTurnTeam());
+		return (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == gameController.GetActualTeam());
     }
 }

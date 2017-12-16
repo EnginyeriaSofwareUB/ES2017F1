@@ -34,15 +34,17 @@ public class LinkAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
+		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
+
         if(link != null)
         {
             link.QuitTank();
-            link = g.GetComponent<AnimPlayer>().sloth;
+            link = g.GetComponent<Sloth>();
             GameObject.Destroy(linkObject);
         }
         linkObject = (GameObject)GameObject.Instantiate(Resources.Load("Objects/LightningBolt/Link"), g.transform.position, Quaternion.identity);
-        g.GetComponent<AnimPlayer>().GetSloth().SetTank(TurnController.Instance.GetActiveSloth().GetComponent<AnimPlayer>().sloth);
-        linkObject.GetComponent<LinkScript>().SetOrigin(TurnController.Instance.GetActiveSloth().transform);
+		g.GetComponent<Sloth>().SetTank(gameController.GetCurrentSloth());
+		linkObject.GetComponent<LinkScript>().SetOrigin(gameController.GetCurrentSloth().transform);
         linkObject.GetComponent<LinkScript>().SetEnd(g.transform);
 
     }

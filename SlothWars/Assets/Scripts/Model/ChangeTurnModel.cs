@@ -102,7 +102,7 @@ public class ChangeTurnModel
     {
         
         slothTeam.GetComponent<Animator>().enabled = true;
-        slothTeam.GetComponent<AnimPlayer>().enabled = true;
+        //slothTeam.GetComponent<AnimPlayer>().enabled = true;
         slothTeam.GetComponent<ShotScript>().enabled = true;
         slothTeam.GetComponent<SlothSelected>().enabled = true;
         slothTeam.GetComponent<SlothSelected>().Active(true);
@@ -113,7 +113,7 @@ public class ChangeTurnModel
     public void DeactivateSloth(GameObject slothTeam)
     {
         slothTeam.GetComponent<Animator>().enabled = false;
-        slothTeam.GetComponent<AnimPlayer>().enabled = false;
+        //slothTeam.GetComponent<AnimPlayer>().enabled = false;
         slothTeam.GetComponent<ShotScript>().enabled = false;
         slothTeam.GetComponent<SlothSelected>().enabled = false;
         slothTeam.GetComponent<SlothSelected>().Active(false);
@@ -127,7 +127,7 @@ public class ChangeTurnModel
         foreach (GameObject player in slothTeamB)
         {
             player.GetComponent<Animator>().enabled = false;
-            player.GetComponent<AnimPlayer>().enabled = false;
+            //player.GetComponent<AnimPlayer>().enabled = false;
             player.GetComponent<ShotScript>().enabled = false;
             player.GetComponent<SlothSelected>().Active(false);
             player.GetComponent<SlothSelected>().enabled = false;
@@ -136,7 +136,7 @@ public class ChangeTurnModel
         for (int i = 1; i < slothTeamA.Count; i++)
         {
             slothTeamA[i].GetComponent<Animator>().enabled = false;
-            slothTeamA[i].GetComponent<AnimPlayer>().enabled = false;
+            //slothTeamA[i].GetComponent<AnimPlayer>().enabled = false;
             slothTeamA[i].GetComponent<ShotScript>().enabled = false;
             slothTeamA[i].GetComponent<SlothSelected>().Active(false);
             slothTeamA[i].GetComponent<SlothSelected>().enabled = false;

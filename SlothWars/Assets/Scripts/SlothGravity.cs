@@ -16,6 +16,7 @@ public class SlothGravity : MonoBehaviour
 
     private void Update()
     {
+		/*
         if (!gameObject.GetComponent<AnimPlayer>().isActiveAndEnabled)
         {
             if (!falling)
@@ -26,6 +27,7 @@ public class SlothGravity : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     // Checks if there is a block in front of the current sloth
@@ -59,10 +61,10 @@ public class SlothGravity : MonoBehaviour
         rbody.useGravity = false;
         rbody.velocity = Vector3.zero;
         GrabPositionCorrection();
-        if (gameObject.GetComponent<AnimPlayer>().isActiveAndEnabled)
-        {
-            ScreenMessage.sm.ForceShowMessage("Whew!", 1.0f);
-        }
+        //if (gameObject.GetComponent<AnimPlayer>().isActiveAndEnabled)
+        //{
+        //    ScreenMessage.sm.ForceShowMessage("Whew!", 1.0f);
+        //}
         falling = false;
     }
 

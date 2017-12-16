@@ -132,12 +132,12 @@ public class ChangeTurnView: MonoBehaviour {
             if (playerTurn1 != 0)
             {
                 changeTurnModel.DeactivateSloth(playersTeam1[playerTurn1 - 1]);
-                playersTeam1[playerTurn1 - 1].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
+                //playersTeam1[playerTurn1 - 1].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
 
             } else if (playerTurn2 > playerTurn1)
             {
                 changeTurnModel.DeactivateSloth(playersTeam2[playerTurn2]);
-                playersTeam1[playerTurn2].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
+                //playersTeam1[playerTurn2].GetComponent<AnimPlayer>().GetComponent<SlothSelected>().enabled = false;
             }
             else
             {
@@ -161,7 +161,7 @@ public class ChangeTurnView: MonoBehaviour {
     private void FixedBugs()
     {
         // if a sloth is walking, the user cannot end the turn (Disable the end turn button)
-
+		/*
         if (playersTeam1[playerTurn1].GetComponent<AnimPlayer>().IsMoving() || playersTeam2[playerTurn2].GetComponent<AnimPlayer>().IsMoving())
         {
             endTurnButton.interactable = false;
@@ -170,7 +170,7 @@ public class ChangeTurnView: MonoBehaviour {
         {
             endTurnButton.interactable = true;
         }
-
+		*/
         // if a sloth is shooting, the user cannot end the turn (Disable the end turn button)
         if (playersTeam1[playerTurn1].GetComponent<ShotScript>().GetShotLoad() || playersTeam2[playerTurn2].GetComponent<ShotScript>().GetShotLoad())
         {

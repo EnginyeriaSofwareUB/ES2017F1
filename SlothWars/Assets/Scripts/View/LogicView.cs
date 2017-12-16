@@ -22,7 +22,7 @@ public class LogicView : MonoBehaviour {
 
         lv = this;
 	}
-	
+	/*
 	// Update is called once per frame
 	private void Update () {
         if (teamSloths1 != null && teamSloths2 != null)
@@ -101,4 +101,5 @@ public class LogicView : MonoBehaviour {
         
         abilityModel.DeactivateButtonsIfNecessary(ab1ap, ab2ap, ab3ap, changeTurnModel.GetApCurrentSloth());
     }
+	*/
 }
