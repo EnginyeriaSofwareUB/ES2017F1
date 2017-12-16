@@ -42,6 +42,9 @@ public class GameController : MonoBehaviour {
 		if(lista2.Count == 0){
 			lista2.Add("Tank");
 		}
+
+        ia = new IA();
+
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
 			GameObject logic = new GameObject("slothlogic");
@@ -311,10 +314,24 @@ public class GameController : MonoBehaviour {
 		case GameAction.ActionType.MOVERSE:
 			MoveSloth((int)action.x,(int)action.y);
 			break;
-		case GameAction.ActionType.EJECUTAR_HABILIDAD:
-			Debug.Log("ESTOY CERCA");
-			//CastAbility(action.gun.position,action.ray.direction,Quaternion.identity,1,action.ability.GetTerrainSize(),false,action.ability.GetSource());
-			break;
+
+        case GameAction.ActionType.EJECUTAR_HABILIDAD:
+
+                if (currentAp >= action.ability.GetAp())
+                {
+                    Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
+                    pr.SetAll(currentSloth.transform.position, new Vector3(action.x, action.y, 0f), currentSloth.transform.rotation, action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
+                    //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
+
+                    pr.ApplyLogic();
+                    currentAp -= action.ability.GetAp();
+                }
+                else
+                {
+                    EndTurn();
+                }
+            break;
+
 		case GameAction.ActionType.ENDTURN:
 			EndTurn();
 			break;

@@ -15,12 +15,16 @@ public class IA: IAInterface
 
     public GameAction GetAction(GameController gameController)
     {
+        GameAction gameAction = new GameAction();
+
         actualPosition = GetActualPosition(gameController);
         rangeListAbilities = GetRangeAbilities(gameController);
 
         positionNearestEnemySloth = PositionNearestEnemySloth(gameController,actualPosition);
         
-        GameAction gameAction = new GameAction();
+        gameAction.x = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).x;
+        gameAction.y = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).y;
+
         checkDistance = CheckDistance(actualPosition,positionNearestEnemySloth, rangeListAbilities);
         if (checkDistance) {
             gameAction.ability = GetAbility(gameController);
@@ -28,8 +32,6 @@ public class IA: IAInterface
         } else
         {
             gameAction.actionType = GameAction.ActionType.MOVERSE;
-            gameAction.x = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).x;
-            gameAction.y = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).y;
         }
         
         if (gameController.GetCurrentAp() <= 0)
