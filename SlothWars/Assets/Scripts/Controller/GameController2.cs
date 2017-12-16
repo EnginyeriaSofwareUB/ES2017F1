@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController2 : MonoBehaviour {
 	private UIController2 uiController;
@@ -11,6 +12,10 @@ public class GameController2 : MonoBehaviour {
 	private int turns;
 	private bool player;
 	private int currentAp;
+	public GameObject leaf;
+	public GameObject toTexture;
+	public Material blueLeaf;
+	public Material redLeaf;
 
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
@@ -38,8 +43,9 @@ public class GameController2 : MonoBehaviour {
 		}
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
-			tmpSloth.tag = "sloth";
 			GameObject logic = new GameObject("slothlogic");
+			logic.tag = "sloth";
+			logic.layer = 8;
 			logic.transform.SetParent(tmpSloth.transform);
 			GameObject model;
 			switch(sloth){
@@ -78,12 +84,12 @@ public class GameController2 : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
-
+			logic.AddComponent<BoxCollider>();
 			HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
-            healthBar.transform.parent = logic.transform;
+            healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
 
 			teamSloths1.Add(logic.GetComponent<Sloth>());
@@ -91,8 +97,9 @@ public class GameController2 : MonoBehaviour {
 
 		foreach(string sloth in lista2){
 			GameObject tmpSloth = new GameObject(sloth+"P2");
-			tmpSloth.tag = "sloth";
 			GameObject logic = new GameObject("slothlogic");
+			logic.tag = "sloth";
+			logic.layer = 8;
 			logic.transform.SetParent(tmpSloth.transform);
 			GameObject model;
 			switch(sloth){
@@ -131,11 +138,12 @@ public class GameController2 : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
+			logic.AddComponent<BoxCollider>();
 
      		HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            healthBar.transform.parent = logic.transform;
+            healthBar.transform.SetParent(logic.transform);
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
 
             health.SetHealthBar(healthBar);
@@ -146,7 +154,6 @@ public class GameController2 : MonoBehaviour {
 		status = GameControllerStatus.LOGIC;
 		player = false;
 		turns = 0;
-
 
 	}
 	
@@ -171,20 +178,28 @@ public class GameController2 : MonoBehaviour {
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 1;
 			status = GameControllerStatus.GAME_OVER;
+			SceneManager.LoadScene("GameOverScene");
 		}
-		if(teamSloths1.Count == 0){
+		if(teamSloths2.Count == 0){
 			StorePersistentVariables.Instance.winner = 0;
 			status = GameControllerStatus.GAME_OVER;
+			SceneManager.LoadScene("GameOverScene");
+			return;
 		}
 
 		player = !player;
 
+
 		if(player){
 			currentSloth = teamSloths1[turns % teamSloths1.Count];
+			toTexture.GetComponent<MeshRenderer>().materials[0] = blueLeaf;
 		} else {
 			currentSloth = teamSloths2[turns % teamSloths2.Count];
 			turns++;
+			toTexture.GetComponent<MeshRenderer>().materials[0] = redLeaf;
 		}
+		leaf.transform.SetParent(currentSloth.gameObject.transform);
+		leaf.transform.localPosition = new Vector3(0f, 0f, 0f);
 
 		uiController.DisplaySlothAbilities(currentSloth);
 		uiController.DisplaySlothStats(currentSloth);
@@ -252,18 +267,26 @@ public class GameController2 : MonoBehaviour {
 			currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
 			currentAp--;
 			status = GameControllerStatus.ANIMATING;
+		} else {
+			uiController.NotifyNotEnoughAp();
 		}
 	}
 
 	public void PauseGame(){
 		status = GameControllerStatus.PAUSE;
+		uiController.SetActiveGameButtons(false);
 	}
 
 	public void UnPauseGame(){
 		status = GameControllerStatus.WAITING_FOR_INPUT;
+		uiController.SetActiveGameButtons(true);
 	}
 
-	public void onDieSloth(Sloth sloth){
+	public void OnDieSloth(Sloth sloth){
+		if(currentSloth == sloth){
+			EndTurn();
+			leaf.transform.SetParent(GameObject.Find("Main Camera").transform);
+		}
 		if(teamSloths1.Contains(sloth)){
 			teamSloths1.Remove(sloth);
 			Destroy(sloth.transform.parent.gameObject);
@@ -277,7 +300,19 @@ public class GameController2 : MonoBehaviour {
 	public Sloth GetCurrentSloth(){
 		return currentSloth;
 	}
+
+	public void Surrender(){
+		StorePersistentVariables.Instance.winner = 1;
+		if(player){
+			StorePersistentVariables.Instance.winner = 0;
+		}
+		status = GameControllerStatus.GAME_OVER;
+		SceneManager.LoadScene("GameOverScene");
+	}
 	
+	public void QuitGame(){
+		SceneManager.LoadScene("MainMenu");
+	}
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}

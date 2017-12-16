@@ -20,6 +20,9 @@ public class GameOver : MonoBehaviour {
 		}
 		GameObject.Find("WinnerName").GetComponent<Text>().text = text;
 
+		foreach(GameObject sloth in sloths){
+			sloth.AddComponent<Rigidbody>();
+		}
 
 	}
 

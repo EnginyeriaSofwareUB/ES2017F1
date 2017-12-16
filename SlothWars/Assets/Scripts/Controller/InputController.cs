@@ -63,6 +63,14 @@ public class InputController : MonoBehaviour {
 		}
 	}
 
+	public void Surrender(){
+		gameController.Surrender();
+	}
+
+	public void QuitGame(){
+		gameController.QuitGame();
+	}
+
 	public void UnPause(){
 		uiController.SetActiveOptsPanel(false);
 		gameController.UnPauseGame();

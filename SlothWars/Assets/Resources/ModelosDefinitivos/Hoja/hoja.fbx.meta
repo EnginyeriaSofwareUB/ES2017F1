@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 8a34ca4c09476654db8e1b92015d9157
-timeCreated: 1513329201
-licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -27,6 +25,7 @@ ModelImporter:
     4300000: Cylinder001
     4300002: Plane001
     4300004: Cube
+    9500000: //RootNode
     10800000: Lamp
   materials:
     importMaterials: 1
@@ -97,7 +96,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
