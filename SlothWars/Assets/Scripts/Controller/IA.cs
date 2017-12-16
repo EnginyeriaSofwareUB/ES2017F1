@@ -86,6 +86,7 @@ public class IA: IAInterface
         if (positionNearestSloth.y == actualIAPosition.y) { if (positionNearestSloth.x > actualIAPosition.x) { return new Vector3(1f, 0f, 0f); } else { return new Vector3(-1f, 0f, 0f); } }
 
         if (positionNearestSloth.x < actualIAPosition.x) { return new Vector3(-1f, 0f, 0f); }
+        if (positionNearestSloth.x > actualIAPosition.x) { return new Vector3(1f, 0f, 0f); }
         if (positionNearestSloth.y < actualIAPosition.y) { return new Vector3(0f, -1f, 0f); }
         if (positionNearestSloth.y > actualIAPosition.y) { return new Vector3(0f, 1f, 0f); }
         else { return new Vector3(0f, 0f, 0f); }
