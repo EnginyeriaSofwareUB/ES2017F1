@@ -13,7 +13,7 @@ public class IA: IAInterface
     private Sloth nearestSloth;
     public IA() { }
 
-    public GameAction GetAction(GameController2 gameController)
+    public GameAction GetAction(GameController gameController)
     {
         actualPosition = GetActualPosition(gameController);
         rangeListAbilities = GetRangeAbilities(gameController);
@@ -39,9 +39,9 @@ public class IA: IAInterface
         return gameAction;
     }
 
-    private Vector3 GetActualPosition(GameController2 gameController) { return gameController.GetCurrentSloth().transform.position; }
+    private Vector3 GetActualPosition(GameController gameController) { return gameController.GetCurrentSloth().transform.position; }
 
-    private Ability GetAbility(GameController2 gameController)
+    private Ability GetAbility(GameController gameController)
     {
         List<Ability> listAbilities = new List<Ability>();
         listAbilities.Add(gameController.GetCurrentSloth().GetAbility1());
@@ -90,7 +90,7 @@ public class IA: IAInterface
     }
 
 
-    private Vector3 PositionNearestEnemySloth(GameController2 gameController, Vector3 actualIAPosition) {
+    private Vector3 PositionNearestEnemySloth(GameController gameController, Vector3 actualIAPosition) {
         Vector3 nearestSloth = new Vector3(0f, 0f, 0f);
         Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
         float norm = 0f;
@@ -109,7 +109,7 @@ public class IA: IAInterface
         
     }
 
-    private Vector3 PositionNearestFriendlySloth(GameController2 gameController, Vector3 actualIAPosition)
+    private Vector3 PositionNearestFriendlySloth(GameController gameController, Vector3 actualIAPosition)
     {
         Vector3 nearestSloth = new Vector3(0f, 0f, 0f);
         Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
@@ -129,7 +129,7 @@ public class IA: IAInterface
 
     }
 
-    private List<float> GetRangeAbilities(GameController2 gameController)
+    private List<float> GetRangeAbilities(GameController gameController)
     {
         List<float> rangeListAbilities = new List<float>();
         rangeListAbilities.Add(gameController.GetCurrentSloth().GetAbility1().GetRange());

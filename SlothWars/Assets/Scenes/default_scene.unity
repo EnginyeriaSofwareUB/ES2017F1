@@ -4122,16 +4122,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 602930564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2815aed0c03109a46a772cd036433c9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ab9a823549d9cb4391b494e33688ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   teamSloths1: []
   teamSloths2: []
-  slothWizard: {fileID: 0}
-  slothArcher: {fileID: 0}
-  slothTank: {fileID: 0}
-  slothHealer: {fileID: 0}
-  slothUtility: {fileID: 0}
   currentSloth: {fileID: 0}
   leaf: {fileID: 148503004}
   toTexture: {fileID: 645022941}

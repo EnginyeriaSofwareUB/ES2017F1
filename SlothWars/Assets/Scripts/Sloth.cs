@@ -144,7 +144,7 @@ public class Sloth: MonoBehaviour {
 		}
 
         if(hp <= 0){
-            GameObject.Find("Main Camera").GetComponent<GameController2>().OnDieSloth(this);
+            GameObject.Find("Main Camera").GetComponent<GameController>().OnDieSloth(this);
         }
 
     }

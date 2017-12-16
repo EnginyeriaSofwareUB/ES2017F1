@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController2 : MonoBehaviour {
+public class GameController : MonoBehaviour {
 	private IA ia;
 	private UIController2 uiController;
 	public List<Sloth> teamSloths1, teamSloths2;
-	public GameObject slothWizard, slothArcher, slothTank, slothHealer, slothUtility;
 	public Sloth currentSloth;
 	private GameControllerStatus status;
 	private int turns;
@@ -354,6 +353,10 @@ public class GameController2 : MonoBehaviour {
 
 	public int GetCurrentAp(){
 		return currentAp;
+	}
+
+	public void CancelAbility(){
+		currentSloth.gameObject.GetComponent<ShotScript> ().CancelShot ();
 	}
 
 	public enum GameControllerStatus{

@@ -41,8 +41,8 @@ public class LinkAbility : Ability
             GameObject.Destroy(linkObject);
         }
         linkObject = (GameObject)GameObject.Instantiate(Resources.Load("Objects/LightningBolt/Link"), g.transform.position, Quaternion.identity);
-        g.GetComponent<Sloth>().SetTank(Camera.main.GetComponent<GameController2>().GetCurrentSloth());
-        linkObject.GetComponent<LinkScript>().SetOrigin(Camera.main.GetComponent<GameController2>().GetCurrentSloth().transform);
+        g.GetComponent<Sloth>().SetTank(Camera.main.GetComponent<GameController>().GetCurrentSloth());
+        linkObject.GetComponent<LinkScript>().SetOrigin(Camera.main.GetComponent<GameController>().GetCurrentSloth().transform);
         linkObject.GetComponent<LinkScript>().SetEnd(g.transform);
     }
     public void Apply(Vector3 p) {

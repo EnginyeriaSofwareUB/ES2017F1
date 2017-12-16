@@ -25,7 +25,7 @@ public class ChainProjectile : Projectile {
 		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
 			List<GameObject> sloths = new List<GameObject> (GameObject.FindGameObjectsWithTag ("sloth"));
 			sloths.Remove (hit.collider.gameObject);
-			if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam()) {
+			if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam()) {
 				lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), hit.transform.position, Quaternion.identity);
 			} 
@@ -50,7 +50,7 @@ public class ChainProjectile : Projectile {
 					//abilityController.pplyLastAbility (sloths [i]);
 					sloths[i].GetComponent<Sloth>().SumToHp(-10);
 					//sloths[i].gameObject.SendMessage("SumToHP", -10);
-					if (sloths[0].GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam()) {
+					if (sloths[0].GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam()) {
 						lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
 						mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), sloths [0].transform.position, Quaternion.identity);
 					} 
@@ -84,7 +84,7 @@ public class ChainProjectile : Projectile {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
             apply = true;
-            if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam() && mark == null) {
+            if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && mark == null) {
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), hit.transform.position, Quaternion.identity);
 			} else if (mark == null) {
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), hit.transform.position, Quaternion.identity);

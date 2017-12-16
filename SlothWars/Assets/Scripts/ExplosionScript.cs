@@ -72,7 +72,7 @@ public class ExplosionScript : MonoBehaviour
             else if ("Destroyable".Equals(currentCollider.tag))
             {
 				if (gameObject.GetComponent<AbilityContainer> ().GetAbility ().GetAlterTerrain ()) {
-					Camera.main.gameObject.GetComponent<GameController2> ().DestroyTerrain (currentCollider.gameObject);
+					Camera.main.gameObject.GetComponent<GameController> ().DestroyTerrain (currentCollider.gameObject);
 				}
                 //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }

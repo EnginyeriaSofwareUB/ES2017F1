@@ -33,7 +33,7 @@ public class LinkProjectile : Projectile
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam() && !hit.collider.gameObject.Equals(Camera.main.GetComponent<GameController2>().GetCurrentSloth().gameObject))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && !hit.collider.gameObject.Equals(Camera.main.GetComponent<GameController>().GetCurrentSloth().gameObject))
         {
             apply = true;
             target = hit.collider.gameObject;

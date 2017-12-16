@@ -12,7 +12,7 @@ public class AutoApplyProjectile : Projectile {
 	// xy trayectory 
 	public override void ApplyLogic()
 	{
-		GameObject s = GameObject.Find("Main Camera").GetComponent<GameController2>().GetCurrentSloth().gameObject;
+		GameObject s = GameObject.Find("Main Camera").GetComponent<GameController>().GetCurrentSloth().gameObject;
         ability.Apply(s); 
 	}
 	// needed to set initial parameters

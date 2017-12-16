@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour {
 			} else {
 				moving = false;
 				transform.parent.position = position;
-				GameObject.Find("Main Camera").GetComponent<GameController2>().NotifyActionEnded();
+				GameObject.Find("Main Camera").GetComponent<GameController>().NotifyActionEnded();
 			}
 		}
 	}

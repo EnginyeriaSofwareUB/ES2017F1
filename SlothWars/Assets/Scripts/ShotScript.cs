@@ -136,7 +136,7 @@ public class ShotScript : MonoBehaviour
         this.shotLoad = shot;
     }
     //shots the projectile asociated to Ability a
-    public void Shot(Ability a)
+	public Projectile Shot(Ability a)
     {
         if (!mov)
         {
@@ -157,5 +157,6 @@ public class ShotScript : MonoBehaviour
 				}
 			}
         }
+		return onLoad;
     }
 }
