@@ -8,11 +8,12 @@ public class ChainProjectile : Projectile {
     private float range = 20f;
     public string lpathR = "Objects/LightningBolt/LightningBoltRed";
 	public string lpathG = "Objects/LightningBolt/LightningBoltGreen";
+    AbilityController abilityController = AbilityController.Instance;
     private Vector3 position;
 	GameObject mark = null;
+    private bool apply = false;
     public void ApplyLogic()
     {
-		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
 		GameObject.Destroy (mark);
 		RaycastHit hit;
 		GameObject lightning;
@@ -20,7 +21,7 @@ public class ChainProjectile : Projectile {
 		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
 			List<GameObject> sloths = new List<GameObject> (GameObject.FindGameObjectsWithTag ("sloth"));
 			sloths.Remove (hit.collider.gameObject);
-			if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == gameController.GetActualTeam()) {
+			if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam()) {
 				lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), hit.transform.position, Quaternion.identity);
 			} 
@@ -29,11 +30,11 @@ public class ChainProjectile : Projectile {
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), hit.transform.position, Quaternion.identity);
 			}
 			lightning.GetComponentInChildren<Transform> ().Find ("LightningStart").position = position;
-			lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = hit.transform.position + new Vector3 (0, 0.3f, 0);
+			lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = hit.transform.position;
 			GameObject.Destroy (lightning, 3f);
 			GameObject.Destroy (mark, 3f);
 			position = hit.transform.position;
-			//abilityController.ApplyLastAbility (hit.collider.gameObject);
+			abilityController.ApplyLastAbility (hit.collider.gameObject);
 			for (int i = 0; i < lnumber-1; i++) {
 				sloths.Sort (delegate (GameObject c1, GameObject c2) {
 					return Vector3.Distance (position, c1.transform.position).CompareTo
@@ -41,9 +42,9 @@ public class ChainProjectile : Projectile {
 				});
 				if ((position - sloths[0].transform.position).magnitude < range) {
 					// GameControl.control.ApplyLastAbility(sloths[i]);
-					//abilityController.ApplyLastAbility (sloths [i]);
+					abilityController.ApplyLastAbility (sloths [i]);
 					//sloths[i].gameObject.SendMessage("SumToHP", -10);
-					if (sloths[0].GetComponent<Sloth> ().GetTeam () == gameController.GetActualTeam()) {
+					if (sloths[0].GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam()) {
 						lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
 						mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), sloths [0].transform.position, Quaternion.identity);
 					} 
@@ -52,11 +53,11 @@ public class ChainProjectile : Projectile {
 						mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), sloths [0].transform.position, Quaternion.identity);
 					}
 					lightning.GetComponentInChildren<Transform> ().Find ("LightningStart").position = position;
-					lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = sloths [0].transform.position + new Vector3 (0, 0.3f, 0);
+					lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = sloths [0].transform.position;
 					GameObject.Destroy (lightning, 3f);
 					GameObject.Destroy (mark, 3f);
 					position = sloths [0].transform.position;
-					//abilityController.ApplyLastAbility (sloths [0]);
+					abilityController.ApplyLastAbility (sloths [0]);
 					sloths.Remove (sloths [0]);
 				} else {
 					break;
@@ -72,11 +73,11 @@ public class ChainProjectile : Projectile {
 		this.position = positon;
 	}
 	public void Mark() {
-		GameController2 gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
-			if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == gameController.GetActualTeam() && mark == null) {
+            apply = true;
+            if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam() && mark == null) {
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), hit.transform.position, Quaternion.identity);
 			} else if (mark == null) {
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), hit.transform.position, Quaternion.identity);
@@ -85,14 +86,13 @@ public class ChainProjectile : Projectile {
 			}
 		} 
 		else if (mark != null){
-			GameObject.Destroy (mark);
+            apply = false;
+            GameObject.Destroy (mark);
 			mark = null;
 		}
 
 	}
 	public bool GetApply() {
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		return Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8);
+		return apply;
 	}
 }

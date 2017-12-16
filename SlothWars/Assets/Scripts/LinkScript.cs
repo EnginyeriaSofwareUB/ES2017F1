@@ -7,8 +7,8 @@ public class LinkScript : MonoBehaviour {
     Transform end = null;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,9 +21,11 @@ public class LinkScript : MonoBehaviour {
     public void SetOrigin(Transform T)
     {
         origin = T;
+        this.gameObject.GetComponentInChildren<Transform>().Find("LightningStart").position = origin.position;
     }
     public void SetEnd(Transform T)
     {
         end = T;
+        this.gameObject.GetComponentInChildren<Transform>().Find("LightningEnd").position = end.position;
     }
 }

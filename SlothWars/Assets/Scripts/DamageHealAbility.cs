@@ -15,8 +15,7 @@ public class DamageHealAbility : Ability
     private bool explosive;
     private string source;
     private bool mark;
-	private GameController2 gameController;
-
+    AbilityController abilityController = AbilityController.Instance;
     public DamageHealAbility(string id, JSONNode json)
     {
 
@@ -29,14 +28,12 @@ public class DamageHealAbility : Ability
         this.explosive = json[id]["explosive"];
         this.source = json[id]["source"];
         this.mark = json[id]["mark"];
-
-		gameController = GameObject.Find ("Main Camera").GetComponent<GameController2> ();
     }
 
     //Apply ability to another sloth
     public void Apply(ref Sloth target)
     {
-		if (target.GetTeam() == gameController.GetActualTeam())
+        if (target.GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam())
         {
             target.SumToHp(healHp);
         }
@@ -44,12 +41,13 @@ public class DamageHealAbility : Ability
         {
             target.SumToHp(-dmg);
         }
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
         Sloth target = g.GetComponent<Sloth>();
-		if (target.GetTeam() == gameController.GetActualTeam())
+        if (target.GetTeam() == Camera.main.GetComponent<GameController2>().GetCurrentSloth().GetTeam())
         {
             target.SumToHp(healHp);
         }
@@ -57,6 +55,7 @@ public class DamageHealAbility : Ability
         {
             target.SumToHp(-dmg);
         }
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

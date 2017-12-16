@@ -14,8 +14,8 @@ public class TankAbility : Ability
     private string projectile;
     private string source;
     private bool mark;
-
-	public TankAbility(string id, JSONNode json)
+    AbilityController abilityController = AbilityController.Instance;
+    public TankAbility(string id, JSONNode json)
     {
 
         this.shield = json[id]["shield"];
@@ -35,13 +35,15 @@ public class TankAbility : Ability
     public void Apply(ref Sloth target)
     {
         target.SetShield(hpShield);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
 
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
-        //Sloth target = g.GetComponent<AnimPlayer>().sloth;
-        //target.SetShield(hpShield);
+        Sloth target = g.GetComponent<Sloth>();
+        target.SetShield(hpShield);
+        abilityController.UpdateHpBar(target.GetHp(), target.GetShield());
     }
     public void Apply(Vector3 p) { }
     public float GetRange()

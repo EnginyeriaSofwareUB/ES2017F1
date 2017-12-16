@@ -7,8 +7,8 @@ public class ShotScript : MonoBehaviour
 {
     public GameObject ForceBar; //force/range bar gameObject
     private Transform gun;  // aim vector transform
-    //private AbilityModel abilityModel;
-    //private ChangeTurnModel changeTurnModel;
+    private AbilityModel abilityModel;
+    private ChangeTurnModel changeTurnModel;
     private int rotate = 0; // 0 when loocking to the right, 1 when loocking to left
     bool shotLoad = false; // it says if its calculating range/force
     bool mov = false; // sloth is moving bool
@@ -20,8 +20,8 @@ public class ShotScript : MonoBehaviour
     void Start()
     {
 		
-        //abilityModel = AbilityModel.Instance;
-        //changeTurnModel = ChangeTurnModel.Instance;
+        abilityModel = AbilityModel.Instance;
+        changeTurnModel = ChangeTurnModel.Instance;
         gun = transform;
 		gun.position = new Vector3(gun.position.x,gun.position.y,gun.position.z-0.5f);
     }
@@ -96,6 +96,15 @@ public class ShotScript : MonoBehaviour
             Active(false);
         }
     }
+    public void CancelShot()
+    {
+        shotLoad = false;
+        Active(false);
+        if (!onloadAbility.GetMark())
+        {
+            if(st != null) { st.Destroy(); }
+        }
+    }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)
     {
@@ -139,7 +148,7 @@ public class ShotScript : MonoBehaviour
 				Debug.Log("The type of the used projectile is " + a.GetHashCode());
                 Debug.Log("The type of the used projectile is " + onLoad.GetType().ToString());
                 onloadAbility = a;
-                //abilityModel.SetLastAbility(a);
+                abilityModel.SetLastAbility(a);
 
 
 				if (a.GetProjectile ().Equals ("autoApply")) {

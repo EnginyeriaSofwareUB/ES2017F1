@@ -58,8 +58,8 @@
     "def": 50,
     "ap": 6,
     "photo": "slothUtility",
-    "idAb1": "U0",
-    "idAb2": "U1",
+    "idAb1": "U1",
+    "idAb2": "U2",
     "idAb3": "U2",
     "model": "sloth_utility"
   }
