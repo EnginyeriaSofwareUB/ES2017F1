@@ -87,6 +87,11 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
 			logic.AddComponent<BoxCollider>();
+
+            //Anadiendo Animator a los sloths
+            Animator anim = logic.AddComponent<Animator>();
+            anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
+
 			HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
