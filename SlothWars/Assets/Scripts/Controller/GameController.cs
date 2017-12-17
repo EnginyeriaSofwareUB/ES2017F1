@@ -374,21 +374,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-    public int GetIndexCurrentSlothRed()
-    {
-        int i = 0;
-        foreach(Sloth sloth in teamSloths2)
-        {
-            if (sloth == currentSloth)
-            {
-                return i;
-            }
-            i++;
-        }
-        //No debe entrar nunca aqui
-        return -10;
-    }
-
     public bool GetGravity()
     {
         return currentSloth.transform.parent.GetComponent<Rigidbody>().useGravity;
