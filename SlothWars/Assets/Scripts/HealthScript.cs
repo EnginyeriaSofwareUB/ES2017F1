@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthScript : MonoBehaviour {
     public GameObject healthBar;
     private double health = 100;
+	private GameObject hp;
     private double maxHealth;
 	private GameObject shield;
 	private GameObject shieldEffect = null;
@@ -27,9 +28,20 @@ public class HealthScript : MonoBehaviour {
     public void SetHealthBar(GameObject healthBar){
         this.healthBar = healthBar;
     }
+    public void turnRight()
+    {
+        /*texthp.transform.eulerAngles = new Vector3(0, 0, 0);
+        texthp.transform.localPosition = new Vector3(0, 3, -0.5f); */
+    }
+    public void turnLeft()
+    {
+       /* texthp.transform.eulerAngles = new Vector3(0, 360, 0);
+        texthp.transform.localPosition = new Vector3(0, 3, 0.5f); */
+    }
 
 	public void setHealth(double health){
 		this.health = health;
+		//hp.GetComponent<TextMesh> ().text = "" + health;
 	}
 
 	public double getHealth(){
@@ -40,28 +52,25 @@ public class HealthScript : MonoBehaviour {
         this.maxHealth = maxHealth;
     }
 
-    public void UpdateHP(double hp, double shield)
+	public void UpdateHP(double hp,double shield)
     {
-        if (shield > 0)
-        {
-            if (shieldEffect == null)
-            {
-                this.shield.SetActive(true);
+		if (shield > 0) {
+			if (shieldEffect == null) {
+				this.shield.SetActive (true);
                 Debug.Log("shield");
-                shieldEffect = (GameObject)Instantiate(Resources.Load("Objects/Shield"), this.transform.position + new Vector3(0, 0, -0.5f), Quaternion.identity);
-            }
-            this.shield.GetComponent<TextMesh>().text = "" + shield;
-
-        }
-        else if (shieldEffect != null)
-        {
-            Destroy(shieldEffect);
-            shieldEffect = null;
-            this.shield.SetActive(false);
-        }
+				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
+			}
+			this.shield.GetComponent<TextMesh> ().text = "" + shield;
+		} else if (shieldEffect != null) {
+			Destroy (shieldEffect);
+			shieldEffect = null;
+			this.shield.SetActive (false);
+		}
         maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
+        //Debug.Log(health);
+        //Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(hp / maxHealth);
-        healthBar.GetComponent<HealthBarScript>().ChangeHealthText(hp);
-        healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
+        //this.hp.GetComponent<TextMesh>().text= "" + health;
     }
+
 }

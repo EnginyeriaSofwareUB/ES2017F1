@@ -17,7 +17,7 @@ public class HealthBarScript : MonoBehaviour
         health = (Text)rt.Find("health").GetComponent<Text>();
         shield = (Text)rt.Find("shield_text").GetComponent<Text>();
         goShield = (Transform)rt.Find("shield");
-        ActivateShield();
+        DeactivateShield();
         rt.rotation = new Quaternion(0, 0, 0, 0);
         rt = (RectTransform)rt.Find("currentHealth");
     }
