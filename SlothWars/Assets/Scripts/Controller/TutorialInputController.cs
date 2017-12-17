@@ -13,17 +13,16 @@ public class TutorialInputController : InputController {
 	// Update is called once per frame
 	void Update () {
 		if(gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT ){
-			if ((Input.GetKey ("up") || Input.GetKey ("w")) and ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.KILL_DUMMY2 || (TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.TEACHING_MOVEMENT2) ) {
+			if ( (Input.GetKey ("up") || Input.GetKey ("w")) && (  ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.KILL_DUMMY2 || ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.TEACHING_MOVEMENT2) ) {
 				gameController.MoveSloth (0, 1);
-			} else if (Input.GetKey ("down") || Input.GetKey ("s")) {
+			} else if ((Input.GetKey ("down") || Input.GetKey ("s")) && (((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.KILL_DUMMY2 || ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.TEACHING_MOVEMENT2) ) {
 				gameController.MoveSloth (0, -1);
-			} else if (Input.GetKey ("right") || Input.GetKey ("d")) {
+			} else if ((Input.GetKey ("right") || Input.GetKey ("d")) && (((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.KILL_DUMMY2 || ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.TEACHING_MOVEMENT2) ) {
 				gameController.MoveSloth (1, 0);
-			} else if (Input.GetKey ("left") || Input.GetKey ("a")) {
+			} else if ((Input.GetKey ("left") || Input.GetKey ("a")) && (((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.KILL_DUMMY2 || ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.TEACHING_MOVEMENT2) ) {
 				gameController.MoveSloth (-1, 0);
 			} else if (Input.GetKeyDown (KeyCode.Escape) && ((TutorialController)gameController).GetTutorialStatus() == TutorialController.TutorialControllerStatus.WAITING_ESC) {
 				uiController.SetActiveOptsPanel (true);
-				Debug.Log("HOLA ENTRO");
 				uiController.SetActiveMainMessage(false);
 				((TutorialController)gameController).NotifyEsc();
 				gameController.PauseGame ();
