@@ -4,7 +4,8 @@ public class DeathZoneEnter : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //LogicView.lv.DestroySlothSafely(other.gameObject);
+        GameObject.Find("Main Camera").GetComponent<GameController>().OnDieSloth(
+            other.gameObject.GetComponentInChildren<Sloth>());
     }
 
 }
