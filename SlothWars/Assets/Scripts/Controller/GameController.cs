@@ -213,7 +213,7 @@ public class GameController : MonoBehaviour {
 
 		uiController.DisplaySlothAbilities(currentSloth);
         currentAp = currentSloth.GetAp();
-        uiController.DisplaySlothStats(currentSloth, currentAp);
+        uiController.DisplaySlothStats(currentSloth,currentAp);
 		uiController.UpdateTurnPlayerInfo(player);
 		
 		CheckAbilitiesAp();

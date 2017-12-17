@@ -107,7 +107,7 @@ public class UIController2 : MonoBehaviour {
 		animatingMainMessage = true;
 	}
 
-    public void DisplaySlothStats(Sloth sloth, int currentAp)
+    public void DisplaySlothStats(Sloth sloth,int currentAp)
     {
         GameObject.Find("lifeSlothText").GetComponent<Text>().text = ((int)sloth.GetHp()).ToString();
         GameObject.Find("attackSlothText").GetComponent<Text>().text = sloth.GetAttack().ToString();
