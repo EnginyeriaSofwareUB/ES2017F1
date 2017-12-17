@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<MovementController>();
             logic.AddComponent<SlothGravity>();
             BoxCollider bc = logic.AddComponent<BoxCollider>();
-            bc.size = new Vector3(1f, 1f, 0.9f);
+            bc.size = new Vector3(0.5f, 0.7f, 0.9f);
 
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
@@ -155,9 +155,9 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<MovementController>();
             logic.AddComponent<SlothGravity>();
             BoxCollider bc = logic.AddComponent<BoxCollider>();
-            bc.size = new Vector3(1f,1f,0.9f);
+            bc.size = new Vector3(0.5f, 0.7f, 0.9f);
 
-     		HealthScript health = logic.AddComponent<HealthScript>();
+            HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.transform.SetParent(logic.transform);
