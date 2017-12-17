@@ -76,11 +76,11 @@ public class PathProjectile : Projectile
                 mark.gameObject.transform.localScale = new Vector3(1, 1, 1) * scale + (nCubes - 1) * d * scale;
                 if (apply)
                 {
-                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Materials/green_mark");
+                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Modelos/Materials/green_mark");
                 }
                 else
                 {
-                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Materials/red_mark");
+                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Modelos/Materials/red_mark");
                 }
             }
         }

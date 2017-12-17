@@ -62,19 +62,19 @@ public class GameController : MonoBehaviour {
 			GameObject model;
 			switch(sloth){
 				case "Wizard":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_wizard"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_wizard"));
 				break;
 				case "Archer":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_archer"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_archer"));
 				break;
 				case "Tank":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_tank"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_tank"));
 				break;
 				case "Healer":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_healer"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_healer"));
 				break;
 				case "Utility":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_utility"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_utility"));
 				break;
 				default:
 					model = new GameObject("EmptyObject");
@@ -103,14 +103,14 @@ public class GameController : MonoBehaviour {
 
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
-            anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
+            anim.runtimeAnimatorController = Resources.Load("Modelos/sloth_action") as RuntimeAnimatorController;
 
             //Anadiendo Rigidbody a los sloths
             //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
             healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
@@ -134,19 +134,19 @@ public class GameController : MonoBehaviour {
 			GameObject model;
 			switch(sloth){
 				case "Wizard":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_wizard"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_wizard"));
 				break;
 				case "Archer":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_archer"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_archer"));
 				break;
 				case "Tank":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_tank"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_tank"));
 				break;
 				case "Healer":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_healer"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_healer"));
 				break;
 				case "Utility":
-					model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_utility"));
+					model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/"+"sloth_utility"));
 				break;
 				default:
 					model = new GameObject("EmptyObject");
@@ -174,14 +174,14 @@ public class GameController : MonoBehaviour {
             
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
-            anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
+            anim.runtimeAnimatorController = Resources.Load("Modelos/sloth_action") as RuntimeAnimatorController;
 
             //Anadiendo Rigidbody a los sloths
             //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.transform.SetParent(logic.transform);
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
             health.SetHealthBar(healthBar);

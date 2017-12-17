@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlothWars", "SlothWars.csproj", "{713907A1-1771-B1F7-228F-98902F1F73A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlothWars.Editor", "SlothWars.Editor.csproj", "{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{713907A1-1771-B1F7-228F-98902F1F73A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{713907A1-1771-B1F7-228F-98902F1F73A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{713907A1-1771-B1F7-228F-98902F1F73A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{713907A1-1771-B1F7-228F-98902F1F73A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

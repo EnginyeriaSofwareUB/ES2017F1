@@ -52,11 +52,11 @@ public class ProjectileTerrain : Projectile {
                 mark.transform.position = position + new Vector3(0, 1, 0) * (nCubes-1) * scale / 2;
                 if (apply)
                 {
-                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Materials/green_mark");
+                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Modelos/Materials/green_mark");
                 }
                 else
                 {
-                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Materials/red_mark");
+                    mark.GetComponent<Renderer>().material = (Material)Resources.Load("Modelos/Materials/red_mark");
                 }
             }
         }

@@ -55,7 +55,7 @@ public class SlothapediaController : MonoBehaviour {
                     showSlothInfo(a);
                     });
 
-				name = n [currentSloth.ToString ()] ["photo"];
+				name = n [currentSloth.ToString ()] ["photoSlothapedia"];
 				name = name.Insert (0, "Slothapedia/f");
 				Debug.Log (name);
 				b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
@@ -80,8 +80,8 @@ public class SlothapediaController : MonoBehaviour {
             b.onClick.AddListener(delegate{
                 showSlothInfo(a);     
             });
-			name = n [currentSloth.ToString ()] ["photo"];
-			name = name.Insert (0, "Slothapedia/f");
+			name = n [currentSloth.ToString ()] ["photoSlothapedia"];
+            name = name.Insert(0, "Slothapedia/f");
 			Debug.Log (name);
 			b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
             //b.GetComponent<Image>().sprite = Resources.Load<Sprite>(n[currentSloth.ToString()]["photo"]);
@@ -140,7 +140,7 @@ public class SlothapediaController : MonoBehaviour {
         GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
         GameObject.Find("action1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["ap"].ToString();
         Destroy(slothModel);
-        GameObject kk = Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+n[currentSloth.ToString()]["model"]);
+        GameObject kk = Resources.Load<GameObject>("Modelos/"+n[currentSloth.ToString()]["model"]);
         slothModel = Instantiate(kk);
         slothModel.transform.position = new Vector3(-100f, -100.023f, 0.0489f);
         
