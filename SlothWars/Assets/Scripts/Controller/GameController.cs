@@ -38,10 +38,14 @@ public class GameController : MonoBehaviour {
 		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
 			lista.Add("Wizard");
+            lista.Add("Healer");
 		}
 		if(lista2.Count == 0){
 			lista2.Add("Tank");
+            lista2.Add("Archer");
 		}
+
+        ia = new IA();
         
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
@@ -92,7 +96,10 @@ public class GameController : MonoBehaviour {
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
 
-			HealthScript health = logic.AddComponent<HealthScript>();
+            //Anadiendo Rigidbody a los sloths
+            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
+            
+            HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
@@ -147,7 +154,15 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<MovementController>();
 			logic.AddComponent<BoxCollider>();
 
-     		HealthScript health = logic.AddComponent<HealthScript>();
+            //Anadiendo Animator a los sloths
+            Animator anim = logic.AddComponent<Animator>();
+            anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
+
+            //Anadiendo Rigidbody a los sloths
+            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
+            
+
+            HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.transform.SetParent(logic.transform);
@@ -329,7 +344,8 @@ public class GameController : MonoBehaviour {
                 if (currentAp >= action.ability.GetAp())
                 {
                     Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
-                    pr.SetAll(currentSloth.transform.position, new Vector3(action.x, action.y, 0f), currentSloth.transform.rotation, action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
+                    
+                    pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, 90, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
                     //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
 
                     pr.ApplyLogic();

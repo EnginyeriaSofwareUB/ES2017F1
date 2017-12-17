@@ -7,6 +7,9 @@ public class GameAction
 {
     public ActionType actionType;
     public float x, y;
+    public Sloth targetSloth;
+    public Vector3 aimVector;
+    public float angleAbility;
     public Ability ability;
 
     public GameAction() { }
