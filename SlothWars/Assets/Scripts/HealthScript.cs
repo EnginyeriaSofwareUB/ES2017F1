@@ -59,6 +59,7 @@ public class HealthScript : MonoBehaviour {
 				//this.shield.SetActive (true);
                 Debug.Log("shield");
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
+                shieldEffect.transform.parent = this.transform;
 			}
 			//this.shield.GetComponent<TextMesh> ().text = "" + shield;
 		} else if (shieldEffect != null) {

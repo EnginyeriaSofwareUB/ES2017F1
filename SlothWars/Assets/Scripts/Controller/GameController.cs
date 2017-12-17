@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour {
 
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
+        
 		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
 
 		TerrainCreator.LoadMap();
@@ -44,8 +45,7 @@ public class GameController : MonoBehaviour {
 			lista2.Add("Tank");
             lista2.Add("Archer");
 		}
-
-        ia = new IA();
+        
         
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
@@ -310,9 +310,10 @@ public class GameController : MonoBehaviour {
 
 	public void MoveSloth(int x, int y){
 		if(currentAp > 0){
-			currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
-			currentAp--;
-			status = GameControllerStatus.ANIMATING;
+            
+            currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
+            currentAp--;
+            status = GameControllerStatus.ANIMATING;
 		} else {
 			uiController.NotifyNotEnoughAp();
 		}
