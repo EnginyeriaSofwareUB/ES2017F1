@@ -108,4 +108,10 @@ public class TeleportProjectile : Projectile
         }
         else { return false; }
     }
+    public override void CalcelMark()
+    {
+        apply = false;
+        GameObject.Destroy(mark);
+        mark = null;
+    }
 }

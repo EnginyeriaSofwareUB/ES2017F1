@@ -11,9 +11,10 @@ public class LinkProjectile : Projectile
     GameObject target;
     bool apply = false;
 
-	public LinkProjectile(Ability a){
-		ability = a;
-	}
+    public LinkProjectile(Ability a)
+    {
+        ability = a;
+    }
 
     public override void ApplyLogic()
     {
@@ -63,5 +64,11 @@ public class LinkProjectile : Projectile
     public override bool GetApply()
     {
         return apply;
+    }
+    public override void CalcelMark()
+    {
+        apply = false;
+        GameObject.Destroy(mark);
+        mark = null;
     }
 }

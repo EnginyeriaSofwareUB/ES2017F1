@@ -62,4 +62,10 @@ public class EnemyTargetProjectile : Projectile
     {
         return apply;
     }
+    public override void CalcelMark()
+    {
+        apply = false;
+        GameObject.Destroy(mark);
+        mark = null;
+    }
 }
