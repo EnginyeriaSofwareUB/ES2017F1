@@ -26,7 +26,8 @@ public class UIController2 : MonoBehaviour {
 		SetActiveOptsPanel(false);
 		SetActiveAbilitiesPanel(false);
 		SetActiveInfoAbPanel (false);
-		SetActiveMainMessage(false);
+		SetActiveMainMessage(true);
+        mainMessage.GetComponent<Text>().text = "";
 	}
 	
 	// Update is called once per frame

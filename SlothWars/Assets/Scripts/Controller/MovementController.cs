@@ -7,11 +7,9 @@ public class MovementController : MonoBehaviour {
 	private float sizeBlock = 1.0f;
 	private float speed = 0.6f;
 	private bool moving;
-    private GameObject mainCamera;
 
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.Find("Main Camera");
 	}
 	
 	// Update is called once per frame
@@ -22,7 +20,7 @@ public class MovementController : MonoBehaviour {
 			} else {
 				moving = false;
 				transform.parent.position = position;
-				mainCamera.GetComponent<GameController>().NotifyActionEnded();
+                GameObject.Find("Main Camera").GetComponent<GameController>().NotifyActionEnded();
 			}
 		}
 	}

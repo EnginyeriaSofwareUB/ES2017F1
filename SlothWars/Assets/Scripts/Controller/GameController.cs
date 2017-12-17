@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour {
             Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
+            tmpSloth.AddComponent<IceCollision>();
 
             GameObject logic = new GameObject("slothlogic");
 			logic.tag = "sloth";
@@ -111,6 +112,7 @@ public class GameController : MonoBehaviour {
             Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
+            tmpSloth.AddComponent<IceCollision>();
 
             GameObject logic = new GameObject("slothlogic");
 			logic.tag = "sloth";
@@ -196,8 +198,6 @@ public class GameController : MonoBehaviour {
 	}
 
 
-
-
 	private void CheckLogic(){
         venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
@@ -214,7 +214,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		player = !player;
-
 
 		if(player){
 			currentSloth = teamSloths1[turns % teamSloths1.Count];
@@ -233,9 +232,6 @@ public class GameController : MonoBehaviour {
 		uiController.UpdateTurnPlayerInfo(player);
 		
 		CheckAbilitiesAp();
-
-
-
 
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}

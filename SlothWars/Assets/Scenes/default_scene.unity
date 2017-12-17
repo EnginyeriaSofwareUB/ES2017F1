@@ -1655,8 +1655,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0093231, z: 1.3060697}
-  m_Center: {x: 0, y: 0.50466156, z: 0.13959348}
+  m_Size: {x: 1, y: 2.3265514, z: 1.3060697}
+  m_Center: {x: 0, y: 0.6632757, z: 0.13959348}
 --- !u!33 &322713742
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9041,6 +9041,21 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abf1b07b6a282e94c8633f31f02a021b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1475589630 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 185286, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 2}
+  m_PrefabInternal: {fileID: 319757672}
+--- !u!114 &1475589631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475589630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfe02cb5bf0a964488d4e629acc5105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1477301182
 Prefab:
   m_ObjectHideFlags: 0

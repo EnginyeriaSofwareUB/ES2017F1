@@ -20,13 +20,30 @@ public class InputController : MonoBehaviour {
 	void Update () {
 		if(gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT){
 			if (Input.GetKey ("up") || Input.GetKey ("w")) {
-				gameController.MoveSloth (0, 1);
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP)){
+                    gameController.MoveSloth(0, 1);
+                } else {
+                    ScreenMessage.sm.ShowMessage("Something is in your way",2f);
+                }
 			} else if (Input.GetKey ("down") || Input.GetKey ("s")) {
-				gameController.MoveSloth (0, -1);
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.DOWN)){
+                    gameController.MoveSloth(0, -1);
+                } else {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
 			} else if (Input.GetKey ("right") || Input.GetKey ("d")) {
-				gameController.MoveSloth (1, 0);
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.RIGHT)){
+                    gameController.MoveSloth(1, 0);
+                } else {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
 			} else if (Input.GetKey ("left") || Input.GetKey ("a")) {
-				gameController.MoveSloth (-1, 0);
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.LEFT)){
+                    gameController.MoveSloth(-1, 0);
+                } else
+                {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
 			} else if (Input.GetKeyDown (KeyCode.Escape)) {
 				uiController.SetActiveOptsPanel (true);
 				gameController.PauseGame ();
