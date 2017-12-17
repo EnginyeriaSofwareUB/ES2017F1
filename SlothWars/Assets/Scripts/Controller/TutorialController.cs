@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TutorialController : GameController {
 	protected TutorialControllerStatus tutorialStatus;
+	protected Vector3 target = new Vector3(22f, 12 + 0.05f, 0.5f);
 
 	// Use this for initialization
 	void Start () {
@@ -111,6 +112,14 @@ public class TutorialController : GameController {
 				((TutorialUIController)uiController).SetTutorialText("Use your key arrows to move arround the map. Try reaching the marked position!");
 				break;
 			case TutorialControllerStatus.TEACHING_MOVEMENT2:
+				if((currentSloth.gameObject.transform.parent.position - target).magnitude <= 0.05f){
+					tutorialStatus = TutorialControllerStatus.TEACHING_ABILITIES;
+				}
+				break;
+			case TutorialControllerStatus.TEACHING_ABILITIES:
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("GREAT! Now try using one ability. \n The bar represents the force of the projectile \n" + 
+				"and you can use the scope to aim. \n You can use the scroll to zoom in or out if you want to have a better vision of the map!");
 				break;
 		}
 	}
