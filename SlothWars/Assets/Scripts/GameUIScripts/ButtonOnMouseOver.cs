@@ -24,7 +24,7 @@ public class ButtonOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerEx
 	}
 
 	IEnumerator waiter(){
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (0.7f);
 		if (EventSystem.current.IsPointerOverGameObject())
             {
             show();

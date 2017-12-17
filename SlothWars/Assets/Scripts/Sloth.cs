@@ -17,7 +17,7 @@ public class Sloth: MonoBehaviour {
     private string idAb3;
     private string sprite;
     private string model;
-    private int ExtraAp;
+    private int ExtraAp = 0;
     Ability ab1;
     Ability ab2;
     Ability ab3;
@@ -119,7 +119,11 @@ public class Sloth: MonoBehaviour {
         return this.defense;
     }
 
-    public int GetAp(){ return ap;}
+    public int GetAp(){
+        int c = ap + ExtraAp;
+        ExtraAp = 0;
+        return c;
+    }
 
 
     public void SumToHp(double dmg_heal)
@@ -197,10 +201,21 @@ public void SetAbility3(Ability a)
     {
         this.ab3 = a;
     }
-    public void Fruit(int extraAp, float heal)
+    public void Fruit(double healFruit, int apFruit)
     {
-        this.SumToHp(heal);
-
+        this.SumToHp(healFruit);
+        if (this.Equals(Camera.main.GetComponent<GameController>().GetCurrentSloth()))
+        {
+            Camera.main.GetComponent<GameController>().SumToCurrentAp(apFruit);
+        }
+        else
+        {
+            ExtraAp += apFruit;
+        }
+    }
+    public void SumExtraAp(int e)
+    {
+        this.ExtraAp += e;
     }
 
 }

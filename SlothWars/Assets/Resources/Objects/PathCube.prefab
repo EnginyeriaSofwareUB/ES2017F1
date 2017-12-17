@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33213558715843396}
   - component: {fileID: 65474970551302752}
   - component: {fileID: 23779950255435536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PathCube
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

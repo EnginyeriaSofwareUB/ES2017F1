@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65548554024656454}
   - component: {fileID: 23234315055812458}
   - component: {fileID: 114414314580638322}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trunk_Cube
   m_TagString: Destroyable
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 533327a8ac778426d96abea11129f38d, type: 2}
+  - {fileID: 2100000, guid: 153370aed43674faa84928a385bd2abc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

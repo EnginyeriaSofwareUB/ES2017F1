@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FruitScript : MonoBehaviour {
-
+    private double healFruit;
+    private int apFruit;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,14 +14,21 @@ public class FruitScript : MonoBehaviour {
 	void Update () {
 		
 	}
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "sloth")
+        if (other.gameObject.tag == "sloth")
         {
-            //collision.gameObject.GetComponent<Sloth>().Fruit(params)
+            other.gameObject.GetComponent<Sloth>().Fruit(healFruit,apFruit);
         }
         Destroy(this.gameObject);
+
     }
-    //public SetParams() { }
+    
+
+    public void SetParams(double h,int a)
+    {
+        healFruit = h;
+        apFruit = a;
+    }
 
 }

@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114689902362667240}
   - component: {fileID: 135950617472136898}
   m_Layer: 0
-  m_Name: Electric Arrow
+  m_Name: ElectricArrow
   m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

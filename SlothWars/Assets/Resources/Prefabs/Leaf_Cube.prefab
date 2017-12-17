@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33400407707959352}
   - component: {fileID: 65842562751013894}
   - component: {fileID: 23581051682581044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Leaf_Cube
   m_TagString: Destroyable
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5bcdfd6c21b4b478dbd3644168c36edb, type: 2}
+  - {fileID: 2100000, guid: d9124379817ec4e81b5ec61cc9f3e43e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

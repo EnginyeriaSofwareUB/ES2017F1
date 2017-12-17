@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class MagicAbility : Ability
 {
-    private string elem;
-    private string onHitEff;
-    private double onHitProb;
     private double dmg;
-    private double residual;
-    private string distance;
     private bool alterTerrain;
     private int reach = 15;
-    private int residualTurns;
     private float hitRadius = 2f;
     private int ap;
     private string projectile;
@@ -23,15 +17,9 @@ public class MagicAbility : Ability
     public MagicAbility(string id, JSONNode json)
     {
 
-        this.elem = json[id]["elem"];
-        this.onHitEff = json[id]["onHit"];
-        this.onHitProb = json[id]["onHitProb"];
         this.dmg = json[id]["dmg"];
-        this.distance = json[id]["distance"];
-        this.residual = json[id]["residual"];
         this.alterTerrain = json[id]["alterTerrain"];
         this.reach = json[id]["reach"];
-        this.residualTurns = json[id]["residual turns"];
         this.hitRadius = json[id]["hitRadius"];
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];

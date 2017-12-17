@@ -17,7 +17,7 @@ public class TargetTeamProjectile : Projectile
     public override void ApplyLogic()
     {
         GameObject.Destroy(mark);
-        //abilityController.ApplyLastAbility(target);
+        ability.Apply(target);
     }
 
     // Update is called once per frame

@@ -30,7 +30,7 @@ public class InputController : MonoBehaviour {
 			} else if (Input.GetKeyDown (KeyCode.Escape)) {
 				uiController.SetActiveOptsPanel (true);
 				gameController.PauseGame ();
-			} else if (Input.GetMouseButtonUp (1) && gettingAbilityInfo) {
+			} else if (Input.GetMouseButtonUp (1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad()) {
 				gameController.CancelAbility ();
 				gettingAbilityInfo = false;
 			}

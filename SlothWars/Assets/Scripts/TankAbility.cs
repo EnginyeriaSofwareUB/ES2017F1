@@ -4,12 +4,7 @@ using UnityEngine;
 public class TankAbility : Ability
 {
     private bool shield;
-    private double boostDef;
-    private int durBoostDef;
-    private double boostHp;
-    private int durBoostHp;
     private double hpShield;
-    private bool blockAb;
     private int ap;
     private string projectile;
     private string source;
@@ -19,12 +14,7 @@ public class TankAbility : Ability
 
         this.shield = json[id]["shield"];
         this.mark = json[id]["mark"];
-        this.boostDef = json[id]["boostDef"];
-        this.durBoostDef = json[id]["durBoostDef"];
-        this.boostHp = json[id]["boostHp"];
-        this.durBoostHp = json[id]["durBoosthp"];
         this.hpShield = json[id]["hpShield"];
-        this.blockAb = json[id]["blockAb"];
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];
         this.source = json[id]["source"];
@@ -39,6 +29,7 @@ public class TankAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(GameObject g)
     {
+        Debug.Log("apply Tank");
         Sloth target = g.GetComponent<Sloth>();
         target.SetShield(hpShield);
     }

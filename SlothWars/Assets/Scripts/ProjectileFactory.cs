@@ -90,6 +90,10 @@ public class ProjectileFactory
         {
             return new LinkProjectile(a);
         }
+        else if (a.GetProjectile().Equals("enemyTarget"))
+        {
+            return new EnemyTargetProjectile(a);
+        }
         else
         {
             return null;

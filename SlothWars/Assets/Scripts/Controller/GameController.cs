@@ -11,12 +11,12 @@ public class GameController : MonoBehaviour {
 	private GameControllerStatus status;
 	private int turns;
 	private bool player;
-	private int currentAp;
+	private int currentAp, cancelAp;
 	public GameObject leaf;
 	public GameObject toTexture;
 	public Material blueLeaf;
 	public Material redLeaf;
-
+    private VenomSystem venomSystem;
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
 	// PLAYER FALSE - LISTA 2
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		//To place sloths
 		int point;
-
+        venomSystem = new VenomSystem();
 		teamSloths1 = new List<Sloth>();
 		teamSloths2 = new List<Sloth>();
 		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
@@ -166,11 +166,14 @@ public class GameController : MonoBehaviour {
 		switch(status){
 			case GameControllerStatus.LOGIC:
 				CheckLogic();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				break;
 			case GameControllerStatus.ABILITY_LOGIC:
 				CheckAbilitiesAp();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				break;
 			case GameControllerStatus.WAITING_FOR_INPUT:
+                uiController.DisplaySlothStats(currentSloth, currentAp);
 				if(ia != null && !player)
 				{
 					DoAction(ia.GetAction(this));
@@ -183,7 +186,7 @@ public class GameController : MonoBehaviour {
 
 
 	private void CheckLogic(){
-
+        venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 1;
@@ -212,9 +215,10 @@ public class GameController : MonoBehaviour {
 		leaf.transform.localPosition = new Vector3(0f, 0f, 0f);
 
 		uiController.DisplaySlothAbilities(currentSloth);
-		uiController.DisplaySlothStats(currentSloth);
+        currentAp = currentSloth.GetAp();
+        uiController.DisplaySlothStats(currentSloth,currentAp);
 		uiController.UpdateTurnPlayerInfo(player);
-		currentAp = currentSloth.GetAp();
+		
 		CheckAbilitiesAp();
 
 
@@ -256,18 +260,21 @@ public class GameController : MonoBehaviour {
 
 	public void CastAbility1(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility1().GetAp();
 		NotifyActionEnded();
 	}
 
 	public void CastAbility2(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility2().GetAp();
 		NotifyActionEnded();
 	}
 
 	public void CastAbility3(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
+        cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility3().GetAp();
 		NotifyActionEnded();
 	}
@@ -314,7 +321,6 @@ public class GameController : MonoBehaviour {
 		case GameAction.ActionType.MOVERSE:
 			MoveSloth((int)action.x,(int)action.y);
 			break;
-
         case GameAction.ActionType.EJECUTAR_HABILIDAD:
 
                 if (currentAp >= action.ability.GetAp())
@@ -324,6 +330,7 @@ public class GameController : MonoBehaviour {
                     //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
 
                     pr.ApplyLogic();
+                    cancelAp = currentAp;
                     currentAp -= action.ability.GetAp();
                 }
                 else
@@ -331,7 +338,6 @@ public class GameController : MonoBehaviour {
                     EndTurn();
                 }
             break;
-
 		case GameAction.ActionType.ENDTURN:
 			EndTurn();
 			break;
@@ -374,9 +380,18 @@ public class GameController : MonoBehaviour {
 
 	public void CancelAbility(){
 		currentSloth.gameObject.GetComponent<ShotScript> ().CancelShot ();
+        currentAp += cancelAp - currentAp;
 	}
 
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}
+    public void SumToCurrentAp(int apFruit)
+    {
+        currentAp += apFruit;
+    }
+    public void AddVenom(Venom v)
+    {
+        venomSystem.AddVenom(v);
+    }
 }
