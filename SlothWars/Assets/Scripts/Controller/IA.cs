@@ -84,12 +84,12 @@ public class IA: IAInterface
 
     private Vector3 GetNextMove(Vector3 EnvsIA) {
         if(EnvsIA.x == 0 && EnvsIA.y == 0) { return new Vector3(0f, 0f, 0f); }
-        if(EnvsIA.x > 0) { Debug.Log("x es mayor"); return new Vector3(1f, 0f, 0f); }
-        if (EnvsIA.y > 0) { Debug.Log("y es mayor"); return new Vector3(0f, 1f, 0f); }
-        if (EnvsIA.y < 0) { Debug.Log("y es menor"); return new Vector3(0f, -1f, 0f); }
-        if (EnvsIA.x < 0) { Debug.Log("x es menor"); return new Vector3(-1f, 0f, 0f); }
-        if(EnvsIA.y > 0) { Debug.Log("y es mayor");  return new Vector3(0f, 1f, 0f); }
-        if(EnvsIA.y < 0) { Debug.Log("y es menor"); return new Vector3(0f, -1f, 0f); }
+        if(EnvsIA.x > 0) { return new Vector3(1f, 0f, 0f); }
+        if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
+        if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
+        if (EnvsIA.x < 0) { return new Vector3(-1f, 0f, 0f); }
+        if(EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
+        if(EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
         else { Debug.Log("Hay un problema"); return new Vector3(0f, 0f, 0f); }
     }
 
@@ -102,19 +102,19 @@ public class IA: IAInterface
         foreach ( Sloth sloth in gameController.GetTeamBlue())
         {
             nearestSloth = sloth.transform.position;
-            if (CheckEnemyAlive(gameController,nearestSloth))
-            {
+            //if (CheckEnemyAlive(gameController,nearestSloth))
+            //{
                 norm = (nearestSloth - actualIAPosition).magnitude;
                 if (normAux < norm)
                 {
                     normAux = norm;
                     nearestSlothAux = nearestSloth;
                 }
-            }
-            else
-            {
-                nearestSlothAux = nearestSloth;
-            }
+            //}
+            //else
+            //{
+            //    nearestSlothAux = nearestSloth;
+//            }
         }
         return nearestSlothAux;
         
