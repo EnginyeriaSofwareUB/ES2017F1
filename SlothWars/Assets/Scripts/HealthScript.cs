@@ -67,10 +67,9 @@ public class HealthScript : MonoBehaviour {
 			this.shield.SetActive (false);
 		}
         maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
-        //Debug.Log(health);
-        //Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(hp / maxHealth);
-        //this.hp.GetComponent<TextMesh>().text= "" + health;
+        healthBar.GetComponent<HealthBarScript>().ChangeHealthText(hp);
+        healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
     }
 
 }
