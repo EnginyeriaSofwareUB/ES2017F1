@@ -42,9 +42,7 @@ public class GameController : MonoBehaviour {
 		if(lista2.Count == 0){
 			lista2.Add("Tank");
 		}
-
-        ia = new IA();
-
+        
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
 			GameObject logic = new GameObject("slothlogic");
