@@ -5,13 +5,6 @@ using SimpleJSON;
 
 public class LinkAbility : Ability
 {
-    private bool shield;
-    private double boostDef;
-    private int durBoostDef;
-    private double boostHp;
-    private int durBoostHp;
-    private double hpShield;
-    private bool blockAb;
     private int ap;
     private string projectile;
     private string source;

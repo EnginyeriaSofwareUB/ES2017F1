@@ -1,7 +1,9 @@
 {
-  "M0": {
-	"desc":"Shoots a fire discharge that deals damage in a short radius",
-    "dmg": 20,
+  "V0": {
+	"desc":"Cast a fireball that explodes on collision dealing damage on hit, destroying terrain and applying little damage during next turns",
+    "dmgOnHit": 15,
+	"residual": 2,
+	"residualTurns": 5,
     "alterTerrain": true,
 	"mark": false,
     "reach": 10,
@@ -11,35 +13,24 @@
     "projectile": "xyz",
     "source": "Objects/FireBall"
   },
-  
-   "M1": {
-	"desc":"Shoots an icy charge that deals damage and freezes an area.",
-    "elem": "ice",
-	"mark": false,
-    "onHit": "freeze",
-    "oHitProb": 0.2,
-    "dmg": 20,
-    "distance": "ranged",
-    "alterTerrain": true,
-    "reach": 10,
-	  "hitRadius": 0.5,
-    "ap": 1,
-    "explosive":true,
-    "projectile": "xyz",
-    "source": "Objects/FireBall"
+  "U0": {
+	"desc": "Creates an ice wall that stop the step through and blocks projectiles",
+    "buildTerrain": true,
+    "terrainType": "Wall",
+    "terrainSize": 4,
+	"ap": 1,
+	"projectile": "terrain",
+	"mark": true,
+    "source": "Objects/WallCube"
   },
-  
-   "M2": {
-	"desc":"Shoots a water bubble that deals damage in a short radius.",
+   
+   "M1": {
+	"desc":"Cast a cosmic projectile that explodes on collision dealing great damage and destroying terrain",
 	"mark": false,
-    "elem": "water",
-    "onHit": "None",
-    "oHitProb": 0,
-    "dmg": 30,
-    "distance": "ranged",
-    "alterTerrain": false,
+    "dmg": 25,
+    "alterTerrain": true,
     "reach": 15,
-	  "hitRadius": 0.5,
+	"hitRadius": 0.5,
     "ap": 1,
     "explosive":true,
     "projectile": "xyz",
@@ -48,7 +39,7 @@
   
   "P3": {
 	"mark": false,
-	"desc":"Shoots an axe",
+	"desc":"Throw a gyratory axe dealing some damage on collision target",
     "dmg": 20,
     "alterTerrain": false,
     "reach": 10,
@@ -60,31 +51,25 @@
   },
   
    "T1": {
-	"desc":"apply a shield",
+	"desc":"Applies on himself a shield",
 	"mark": false,
     "shield": true,
-    "boostDef": 0,
-    "durBoostDef": 0,
-    "boostHp": 100,
-    "durBoostHp": 10,
-    "hpShield": 20,
-    "blockAb": false,
-	"hitRadius": 0.5,
-		"ap": 1,
+    "hpShield": 15,
+	"ap": 1,
 	"projectile": "autoApply",
     "source": "Objects/Shield"
   },
   
    "L0": {
-  	"desc":"generates a link between the tank and the target so that the tank absorbs half the damage",
+  	"desc":"Generates a link between the tank and the target so that the tank absorbs half of the damage",
 		"ap": 1,
 		"projectile": "link",
 		"mark": true
   },
-  
+
   "P0": {
 	"mark": false,
-	"desc":"shoots an arrow that deals little damage in a long range.",
+	"desc":"Shoots a long range drill arrow that goes through the first collision target and deals some damage to collision targets",
     "dmg": 5,
     "reach": 20,
 	"hitRadius": 0.5,
@@ -97,39 +82,36 @@
   
   "P1": {
 	"mark": false,
-	"desc":"shoots a electric arrow that explodes and deals little damage in a small radius and cast 3 lightning bolt that apply the damage again to the 3 nearest sloths.",
-    "dmg": 5,
+	"desc":"Shoots a electric arrow that explodes and deals little damage in a small radius and cast 3 lightning bolt that apply the damage again to the 3 nearest sloths",
+    "dmg": 8,
     "reach": 20,
 	"hitRadius": 0.5,
 	"ap":1,
 	"projectile": "xyz",
 	"explosive":true,
 	"alterTerrain": false,
-    "source": "Objects/Electric Arrow"
+    "source": "Objects/ElectricArrow"
 
   },
   
-  "P2": {
-	"desc":"shoots an arrow that deals little damage in a long range.",
-    "dmg": 5,
+  "V1": {
+	"desc":"Shoots a poisonous arrow that explodes on collision dealing great damage during next turns",
+    "dmgOnHit": 15,
+	"residual": 6,
+	"residualTurns": 6,
+    "alterTerrain": false,
+	"mark": false,
     "reach": 20,
 	"hitRadius": 0.5,
-	"ap":1,
-	"projectile": "xyz",
-	"explosive":true,
-	"mark": false,
-	"alterTerrain": false,
+    "ap": 1,
+    "explosive":true,
+    "projectile": "xyz",
     "source": "Objects/PoisonArrow"
   },
 
   "H0": {
-	"desc":"shoots a heal ball that explodes healing in a small radius.",
-    "shield": 0,
-    "durShield": 5,
+	"desc":"Cast a heal ball that explodes and heals close sloths",
     "healHp": 40,
-    "healEffects": false,
-    "boostDef": 0,
-    "durBoostDef": 0,
 	"hitRadius": 3,
 	"ap": 1,
 	"reach": 15,
@@ -142,8 +124,8 @@
   },
   
   "DH1": {
-	"desc":"Heals/damage the target and the members of a chain with size 2",
-    "damage": 5,
+	"desc":"Cast a heal/damage chain of size that extend through the target to three close sloths",
+    "dmg": 5,
     "healHP": 5,
 	"ap": 1,
 	"reach": 15,
@@ -153,46 +135,25 @@
   },
   
   "T3": {
-    	"desc":"apply a shield",
+    	"desc":"Applies a shield to the target",
     "shield": true,
-    "boostDef": 0,
-    "durBoostDef": 0,
-    "boostHp": 0,
-    "durBoostHp": 10,
     "hpShield": 20,
     "blockAb": false,
-	"hitRadius": 0.5,
-		"ap": 1,
+	"ap": 1,
 	"projectile": "allyTarget",
 	"mark": true,
     "source": "Objects/Shield"
   },
   
-  "U0": {
-	"desc":"Spawns impassable terrain in a zone.",
-    "buildTerrain": true,
-    "terrainType": "Wall",
-    "terrainSize": 4,
-    "alterTerrain": false,
-    "durAlterTerrain": 0,
-    "alterationSize": 0,
-	"ap": 1,
-	"reach": 15,
-	"projectile": "terrain",
-	"mark": true,
-    "source": "Objects/WallCube"
-  },
   
   "U1": {
-	"desc":"Spawns impassable terrain in a zone.",
-    "buildTerrain": true,
+	"desc":"Creates a terrain path through the selected terrain leaving a fruit that heals and increases the action points",
     "terrainType": "Wall",
+	"buildTerrain": true,
+	"fruitHeal": 10,
+	"fruitAp":5,
     "terrainSize": 4,
-    "alterTerrain": false,
-    "durAlterTerrain": 0,
-    "alterationSize": 0,
 	"ap": 1,
-	"reach": 15,
 	"projectile": "path",
 	"mark": true,
     "source": "Objects/WallCube"
@@ -200,17 +161,20 @@
   },
   
   "U2": {
-	"desc":"Spawns impassable terrain in a zone.",
-    "buildTerrain": true,
-    "terrainType": "Wall",
-    "terrainSize": 4,
-    "alterTerrain": false,
-    "durAlterTerrain": 0,
-    "alterationSize": 0,
+	"desc":"Teleports the target to selected location",
 	"ap": 1,
-	"reach": 15,
 	"projectile": "teleport",
+	"buildTerrain": false,
 	"mark": true,
     "source": "Objects/SmokeMark"
+  }
+   "A0": {
+	"desc":"Deals damage to the target and decrease his action points",
+    "dmg": 5,
+	"apDecrement": 2,
+	"ap": 1,
+	"reach": 15,
+	"projectile": "enemyTarget",
+	"mark": true,
   }
 }

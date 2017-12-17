@@ -6,9 +6,9 @@
     "def": 20,
     "ap": 5,
     "photo": "slothWizard",
-    "idAb1": "M0",
+    "idAb1": "V0",
     "idAb2": "U0",
-    "idAb3": "M2",
+    "idAb3": "M1",
     "model": "sloth_wizard"
   },
   
@@ -34,7 +34,7 @@
     "photo": "slothArcher",
     "idAb1": "P0",
     "idAb2": "P1",
-    "idAb3": "P2",
+    "idAb3": "V1",
     "model": "sloth_archer"
   },
   
@@ -60,7 +60,7 @@
     "photo": "slothUtility",
     "idAb1": "U1",
     "idAb2": "U2",
-    "idAb3": "U2",
+    "idAb3": "A0",
     "model": "sloth_utility"
   }
 

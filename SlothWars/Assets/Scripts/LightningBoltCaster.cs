@@ -22,6 +22,7 @@ public class LightningBoltCaster : MonoBehaviour {
                 // GameControl.control.ApplyLastAbility(sloths[i]);
                 //abilityController.ApplyLastAbility(sloths[i]);
                 //sloths[i].gameObject.SendMessage("SumToHP", -10);
+                GameObject.Find("ElectricArrow(Clone)").GetComponent<AbilityContainer>().GetAbility().Apply(sloths[i]);
                 GameObject lightning = (GameObject)Instantiate(Resources.Load(lpath), this.transform.position, this.transform.rotation);
                 lightning.GetComponentInChildren<Transform>().Find("LightningStart").position = this.transform.position;
                 lightning.GetComponentInChildren<Transform>().Find("LightningEnd").position = sloths[i].transform.position+ new Vector3(0,0.3f,0);

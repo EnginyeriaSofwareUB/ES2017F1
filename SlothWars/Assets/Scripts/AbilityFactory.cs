@@ -56,6 +56,14 @@ public class AbilityFactory
         {
             return new LinkAbility(abilityID, n);
         }
+        else if (abilityID[0] == 'V')
+        {
+            return new VenomAbility(abilityID, n);
+        }
+        else if (abilityID[0] == 'A')
+        {
+            return new DecrementApAbility(abilityID, n);
+        }
         return null;
     }
 

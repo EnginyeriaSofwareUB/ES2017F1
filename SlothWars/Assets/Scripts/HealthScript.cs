@@ -17,23 +17,12 @@ public class HealthScript : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
-        health = gameObject.GetComponent<Sloth>().GetHp();
-        healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(health/maxHealth);
-        healthBar.GetComponent<HealthBarScript>().ChangeHealthText(health);
-		//hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
-        if (gameObject.GetComponent<Sloth>().GetShield() >= 0){
-            healthBar.GetComponent<HealthBarScript>().ActivateShield();
-            healthBar.GetComponent<HealthBarScript>().ChangeTextShield(gameObject.GetComponent<Sloth>().GetShield());
-        }
-        else{
-            healthBar.GetComponent<HealthBarScript>().DeactivateShield();   
-        }
-        if (shieldEffect != null)
-        {
-            shield.transform.position = this.transform.position + new Vector3(0.5f, 1, 0);
-            shieldEffect.transform.position = this.transform.position + new Vector3(0, 0, -0.5f);
-        }
+        //hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
+        UpdateHP(gameObject.GetComponent<Sloth>().GetHp(), gameObject.GetComponent<Sloth>().GetShield());
+		if (shieldEffect != null) {
+			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
+			shieldEffect.transform.position = this.transform.position + new Vector3 (0, 0, -0.5f);
+		}
     }
 
     public void SetHealthBar(GameObject healthBar){
@@ -63,12 +52,12 @@ public class HealthScript : MonoBehaviour {
         this.maxHealth = maxHealth;
     }
 
-	public void UpdateHP(int hp,int shield)
+	public void UpdateHP(double hp,double shield)
     {
-        //health = hp;
 		if (shield > 0) {
 			if (shieldEffect == null) {
 				this.shield.SetActive (true);
+                Debug.Log("shield");
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
 			}
 			this.shield.GetComponent<TextMesh> ().text = "" + shield;
@@ -77,7 +66,11 @@ public class HealthScript : MonoBehaviour {
 			shieldEffect = null;
 			this.shield.SetActive (false);
 		}
-		//this.hp.GetComponent<TextMesh>().text= "" + health;
+        maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
+        //Debug.Log(health);
+        //Debug.Log(health/maxHealth);
+        healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(hp / maxHealth);
+        //this.hp.GetComponent<TextMesh>().text= "" + health;
     }
 
 }

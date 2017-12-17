@@ -18,7 +18,6 @@ public class ExplosionScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -89,7 +88,6 @@ public class ExplosionScript : MonoBehaviour
             GetComponent<SphereCollider>().enabled = false;
             Destroy(this.gameObject, 20);
             this.tag = "Untagged";
-            this.enabled = false;
             foreach(LineRenderer l in GetComponentsInChildren<LineRenderer>())
             {
                 l.gameObject.SetActive(false);
@@ -98,6 +96,7 @@ public class ExplosionScript : MonoBehaviour
             {
                 s.Stop();
             }
+            this.enabled = false;
         }
         else
         {

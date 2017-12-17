@@ -11,7 +11,7 @@ public class ChainProjectile : Projectile {
     private Vector3 position;
 	GameObject mark = null;
     private bool apply = false;
-
+    bool g;
 	public ChainProjectile(Ability a){
 		ability = a;
 	}
@@ -32,7 +32,7 @@ public class ChainProjectile : Projectile {
 			else {
 				lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathR), position, Quaternion.identity);
 				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), hit.transform.position, Quaternion.identity);
-			}
+            }
 			lightning.GetComponentInChildren<Transform> ().Find ("LightningStart").position = position;
 			lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = hit.transform.position;
 			GameObject.Destroy (lightning, 3f);
@@ -45,26 +45,20 @@ public class ChainProjectile : Projectile {
 						((Vector3.Distance (position, c2.transform.position)));
 				});
 				if ((position - sloths[0].transform.position).magnitude < range) {
-					// GameControl.control.pplyLastAbility(sloths[i]);
-					ability.Apply(sloths[i]);
-					//abilityController.pplyLastAbility (sloths [i]);
-					sloths[i].GetComponent<Sloth>().SumToHp(-10);
-					//sloths[i].gameObject.SendMessage("SumToHP", -10);
 					if (sloths[0].GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam()) {
 						lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathG), position, Quaternion.identity);
 						mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), sloths [0].transform.position, Quaternion.identity);
-					} 
+                    } 
 					else {
 						lightning = (GameObject)GameObject.Instantiate (Resources.Load (lpathR), position, Quaternion.identity);
 						mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), sloths [0].transform.position, Quaternion.identity);
-					}
+                    }
 					lightning.GetComponentInChildren<Transform> ().Find ("LightningStart").position = position;
 					lightning.GetComponentInChildren<Transform> ().Find ("LightningEnd").position = sloths [0].transform.position;
 					GameObject.Destroy (lightning, 3f);
 					GameObject.Destroy (mark, 3f);
 					position = sloths [0].transform.position;
 					ability.Apply(sloths[0]);
-					//abilityController.pplyLastAbility (sloths [0]);
 					sloths.Remove (sloths [0]);
 				} else {
 					break;
@@ -84,13 +78,28 @@ public class ChainProjectile : Projectile {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
             apply = true;
-            if (hit.collider.gameObject.GetComponent<Sloth> ().GetTeam () == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && mark == null) {
-				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealG"), hit.transform.position, Quaternion.identity);
-			} else if (mark == null) {
-				mark = (GameObject)GameObject.Instantiate (Resources.Load ("Objects/HealR"), hit.transform.position, Quaternion.identity);
-			} else if (mark != null) {
-				mark.transform.position = hit.transform.position;
-			}
+            bool cond = hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam();
+            if (mark != null)
+            {
+                if (g && !cond || !g && cond)
+                {
+                    GameObject.Destroy(mark);
+                }
+                else
+                {
+                    mark.transform.position = hit.transform.position;
+                }
+            }
+            else if (cond)
+            {
+                mark = (GameObject)GameObject.Instantiate(Resources.Load("Objects/HealG"), hit.transform.position, Quaternion.identity);
+                g = true;
+            }
+            else
+            {
+                mark = (GameObject)GameObject.Instantiate(Resources.Load("Objects/HealR"), hit.transform.position, Quaternion.identity);
+                g = false;
+            }
 		} 
 		else if (mark != null){
             apply = false;

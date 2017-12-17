@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
 	public GameObject toTexture;
 	public Material blueLeaf;
 	public Material redLeaf;
-
+    private VenomSystem venomSystem;
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
 	// PLAYER FALSE - LISTA 2
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		//To place sloths
 		int point;
-
+        venomSystem = new VenomSystem();
 		teamSloths1 = new List<Sloth>();
 		teamSloths2 = new List<Sloth>();
 		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 
 
 	private void CheckLogic(){
-
+        venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
 		if(teamSloths1.Count == 0){
 			StorePersistentVariables.Instance.winner = 1;
@@ -370,4 +370,12 @@ public class GameController : MonoBehaviour {
 	public enum GameControllerStatus{
 		WAITING_FOR_INPUT, ANIMATING, LOGIC, GAME_OVER, ABILITY_LOGIC, PAUSE
 	}
+    public void SumToCurrentAp(int apFruit)
+    {
+        currentAp += apFruit;
+    }
+    public void AddVenom(Venom v)
+    {
+        venomSystem.AddVenom(v);
+    }
 }
