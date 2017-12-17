@@ -49,7 +49,13 @@ public class GameController : MonoBehaviour {
         
 		foreach(string sloth in lista){
 			GameObject tmpSloth = new GameObject(sloth+"P1");
-			GameObject logic = new GameObject("slothlogic");
+            tmpSloth.tag = "physical";
+            Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            tmpSloth.AddComponent<IceCollision>();
+
+            GameObject logic = new GameObject("slothlogic");
 			logic.tag = "sloth";
 			logic.layer = 8;
 			logic.transform.SetParent(tmpSloth.transform);
@@ -90,7 +96,10 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
-			logic.AddComponent<BoxCollider>();
+            logic.AddComponent<SlothGravity>();
+            BoxCollider bc = logic.AddComponent<BoxCollider>();
+            bc.size = new Vector3(0.5f, 0.7f, 0.9f);
+                        
 
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
@@ -101,17 +110,24 @@ public class GameController : MonoBehaviour {
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
             healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
+
             logic.GetComponent<Sloth>().SetTeam(1);
             teamSloths1.Add(logic.GetComponent<Sloth>());
 		}
 
 		foreach(string sloth in lista2){
 			GameObject tmpSloth = new GameObject(sloth+"P2");
-			GameObject logic = new GameObject("slothlogic");
+            tmpSloth.tag = "physical";
+            Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            tmpSloth.AddComponent<IceCollision>();
+
+            GameObject logic = new GameObject("slothlogic");
 			logic.tag = "sloth";
 			logic.layer = 8;
 			logic.transform.SetParent(tmpSloth.transform);
@@ -152,8 +168,10 @@ public class GameController : MonoBehaviour {
 			logic.AddComponent<Sloth>().initSloth(sloth);
 			logic.AddComponent<ShotScript>();
 			logic.AddComponent<MovementController>();
-			logic.AddComponent<BoxCollider>();
-
+            logic.AddComponent<SlothGravity>();
+            BoxCollider bc = logic.AddComponent<BoxCollider>();
+            bc.size = new Vector3(0.5f, 0.7f, 0.9f);
+            
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
@@ -161,14 +179,13 @@ public class GameController : MonoBehaviour {
             //Anadiendo Rigidbody a los sloths
             //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             
-
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             healthBar.transform.SetParent(logic.transform);
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
-
             health.SetHealthBar(healthBar);
+
             logic.GetComponent<Sloth>().SetTeam(2);
 			teamSloths2.Add(logic.GetComponent<Sloth>());
 		}
@@ -201,8 +218,6 @@ public class GameController : MonoBehaviour {
 	}
 
 
-
-
 	private void CheckLogic(){
         venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
@@ -219,7 +234,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		player = !player;
-
 
 		if(player){
 			currentSloth = teamSloths1[turns % teamSloths1.Count];
@@ -238,9 +252,6 @@ public class GameController : MonoBehaviour {
 		uiController.UpdateTurnPlayerInfo(player);
 		
 		CheckAbilitiesAp();
-
-
-
 
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}

@@ -103,4 +103,10 @@ public class PathProjectile : Projectile
         nCubes = radius;
     }
     public override bool GetApply() { return apply; }
+    public override void CalcelMark()
+    {
+        apply = false;
+        GameObject.Destroy(mark);
+        mark = null;
+    }
 }

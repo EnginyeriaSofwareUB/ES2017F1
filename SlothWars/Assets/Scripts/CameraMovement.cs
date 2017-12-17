@@ -101,13 +101,13 @@ public class CameraMovement : MonoBehaviour {
 		//if mouse is 50 pixels and less from the left side of the
 		//screen, we move the camera in that direction at scrollSpeed
 		if (mousePos.x < 50) {
-			if (!(gameObject.transform.position.x < 13.5f)) {
+			if (!(gameObject.transform.position.x < 7f)) {
 				gameObject.transform.Translate (-scrollSpeed, 0, 0);
 			}
 		}
 		//if 50px or less from the right side, move right at scrollSpeeed
 		if (mousePos.x > Screen.width - 50) {
-			if (!(gameObject.transform.position.x > 90.7f)) {
+			if (!(gameObject.transform.position.x > 100f)) {
 				gameObject.transform.Translate (scrollSpeed, 0, 0);
 			}
 		}

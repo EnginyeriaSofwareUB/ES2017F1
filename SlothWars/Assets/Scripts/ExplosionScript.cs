@@ -73,13 +73,12 @@ public class ExplosionScript : MonoBehaviour
 				if (gameObject.GetComponent<AbilityContainer> ().GetAbility ().GetAlterTerrain ()) {
 					Camera.main.gameObject.GetComponent<GameController> ().DestroyTerrain (currentCollider.gameObject);
 				}
-                //abilityController.ApplyDestroyTerrainAbility(currentCollider.gameObject);
             }
             i++;
         }
 
         explosion = (GameObject)Instantiate(Resources.Load(namePath), this.transform.position, this.transform.rotation);
-        Destroy(explosion, 3);
+        Destroy(explosion, 1.5f);
         if (stopOnColision)
         {
             this.transform.position += dir * 0.3f;

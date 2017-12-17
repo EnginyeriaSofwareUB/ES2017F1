@@ -5,12 +5,11 @@ using UnityEngine;
 public class MovementController : MonoBehaviour {
 	private Vector3 speedVector, position;
 	private float sizeBlock = 1.0f;
-	private float speed = 1f;
+	private float speed = 0.6f;
 	private bool moving;
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -21,7 +20,7 @@ public class MovementController : MonoBehaviour {
 			} else {
 				moving = false;
 				transform.parent.position = position;
-				GameObject.Find("Main Camera").GetComponent<GameController>().NotifyActionEnded();
+                GameObject.Find("Main Camera").GetComponent<GameController>().NotifyActionEnded();
 			}
 		}
 	}

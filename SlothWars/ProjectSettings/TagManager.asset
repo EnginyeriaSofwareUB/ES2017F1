@@ -34,6 +34,7 @@ TagManager:
   - Destroyable
   - soundManager
   - abilityText
+  - physical
   layers:
   - Default
   - TransparentFX

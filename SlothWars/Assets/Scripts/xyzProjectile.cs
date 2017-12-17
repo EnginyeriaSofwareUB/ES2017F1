@@ -58,4 +58,5 @@ public class xyzProjectile : Projectile {
 	}
 	public override void Mark() { }
 	public override bool GetApply() { return true; }
+    public override void CalcelMark() { }
 }

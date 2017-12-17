@@ -17,4 +17,5 @@ public abstract class Projectile
 	public abstract void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source);
     public abstract void Mark();
     public abstract bool GetApply();
+    public abstract void CalcelMark();
 }

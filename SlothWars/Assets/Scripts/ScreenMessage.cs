@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +16,7 @@ public class ScreenMessage : MonoBehaviour {
     void Start () {
         showingMessage = false;
         mainText = GameObject.Find("MainMessage");
-        mainText.SetActive(false);
+        mainText.GetComponent<Text>().text = "";
         sm = this;
     }
 	
@@ -38,7 +37,6 @@ public class ScreenMessage : MonoBehaviour {
     {
         StopAllCoroutines();
         showingMessage = false;
-        mainText.SetActive(false);
         StartCoroutine(InvokeMessage(message, seconds));
     }
 
@@ -48,7 +46,7 @@ public class ScreenMessage : MonoBehaviour {
         mainText.SetActive(true);
         mainText.GetComponent<Text>().text = msg;
         yield return new WaitForSeconds(sec);
-        mainText.SetActive(false);
+        mainText.GetComponent<Text>().text = "";
         showingMessage = false;
     }
 
