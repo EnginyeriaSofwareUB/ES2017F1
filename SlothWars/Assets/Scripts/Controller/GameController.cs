@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-	private IA ia;
-	private UIController2 uiController;
+	protected IA ia;
+	protected UIController2 uiController;
 	public List<Sloth> teamSloths1, teamSloths2;
 	public Sloth currentSloth;
-	private GameControllerStatus status;
-	private int turns;
-	private bool player;
-	private int currentAp, cancelAp;
+	protected GameControllerStatus status;
+	protected int turns;
+	protected bool player;
+	protected int currentAp, cancelAp;
 	public GameObject leaf;
 	public GameObject toTexture;
 	public Material blueLeaf;
 	public Material redLeaf;
-    private VenomSystem venomSystem;
+    protected VenomSystem venomSystem;
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
 	// PLAYER FALSE - LISTA 2
@@ -188,7 +188,7 @@ public class GameController : MonoBehaviour {
 
 
 
-	private void CheckLogic(){
+	protected void CheckLogic(){
         venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
 		if(teamSloths1.Count == 0){
@@ -230,7 +230,7 @@ public class GameController : MonoBehaviour {
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
-	private void CheckAbilitiesAp(){
+	protected void CheckAbilitiesAp(){
 		if(currentSloth.GetAbility1().GetAp() <= currentAp){
 			uiController.SetActiveAb1(true);
 		} else {
@@ -317,7 +317,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	private void DoAction(GameAction action)
+	protected void DoAction(GameAction action)
 	{
 		switch (action.actionType)
 		{
