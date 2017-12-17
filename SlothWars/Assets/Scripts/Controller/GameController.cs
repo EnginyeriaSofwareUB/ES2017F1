@@ -397,4 +397,7 @@ public class GameController : MonoBehaviour {
     {
         venomSystem.AddVenom(v);
     }
+
+	public void NotifyAbilityUsed(){
+	}
 }

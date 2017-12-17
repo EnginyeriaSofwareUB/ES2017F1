@@ -62,6 +62,19 @@
     "idAb2": "U2",
     "idAb3": "A0",
     "model": "sloth_utility"
+  },
+
+  "5": {
+    "type": "Tutorial",
+    "hp": 60,
+    "att": 50,
+    "def": 20,
+    "ap": 500,
+    "photo": "slothWizard",
+    "idAb1": "V0",
+    "idAb2": "U0",
+    "idAb3": "M1",
+    "model": "sloth_wizard"
   }
 
 }

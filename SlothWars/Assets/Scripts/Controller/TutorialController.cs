@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : GameController {
 	protected TutorialControllerStatus tutorialStatus;
@@ -31,7 +32,7 @@ public class TutorialController : GameController {
 		Destroy(model.transform.Find("Camera").gameObject);
 		//Colocar el bichurro en un sitio random
 		model.transform.parent.position = new Vector3(20f, 10 + 0.05f, 0.5f);
-		logic.AddComponent<Sloth>().initSloth("Wizard");
+		logic.AddComponent<Sloth>().initSloth("Tutorial");
 		logic.AddComponent<ShotScript>();
 		logic.AddComponent<MovementController>();
 		logic.AddComponent<BoxCollider>();
@@ -120,6 +121,48 @@ public class TutorialController : GameController {
 				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
 				((TutorialUIController)uiController).SetTutorialText("GREAT! Now try using one ability. \n The bar represents the force of the projectile \n" + 
 				"and you can use the scope to aim. \n You can use the scroll to zoom in or out if you want to have a better vision of the map!");
+				tutorialStatus = TutorialControllerStatus.WAITING_FOR_ABILITY;
+				break;
+			case TutorialControllerStatus.TEACHING_ABILITIES2:
+				uiController.SetActiveAb1(false);
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("As you can see, the abilities have a wide variety of effects. \n"+
+				"Some can destroy terrain and damage other sloths, while others heal. \n Visit the Slothapedia for more info!");
+				break;
+			case TutorialControllerStatus.TEACHING_AP:
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("Notice that your actions consume Ability Points (AP). \n"+
+				"Moving consumes 1 AP but the cost of the ability depends on its type. \n If you consume all your AP you will have to end your turn.");
+				break;
+			case TutorialControllerStatus.TEACHING_TURNS:
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("Speaking of turns... \n"+
+				"Normally, the enemy team and you will move in turns. \n Clicking the end turn button will switch the turn.");
+				break;
+			case TutorialControllerStatus.TEACHING_OPTIONS:
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("Press 'ESC' to open an options menu.\n"+
+				"There, you can chose to Surrender a game or just simply Quit it. Try it now, altough the options will be disabled for the tutorial...");
+				break;
+			case TutorialControllerStatus.KILL_DUMMY:
+				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
+				((TutorialUIController)uiController).SetTutorialText("You now know all the basic to play SlothWars!\n"+
+				"Before leaving, try killing the dummy!");
+				break;
+			case TutorialControllerStatus.WAITING_ESC:
+				((TutorialUIController)uiController).SetActiveMainMessage(true);
+				((TutorialUIController)uiController).ChangeMainMessage("Press 'ESC'");
+				break;
+			case TutorialControllerStatus.KILL_DUMMY2:
+				uiController.SetActiveAb1(true);
+				uiController.SetActiveAb1(true);
+				uiController.SetActiveAb1(true);
+
+				if(teamSloths2.Count == 0){
+					SceneManager.LoadScene("GameOverScene");
+				}
+				break;
+			default:
 				break;
 		}
 	}
@@ -135,12 +178,52 @@ public class TutorialController : GameController {
 			case TutorialControllerStatus.TEACHING_AP:
 				tutorialStatus = TutorialControllerStatus.TEACHING_TURNS;
 				break;
+			case TutorialControllerStatus.WAITING_FOR_ABILITY:
+				uiController.SetActiveAb1(true);
+				break;
+			case TutorialControllerStatus.TEACHING_ABILITIES2:
+				tutorialStatus = TutorialControllerStatus.TEACHING_AP;
+				break;
+			case TutorialControllerStatus.TEACHING_TURNS:
+				tutorialStatus = TutorialControllerStatus.TEACHING_OPTIONS;
+				break;
+			case TutorialControllerStatus.TEACHING_OPTIONS:
+				tutorialStatus = TutorialControllerStatus.WAITING_ESC;
+				break;
+			case TutorialControllerStatus.KILL_DUMMY:
+				tutorialStatus = TutorialControllerStatus.KILL_DUMMY2;
+				break;
 		}
 		((TutorialUIController)uiController).SetTutorialPopUpActive(false);
 	}
-	
+
+	protected void CheckAbilitiesAp(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
+	}
+
+	public TutorialControllerStatus GetTutorialStatus(){
+		return tutorialStatus;
+	}
+
+	public void NotifyAbilityUsed(){
+		if (tutorialStatus == TutorialControllerStatus.WAITING_FOR_ABILITY){
+			tutorialStatus = TutorialControllerStatus.TEACHING_ABILITIES2;
+		}
+	}
+
+	public void NotifyOptionsChecked(){
+		tutorialStatus = TutorialControllerStatus.KILL_DUMMY;
+	}
+
+	public void NotifyEsc(){
+		tutorialStatus = TutorialControllerStatus.WAIT;
+	}
+
+	public void UnPauseGame(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
+	}
 
 	public enum TutorialControllerStatus{
-		WELCOME, TEACHING_MOVEMENT, TEACHING_MOVEMENT2, TEACHING_ABILITIES, TEACHING_AP, TEACHING_TURNS, KILL_DUMMY
+		WELCOME, TEACHING_MOVEMENT, TEACHING_MOVEMENT2, TEACHING_ABILITIES, WAITING_FOR_ABILITY, TEACHING_ABILITIES2, TEACHING_AP, TEACHING_TURNS, TEACHING_OPTIONS, WAITING_ESC, KILL_DUMMY, KILL_DUMMY2, WAIT
 	}
 }

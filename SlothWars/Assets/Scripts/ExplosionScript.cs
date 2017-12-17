@@ -102,6 +102,7 @@ public class ExplosionScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Camera.main.gameObject.GetComponent<TutorialController>().NotifyAbilityUsed();
     }
 
     public void SetOrigin(Vector3 p)

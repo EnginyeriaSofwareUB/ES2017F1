@@ -97,7 +97,12 @@ public class UIController2 : MonoBehaviour {
 	}
 
 	public void SetActiveMainMessage(bool b){
+		Debug.Log(b);
 		mainMessage.SetActive(b);
+	}
+
+	public void ChangeMainMessage(string t){
+		mainMessage.GetComponent<Text>().text = t;
 	}
 
 	public void NotifyNotEnoughAp(){
