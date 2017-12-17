@@ -5,25 +5,31 @@ using System.Collections.Generic;
 
 public class IA: IAInterface
 {
-    private bool checkDistance = false;
-    private Vector3 actualPosition = new Vector3(0f,0f,0f);
+    private static bool checkDistance = false;
+    private static bool checkFlag = false;
+    private static bool flagFalling = false;
+    private static Vector3 previousPosition = new Vector3(0f, 0f, 0f);
+    private static Vector3 actualPosition = new Vector3(0f,0f,0f);
     private static Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
     private Vector3 positionNearestFriendlySloth = new Vector3(0f, 0f, 0f);
     private List<float> rangeListAbilities;
-    
+    private static List<Sloth> listSloths = new List<Sloth>();
+    private static List<Vector3> previousPositionList = new List<Vector3>();
     public IA() { }
 
     public GameAction GetAction(GameController gameController)
     {
         GameAction gameAction = new GameAction();
+        if (gameController.GetGravity()) { flagFalling = true; }
 
         actualPosition = GetActualPosition(gameController);
         rangeListAbilities = GetRangeAbilities(gameController);
-
+        
         positionNearestEnemySloth = PositionNearestEnemySloth(gameController,actualPosition);
-        Debug.Log(actualPosition);
-        Debug.Log(positionNearestEnemySloth);
-        Vector3 dir = GetNextMove(-actualPosition + positionNearestEnemySloth);
+        
+        Vector3 dir = GetNextMove(-actualPosition + positionNearestEnemySloth, flagFalling);
+
+        flagFalling = false;
         gameAction.x = dir.x;
         gameAction.y = dir.y;
 
@@ -82,15 +88,26 @@ public class IA: IAInterface
         return false;
     }
 
-    private Vector3 GetNextMove(Vector3 EnvsIA) {
-        if(EnvsIA.x == 0 && EnvsIA.y == 0) { return new Vector3(0f, 0f, 0f); }
-        if(EnvsIA.x > 0) { return new Vector3(1f, 0f, 0f); }
-        if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
-        if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
-        if (EnvsIA.x < 0) { return new Vector3(-1f, 0f, 0f); }
-        if(EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
-        if(EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
-        else { Debug.Log("Hay un problema"); return new Vector3(0f, 0f, 0f); }
+    private Vector3 GetNextMove(Vector3 EnvsIA, bool flagFalling) {
+        Debug.Log("Flag " + flagFalling);
+        Debug.Log("checkFlag" + checkFlag);
+        if (!flagFalling)
+        {
+            if (checkFlag) { checkFlag = false; return new Vector3(1f, 0f, 0f); } //Mirar porque no siempre se ha de mover en esta direccion
+            if (EnvsIA.x == 0 && EnvsIA.y == 0) { return new Vector3(0f, 0f, 0f); }
+            if (EnvsIA.x > 0) { return new Vector3(1f, 0f, 0f); }
+            if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
+            if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
+            if (EnvsIA.x < 0) { return new Vector3(-1f, 0f, 0f); }
+            if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
+            if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
+            else { Debug.Log("Hay un problema"); return new Vector3(0f, 0f, 0f); }
+        } else
+        {
+            checkFlag = true;
+            return new Vector3(0f, 0f, 0f);
+            
+        }
     }
 
 
@@ -102,19 +119,12 @@ public class IA: IAInterface
         foreach ( Sloth sloth in gameController.GetTeamBlue())
         {
             nearestSloth = sloth.transform.position;
-            //if (CheckEnemyAlive(gameController,nearestSloth))
-            //{
-                norm = (nearestSloth - actualIAPosition).magnitude;
-                if (normAux < norm)
-                {
-                    normAux = norm;
-                    nearestSlothAux = nearestSloth;
-                }
-            //}
-            //else
-            //{
-            //    nearestSlothAux = nearestSloth;
-//            }
+            norm = (nearestSloth - actualIAPosition).magnitude;
+            if (normAux < norm)
+            {
+                normAux = norm;
+                nearestSlothAux = nearestSloth;
+            }
         }
         return nearestSlothAux;
         

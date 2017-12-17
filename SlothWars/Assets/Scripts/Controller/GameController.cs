@@ -33,9 +33,9 @@ public class GameController : MonoBehaviour {
 
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
-        
+        ia = new IA();
 		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
-
+        
 		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
 			lista.Add("Wizard");
@@ -105,9 +105,6 @@ public class GameController : MonoBehaviour {
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
 
-            //Anadiendo Rigidbody a los sloths
-            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
-            
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -175,9 +172,6 @@ public class GameController : MonoBehaviour {
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
-
-            //Anadiendo Rigidbody a los sloths
-            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
@@ -248,7 +242,7 @@ public class GameController : MonoBehaviour {
 
 		uiController.DisplaySlothAbilities(currentSloth);
         currentAp = currentSloth.GetAp();
-        uiController.DisplaySlothStats(currentSloth,currentAp);
+        //uiController.DisplaySlothStats(currentSloth,currentAp);
 		uiController.UpdateTurnPlayerInfo(player);
 		
 		CheckAbilitiesAp();
@@ -291,28 +285,32 @@ public class GameController : MonoBehaviour {
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility1().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void CastAbility2(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility2().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void CastAbility3(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility3().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void MoveSloth(int x, int y){
 		if(currentAp > 0){
-            
-            currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
             currentAp--;
+            uiController.DisplaySlothStats(currentSloth, currentAp);
+            currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
+            
             status = GameControllerStatus.ANIMATING;
 		} else {
 			uiController.NotifyNotEnoughAp();
@@ -363,6 +361,7 @@ public class GameController : MonoBehaviour {
                     pr.ApplyLogic();
                     cancelAp = currentAp;
                     currentAp -= action.ability.GetAp();
+                    uiController.DisplaySlothStats(currentSloth, currentAp);
                 }
                 else
                 {
@@ -375,6 +374,25 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+    public int GetIndexCurrentSlothRed()
+    {
+        int i = 0;
+        foreach(Sloth sloth in teamSloths2)
+        {
+            if (sloth == currentSloth)
+            {
+                return i;
+            }
+            i++;
+        }
+        //No debe entrar nunca aqui
+        return -10;
+    }
+
+    public bool GetGravity()
+    {
+        return currentSloth.transform.parent.GetComponent<Rigidbody>().useGravity;
+    }
 
 	public Sloth GetCurrentSloth(){
 		return currentSloth;
