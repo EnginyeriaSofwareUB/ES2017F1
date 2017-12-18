@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour {
 
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
-        ia = new IA();
 		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
         
 		TerrainCreator.LoadMap();
@@ -350,26 +349,27 @@ public class GameController : MonoBehaviour {
 			MoveSloth((int)action.x,(int)action.y);
 			break;
         case GameAction.ActionType.EJECUTAR_HABILIDAD:
-
-                if (currentAp >= action.ability.GetAp())
-                {
-                    Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
+                
+            if (currentAp >= action.ability.GetAp())
+            {
+                Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
                     
-                    pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, 270, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
-                    //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
+                pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, action.angleAbility, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
+                //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
 
-                    pr.ApplyLogic();
-                    cancelAp = currentAp;
-                    currentAp -= action.ability.GetAp();
-                    uiController.DisplaySlothStats(currentSloth, currentAp);
-                }
-                else
+                pr.ApplyLogic();
+                    
+                cancelAp = currentAp;
+                currentAp -= action.ability.GetAp();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
+            }
+            else
+            {
+                if (teamSloths1.Count != 0)
                 {
-                    if (teamSloths1.Count != 0)
-                    {
-                        EndTurn();
-                    }
+                    EndTurn();
                 }
+            }
             break;
 		case GameAction.ActionType.ENDTURN:
 			EndTurn();
@@ -415,6 +415,10 @@ public class GameController : MonoBehaviour {
 		return currentAp;
 	}
 
+    public void SetCurrentAp(int currentAp)
+    {
+        this.currentAp = currentAp;
+    }
 	public void CancelAbility(){
 		currentSloth.gameObject.GetComponent<ShotScript> ().CancelShot ();
         currentAp += cancelAp - currentAp;
