@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlothWars", "SlothWars.csproj", "{713907A1-1771-B1F7-228F-98902F1F73A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlothWars.Editor", "SlothWars.Editor.csproj", "{1F1FF6F3-CBF8-97D4-6984-9AAAE1A9816F}"
