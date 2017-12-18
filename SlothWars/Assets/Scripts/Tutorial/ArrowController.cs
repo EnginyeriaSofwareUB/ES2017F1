@@ -9,6 +9,7 @@ public class ArrowController : MonoBehaviour {
 	private Sprite spriteArrow;
 	private GameObject arrow;
 	private Vector3 offset;
+	private bool vertical;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class ArrowController : MonoBehaviour {
 		isWorld = true;
 		target = new Vector3(22f, 12 + 0.05f, 0.5f);
 		offset = new Vector3(0f, spriteArrow.bounds.size.y/2f, 0f);
+		vertical = true;
 	}
 	
 	// Update is called once per frame
@@ -27,7 +29,17 @@ public class ArrowController : MonoBehaviour {
 			} else {
 				arrow.transform.position = target + offset;
 			}
+
+			if(vertical){
+				arrow.transform.position = arrow.transform.position + new Vector3(0f, 10f*Mathf.Sin(Time.time*3f), 0f);
+			} else {
+				arrow.transform.position = arrow.transform.position + new Vector3(10f*Mathf.Sin(Time.time*3f), 0f, 0f);
+			}
 		}
+	}
+
+	public void SetVertical(bool b){
+		vertical = b;
 	}
 
 	public Vector3 GetTarget(){

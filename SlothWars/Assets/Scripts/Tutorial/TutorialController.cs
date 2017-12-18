@@ -183,6 +183,7 @@ public class TutorialController : GameController {
 				arrow.SetTarget(((TutorialUIController)uiController).GetPositionTurns());
 				arrow.SetRotation(new Vector3(0f, 0f, -90f));
 				arrow.SetOffset(new Vector3(100f, 0f, 0f));
+				arrow.SetVertical(false);
 				break;
 			case TutorialControllerStatus.WAITING_FOR_ABILITY:
 				uiController.SetActiveAb1(true);
@@ -233,6 +234,7 @@ public class TutorialController : GameController {
 		arrow.SetTarget(teamSloths2[0].transform.position);
 		arrow.SetRotation(new Vector3(0f, 0f, 90f));
 		arrow.SetOffset(new Vector3(0f, 1.5f, 0f));
+		arrow.SetVertical(true);
 	}
 
 	public void NotifyEsc(){
