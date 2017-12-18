@@ -7,11 +7,11 @@ using SimpleJSON;
 
 public class UIController2 : MonoBehaviour {
 	public GameObject mainPanel, optsPanel, abilitiesPanel, infoAbPanel, mainMessage;
-	string[] abilitiesInfo = new string[3];
-	string s;
-	JSONNode n;
-	private float mainMessageDuration;
-	private bool animatingMainMessage = false;
+	protected string[] abilitiesInfo = new string[3];
+	protected string s;
+	protected JSONNode n;
+	protected float mainMessageDuration;
+	protected bool animatingMainMessage = false;
 	// Use this for initialization
 	
 	void Start () {
@@ -98,7 +98,12 @@ public class UIController2 : MonoBehaviour {
 	}
 
 	public void SetActiveMainMessage(bool b){
+		Debug.Log(b);
 		mainMessage.SetActive(b);
+	}
+
+	public void ChangeMainMessage(string t){
+		mainMessage.GetComponent<Text>().text = t;
 	}
 
 	public void NotifyNotEnoughAp(){

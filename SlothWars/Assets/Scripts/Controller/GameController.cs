@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-	private IA ia;
-	private UIController2 uiController;
+	protected IA ia;
+	protected UIController2 uiController;
 	public List<Sloth> teamSloths1, teamSloths2;
 	public Sloth currentSloth;
-	private GameControllerStatus status;
-	private int turns;
-	private bool player;
-	private int currentAp, cancelAp;
+	protected GameControllerStatus status;
+	protected int turns;
+	protected bool player;
+	protected int currentAp, cancelAp;
 	public GameObject leaf;
 	public GameObject toTexture;
 	public Material blueLeaf;
 	public Material redLeaf;
-    private VenomSystem venomSystem;
+    protected VenomSystem venomSystem;
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
 	// PLAYER FALSE - LISTA 2
@@ -33,9 +33,8 @@ public class GameController : MonoBehaviour {
 
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
-        
 		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
-
+        
 		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
 			lista.Add("Wizard");
@@ -105,9 +104,6 @@ public class GameController : MonoBehaviour {
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("Modelos/sloth_action") as RuntimeAnimatorController;
 
-            //Anadiendo Rigidbody a los sloths
-            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
-            
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
             GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -175,9 +171,6 @@ public class GameController : MonoBehaviour {
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
             anim.runtimeAnimatorController = Resources.Load("Modelos/sloth_action") as RuntimeAnimatorController;
-
-            //Anadiendo Rigidbody a los sloths
-            //Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
@@ -218,7 +211,9 @@ public class GameController : MonoBehaviour {
 	}
 
 
-	private void CheckLogic(){
+
+
+	protected void CheckLogic(){
         venomSystem.ApplyVenoms();
 		//Check if a team of sloths is dead. Maybe end the game.
 		if(teamSloths1.Count == 0){
@@ -248,7 +243,7 @@ public class GameController : MonoBehaviour {
 
 		uiController.DisplaySlothAbilities(currentSloth);
         currentAp = currentSloth.GetAp();
-        uiController.DisplaySlothStats(currentSloth,currentAp);
+        //uiController.DisplaySlothStats(currentSloth,currentAp);
 		uiController.UpdateTurnPlayerInfo(player);
 		
 		CheckAbilitiesAp();
@@ -256,7 +251,7 @@ public class GameController : MonoBehaviour {
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
-	private void CheckAbilitiesAp(){
+	protected void CheckAbilitiesAp(){
 		if(currentSloth.GetAbility1().GetAp() <= currentAp){
 			uiController.SetActiveAb1(true);
 		} else {
@@ -291,28 +286,32 @@ public class GameController : MonoBehaviour {
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility1().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void CastAbility2(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility2().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void CastAbility3(){
 		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility3().GetAp();
-		NotifyActionEnded();
+        uiController.DisplaySlothStats(currentSloth, currentAp);
+        NotifyActionEnded();
 	}
 
 	public void MoveSloth(int x, int y){
 		if(currentAp > 0){
-            
-            currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
             currentAp--;
+            uiController.DisplaySlothStats(currentSloth, currentAp);
+            currentSloth.gameObject.GetComponent<MovementController>().MoveTo(x, y);
+            
             status = GameControllerStatus.ANIMATING;
 		} else {
 			uiController.NotifyNotEnoughAp();
@@ -344,7 +343,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	private void DoAction(GameAction action)
+	protected void DoAction(GameAction action)
 	{
 		switch (action.actionType)
 		{
@@ -352,22 +351,27 @@ public class GameController : MonoBehaviour {
 			MoveSloth((int)action.x,(int)action.y);
 			break;
         case GameAction.ActionType.EJECUTAR_HABILIDAD:
-
-                if (currentAp >= action.ability.GetAp())
-                {
-                    Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
+                
+            if (currentAp >= action.ability.GetAp())
+            {
+                Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
                     
-                    pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, 90, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
-                    //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
+                pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, action.angleAbility, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
+                //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
 
-                    pr.ApplyLogic();
-                    cancelAp = currentAp;
-                    currentAp -= action.ability.GetAp();
-                }
-                else
+                pr.ApplyLogic();
+                    
+                cancelAp = currentAp;
+                currentAp -= action.ability.GetAp();
+                uiController.DisplaySlothStats(currentSloth, currentAp);
+            }
+            else
+            {
+                if (teamSloths1.Count != 0)
                 {
                     EndTurn();
                 }
+            }
             break;
 		case GameAction.ActionType.ENDTURN:
 			EndTurn();
@@ -375,6 +379,10 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+    public bool GetGravity()
+    {
+        return currentSloth.transform.parent.GetComponent<Rigidbody>().useGravity;
+    }
 
 	public Sloth GetCurrentSloth(){
 		return currentSloth;
@@ -409,6 +417,10 @@ public class GameController : MonoBehaviour {
 		return currentAp;
 	}
 
+    public void SetCurrentAp(int currentAp)
+    {
+        this.currentAp = currentAp;
+    }
 	public void CancelAbility(){
 		currentSloth.gameObject.GetComponent<ShotScript> ().CancelShot ();
         currentAp += cancelAp - currentAp;
@@ -425,4 +437,7 @@ public class GameController : MonoBehaviour {
     {
         venomSystem.AddVenom(v);
     }
+
+	public void NotifyAbilityUsed(){
+	}
 }

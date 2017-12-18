@@ -68,6 +68,7 @@ public class TeamSelection : MonoBehaviour
         // Dynamic elements
         StorePersistentVariables.Instance.slothTeam1.Clear();
         StorePersistentVariables.Instance.slothTeam2.Clear();
+        StorePersistentVariables.Instance.iaPlaying = false;
 
         currentPageText = GameObject.Find("currentPage").GetComponent<Text>();
         numPlayer = GameObject.Find("playerValue").GetComponent<Text>();

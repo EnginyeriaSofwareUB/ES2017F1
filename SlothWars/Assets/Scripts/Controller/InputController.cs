@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour {
 
-	private GameController gameController;
-	private UIController2 uiController;
+	protected GameController gameController;
+	protected UIController2 uiController;
 
-	private bool gettingAbilityInfo;
+	protected bool gettingAbilityInfo;
 
 	// Use this for initialization
 	void Start () {
