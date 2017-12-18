@@ -43,7 +43,7 @@ public class TutorialController : GameController {
 		anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
 		HealthScript health = logic.AddComponent<HealthScript>();
 		health.enabled = true;
-		GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+		GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
 		healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
 		healthBar.transform.SetParent(logic.transform);
 		health.SetHealthBar(healthBar);
@@ -71,7 +71,7 @@ public class TutorialController : GameController {
 
 		health = logic.AddComponent<HealthScript>();
 		health.enabled = true;
-		healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBar"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+		healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
 		healthBar.transform.SetParent(logic.transform);
 		health.SetHealthBar(healthBar);
 		logic.GetComponent<Sloth>().SetTeam(2);
@@ -81,7 +81,6 @@ public class TutorialController : GameController {
 		status = GameControllerStatus.LOGIC;
 		player = false;
 		turns = 0;
-		arrow.SetArrowActive(false);
 
 	}
 
@@ -105,6 +104,7 @@ public class TutorialController : GameController {
 		}
 		switch(tutorialStatus){
 			case TutorialControllerStatus.WELCOME:
+				arrow.SetArrowActive(false);
 				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
 				uiController.SetActiveGameButtons(false);
 				((TutorialUIController)uiController).SetTutorialText("Welcome to the Sloth Wars tutorial! \n Here you will learn basic info about the game. Enjoy :)");
