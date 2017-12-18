@@ -5,12 +5,13 @@ using System.Collections.Generic;
 
 public class IA: IAInterface
 {
+    private static bool checkMovement = false;
     private static bool checkDistance = false;
     private static bool checkFlag = false;
     private static bool flagFalling = false;
-    private static Vector3 previousPosition = new Vector3(0f, 0f, 0f);
-    private static Vector3 actualPosition = new Vector3(0f,0f,0f);
-    private static Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
+    private Vector3 previousPosition = new Vector3(0f, 0f, 0f);
+    private Vector3 actualPosition = new Vector3(0f,0f,0f);
+    private Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
     private Vector3 positionNearestFriendlySloth = new Vector3(0f, 0f, 0f);
     private List<float> rangeListAbilities;
     private static List<Sloth> listSloths = new List<Sloth>();
@@ -20,14 +21,15 @@ public class IA: IAInterface
     public GameAction GetAction(GameController gameController)
     {
         GameAction gameAction = new GameAction();
-        if (gameController.GetGravity()) { flagFalling = true; }
+        if (gameController.GetGravity()) { Debug.Log("Me cai"); flagFalling = true; }
 
         actualPosition = GetActualPosition(gameController);
         rangeListAbilities = GetRangeAbilities(gameController);
         
         positionNearestEnemySloth = PositionNearestEnemySloth(gameController,actualPosition);
         
-        Vector3 dir = GetNextMove(-actualPosition + positionNearestEnemySloth, flagFalling);
+        Debug.Log("EnemyPosition " + positionNearestEnemySloth);
+        Vector3 dir = GetNextMove(positionNearestEnemySloth - actualPosition, flagFalling);
 
         flagFalling = false;
         gameAction.x = dir.x;
@@ -55,7 +57,12 @@ public class IA: IAInterface
         return gameAction;
     }
 
-    private Vector3 GetActualPosition(GameController gameController) { return gameController.GetCurrentSloth().transform.position; }
+    private Vector3 GetActualPosition(GameController gameController) {
+        Vector3 actualPosition = gameController.GetCurrentSloth().transform.position;
+        actualPosition.x = Mathf.Round(actualPosition.x);
+        actualPosition.y = Mathf.Round(actualPosition.y);
+        return actualPosition;
+    }
 
     private Ability GetAbility(GameController gameController)
     {
@@ -89,22 +96,31 @@ public class IA: IAInterface
     }
 
     private Vector3 GetNextMove(Vector3 EnvsIA, bool flagFalling) {
+        Debug.Log("checkMovement " + checkMovement);
         Debug.Log("Flag " + flagFalling);
         Debug.Log("checkFlag" + checkFlag);
         if (!flagFalling)
         {
-            if (checkFlag) { checkFlag = false; return new Vector3(1f, 0f, 0f); } //Mirar porque no siempre se ha de mover en esta direccion
+            if (checkFlag) {
+                checkFlag = false;
+                Debug.Log("Me he caido");
+            } //Mirar porque no siempre se ha de mover en esta direccion
+            if (checkMovement)
+            {
+                if(EnvsIA.y > 0) { checkMovement = false; Debug.Log("Deberia moverme a la derecha"); return new Vector3(1f, 0f, 0f); } //Quiza a la izquierda
+            }
             if (EnvsIA.x == 0 && EnvsIA.y == 0) { return new Vector3(0f, 0f, 0f); }
-            if (EnvsIA.x > 0) { return new Vector3(1f, 0f, 0f); }
-            if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
-            if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
-            if (EnvsIA.x < 0) { return new Vector3(-1f, 0f, 0f); }
-            if (EnvsIA.y > 0) { return new Vector3(0f, 1f, 0f); }
-            if (EnvsIA.y < 0) { return new Vector3(0f, -1f, 0f); }
+            if (EnvsIA.x > 0) { Debug.Log("Avanzare a la derecha"); return new Vector3(1f, 0f, 0f); }
+            if (EnvsIA.y > 0) { Debug.Log("Avanzare arribaDer");  return new Vector3(0f, 1f, 0f); }
+            if (EnvsIA.y < 0) { Debug.Log("Avanzare abajoDer"); return new Vector3(0f, -1f, 0f); }
+            if (EnvsIA.x < 0) { Debug.Log("Avanzare a la izquierda"); return new Vector3(-1f, 0f, 0f); }
+            if (EnvsIA.y > 0) { Debug.Log("Avanzare arribaIz"); return new Vector3(0f, 1f, 0f); }
+            if (EnvsIA.y < 0) { Debug.Log("Avanzare abajoIz"); return new Vector3(0f, -1f, 0f); }
             else { Debug.Log("Hay un problema"); return new Vector3(0f, 0f, 0f); }
         } else
         {
             checkFlag = true;
+            if(EnvsIA.x == 0) { checkMovement = true; }
             return new Vector3(0f, 0f, 0f);
             
         }
@@ -112,6 +128,7 @@ public class IA: IAInterface
 
 
     private Vector3 PositionNearestEnemySloth(GameController gameController, Vector3 actualIAPosition) {
+        Vector3 roundPosition = new Vector3(-10f, -10f, -10f);
         Vector3 nearestSloth = new Vector3(0f, 0f, 0f);
         Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
         float norm = 0f;
@@ -119,14 +136,17 @@ public class IA: IAInterface
         foreach ( Sloth sloth in gameController.GetTeamBlue())
         {
             nearestSloth = sloth.transform.position;
-            norm = (nearestSloth - actualIAPosition).magnitude;
+            norm = (nearestSloth - actualIAPosition).sqrMagnitude;
             if (normAux < norm)
             {
                 normAux = norm;
                 nearestSlothAux = nearestSloth;
             }
         }
-        return nearestSlothAux;
+        roundPosition.x = Mathf.Round(nearestSlothAux.x);
+        roundPosition.y = Mathf.Round(nearestSlothAux.y);
+        roundPosition.z = nearestSlothAux.z;
+        return roundPosition;
         
     }
 

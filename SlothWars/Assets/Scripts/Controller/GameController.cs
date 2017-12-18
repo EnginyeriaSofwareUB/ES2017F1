@@ -355,7 +355,7 @@ public class GameController : MonoBehaviour {
                 {
                     Projectile pr = ProjectileFactory.Instance.getProjectile(action.ability);
                     
-                    pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, 90, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
+                    pr.SetAll(currentSloth.transform.position, action.aimVector, Quaternion.Euler(action.angleAbility, 270, 0), action.ability.GetRange(), action.ability.GetRadius(), action.ability.GetExplosive(), action.ability.GetSource());
                     //onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(), onloadAbility.GetExplosive(), onloadAbility.GetSource());
 
                     pr.ApplyLogic();
@@ -365,7 +365,10 @@ public class GameController : MonoBehaviour {
                 }
                 else
                 {
-                    EndTurn();
+                    if (teamSloths1.Count != 0)
+                    {
+                        EndTurn();
+                    }
                 }
             break;
 		case GameAction.ActionType.ENDTURN:
