@@ -231,8 +231,8 @@ public class TutorialController : GameController {
 		tutorialStatus = TutorialControllerStatus.KILL_DUMMY;
 		arrow.SetIsWorld(true);
 		arrow.SetTarget(teamSloths2[0].transform.position);
-		arrow.SetRotation(new Vector3(0f, 90f, 0f));
-		arrow.SetOffset(new Vector3(0f, 40f, 0f));
+		arrow.SetRotation(new Vector3(0f, 0f, 90f));
+		arrow.SetOffset(new Vector3(0f, 1.5f, 0f));
 	}
 
 	public void NotifyEsc(){
