@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TutorialController : GameController {
 	protected TutorialControllerStatus tutorialStatus;
+	protected ArrowController arrow;
 	protected Vector3 target = new Vector3(22f, 12 + 0.05f, 0.5f);
 
 	// Use this for initialization
@@ -14,6 +15,7 @@ public class TutorialController : GameController {
 		teamSloths1 = new List<Sloth>();
 		teamSloths2 = new List<Sloth>();
 		uiController = GameObject.Find("Main Camera").GetComponent<TutorialUIController>();
+		arrow = GameObject.Find("Main Camera").GetComponent<ArrowController>();
 
 		TerrainCreator.LoadMap();
         
@@ -79,8 +81,7 @@ public class TutorialController : GameController {
 		status = GameControllerStatus.LOGIC;
 		player = false;
 		turns = 0;
-
-
+		arrow.SetArrowActive(false);
 
 	}
 
@@ -111,10 +112,12 @@ public class TutorialController : GameController {
 			case TutorialControllerStatus.TEACHING_MOVEMENT:
 				((TutorialUIController)uiController).SetTutorialPopUpActive(true);
 				((TutorialUIController)uiController).SetTutorialText("Use your key arrows to move arround the map. Try reaching the marked position!");
+				arrow.SetArrowActive(true);
 				break;
 			case TutorialControllerStatus.TEACHING_MOVEMENT2:
 				if((currentSloth.gameObject.transform.parent.position - target).magnitude <= 0.05f){
 					tutorialStatus = TutorialControllerStatus.TEACHING_ABILITIES;
+					arrow.SetArrowActive(false);
 				}
 				break;
 			case TutorialControllerStatus.TEACHING_ABILITIES:
@@ -177,21 +180,33 @@ public class TutorialController : GameController {
 				break;
 			case TutorialControllerStatus.TEACHING_AP:
 				tutorialStatus = TutorialControllerStatus.TEACHING_TURNS;
+				arrow.SetTarget(((TutorialUIController)uiController).GetPositionTurns());
+				arrow.SetRotation(new Vector3(0f, 0f, -90f));
+				arrow.SetOffset(new Vector3(100f, 0f, 0f));
 				break;
 			case TutorialControllerStatus.WAITING_FOR_ABILITY:
 				uiController.SetActiveAb1(true);
+				arrow.SetArrowActive(true);
+				arrow.SetIsWorld(false);
+				arrow.SetOffset(new Vector3(0f, 60f, 0f));
+				arrow.SetTarget(((TutorialUIController)uiController).GetPositionAb1());
 				break;
 			case TutorialControllerStatus.TEACHING_ABILITIES2:
 				tutorialStatus = TutorialControllerStatus.TEACHING_AP;
+				arrow.SetArrowActive(true);
+				arrow.SetTarget(((TutorialUIController)uiController).GetPositionAp());
+				arrow.SetOffset(new Vector3(0f, 50f, 0f));
 				break;
 			case TutorialControllerStatus.TEACHING_TURNS:
 				tutorialStatus = TutorialControllerStatus.TEACHING_OPTIONS;
+				arrow.SetArrowActive(false);
 				break;
 			case TutorialControllerStatus.TEACHING_OPTIONS:
 				tutorialStatus = TutorialControllerStatus.WAITING_ESC;
 				break;
 			case TutorialControllerStatus.KILL_DUMMY:
 				tutorialStatus = TutorialControllerStatus.KILL_DUMMY2;
+				arrow.SetArrowActive(false);
 				break;
 		}
 		((TutorialUIController)uiController).SetTutorialPopUpActive(false);
@@ -208,15 +223,23 @@ public class TutorialController : GameController {
 	public void NotifyAbilityUsed(){
 		if (tutorialStatus == TutorialControllerStatus.WAITING_FOR_ABILITY){
 			tutorialStatus = TutorialControllerStatus.TEACHING_ABILITIES2;
+			arrow.SetArrowActive(false);
 		}
 	}
 
 	public void NotifyOptionsChecked(){
 		tutorialStatus = TutorialControllerStatus.KILL_DUMMY;
+		arrow.SetIsWorld(true);
+		arrow.SetTarget(teamSloths2[0].transform.position);
+		arrow.SetRotation(new Vector3(0f, 90f, 0f));
+		arrow.SetOffset(new Vector3(0f, 40f, 0f));
 	}
 
 	public void NotifyEsc(){
 		tutorialStatus = TutorialControllerStatus.WAIT;
+		arrow.SetArrowActive(true);
+		arrow.SetTarget(((TutorialUIController)uiController).GetPositionResume());
+		arrow.SetOffset(new Vector3(200f, 0f, 0f));
 	}
 
 	public void UnPauseGame(){

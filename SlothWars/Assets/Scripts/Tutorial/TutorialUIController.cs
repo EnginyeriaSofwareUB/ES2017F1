@@ -38,7 +38,21 @@ public class TutorialUIController : UIController2 {
 		
 	}
 
+	public Vector3 GetPositionAb1(){
+		return GameObject.Find("buttonAbility1").transform.position;
+	}
 
+	public Vector3 GetPositionTurns(){
+		return GameObject.Find("EndTurnButton").transform.position;
+	}
+
+	public Vector3 GetPositionResume(){
+		return GameObject.Find("ResumeGame").transform.position;
+	}
+
+	public Vector3 GetPositionAp(){
+		return GameObject.Find("actionSlothText").transform.position;
+	}
 	public void SetTutorialPopUpActive(bool b){
 		tutorialPopUp.SetActive(b);
 	}
