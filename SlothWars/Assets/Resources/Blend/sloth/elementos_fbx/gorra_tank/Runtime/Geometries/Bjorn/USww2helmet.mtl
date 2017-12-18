@@ -1,0 +1,27 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 4.1.20.1005 Release
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl band
+Ka 0 0 0
+Kd 0.392157 0.352941 0.235294
+Ks 0.5 0.5 0.5
+illum 2
+Ns 8
+
+newmtl helmet
+Ka 0 0 0
+Kd 0.184314 0.180392 0.101961
+Ks 0.5 0.5 0.5
+illum 2
+Ns 8
+
+newmtl holders
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.5 0.5 0.5
+illum 2
+Ns 8
