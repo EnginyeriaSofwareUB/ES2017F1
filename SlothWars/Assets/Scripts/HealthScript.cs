@@ -12,15 +12,15 @@ public class HealthScript : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
       	//hp = (GameObject) Instantiate(Resources.Load("Prefabs/health"),this.transform.position + new Vector3(-1,1,0),Quaternion.identity);
-		shield = (GameObject) Instantiate(Resources.Load("Prefabs/shield"),this.transform.position + new Vector3(0.5f,1,0),Quaternion.identity);
-		shield.SetActive (false);
+		//shield = (GameObject) Instantiate(Resources.Load("Prefabs/shield"),this.transform.position + new Vector3(0.5f,1,0),Quaternion.identity);
+		//shield.SetActive (false);
 	}
 	// Update is called once per frame
 	void Update () {
         //hp.transform.position = this.transform.position + new Vector3 (-2, 1, 0);
         UpdateHP(gameObject.GetComponent<Sloth>().GetHp(), gameObject.GetComponent<Sloth>().GetShield());
 		if (shieldEffect != null) {
-			shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
+			//shield.transform.position = this.transform.position + new Vector3 (0.5f, 1, 0);
 			shieldEffect.transform.position = this.transform.position + new Vector3 (0, 0, -0.5f);
 		}
     }
@@ -56,21 +56,21 @@ public class HealthScript : MonoBehaviour {
     {
 		if (shield > 0) {
 			if (shieldEffect == null) {
-				this.shield.SetActive (true);
+				//this.shield.SetActive (true);
                 Debug.Log("shield");
 				shieldEffect = (GameObject)Instantiate (Resources.Load ("Objects/Shield"), this.transform.position+ new Vector3(0,0,-0.5f), Quaternion.identity);
+                shieldEffect.transform.parent = this.transform;
 			}
-			this.shield.GetComponent<TextMesh> ().text = "" + shield;
+			//this.shield.GetComponent<TextMesh> ().text = "" + shield;
 		} else if (shieldEffect != null) {
 			Destroy (shieldEffect);
 			shieldEffect = null;
-			this.shield.SetActive (false);
+			//this.shield.SetActive (false);
 		}
         maxHealth = gameObject.GetComponent<Sloth>().GetMaxHp();
-        //Debug.Log(health);
-        //Debug.Log(health/maxHealth);
         healthBar.GetComponent<HealthBarScript>().ChangeBarLevel(hp / maxHealth);
-        //this.hp.GetComponent<TextMesh>().text= "" + health;
+        healthBar.GetComponent<HealthBarScript>().ChangeHealthText(hp);
+        healthBar.GetComponent<HealthBarScript>().ChangeTextShield(shield);
     }
 
 }

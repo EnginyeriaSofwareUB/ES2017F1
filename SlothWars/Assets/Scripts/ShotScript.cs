@@ -100,6 +100,10 @@ public class ShotScript : MonoBehaviour
         {
             if(st != null) { st.Destroy(); }
         }
+        else
+        {
+            onLoad.CalcelMark();
+        }
     }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)

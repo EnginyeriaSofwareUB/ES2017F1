@@ -5,28 +5,46 @@ using System.Collections.Generic;
 
 public class IA: IAInterface
 {
-    private bool checkDistance = false;
+    private static bool checkRight = false;
+    private static bool checkMovement = false;
+    private static bool checkDistance = false;
+    private static bool checkFlag = false;
+    private static bool flagFalling = false;
+    private Vector3 previousPosition = new Vector3(0f, 0f, 0f);
     private Vector3 actualPosition = new Vector3(0f,0f,0f);
     private Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
     private Vector3 positionNearestFriendlySloth = new Vector3(0f, 0f, 0f);
     private List<float> rangeListAbilities;
-    private Sloth nearestSloth;
+    private static List<Sloth> listSloths = new List<Sloth>();
+    private static List<Vector3> previousPositionList = new List<Vector3>();
     public IA() { }
 
     public GameAction GetAction(GameController gameController)
     {
         GameAction gameAction = new GameAction();
+        if (gameController.GetGravity()) { Debug.Log("Me cai"); flagFalling = true; }
 
         actualPosition = GetActualPosition(gameController);
+        Debug.Log("actualPosition" + actualPosition);
         rangeListAbilities = GetRangeAbilities(gameController);
-
+        
         positionNearestEnemySloth = PositionNearestEnemySloth(gameController,actualPosition);
         
-        gameAction.x = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).x;
-        gameAction.y = GetDirectionNearestSloth(actualPosition, positionNearestEnemySloth).y;
+        Debug.Log("EnemyPosition " + positionNearestEnemySloth);
+        Vector3 dir = GetNextMove(positionNearestEnemySloth - actualPosition, flagFalling,gameController);
+
+        flagFalling = false;
+        gameAction.x = dir.x;
+        gameAction.y = dir.y;
 
         checkDistance = CheckDistance(actualPosition,positionNearestEnemySloth, rangeListAbilities);
         if (checkDistance) {
+            gameAction.targetSloth = TargetSloth(gameController, actualPosition);
+
+            gameAction.angleAbility = GetAngle(positionNearestEnemySloth, actualPosition);
+            gameAction.aimVector = GetDirectionNearestSloth(gameAction.angleAbility);
+ 
+            gameAction.angleAbility = GetAngle(positionNearestEnemySloth,actualPosition);
             gameAction.ability = GetAbility(gameController);
             gameAction.actionType = GameAction.ActionType.EJECUTAR_HABILIDAD; 
         } else
@@ -41,7 +59,12 @@ public class IA: IAInterface
         return gameAction;
     }
 
-    private Vector3 GetActualPosition(GameController gameController) { return gameController.GetCurrentSloth().transform.position; }
+    private Vector3 GetActualPosition(GameController gameController) {
+        Vector3 actualPosition = gameController.GetCurrentSloth().transform.position;
+        actualPosition.x = Mathf.Round(actualPosition.x);
+        actualPosition.y = Mathf.Round(actualPosition.y);
+        return actualPosition;
+    }
 
     private Ability GetAbility(GameController gameController)
     {
@@ -74,62 +97,97 @@ public class IA: IAInterface
         return false;
     }
 
-    private Vector3 GetDirectionNearestSloth(Vector3 actualIAPosition, Vector3 positionNearestSloth) {
-        if (positionNearestSloth.x == actualIAPosition.x && positionNearestSloth.y == actualIAPosition.y) { return new Vector3(0f, 0f, 0f); }
+    private Vector3 GetNextMove(Vector3 EnvsIA, bool flagFalling, GameController gameController) {
+        //checkMovement: Se pone a true cuando esta en la misma x del sloth y ha de ir hacia arriba y en la casilla superior no hay terreno
+        //checkFlag: Se pone a true cuando el sloth ha caido
+        //checkRight: Se pone a true cuando el sloth enemigo esta mas a la derecha que el current
+        Debug.Log("checkMovement " + checkMovement);
+        Debug.Log("Flag " + flagFalling);
+        Debug.Log("checkFlag" + checkFlag);
+        if (!flagFalling)
+        {
+            if (checkFlag) {
+                checkFlag = false;
+                Debug.Log("Me he caido");
+            } //Mirar porque no siempre se ha de mover en esta direccion
 
-        if (positionNearestSloth.x > actualIAPosition.x && positionNearestSloth.y == actualIAPosition.y) { return new Vector3(1f, 0f, 0f); }
-        if (positionNearestSloth.x < actualIAPosition.x && positionNearestSloth.y == actualIAPosition.y) { return new Vector3(-1f, 0f, 0f); }
-        if (positionNearestSloth.x == actualIAPosition.x) { if (positionNearestSloth.y > actualIAPosition.y) { return new Vector3(0f, 1f, 0f); } else { return new Vector3(0f, -1f, 0f); } }
 
-        if (positionNearestSloth.y > actualIAPosition.y && positionNearestSloth.x == actualIAPosition.x) { return new Vector3(0f, 1f, 0f); }
-        if (positionNearestSloth.y < actualIAPosition.y && positionNearestSloth.x == actualIAPosition.x) { return new Vector3(0f, -1f, 0f); }
-        if (positionNearestSloth.y == actualIAPosition.y) { if (positionNearestSloth.x > actualIAPosition.x) { return new Vector3(1f, 0f, 0f); } else { return new Vector3(-1f, 0f, 0f); } }
-
-        if (positionNearestSloth.x < actualIAPosition.x) { return new Vector3(-1f, 0f, 0f); }
-        if (positionNearestSloth.x > actualIAPosition.x) { return new Vector3(1f, 0f, 0f); }
-        if (positionNearestSloth.y < actualIAPosition.y) { return new Vector3(0f, -1f, 0f); }
-        if (positionNearestSloth.y > actualIAPosition.y) { return new Vector3(0f, 1f, 0f); }
-        else { return new Vector3(0f, 0f, 0f); }
+            if (checkMovement)
+            {
+                if (EnvsIA.y > 0)
+                {
+                    checkMovement = false;
+                    Debug.Log("Deberia moverme a la derecha o a la izquierda");
+                    if (checkRight) { checkRight = false; return new Vector3(1f, 0f, 0f); }
+                    return new Vector3(-1f, 0f, 0f);
+                }
+            }
+            
+            if (EnvsIA.x == 0 && EnvsIA.y == 0) { return new Vector3(0f, 0f, 0f); }
+            if (EnvsIA.x > 0) { Debug.Log("Avanzare a la derecha"); checkRight = true;  return new Vector3(1f, 0f, 0f); }
+            if (EnvsIA.x < 0) { Debug.Log("Avanzare a la izquierda"); return new Vector3(-1f, 0f, 0f); }
+            if (EnvsIA.y > 0) { Debug.Log("Avanzare arriba"); return new Vector3(0f, 1f, 0f); }
+            if (EnvsIA.y < 0) { Debug.Log("Avanzare abajo"); return new Vector3(0f, -1f, 0f); }
+            else { Debug.Log("Hay un problema"); return new Vector3(0f, 0f, 0f); }
+        } else
+        {
+            gameController.SetCurrentAp(gameController.GetCurrentAp() + 1);
+            checkFlag = true;
+            if(EnvsIA.x == 0) { checkMovement = true; }
+            return new Vector3(0f, 0f, 0f);
+            
+        }
     }
 
 
     private Vector3 PositionNearestEnemySloth(GameController gameController, Vector3 actualIAPosition) {
+        Vector3 roundPosition = new Vector3(-10f, -10f, -10f);
         Vector3 nearestSloth = new Vector3(0f, 0f, 0f);
         Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
         float norm = 0f;
-        float normAux = 0f;
+        float normAux = 100000000f;
         foreach ( Sloth sloth in gameController.GetTeamBlue())
         {
             nearestSloth = sloth.transform.position;
-            norm = (nearestSloth - actualIAPosition).magnitude;
-            if (normAux < norm)
+            norm = (nearestSloth - actualIAPosition).sqrMagnitude;
+            
+            if (normAux > norm)
             {
                 normAux = norm;
                 nearestSlothAux = nearestSloth;
             }
         }
-        return nearestSlothAux;
+        roundPosition.x = Mathf.Round(nearestSlothAux.x);
+        roundPosition.y = Mathf.Round(nearestSlothAux.y);
+        roundPosition.z = nearestSlothAux.z;
+        return roundPosition;
         
     }
 
-    private Vector3 PositionNearestFriendlySloth(GameController gameController, Vector3 actualIAPosition)
+    private bool CheckEnemyAlive(GameController gameController, Vector3 slothPosition)
     {
-        Vector3 nearestSloth = new Vector3(0f, 0f, 0f);
-        Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
-        float norm = 0f;
-        float normAux = 0f;
-        foreach (Sloth sloth in gameController.GetTeamRed())
+        foreach(Sloth sloth in gameController.GetTeamBlue())
         {
-            nearestSloth = sloth.transform.position;
-            norm = (nearestSloth - actualIAPosition).magnitude;
-            if (normAux < norm)
+            if(sloth.transform.position == slothPosition)
             {
-                normAux = norm;
-                nearestSlothAux = nearestSloth;
+                return false;
             }
         }
-        return nearestSlothAux;
+        return true;
+    }
 
+    private Vector3 GetDirectionNearestSloth(float angle)
+    {
+        return new Vector3(Mathf.Cos(angle*(Mathf.PI)/180), Mathf.Sin(angle*(Mathf.PI)/180), 0f);
+    }
+    
+    private float GetAngle(Vector3 positionEnemySloth, Vector3 actualIAPosition)
+    {
+        float xAng = positionEnemySloth.x - actualIAPosition.x;
+        float yAng = positionEnemySloth.y - actualIAPosition.y;
+        float angle = Mathf.Atan2(yAng, xAng) * (180f / Mathf.PI);
+        
+        return angle;
     }
 
     private List<float> GetRangeAbilities(GameController gameController)
@@ -143,5 +201,25 @@ public class IA: IAInterface
 
     }
     
-    
+    private Sloth TargetSloth(GameController gameController, Vector3 actualIAPosition)
+    {
+        Sloth nearestSloth = null; 
+        Vector3 nearestSlothPos = new Vector3(0f, 0f, 0f);
+        Vector3 nearestSlothAux = new Vector3(0f, 0f, 0f);
+        float norm = 0f;
+        float normAux = 0f;
+        foreach (Sloth sloth in gameController.GetTeamRed())
+        {
+            nearestSlothPos = sloth.transform.position;
+            norm = (nearestSlothPos - actualIAPosition).magnitude;
+            if (normAux < norm)
+            {
+                normAux = norm;
+                nearestSloth = sloth;
+                nearestSlothAux = nearestSlothPos;
+            }
+        }
+        return nearestSloth;
+
+    }
 }
