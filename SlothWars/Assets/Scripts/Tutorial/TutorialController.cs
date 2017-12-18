@@ -196,7 +196,7 @@ public class TutorialController : GameController {
 				tutorialStatus = TutorialControllerStatus.TEACHING_AP;
 				arrow.SetArrowActive(true);
 				arrow.SetTarget(((TutorialUIController)uiController).GetPositionAp());
-				arrow.SetOffset(new Vector3(0f, 50f, 0f));
+				arrow.SetOffset(new Vector3(5f, 60f, 0f));
 				break;
 			case TutorialControllerStatus.TEACHING_TURNS:
 				tutorialStatus = TutorialControllerStatus.TEACHING_OPTIONS;
