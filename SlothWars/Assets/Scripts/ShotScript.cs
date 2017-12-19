@@ -129,7 +129,7 @@ public class ShotScript : MonoBehaviour
             gun = this.transform;
         }
         else{
-            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position+ new Vector3(0,0,-0.52f), Quaternion.identity);
+            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position+ new Vector3(0,0,-0.53f), Quaternion.identity);
             gun = g.transform;
         }
         //gun.gameObject.SetActive(b);
