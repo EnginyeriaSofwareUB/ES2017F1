@@ -15,51 +15,75 @@ public class InputController : MonoBehaviour {
 		uiController = GameObject.Find("Main Camera").GetComponent<UIController2>();
 		gettingAbilityInfo = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		Debug.Log(gameController.GetStatus());
-		if(gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT){
-			if (Input.GetKey ("up") || Input.GetKey ("w")) {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP)){
+
+    // Update is called once per frame
+    void Update()
+    {
+        Debug.Log(gameController.GetStatus());
+        if (gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT)
+        {
+            if (Input.GetKey("up") || Input.GetKey("w"))
+            {
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP))
+                {
                     gameController.MoveSloth(0, 1);
-                } else {
-                    ScreenMessage.sm.ShowMessage("Something is in your way",2f);
                 }
-			} else if (Input.GetKey ("down") || Input.GetKey ("s")) {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.DOWN)){
-                    gameController.MoveSloth(0, -1);
-                } else {
-                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
-                }
-			} else if (Input.GetKey ("right") || Input.GetKey ("d")) {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.RIGHT)){
-                    gameController.MoveSloth(1, 0);
-                } else {
-                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
-                }
-			} else if (Input.GetKey ("left") || Input.GetKey ("a")) {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.LEFT)){
-                    gameController.MoveSloth(-1, 0);
-                } else
+                else
                 {
                     ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
                 }
-			} else if (Input.GetKeyDown (KeyCode.Escape)) {
-				uiController.SetActiveOptsPanel (true);
-				gameController.PauseGame ();
-				//TODO: AÑADIR AL IF CON UN && gameController.GetStatus() == GameController.GameControllerStatus.ANIMATING
-			} else if (Input.GetMouseButtonUp (1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad()) {
-				gameController.CancelAbility ();
-				gettingAbilityInfo = false;
-			}
-		} else{
-			if(gameController.GetStatus() == GameController.GameControllerStatus.PAUSE && Input.GetKeyDown(KeyCode.Escape)){
-				UnPause();
-			}
-		}
-	}
-
+            }
+            else if (Input.GetKey("down") || Input.GetKey("s"))
+            {
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.DOWN))
+                {
+                    gameController.MoveSloth(0, -1);
+                }
+                else
+                {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
+            }
+            else if (Input.GetKey("right") || Input.GetKey("d"))
+            {
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.RIGHT))
+                {
+                    gameController.MoveSloth(1, 0);
+                }
+                else
+                {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
+            }
+            else if (Input.GetKey("left") || Input.GetKey("a"))
+            {
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.LEFT))
+                {
+                    gameController.MoveSloth(-1, 0);
+                }
+                else
+                {
+                    ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                uiController.SetActiveOptsPanel(true);
+                gameController.PauseGame();
+            }
+        }
+        else if (gameController.GetStatus() == GameController.GameControllerStatus.PAUSE && Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnPause();
+        }
+        else if (Input.GetMouseButtonUp(1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad() && gameController.GetStatus() == GameController.GameControllerStatus.ANIMATING)
+        {
+            gameController.CancelAbility();
+            gettingAbilityInfo = false;
+            gameController.NotifyAbilityEnded();
+            gameController.SetShot(false);
+        }
+    }
 
 	public void ChangeTurn(){
 		if(gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT){

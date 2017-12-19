@@ -92,6 +92,8 @@ public class ShotScript : MonoBehaviour
             shotLoad = false;
             Active(false);
         }
+        Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
+        Camera.main.gameObject.GetComponent<GameController>().SetShot(false);
     }
     public void CancelShot()
     {
@@ -105,6 +107,7 @@ public class ShotScript : MonoBehaviour
         {
             onLoad.CalcelMark();
         }
+        //Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
     }
     // r = 0 when right moving , left moving r = 1
     public void IsMoving(int r)
@@ -156,6 +159,8 @@ public class ShotScript : MonoBehaviour
 
 				if (a.GetProjectile ().Equals ("autoApply")) {
 					onLoad.ApplyLogic ();
+                    Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
+                    Camera.main.gameObject.GetComponent<GameController>().SetShot(false);
                 } else {
 					Bar ();
 					Active (true);
