@@ -31,7 +31,7 @@ public class AxeScript : MonoBehaviour
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             Destroy(this.gameObject);
         }
-        else if (!(other.gameObject.tag == "physical"))
+        else if (!(other.gameObject.tag == "physical") && !(other.gameObject.tag == "fruit"))
         {
             if (other.transform.position.z == 1)
             {

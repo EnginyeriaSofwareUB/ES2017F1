@@ -107,6 +107,7 @@ public class TeleportProjectile : Projectile
             rangeMaker.DestroyCubeMarks();
             rangeMaker.MakeCubeMarks(ability.GetRange(), target.transform.position);
             resource = "Objects/TPMark";
+            this.position = target.transform.position;
             return false;
         }
         else if(!firstCast && apply)

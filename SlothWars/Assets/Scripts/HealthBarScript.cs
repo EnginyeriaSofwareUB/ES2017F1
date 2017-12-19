@@ -39,16 +39,19 @@ public class HealthBarScript : MonoBehaviour
         {
             ratio = 0;
         }
-        rt.localScale = new Vector3((float)ratio, 0.1f, 0.1f);
+        if (rt != null)
+            rt.localScale = new Vector3((float)ratio, 0.1f, 0.1f);
 
     }
 
     public void ChangeHealthText(double health){
-        this.health.text = health.ToString();
+        if(this.health != null)
+            this.health.text = health.ToString();
     }
 
     public void ChangeTextShield(double shield){
-        this.shield.text = shield.ToString();
+        if (this.shield != null)
+            this.shield.text = shield.ToString();
     }
 
     public void ActivateShield(){
