@@ -29,3 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IATeamSelection.unity
     guid: d1b6204db0283c940ac0055f6a4b8e66
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 24575243a35f4e14cb20b265e2a662bf
