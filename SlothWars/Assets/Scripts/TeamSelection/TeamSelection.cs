@@ -208,6 +208,11 @@ public class TeamSelection : MonoBehaviour
 
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu"); 
+    }
+
     // Adding the images in team1SlothImages and team2SlothImages
     void SetTeamSlotPic(string team, string slot, int teamSlot)
     {
