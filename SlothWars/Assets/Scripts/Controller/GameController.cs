@@ -252,7 +252,7 @@ public class GameController : MonoBehaviour {
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
-	protected void CheckAbilitiesAp(){
+	public void CheckAbilitiesAp(){
 		if(currentSloth.GetAbility1().GetAp() <= currentAp){
 			uiController.SetActiveAb1(true);
 		} else {
