@@ -137,6 +137,7 @@
   "T3": {
     	"desc":"Applies a shield to the target",
     "shield": true,
+	"reach": 10,
     "hpShield": 20,
     "blockAb": false,
 	"ap": 1,

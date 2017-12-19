@@ -9,6 +9,7 @@ public class TankAbility : Ability
     private string projectile;
     private string source;
     private bool mark;
+    private float range;
     public TankAbility(string id, JSONNode json)
     {
 
@@ -18,6 +19,7 @@ public class TankAbility : Ability
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];
         this.source = json[id]["source"];
+        this.range = json[id]["reach"];
     }
 
     //Apply ability to another sloth
@@ -36,7 +38,7 @@ public class TankAbility : Ability
     public void Apply(Vector3 p) { }
     public float GetRange()
     {
-        return 10;
+        return range;
     }
     public float GetRadius()
     {

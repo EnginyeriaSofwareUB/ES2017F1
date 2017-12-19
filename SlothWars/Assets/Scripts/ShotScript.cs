@@ -50,12 +50,8 @@ public class ShotScript : MonoBehaviour
         gun.Rotate(AimVector);
     }
     private void MarkBuildTerrain()
-    {
-        if (onloadAbility.GetMark()) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			onLoad.SetAll(gun.position, ray.direction,Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
-            onLoad.Mark();
-        }
+    {        
+        onLoad.Mark();
     }
     // creates a force bar
     private void Bar()
@@ -64,6 +60,11 @@ public class ShotScript : MonoBehaviour
         {
             GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 0.8f, 0), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            onLoad.SetAll(gun.position, ray.direction, Quaternion.identity, onloadAbility.GetRange(), this.onloadAbility.GetTerrainSize(), false, onloadAbility.GetSource());
         }
         shotLoad = true;
     }
@@ -74,7 +75,7 @@ public class ShotScript : MonoBehaviour
         {
             if (onLoad.GetApply())
             {
-				onLoad.SetAll(gun.position,new Vector3(0,0,0),Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
+				//onLoad.SetAll(gun.position,new Vector3(0,0,0),Quaternion.identity, 1,this.onloadAbility.GetTerrainSize(),false,onloadAbility.GetSource());
                 shotLoad = false;
                 Active(false);
                 onLoad.ApplyLogic();

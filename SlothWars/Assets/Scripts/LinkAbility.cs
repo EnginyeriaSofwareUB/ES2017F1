@@ -30,9 +30,9 @@ public class LinkAbility : Ability
         if(link != null)
         {
             link.QuitTank();
-            link = g.GetComponent<Sloth>();
             GameObject.Destroy(linkObject);
         }
+        link = g.GetComponent<Sloth>();
         linkObject = (GameObject)GameObject.Instantiate(Resources.Load("Objects/LightningBolt/Link"), g.transform.position, Quaternion.identity);
         g.GetComponent<Sloth>().SetTank(Camera.main.GetComponent<GameController>().GetCurrentSloth());
         linkObject.GetComponent<LinkScript>().SetOrigin(Camera.main.GetComponent<GameController>().GetCurrentSloth().transform);

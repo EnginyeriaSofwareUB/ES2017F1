@@ -13,8 +13,10 @@ public class PathProjectile : Projectile
     private GameObject mark;
     private bool created = false;
     private GameObject Floor;
+    private RangeMark rangeMaker;
+    private Vector3 position;
 
-	public PathProjectile(Ability a){
+    public PathProjectile(Ability a){
 		ability = a;
 	}
 
@@ -22,7 +24,7 @@ public class PathProjectile : Projectile
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 9) &&  hit.transform.position.z == 1)
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 9) &&  hit.transform.position.z == 1 && (position - hit.transform.position).magnitude <= ability.GetRange())
         {
             Vector3 d = hit.point -hit.transform.position;
             float max = Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y));
@@ -97,10 +99,15 @@ public class PathProjectile : Projectile
         ability.Apply(Floor);
         //AbilityController.Instance.ApplyLastAbility(direction);
         //AbilityController.Instance.ApplyLastAbility(Floor);
+        rangeMaker.DestroyCubeMarks();
     }
     public override void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius, bool explosive, string source)
     {
+        this.position = position;
         nCubes = radius;
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
+        this.position.z = 1;
     }
     public override bool GetApply() { return apply; }
     public override void CalcelMark()
@@ -108,5 +115,6 @@ public class PathProjectile : Projectile
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }

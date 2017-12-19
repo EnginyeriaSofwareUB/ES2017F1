@@ -9,8 +9,8 @@ public class TargetTeamProjectile : Projectile
     private string resource;
     GameObject target;
     private bool apply =false;
-
-	public TargetTeamProjectile(Ability a){
+    private RangeMark rangeMaker;
+    public TargetTeamProjectile(Ability a){
 		ability = a;
 	}
 
@@ -18,6 +18,7 @@ public class TargetTeamProjectile : Projectile
     {
         GameObject.Destroy(mark);
         ability.Apply(target);
+        rangeMaker.DestroyCubeMarks();
     }
 
     // Update is called once per frame
@@ -26,12 +27,15 @@ public class TargetTeamProjectile : Projectile
     {
         this.position = positon;
         resource = source;
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
+
     }
     public override void Mark()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam())
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && (hit.collider.transform.position - position).magnitude <= ability.GetRange())
         {
             apply = true;
             target = hit.collider.gameObject;
@@ -63,5 +67,6 @@ public class TargetTeamProjectile : Projectile
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }
