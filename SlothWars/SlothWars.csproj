@@ -336,6 +336,7 @@
     <Compile Include="Assets\Scripts\ProjectileScript.cs" />
     <Compile Include="Assets\Scripts\ProjectileTerrain.cs" />
     <Compile Include="Assets\Scripts\RainController.cs" />
+    <Compile Include="Assets\Scripts\RangeMark.cs" />
     <Compile Include="Assets\Scripts\ScreenMessage.cs" />
     <Compile Include="Assets\Scripts\ShotScript.cs" />
     <Compile Include="Assets\Scripts\SimpleJSON.cs" />

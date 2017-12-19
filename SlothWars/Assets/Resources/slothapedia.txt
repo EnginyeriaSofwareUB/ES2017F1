@@ -75,7 +75,7 @@
     "att": 50,
     "def": 20,
     "ap": 500,
-    "photo": "slothWizard",
+    "photo": "HUD_Assets/slothWizard",
     "idAb1": "V0",
     "idAb2": "U0",
     "idAb3": "M1",

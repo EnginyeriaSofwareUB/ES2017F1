@@ -10,6 +10,7 @@ public class LinkProjectile : Projectile
     public string link = "Objects/LightningBolt/Link";
     GameObject target;
     bool apply = false;
+    private RangeMark rangeMaker;
 
     public LinkProjectile(Ability a)
     {
@@ -21,6 +22,7 @@ public class LinkProjectile : Projectile
         GameObject.Destroy(mark);
         //abilityController.pplyLastAbility(target);
         ability.Apply(target);
+        rangeMaker.DestroyCubeMarks();
     }
 
     // Update is called once per frame
@@ -29,12 +31,14 @@ public class LinkProjectile : Projectile
     {
         this.position = positon;
         resource = source;
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
     }
     public override void Mark()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && !hit.collider.gameObject.Equals(Camera.main.GetComponent<GameController>().GetCurrentSloth().gameObject))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam() && !hit.collider.gameObject.Equals(Camera.main.GetComponent<GameController>().GetCurrentSloth().gameObject)&&(hit.collider.transform.position - position).magnitude <= ability.GetRange())
         {
             apply = true;
             target = hit.collider.gameObject;
@@ -70,5 +74,6 @@ public class LinkProjectile : Projectile
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }

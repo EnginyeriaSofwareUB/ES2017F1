@@ -12,13 +12,15 @@ public class ChainProjectile : Projectile {
 	GameObject mark = null;
     private bool apply = false;
     bool g;
-	public ChainProjectile(Ability a){
+    private RangeMark rangeMaker;
+    public ChainProjectile(Ability a){
 		ability = a;
 	}
 
     public override void ApplyLogic()
     {
-		GameObject.Destroy (mark);
+        rangeMaker.DestroyCubeMarks();
+        GameObject.Destroy (mark);
 		RaycastHit hit;
 		GameObject lightning;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -72,11 +74,13 @@ public class ChainProjectile : Projectile {
 	public override void SetAll(Vector3 positon, Vector3 aimVector, Quaternion rotation, float range, float radius,bool  explosive,string source)
 	{
 		this.position = positon;
-	}
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
+    }
 	public override void Mark() {
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8)) {
+		if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && (hit.collider.transform.position - position).magnitude <= ability.GetRange()) {
             apply = true;
             bool cond = hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam();
             if (mark != null)
@@ -116,5 +120,6 @@ public class ChainProjectile : Projectile {
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }

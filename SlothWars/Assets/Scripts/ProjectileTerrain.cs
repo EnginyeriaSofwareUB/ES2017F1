@@ -13,6 +13,8 @@ public class ProjectileTerrain : Projectile {
     private bool apply = false;
     private GameObject mark;
     private bool created = false;
+    private RangeMark rangeMaker;
+    private Vector3 origin;
 
 	public ProjectileTerrain(Ability a){
 		ability = a;
@@ -25,8 +27,15 @@ public class ProjectileTerrain : Projectile {
         float hitdist = 0.0f;
         if (playerPlane.Raycast(ray, out hitdist))
         {
-            ray.GetPoint(hitdist);
             position = ray.GetPoint(hitdist);
+            position.y = Mathf.Round(position.y);
+            position.x = Mathf.Round(position.x);
+            if ((position - origin).magnitude > ability.GetRange())
+            {
+                created = false;
+                GameObject.Destroy(mark);
+                return;
+            }
             for (int i = 0; i < nCubes; i++)
             {
                 Collider[] sloths = Physics.OverlapBox(position +  i * scale * new Vector3(0, 1, 0), new Vector3(1, 1, 1) * (scale-0.001f)/ 2f);
@@ -71,11 +80,15 @@ public class ProjectileTerrain : Projectile {
     {
         GameObject.Destroy(mark);
 		ability.Apply (position);
-	}
+        rangeMaker.DestroyCubeMarks();
+    }
 	
 	public override void SetAll(Vector3 position, Vector3 aimVector, Quaternion rotation, float range, float radius,bool explosive,string source)
     {
+        origin = position;
         nCubes = radius;
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
     }
     public override bool GetApply(){return apply;}
     public override void CalcelMark()
@@ -83,5 +96,6 @@ public class ProjectileTerrain : Projectile {
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }

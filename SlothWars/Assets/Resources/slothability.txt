@@ -140,6 +140,7 @@
     "desc":"Applies a shield to the target",
     "shield": true,
     "hpShield": 5,
+    "reach": 10,
     "blockAb": false,
 	"ap": 2,
 	"projectile": "allyTarget",

@@ -63,6 +63,7 @@ public class SlothGravity : MonoBehaviour
 
     public void InvokeGravity()
     {
+        Camera.main.gameObject.GetComponent<GameController>().NotifyFalling();
         falling = true;
         StartCoroutine(ApplyGravity());
     }
@@ -82,6 +83,7 @@ public class SlothGravity : MonoBehaviour
         rbody.velocity = Vector3.zero;
         GrabPositionCorrection();
         falling = false;
+        Camera.main.gameObject.GetComponent<GameController>().NotifyFallingEnded();
     }
 
     private void GrabPositionCorrection()

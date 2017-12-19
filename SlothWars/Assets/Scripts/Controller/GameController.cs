@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 	public Material blueLeaf;
 	public Material redLeaf;
     protected VenomSystem venomSystem;
+    private bool shot = false;
 	// PLAYER TRUE - LISTA 1
 	// PLAYER AZUL - TRUE - 0
 	// PLAYER FALSE - LISTA 2
@@ -199,7 +200,7 @@ public class GameController : MonoBehaviour {
 			case GameControllerStatus.ABILITY_LOGIC:
 				CheckAbilitiesAp();
                 uiController.DisplaySlothStats(currentSloth, currentAp);
-				break;
+                break;
 			case GameControllerStatus.WAITING_FOR_INPUT:
                 uiController.DisplaySlothStats(currentSloth, currentAp);
 				if(ia != null && !player)
@@ -267,7 +268,9 @@ public class GameController : MonoBehaviour {
 		} else {
 			uiController.SetActiveAb3(false);
 		}
-		status = GameControllerStatus.WAITING_FOR_INPUT;
+        //TODO: CAMBIAR ESTO:
+        if (this.shot) { status = GameControllerStatus.ANIMATING; }
+        else { status = GameControllerStatus.WAITING_FOR_INPUT; }
 	}
 
 	public GameControllerStatus GetStatus(){
@@ -283,7 +286,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CastAbility1(){
-		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
+        shot = true;
+        currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility1());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility1().GetAp();
         uiController.DisplaySlothStats(currentSloth, currentAp);
@@ -291,7 +295,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CastAbility2(){
-		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
+        shot = true;
+        currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility2());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility2().GetAp();
         uiController.DisplaySlothStats(currentSloth, currentAp);
@@ -299,7 +304,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CastAbility3(){
-		currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
+        shot = true;
+        currentSloth.gameObject.GetComponent<ShotScript>().Shot(currentSloth.GetAbility3());
         cancelAp = currentAp;
 		currentAp -= currentSloth.GetAbility3().GetAp();
         uiController.DisplaySlothStats(currentSloth, currentAp);
@@ -439,5 +445,22 @@ public class GameController : MonoBehaviour {
     }
 
 	public void NotifyAbilityUsed(){
+        status = GameControllerStatus.ANIMATING;
+    }
+
+	//TODO: USAR ESTO
+	public void NotifyAbilityEnded(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
+
+	public void NotifyFalling(){
+		status = GameControllerStatus.ANIMATING;
+	}
+	public void NotifyFallingEnded(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
+	}
+    public void SetShot(bool b)
+    {
+        this.shot = b;
+    }
 }

@@ -160,25 +160,31 @@ public class IATeamSelection : MonoBehaviour
             if (CompareSloths(StorePersistentVariables.Instance.slothTeam1, type))
             {
                 Debug.Log("Team 1 already has this sloth");
-                // ScreenMessage.showMessage("Your team already has this sloth");
+                ScreenMessage.sm.ShowMessage("Your team already has this sloth",2f);
             }
             else
             {
                 StorePersistentVariables.Instance.slothTeam1.Add(type);
-
-                //slothTeam1.Add(new Sloth(type));
                 Debug.Log(type + " sloth added to team 1");
                 SetTeamSlotPic("1", slot, StorePersistentVariables.Instance.slothTeam1.Count);
                 if (StorePersistentVariables.Instance.slothTeam1.Count == maxTeamSloths)
                 {
                     Debug.Log("TEAM SELECTION FINISHED!");
-                    //ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
-                    //WaitAndLoadScene(3);
-                    SceneManager.LoadScene("default_scene");
+                    StartCoroutine(WaitAndLoadScene());
                 }
                 numPlayer = "1";
             }
         }
+    }
+
+    private IEnumerator WaitAndLoadScene()
+    {
+        ScreenMessage.sm.ShowMessage("The game will begin in: 3", 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        ScreenMessage.sm.ShowMessage("The game will begin in: 2", 1f);
+        yield return new WaitForSeconds(1f);
+        ScreenMessage.sm.ShowMessage("The game will begin in: 1", 1f);
+        SceneManager.LoadScene("default_scene");
     }
 
     private bool CompareSloths(List<string> list, string type)
@@ -282,12 +288,17 @@ public class IATeamSelection : MonoBehaviour
         UpdateSlots();
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     void UpdateSlots()
     {
         int i = currentPage * 3;
 
         slot1Type.text = node[i]["type"];
-        slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i]["photo"]); // ASI FUNCTIONA
+        slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i]["photo"]);
         slot1Health.text = node[i]["hp"];
         //slot1Attack.text = node[i]["att"];
         //slot1Defense.text = node[i]["def"];
@@ -300,7 +311,7 @@ public class IATeamSelection : MonoBehaviour
         else
         {
             slot2Type.text = node[i + 1]["type"];
-            slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]); // ASI NO :V
+            slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]);
             slot2Health.text = node[i + 1]["hp"];
           //  slot2Attack.text = node[i + 1]["att"];
           //  slot2Defense.text = node[i + 1]["def"];
@@ -313,12 +324,20 @@ public class IATeamSelection : MonoBehaviour
         }
         else
         {
-            slot3Type.text = node[i + 2]["type"];
-            slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 2]["photo"]);
-            slot3Health.text = node[i + 2]["hp"];
-           // slot3Attack.text = node[i + 2]["att"];
-           // slot3Defense.text = node[i + 2]["def"];
-            slot3Action.text = node[i + 2]["ap"];
+
+            if (!"Tutorial".Equals(node[i + 2]["type"]))
+            {
+                slot3Type.text = node[i + 2]["type"];
+                slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 2]["photo"]);
+                slot3Health.text = node[i + 2]["hp"];
+                //slot3Attack.text = node[i + 2]["att"];
+                //slot3Defense.text = node[i + 2]["def"];
+                slot3Action.text = node[i + 2]["ap"];
+            }
+            else
+            {
+                slot3.SetActive(false);
+            }
         }
     }
 

@@ -160,13 +160,11 @@ public class TeamSelection : MonoBehaviour
             if (CompareSloths(StorePersistentVariables.Instance.slothTeam1, type))
             {
                 Debug.Log("Team 1 already has this sloth");
-                // ScreenMessage.showMessage("Your team already has this sloth");
+                ScreenMessage.sm.ShowMessage("Your team already has this",2f);
             }
             else
             {
                 StorePersistentVariables.Instance.slothTeam1.Add(type);
-
-                //slothTeam1.Add(new Sloth(type));
                 Debug.Log(type + " sloth added to team 1");
                 SetTeamSlotPic("1", slot, StorePersistentVariables.Instance.slothTeam1.Count);
                 numPlayer.text = "2";
@@ -177,30 +175,42 @@ public class TeamSelection : MonoBehaviour
             if (CompareSloths(StorePersistentVariables.Instance.slothTeam2, type))
             {
                 Debug.Log("Team 2 already has this sloth");
-                // ScreenMessage.showMessage("Your team already has this sloth");
+                ScreenMessage.sm.ShowMessage("Your team already has this",2f);
             }
             else
             {
                 StorePersistentVariables.Instance.slothTeam2.Add(type);
-                //slothTeam2.Add (new Sloth(type));
                 Debug.Log(type + " sloth added to team 2");
                 SetTeamSlotPic("2", slot, StorePersistentVariables.Instance.slothTeam2.Count);
                 if (StorePersistentVariables.Instance.slothTeam2.Count == maxTeamSloths)
                 {
                     Debug.Log("TEAM SELECTION FINISHED!");
-                    //ScreenMessage.showMessage("TEAM SELECTION FINISHED!");
-                    //WaitAndLoadScene(3);
-                    SceneManager.LoadScene("default_scene");
+                    StartCoroutine(WaitAndLoadScene());
                 }
                 numPlayer.text = "1";
             }
         }
     }
 
+    private IEnumerator WaitAndLoadScene()
+    {
+        ScreenMessage.sm.ShowMessage("The game will begin in: 3", 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        ScreenMessage.sm.ShowMessage("The game will begin in: 2", 1f);
+        yield return new WaitForSeconds(1f);
+        ScreenMessage.sm.ShowMessage("The game will begin in: 1", 1f);
+        SceneManager.LoadScene("default_scene");
+    }
+
     private bool CompareSloths(List<string> list, string type)
     {
         return list.Contains(type);
 
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu"); 
     }
 
     // Adding the images in team1SlothImages and team2SlothImages
@@ -324,34 +334,36 @@ public class TeamSelection : MonoBehaviour
 
     void UpdateSlots()
     {
-            int i = currentPage * 3;
+        int i = currentPage * 3;
 
-            slot1Type.text = node[i]["type"];
-            slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i]["photo"]); // ASI FUNCTIONA
-            slot1Health.text = node[i]["hp"];
-          //  slot1Attack.text = node[i]["att"];
-           // slot1Defense.text = node[i]["def"];
-            slot1Action.text = node[i]["ap"];
+        slot1Type.text = node[i]["type"];
+        slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i]["photo"]);
+        slot1Health.text = node[i]["hp"];
+        //slot1Attack.text = node[i]["att"];
+        //slot1Defense.text = node[i]["def"];
+        slot1Action.text = node[i]["ap"];
 
-            if (currentPage == lastPage && lastPageActiveSlot < 2)
-            {
-                slot2.SetActive(false);
-            }
-            else
-            {
-                slot2Type.text = node[i + 1]["type"];
-                slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]); // ASI NO :V
-                slot2Health.text = node[i + 1]["hp"];
-             //   slot2Attack.text = node[i + 1]["att"];
-             //   slot2Defense.text = node[i + 1]["def"];
-                slot2Action.text = node[i + 1]["ap"];
-            }
+        if (currentPage == lastPage && lastPageActiveSlot < 2)
+        {
+            slot2.SetActive(false);
+        }
+        else
+        {
+            slot2Type.text = node[i + 1]["type"];
+            slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]);
+            slot2Health.text = node[i + 1]["hp"];
+           // slot2Attack.text = node[i + 1]["att"];
+           // slot2Defense.text = node[i + 1]["def"];
+            slot2Action.text = node[i + 1]["ap"];
+        }
 
-            if (currentPage == lastPage && lastPageActiveSlot < 3)
-            {
-                slot3.SetActive(false);
-            }
-            else
+        if (currentPage == lastPage && lastPageActiveSlot < 3)
+        {
+            slot3.SetActive(false);
+        }
+        else
+        {
+            if (!"Tutorial".Equals(node[i + 2]["type"]))
             {
                 slot3Type.text = node[i + 2]["type"];
                 slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 2]["photo"]);
@@ -360,6 +372,11 @@ public class TeamSelection : MonoBehaviour
                // slot3Defense.text = node[i + 2]["def"];
                 slot3Action.text = node[i + 2]["ap"];
             }
+            else
+            {
+                slot3.SetActive(false);
+            }
         }
+    }
 
 }

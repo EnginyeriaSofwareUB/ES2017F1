@@ -45,7 +45,12 @@ public class ExplosionScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (onCollision && !colided)
+        if (other.gameObject.tag == "DeathZone") {
+            Destroy(this.gameObject);
+            colided = true;
+        }
+
+        else if (onCollision && !colided && other.tag != "fruit")
         {
             colided = true;
             Debug.Log("radius " + radius);
@@ -101,6 +106,7 @@ public class ExplosionScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
         if (Camera.main.gameObject.GetComponent<TutorialController>() != null){
             Camera.main.gameObject.GetComponent<TutorialController>().NotifyAbilityUsed();
         }

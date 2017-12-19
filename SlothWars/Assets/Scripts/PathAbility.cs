@@ -41,15 +41,16 @@ public class PathAbility : Ability
         {
             if (Physics.OverlapBox(g.transform.position + i * scale * direction + direction * scale, new Vector3(1, 1, 1) * (scale - 0.001f) / 2f).Length == 0)
             {
-                if (i == 0)
-                {
-                    fruit = (GameObject) GameObject.Instantiate(Resources.Load("Objects/ApplePrefab"), g.transform.position + i * scale * direction + scale * direction +new Vector3(0,0,-0.75f), Quaternion.identity);
-                    fruit.GetComponent<FruitScript>().SetParams(fruitHeal,fruitAp);
-                }
                 explosion = (GameObject)GameObject.Instantiate(Resources.Load("Objects/SmokeExplosion"), g.transform.position + i * scale * direction + scale * direction, Quaternion.identity);
                 GameObject.Destroy(explosion, 3);
                 cube = (GameObject)GameObject.Instantiate(Resources.Load("Objects/PathCube"), g.transform.position + i * scale * direction + scale * direction, g.transform.rotation);
                 cube.GetComponent<Renderer>().material = m;
+                if (i == 0)
+                {
+                    fruit = (GameObject)GameObject.Instantiate(Resources.Load("Objects/ApplePrefab"), g.transform.position + i * scale * direction + scale * direction + new Vector3(0, 0, -0.75f), Quaternion.identity);
+                    fruit.GetComponent<FruitScript>().SetParams(fruitHeal, fruitAp);
+                    fruit.GetComponent<FruitScript>().SetCube(cube.transform);
+                }
             }
         }
     }

@@ -20,12 +20,18 @@ public class TutorialController : GameController {
 		TerrainCreator.LoadMap();
         
 		GameObject tmpSloth = new GameObject("player");
-		GameObject logic = new GameObject("slothlogic");
+        tmpSloth.tag = "physical";
+        Rigidbody rb = tmpSloth.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        tmpSloth.AddComponent<IceCollision>();
+
+        GameObject logic = new GameObject("slothlogic");
 		logic.tag = "sloth";
 		logic.layer = 8;
 		logic.transform.SetParent(tmpSloth.transform);
 		GameObject model;
-		model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_wizard"));	
+		model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/" + "sloth_wizard"));	
 		model.transform.SetParent(tmpSloth.transform);
 		//Hay que reescalar los bichos
 		model.transform.localScale = new Vector3(27f, 27f, 27f);
@@ -37,13 +43,15 @@ public class TutorialController : GameController {
 		logic.AddComponent<Sloth>().initSloth("Tutorial");
 		logic.AddComponent<ShotScript>();
 		logic.AddComponent<MovementController>();
-		logic.AddComponent<BoxCollider>();
-		//Anadiendo Animator a los sloths
-		Animator anim = logic.AddComponent<Animator>();
-		anim.runtimeAnimatorController = Resources.Load("ModelosDefinitivos/sloth_action") as RuntimeAnimatorController;
+        logic.AddComponent<SlothGravity>();
+        BoxCollider bc = logic.AddComponent<BoxCollider>();
+        bc.size = new Vector3(0.5f, 0.7f, 0.9f);
+        //Anadiendo Animator a los sloths
+        Animator anim = logic.AddComponent<Animator>();
+		anim.runtimeAnimatorController = Resources.Load("Modelos/sloth_action") as RuntimeAnimatorController;
 		HealthScript health = logic.AddComponent<HealthScript>();
 		health.enabled = true;
-		GameObject healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+		GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
 		healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
 		healthBar.transform.SetParent(logic.transform);
 		health.SetHealthBar(healthBar);
@@ -52,11 +60,17 @@ public class TutorialController : GameController {
 		
 
 		tmpSloth = new GameObject("dummy");
-		logic = new GameObject("slothlogic");
+        tmpSloth.tag = "physical";
+        Rigidbody rb2 = tmpSloth.AddComponent<Rigidbody>();
+        rb2.useGravity = false;
+        rb2.isKinematic = true;
+        tmpSloth.AddComponent<IceCollision>();
+
+        logic = new GameObject("slothlogic");
 		logic.tag = "sloth";
 		logic.layer = 8;
 		logic.transform.SetParent(tmpSloth.transform);
-		model = (GameObject)Instantiate(Resources.Load<GameObject>("ModelosDefinitivos/ModelosSlothapedia/"+"sloth_healer"));
+		model = (GameObject)Instantiate(Resources.Load<GameObject>("Modelos/" + "sloth_healer"));
 		model.transform.SetParent(tmpSloth.transform);
 		//Hay que reescalar los bichos
 		model.transform.localScale = new Vector3(27f, 27f, 27f);
@@ -67,11 +81,13 @@ public class TutorialController : GameController {
 		logic.AddComponent<Sloth>().initSloth("Healer");
 		logic.AddComponent<ShotScript>();
 		logic.AddComponent<MovementController>();
-		logic.AddComponent<BoxCollider>();
+        logic.AddComponent<SlothGravity>();
+        BoxCollider bc2 = logic.AddComponent<BoxCollider>();
+        bc2.size = new Vector3(0.5f, 0.7f, 0.9f);
 
-		health = logic.AddComponent<HealthScript>();
+        health = logic.AddComponent<HealthScript>();
 		health.enabled = true;
-		healthBar = (GameObject)Instantiate(Resources.Load("ModelosDefinitivos/Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+		healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
 		healthBar.transform.SetParent(logic.transform);
 		health.SetHealthBar(healthBar);
 		logic.GetComponent<Sloth>().SetTeam(2);

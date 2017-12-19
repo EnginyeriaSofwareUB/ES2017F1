@@ -25,20 +25,39 @@ public class AxeScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "sloth")
+        if (other.gameObject.tag == "DeathZone") { Destroy(this.gameObject); }
+        else if (other.gameObject.tag == "sloth") //|| other.gameObject.tag == "physical"
         {
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             Destroy(this.gameObject);
         }
+        else if (!(other.gameObject.tag == "physical") && !(other.gameObject.tag == "fruit"))
+        {
+            if (other.transform.position.z == 1)
+            {
+                Vector3 v = transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
+                this.transform.rotation = Quaternion.Euler(0, 180 + rot, 0);
+                v -= transform.TransformPoint(this.GetComponent<CapsuleCollider>().center);
+                this.transform.position += v;
+                this.transform.position += new Vector3(0, 0, 0.05f);
+            }
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            GetComponent<CapsuleCollider>().enabled = false;
+            rb.useGravity = false;
+            Destroy(this.gameObject, 20);
+            this.tag = "Untagged";
+            this.enabled = false;
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "sloth")
+        if (collision.gameObject.tag == "sloth" )  //|| other.gameObject.tag == "physical"
         {
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(collision.gameObject);
             Destroy(this.gameObject);
         }
-        else
+        else if(!(collision.gameObject.tag == "physical"))
         { 
             if (collision.transform.position.z == 1)
             {

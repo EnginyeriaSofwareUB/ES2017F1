@@ -10,17 +10,19 @@ public class TeleportProjectile : Projectile
     private bool firstCast = true;
     private bool apply = false;
     GameObject target;
+    private RangeMark rangeMaker;
 
-	public TeleportProjectile(Ability a){
+    public TeleportProjectile(Ability a){
 		ability = a;
 	}
 
     public override void ApplyLogic()
     {
-        target.transform.parent.position = mark.transform.position;
-        GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load("Objects/SmokeExplosion"), target.transform.position, Quaternion.identity);
+        target.transform.parent.position = mark.transform.position+ new Vector3(0, 0, 0.5f);
+        GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load("Objects/SmokeExplosion"), target.transform.position + new Vector3(0,0, 0.5f), Quaternion.identity);
         GameObject.Destroy(explosion, 3);
         GameObject.Destroy(mark);
+        rangeMaker.DestroyCubeMarks();
     }
 
     // Update is called once per frame
@@ -29,6 +31,8 @@ public class TeleportProjectile : Projectile
     {
         this.position = positon;
         resource = source;
+        rangeMaker = new RangeMark();
+        rangeMaker.MakeCubeMarks(ability.GetRange(), position);
     }
     public override void Mark()
     {
@@ -36,7 +40,7 @@ public class TeleportProjectile : Projectile
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam())
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 8) && hit.collider.gameObject.GetComponent<Sloth>().GetTeam() == Camera.main.GetComponent<GameController>().GetCurrentSloth().GetTeam()&& (hit.collider.transform.position - position).magnitude <= ability.GetRange())
             {
                 apply = true;
                 if (mark == null)
@@ -62,12 +66,12 @@ public class TeleportProjectile : Projectile
             apply = true;
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 9)&& hit.transform.position.z == 1)
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, 1 << 9)&& hit.transform.position.z == 1 &&(hit.collider.transform.position + new Vector3(0, 0, -1) - position).magnitude <= ability.GetRange())
             {
                 Collider[] colls = Physics.OverlapBox(hit.transform.position + new Vector3(0,0,-1f), new Vector3(1, 1, 1) * (1 - 0.001f) / 2f);
                 foreach(Collider c in colls)
                 {
-                    if(c.gameObject.tag != "fruit")
+                    if(c.gameObject.tag == "sloth" || c.gameObject.tag == "Destroyable")
                     {
                         apply = false;
                         break;
@@ -79,11 +83,11 @@ public class TeleportProjectile : Projectile
             {
                 if (mark == null)
                 {
-                    mark = (GameObject)GameObject.Instantiate(Resources.Load(resource), hit.transform.position + new Vector3(0, 0, -0.5f), Quaternion.identity);
+                    mark = (GameObject)GameObject.Instantiate(Resources.Load(resource), hit.transform.position + new Vector3(0, 0, -1), Quaternion.identity);
                 }
                 else
                 {
-                    mark.transform.position = hit.transform.position + new Vector3(0, 0, -0.5f);
+                    mark.transform.position = hit.transform.position + new Vector3(0, 0, -1);
                 }
             }
             else
@@ -100,10 +104,15 @@ public class TeleportProjectile : Projectile
             firstCast = false;
             GameObject.Destroy(mark);
             mark = null;
+            rangeMaker.DestroyCubeMarks();
+            rangeMaker.MakeCubeMarks(ability.GetRange(), target.transform.position);
+            resource = "Objects/TPMark";
+            this.position = target.transform.position;
             return false;
         }
         else if(!firstCast && apply)
         {
+            rangeMaker.DestroyCubeMarks();
             return true;
         }
         else { return false; }
@@ -113,5 +122,6 @@ public class TeleportProjectile : Projectile
         apply = false;
         GameObject.Destroy(mark);
         mark = null;
+        rangeMaker.DestroyCubeMarks();
     }
 }
