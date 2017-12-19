@@ -98,7 +98,6 @@ public class GameController : MonoBehaviour {
             logic.AddComponent<SlothGravity>();
             BoxCollider bc = logic.AddComponent<BoxCollider>();
             bc.size = new Vector3(0.5f, 0.7f, 0.9f);
-                        
 
             //Anadiendo Animator a los sloths
             Animator anim = logic.AddComponent<Animator>();
