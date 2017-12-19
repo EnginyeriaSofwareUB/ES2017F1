@@ -9,6 +9,7 @@ public class IA: IAInterface
     private static bool checkDistance = false;
     private static bool checkFlag = false;
     private static bool flagFalling = false;
+    private string tagSloth;
     private Vector3 previousPosition = new Vector3(0f, 0f, 0f);
     private Vector3 actualPosition = new Vector3(0f,0f,0f);
     private Vector3 positionNearestEnemySloth = new Vector3(0f, 0f, 0f);
@@ -23,6 +24,7 @@ public class IA: IAInterface
         GameAction gameAction = new GameAction();
         if (gameController.GetGravity()) { Debug.Log("Me cai"); flagFalling = true; }
 
+        tagSloth = GetActualTag(gameController);
         actualPosition = GetActualPosition(gameController);
         Debug.Log("actualPosition" + actualPosition);
         rangeListAbilities = GetRangeAbilities(gameController);
@@ -36,7 +38,7 @@ public class IA: IAInterface
         gameAction.x = dir.x;
         gameAction.y = dir.y;
 
-        checkDistance = CheckDistance(actualPosition,positionNearestEnemySloth, rangeListAbilities);
+        checkDistance = CheckDistance(actualPosition,positionNearestEnemySloth, rangeListAbilities, tagSloth);
         if (checkDistance) {
             gameAction.targetSloth = TargetSloth(gameController, actualPosition);
 
@@ -87,9 +89,15 @@ public class IA: IAInterface
         return a;
        
     }
-    private bool CheckDistance(Vector3 iAPosition, Vector3 positionNearestSloth, List<float> rangeListAbilities) {
+    private bool CheckDistance(Vector3 iAPosition, Vector3 positionNearestSloth, List<float> rangeListAbilities, string tagCurrentSloth) {
         rangeListAbilities.Sort();
-        if ((iAPosition - positionNearestSloth).magnitude <= rangeListAbilities[rangeListAbilities.Count-1])
+        if (tagCurrentSloth.Equals("TankP2"))
+        {
+            if ((iAPosition - positionNearestSloth).magnitude <= rangeListAbilities[rangeListAbilities.Count - 1]/2f - 1) { // rango 4 (Asi le da con las hachas)"
+                return true;
+            }
+        }
+        else if ((iAPosition - positionNearestSloth).magnitude <= rangeListAbilities[rangeListAbilities.Count-1])
         {
             return true;
         }
@@ -175,6 +183,7 @@ public class IA: IAInterface
         return true;
     }
 
+    private string GetActualTag(GameController gameController) { return gameController.GetCurrentSloth().transform.parent.name; }
     private Vector3 GetDirectionNearestSloth(float angle)
     {
         return new Vector3(Mathf.Cos(angle*(Mathf.PI)/180), Mathf.Sin(angle*(Mathf.PI)/180), 0f);

@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour {
 		List<string> lista = StorePersistentVariables.Instance.slothTeam1;
 		List<string> lista2 = StorePersistentVariables.Instance.slothTeam2;
 		if (StorePersistentVariables.Instance.iaPlaying){ ia = new IA(); }
-        
+        ia = new IA();
 		TerrainCreator.LoadMap();
 		if(lista.Count == 0){
 			lista.Add("Wizard");
