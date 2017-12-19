@@ -447,4 +447,11 @@ public class GameController : MonoBehaviour {
 	public void NotifyAbilityEnded(){
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
+
+	public void NotifyFalling(){
+		status = GameControllerStatus.ANIMATING;
+	}
+	public void NotifyFallingEnded(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
+	}
 }
