@@ -97,6 +97,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Slothapedia");
     }
 
+	public void ShowTutorial(){
+		SceneManager.LoadScene ("Tutorial");
+	}
+
 	public void mainVolSliderOnValueChanged (){
 		 
 		AudioListener.volume = mVolSlider.value;
