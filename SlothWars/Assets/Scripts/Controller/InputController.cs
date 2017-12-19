@@ -20,65 +20,42 @@ public class InputController : MonoBehaviour {
     void Update()
     {
         Debug.Log(gameController.GetStatus());
-        if (gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT)
-        {
-            if (Input.GetKey("up") || Input.GetKey("w"))
-            {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP))
-                {
+        if (gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT){
+            if (Input.GetKey("up") || Input.GetKey("w")){
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP)){
                     gameController.MoveSloth(0, 1);
-                }
-                else
-                {
+                }else{
                     ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
                 }
             }
-            else if (Input.GetKey("down") || Input.GetKey("s"))
-            {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.DOWN))
-                {
+            else if (Input.GetKey("down") || Input.GetKey("s")){
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.DOWN)){
                     gameController.MoveSloth(0, -1);
-                }
-                else
-                {
+                }else{
                     ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
                 }
-            }
-            else if (Input.GetKey("right") || Input.GetKey("d"))
-            {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.RIGHT))
-                {
+            }else if (Input.GetKey("right") || Input.GetKey("d")){
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.RIGHT)){
                     gameController.MoveSloth(1, 0);
-                }
-                else
-                {
+    			}else{
                     ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
                 }
-            }
-            else if (Input.GetKey("left") || Input.GetKey("a"))
-            {
-                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.LEFT))
-                {
+            }else if (Input.GetKey("left") || Input.GetKey("a")){
+                if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.LEFT)){
                     gameController.MoveSloth(-1, 0);
-                }
-                else
-                {
+                }else{
                     ScreenMessage.sm.ShowMessage("Something is in your way", 2f);
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
+			}else if (Input.GetKeyDown(KeyCode.Escape)){
                 uiController.SetActiveOptsPanel(true);
                 gameController.PauseGame();
             }
-        }
-        else if (gameController.GetStatus() == GameController.GameControllerStatus.PAUSE && Input.GetKeyDown(KeyCode.Escape))
-        {
+        }else if (gameController.GetStatus() == GameController.GameControllerStatus.PAUSE && Input.GetKeyDown(KeyCode.Escape)){
             UnPause();
         }
-        else if (Input.GetMouseButtonUp(1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad() && gameController.GetStatus() == GameController.GameControllerStatus.ANIMATING)
-        {
+        else if (Input.GetMouseButtonUp(1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad() && gameController.GetStatus() == GameController.GameControllerStatus.ANIMATING){
             gameController.CancelAbility();
+			gameController.CheckAbilitiesAp();
             gettingAbilityInfo = false;
             gameController.NotifyAbilityEnded();
             gameController.SetShot(false);
