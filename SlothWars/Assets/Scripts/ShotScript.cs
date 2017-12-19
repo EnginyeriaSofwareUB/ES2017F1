@@ -79,6 +79,8 @@ public class ShotScript : MonoBehaviour
                 shotLoad = false;
                 Active(false);
                 onLoad.ApplyLogic();
+                Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
+                Camera.main.gameObject.GetComponent<GameController>().SetShot(false);
 
             }
         }
@@ -91,9 +93,9 @@ public class ShotScript : MonoBehaviour
             st.Destroy();
             shotLoad = false;
             Active(false);
+            Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
+            Camera.main.gameObject.GetComponent<GameController>().SetShot(false);
         }
-        Camera.main.gameObject.GetComponent<GameController>().NotifyAbilityEnded();
-        Camera.main.gameObject.GetComponent<GameController>().SetShot(false);
     }
     public void CancelShot()
     {
