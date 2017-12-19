@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
 using UnityEngine.SceneManagement;
@@ -8,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SlothapediaController : MonoBehaviour {
     GameObject canvas;
     public Button button;
+
     //Size of panels
     private float matrixWidth = 0.6f;
     private float slothWidth = 0.4f;
@@ -17,6 +16,7 @@ public class SlothapediaController : MonoBehaviour {
     private GameObject rawImage;
     private Quaternion quaternion;
 	public AudioSource slothapediaSound;
+
     //Slothapedia json and slothability json
     private JSONNode n;
     private JSONNode m;
@@ -71,25 +71,31 @@ public class SlothapediaController : MonoBehaviour {
 
         //The last sloths may be a little more difficult to put.
         //This for resolves that.
-        for(int j = 0; j < numberSloths % 4; j++){
+        for (int j = 0; j < numberSloths % 4; j++)
+        {
             //Same as the other for. I could do a function for this, but whatever.
             Button b = Instantiate(button);
             currentSloth = (4 * i + j);
-            int a = currentSloth;
-            b.name = "button" + n[currentSloth.ToString()]["type"];
-            b.onClick.AddListener(delegate{
-                showSlothInfo(a);     
-            });
-			name = n [currentSloth.ToString ()] ["photoSlothapedia"];
-            name = name.Insert(0, "Slothapedia/f");
-			Debug.Log (name);
-			b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
-            //b.GetComponent<Image>().sprite = Resources.Load<Sprite>(n[currentSloth.ToString()]["photo"]);
-            //Meter el button en el canvas
-            b.transform.parent = canvas.transform;
-            RectTransform rectTransform = b.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(width * matrixWidth * 0.25f * 0.2f * 4.5f, width * matrixWidth * 0.25f * 0.2f * 4.5f);
-            rectTransform.position = new Vector2(width * matrixWidth * 0.25f * 0.5f + j * width * matrixWidth * 0.25f, height - (width * matrixWidth * 0.25f * 0.5f + i * width * matrixWidth * 0.25f));
+            string currentType = n[currentSloth.ToString()]["type"];
+            if (!"Tutorial".Equals(currentType))
+            {
+                int a = currentSloth;
+                b.name = "button" + currentType;
+                b.onClick.AddListener(delegate
+                {
+                    showSlothInfo(a);
+                });
+                name = n[currentSloth.ToString()]["photoSlothapedia"];
+                name = name.Insert(0, "Slothapedia/f");
+                Debug.Log(name);
+                b.GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
+                //Meter el button en el canvas
+                b.transform.parent = canvas.transform;
+                RectTransform rectTransform = b.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(width * matrixWidth * 0.25f * 0.2f * 4.5f, width * matrixWidth * 0.25f * 0.2f * 4.5f);
+                rectTransform.position = new Vector2(width * matrixWidth * 0.25f * 0.5f + j * width * matrixWidth * 0.25f, height - (width * matrixWidth * 0.25f * 0.5f + i * width * matrixWidth * 0.25f));
+
+            }
         }
 
         //Place the slothResume panel where we can find the model of the sloth, its stats and its abilities
@@ -107,8 +113,6 @@ public class SlothapediaController : MonoBehaviour {
 
         panelAbilityInfo.GetComponent<RectTransform>().sizeDelta = new Vector2(width * slothWidth, height*0.4f);
 
-
-
         //this panels must start being enabled
         panelSlothInfo.SetActive(true);
         panelAbilityInfo.SetActive(true);
@@ -120,11 +124,6 @@ public class SlothapediaController : MonoBehaviour {
     }
 
     public void showSlothInfo(int currentSloth){
-        //if passes Sprint 4 review delete this lines below
-		//When we press a button of a sloth, first we activate the panel sloth info
-        //panelSlothInfo.SetActive(true);
-        //panelAbilityInfo.SetActive(false);
-
 		//reactivate all inactive buttons
 		Button [] abilityButtons;
 		abilityButtons = GameObject.Find("AbilityIconResume").GetComponentsInChildren<Button>(true);
@@ -136,8 +135,6 @@ public class SlothapediaController : MonoBehaviour {
 
 		//Place the correct values on the stats icon
         GameObject.Find("health1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["hp"].ToString();
-        //GameObject.Find("attack1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["att"].ToString();
-        //GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
         GameObject.Find("action1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["ap"].ToString();
         Destroy(slothModel);
         GameObject kk = Resources.Load<GameObject>("Modelos/"+n[currentSloth.ToString()]["model"]);
@@ -148,19 +145,10 @@ public class SlothapediaController : MonoBehaviour {
         ((Button)GameObject.Find("Ability1").GetComponent<Button>()).onClick.AddListener(delegate{
                 showAbilityInfo(n[currentSloth.ToString()]["idAb1"]);     
             });
-		//changingImage
-
-
-		//Debug.Log("hola");
-		//Debug.Log(newSprite);
-		///Image theImage = 
 
 		name = n[currentSloth.ToString()]["idAb1"];
 		name = name.Insert (0, "Spellicons/");
 		GameObject.Find("Ability1").GetComponent<Image>().sprite = Resources.Load<Sprite>(name);
-
-		//theImage.sprite = newSprite;​
-
 
 		((Button)GameObject.Find("Ability2").GetComponent<Button>()).onClick.AddListener(delegate{
             showAbilityInfo(n[currentSloth.ToString()]["idAb2"]);     
