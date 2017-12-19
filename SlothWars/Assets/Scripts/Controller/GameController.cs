@@ -267,6 +267,8 @@ public class GameController : MonoBehaviour {
 		} else {
 			uiController.SetActiveAb3(false);
 		}
+		//TODO: CAMBIAR ESTO:
+		//status = GameControllerStatus.ANIMATING;
 		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 
@@ -439,5 +441,10 @@ public class GameController : MonoBehaviour {
     }
 
 	public void NotifyAbilityUsed(){
+	}
+
+	//TODO: USAR ESTO
+	public void NotifyAbilityEnded(){
+		status = GameControllerStatus.WAITING_FOR_INPUT;
 	}
 }

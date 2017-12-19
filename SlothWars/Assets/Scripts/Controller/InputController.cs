@@ -18,6 +18,7 @@ public class InputController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(gameController.GetStatus());
 		if(gameController.GetStatus() == GameController.GameControllerStatus.WAITING_FOR_INPUT){
 			if (Input.GetKey ("up") || Input.GetKey ("w")) {
                 if (!gameController.currentSloth.GetComponent<SlothGravity>().IsBlockInDirection(DirectionValues.UP)){
@@ -47,6 +48,7 @@ public class InputController : MonoBehaviour {
 			} else if (Input.GetKeyDown (KeyCode.Escape)) {
 				uiController.SetActiveOptsPanel (true);
 				gameController.PauseGame ();
+				//TODO: AÑADIR AL IF CON UN && gameController.GetStatus() == GameController.GameControllerStatus.ANIMATING
 			} else if (Input.GetMouseButtonUp (1) && gettingAbilityInfo && gameController.GetCurrentSloth().GetComponent<ShotScript>().GetShotLoad()) {
 				gameController.CancelAbility ();
 				gettingAbilityInfo = false;
