@@ -25,7 +25,8 @@ public class DrillArrow : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "sloth")
+        if (other.gameObject.tag == "DeathZone") { Destroy(this.gameObject); }
+        else if (other.gameObject.tag == "sloth")
         {
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             if (!firstTarget)
@@ -36,14 +37,14 @@ public class DrillArrow : MonoBehaviour
             }
             else { Destroy(this.gameObject); }
         }
-        else
+        else if (other.tag != "fruit")
         {
             if (!firstTarget)
             {
-                firstTarget = true;
-                RemoveWindEffect();
                 if (other.gameObject.tag == "Destroyable")
                 {
+                    firstTarget = true;
+                    RemoveWindEffect();
                     Destroy(other.gameObject);
                 }
             }

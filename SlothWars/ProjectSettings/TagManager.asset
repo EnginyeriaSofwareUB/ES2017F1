@@ -35,6 +35,8 @@ TagManager:
   - soundManager
   - abilityText
   - physical
+  - cubeMark
+  - DeathZone
   layers:
   - Default
   - TransparentFX

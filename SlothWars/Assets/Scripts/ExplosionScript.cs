@@ -35,7 +35,12 @@ public class ExplosionScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (onCollision && !colided)
+        if (collision.gameObject.tag == "DeathZone")
+        {
+            Destroy(this.gameObject);
+            colided = true;
+        }
+        if (onCollision && !colided && collision.gameObject.tag != "fruit")
         {
             colided = true;
             Debug.Log("radius " + radius);
@@ -45,7 +50,12 @@ public class ExplosionScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (onCollision && !colided)
+        if (other.gameObject.tag == "DeathZone") {
+            Destroy(this.gameObject);
+            colided = true;
+        }
+
+        else if (onCollision && !colided && other.tag != "fruit")
         {
             colided = true;
             Debug.Log("radius " + radius);
