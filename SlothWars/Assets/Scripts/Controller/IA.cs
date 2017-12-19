@@ -93,7 +93,7 @@ public class IA: IAInterface
         rangeListAbilities.Sort();
         if (tagCurrentSloth.Equals("TankP2"))
         {
-            if ((iAPosition - positionNearestSloth).magnitude <= rangeListAbilities[rangeListAbilities.Count - 1]/5f) { // rango 2 (Asi le da con las hachas)"
+            if ((iAPosition - positionNearestSloth).magnitude <= rangeListAbilities[rangeListAbilities.Count - 1]) { // rango 2 (Asi le da con las hachas)"
                 return true;
             }
         }

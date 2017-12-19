@@ -1,6 +1,6 @@
 {
   "V0": {
-	"desc":"Cast a fireball that explodes on collision dealing damage on hit, destroying terrain and applying little damage during next turns",
+	"desc":"Cast a fireball that explodes on collision dealing 10 damage on hit, destroying terrain and applying 5 damage during the next 2 turns. Costs 5AP.",
     "dmgOnHit": 10,
 	"residual": 5,
 	"residualTurns": 2,
@@ -14,7 +14,7 @@
     "source": "Objects/FireBall"
   },
   "U0": {
-	"desc": "Creates an ice wall that stop the step through and blocks projectiles",
+	"desc": "Creates an ice wall that stop the step through and blocks projectiles. Costs 6AP.",
     "buildTerrain": true,
     "terrainType": "Wall",
     "terrainSize": 4,
@@ -26,7 +26,7 @@
   },
    
    "M1": {
-	"desc":"Cast a cosmic projectile that explodes on collision dealing great damage and destroying terrain",
+	"desc":"Cast a cosmic projectile that explodes on collision dealing 20 damage and destroying terrain. Costs 5AP.",
 	"mark": false,
     "dmg": 20,
     "alterTerrain": true,
@@ -40,7 +40,7 @@
   
   "P3": {
 	"mark": false,
-	"desc":"Throw a gyratory axe dealing some damage on collision target",
+	"desc":"Throw a gyratory axe dealing 15 damage on collision target. Costs 2AP.",
     "dmg": 15,
     "alterTerrain": false,
     "reach": 5,
@@ -52,7 +52,7 @@
   },
   
    "T1": {
-	"desc":"Applies on himself a shield",
+	"desc":"Applies on himself 10 points of shield. Costs 2AP.",
 	"mark": false,
     "shield": true,
     "hpShield": 10,
@@ -62,7 +62,7 @@
   },
   
    "L0": {
-  	"desc":"Generates a link between the tank and the target so that the tank absorbs half of the damage",
+  	"desc":"Generates a link between the tank and the target so that the tank absorbs half of the damage. Costs 6AP.",
 		"ap": 6,
 		"projectile": "link",
 		"mark": true,
@@ -71,7 +71,7 @@
 
   "P0": {
 	"mark": false,
-	"desc":"Shoots a long range drill arrow that goes through the first collision target and deals some damage to collision targets",
+	"desc":"Shoots a long range drill arrow that goes through the first collision target and deals 10 damage to collision targets. Costs 2AP.",
     "dmg": 10,
     "reach": 35,
 	"hitRadius": 0.5,
@@ -84,7 +84,7 @@
   
   "P1": {
 	"mark": false,
-	"desc":"Shoots a electric arrow that explodes and deals little damage in a small radius and cast 3 lightning bolt that apply the damage again to the 3 nearest sloths",
+	"desc":"Shoots a electric arrow that explodes and deals 5 damage in a small radius and cast 3 lightning bolt that apply the same damage again to the 3 nearest sloths. Costs 5AP.",
     "dmg": 5,
     "reach": 30,
 	"hitRadius": 0.5,
@@ -97,7 +97,7 @@
   },
   
   "V1": {
-	"desc":"Shoots a poisonous arrow that explodes on collision dealing great damage during next turns",
+	"desc":"Shoots a poisonous arrow that explodes on collision dealing 7 damage and applying 1 damage during the next 3 turns. Costs 3AP.",
     "dmgOnHit": 7,
 	"residual": 1,
 	"residualTurns": 3,
@@ -112,7 +112,7 @@
   },
 
   "H0": {
-	"desc":"Cast a heal ball that explodes and heals close sloths",
+	"desc":"Cast a heal ball that explodes and heals 15HP to close sloths. Costs 3AP.",
     "healHp": 15,
 	"hitRadius": 3,
 	"ap": 3,
@@ -126,7 +126,7 @@
   },
   
   "DH1": {
-	"desc":"Cast a heal/damage chain of size that extend through the target to three close sloths",
+	"desc":"Cast a heal/damage chain of size that extend through the target to three close sloths. Deals 10HP to enemy sloths and heals 5HP to ally sloths. Costs 5AP.",
     "dmg": 10,
     "healHP": 5,
 	"ap": 5,
@@ -137,7 +137,7 @@
   },
   
   "T3": {
-    "desc":"Applies a shield to the target",
+    "desc":"Applies a 5 points shield to the target. Costs 2AP.",
     "shield": true,
     "hpShield": 5,
     "reach": 10,
@@ -150,7 +150,7 @@
   
   
   "U1": {
-	"desc":"Creates a terrain path through the selected terrain leaving a fruit that heals and increases the action points",
+	"desc":"Creates a terrain path through the selected terrain leaving a fruit that heals 5HP and increases by 4 the action points. Costs 8AP.",
     "terrainType": "Wall",
 	"buildTerrain": true,
 	"fruitHeal": 5,
@@ -165,16 +165,16 @@
   },
   
   "U2": {
-	"desc":"Teleports the target to selected location",
+	"desc":"Teleports the target to selected location. Costs 10AP.",
 	"ap": 10,
+    "reach": 10,
 	"projectile": "teleport",
 	"buildTerrain": false,
 	"mark": true,
-	"reach": 10,
     "source": "Objects/SmokeMark"
   }
    "A0": {
-	"desc":"Deals damage to the target and decrease his action points",
+	"desc":"Deals 10 damage to the target and decrease his action points by 2. Costs 6AP.",
     "dmg": 10,
 	"apDecrement": 2,
 	"ap": 6,
