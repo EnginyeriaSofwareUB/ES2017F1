@@ -11,7 +11,7 @@ public class UtilityAbility : Ability
     private string projectile;
     private string source;
     private bool mark;
-
+    private float range;
     public UtilityAbility(string id, JSONNode json)
     {
         this.buildTerrain = json[id]["buildTerrain"];
@@ -20,6 +20,7 @@ public class UtilityAbility : Ability
         this.projectile = json[id]["projectile"];
         this.source = json[id]["source"];
         this.mark = json[id]["mark"];
+        this.range = json[id]["reach"];
     }
 
     //Apply ability to another sloth
@@ -40,7 +41,7 @@ public class UtilityAbility : Ability
         }
 
     }
-    public float GetRange() { return 10; }
+    public float GetRange() { return range; }
     public float GetRadius() { return 1; }
     public bool GetBuildTerrain() { return buildTerrain; }
     public int GetTerrainSize() { return terrainSize; }

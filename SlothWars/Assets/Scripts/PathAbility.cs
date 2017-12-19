@@ -15,6 +15,7 @@ public class PathAbility : Ability
     private Vector3 direction;
     private double fruitHeal;
     private int fruitAp;
+    private float range;
     public PathAbility(string id, JSONNode json)
     {
         this.buildTerrain = json[id]["buildTerrain"];
@@ -25,6 +26,7 @@ public class PathAbility : Ability
         this.mark = json[id]["mark"];
         this.fruitHeal = json[id]["fruitHeal"];
         this.fruitAp = json[id]["fruitAp"];
+        this.range = json[id]["reach"];
     }
 
     //Apply ability to another sloth
@@ -59,7 +61,7 @@ public class PathAbility : Ability
     {
         direction = position;
     }
-    public float GetRange() { return 10; }
+    public float GetRange() { return range; }
     public float GetRadius() { return 1; }
     public bool GetBuildTerrain() { return buildTerrain; }
     public int GetTerrainSize() { return terrainSize; }

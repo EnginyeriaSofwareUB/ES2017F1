@@ -58,13 +58,13 @@ public class ShotScript : MonoBehaviour
     {
         if (!onloadAbility.GetMark())
         {
-            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(-0.7f, 1.5f, -0.51f), gun.rotation);
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), this.transform.position + new Vector3(-0.7f, 1.5f, -0.51f), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
         }
         else
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            onLoad.SetAll(gun.position, ray.direction, Quaternion.identity, onloadAbility.GetRange(), this.onloadAbility.GetTerrainSize(), false, onloadAbility.GetSource());
+            onLoad.SetAll(this.transform.position, ray.direction, Quaternion.identity, onloadAbility.GetRange(), this.onloadAbility.GetTerrainSize(), false, onloadAbility.GetSource());
         }
         shotLoad = true;
     }
@@ -86,7 +86,7 @@ public class ShotScript : MonoBehaviour
         {
             float radAngle = gun.eulerAngles[2]  * Mathf.Deg2Rad;
             Vector3 AimVector = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
-			onLoad.SetAll(gun.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(),onloadAbility.GetExplosive(),onloadAbility.GetSource());
+			onLoad.SetAll(this.transform.position, AimVector, gun.rotation, st.getForce() * (float)onloadAbility.GetRange(), onloadAbility.GetRadius(),onloadAbility.GetExplosive(),onloadAbility.GetSource());
             onLoad.ApplyLogic();
             st.Destroy();
             shotLoad = false;
@@ -129,7 +129,7 @@ public class ShotScript : MonoBehaviour
             gun = this.transform;
         }
         else{
-            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position, Quaternion.identity);
+            GameObject g = (GameObject)Instantiate(Resources.Load("Objects/Gun"), transform.position+ new Vector3(0,0,-0.52f), Quaternion.identity);
             gun = g.transform;
         }
         //gun.gameObject.SetActive(b);

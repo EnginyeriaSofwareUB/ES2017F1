@@ -9,13 +9,14 @@ public class TeleportAbility : Ability
     private string projectile;
     private string source;
     private bool mark;
-
+    private float range;
     public TeleportAbility(string id, JSONNode json)
     {
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];
         this.source = json[id]["source"];
         this.mark = json[id]["mark"];
+        this.range = json[id]["reach"];
     }
 
     //Apply ability to another sloth
@@ -27,7 +28,7 @@ public class TeleportAbility : Ability
     //WIP: apply ability to terrain
     public void Apply(Vector3 position)
     {}
-    public float GetRange() { return 10; }
+    public float GetRange() { return range; }
     public float GetRadius() { return 1; }
     public bool GetBuildTerrain() { return false; }
     public int GetTerrainSize() { return 0; }

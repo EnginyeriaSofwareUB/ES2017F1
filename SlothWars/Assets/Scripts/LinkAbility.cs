@@ -10,12 +10,14 @@ public class LinkAbility : Ability
     private string source;
     private bool mark;
     private Sloth link = null;
-    GameObject linkObject = null;
+    private float range;
+    private GameObject linkObject = null;
     public LinkAbility(string id, JSONNode json)
     {
         this.mark = json[id]["mark"];
         this.ap = json[id]["ap"];
         this.projectile = json[id]["projectile"];
+        this.range = json[id]["reach"];
     }
 
     //Apply ability to another sloth
@@ -42,7 +44,7 @@ public class LinkAbility : Ability
     }
     public float GetRange()
     {
-        return 10;
+        return range;
     }
     public float GetRadius()
     {

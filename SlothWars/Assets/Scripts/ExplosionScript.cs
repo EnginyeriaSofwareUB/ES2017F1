@@ -61,7 +61,7 @@ public class ExplosionScript : MonoBehaviour
     void logicAndDestroy()
     {
         int effect_radius = 1;
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, effect_radius);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, radius);
         Collider currentCollider;
         int i = 0;
         Debug.Log("Hits: " + hitColliders.Length);
