@@ -31,7 +31,7 @@ public class AxeScript : MonoBehaviour
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(other.gameObject);
             Destroy(this.gameObject);
         }
-        else
+        else if (!(other.gameObject.tag == "physical") && !(other.gameObject.tag == "fruit"))
         {
             if (other.transform.position.z == 1)
             {
@@ -57,7 +57,7 @@ public class AxeScript : MonoBehaviour
 			gameObject.GetComponent<AbilityContainer>().GetAbility().Apply(collision.gameObject);
             Destroy(this.gameObject);
         }
-        else
+        else if(!(collision.gameObject.tag == "physical"))
         { 
             if (collision.transform.position.z == 1)
             {

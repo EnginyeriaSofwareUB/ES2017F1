@@ -288,6 +288,11 @@ public class IATeamSelection : MonoBehaviour
         UpdateSlots();
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     void UpdateSlots()
     {
         int i = currentPage * 3;
