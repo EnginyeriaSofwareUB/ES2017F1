@@ -1,14 +1,14 @@
 {
   "V0": {
 	"desc":"Cast a fireball that explodes on collision dealing damage on hit, destroying terrain and applying little damage during next turns",
-    "dmgOnHit": 15,
-	"residual": 2,
-	"residualTurns": 5,
+    "dmgOnHit": 10,
+	"residual": 5,
+	"residualTurns": 2,
     "alterTerrain": true,
 	"mark": false,
-    "reach": 10,
+    "reach": 15,
 	"hitRadius": 0.5,
-    "ap": 1,
+    "ap": 5,
     "explosive":true,
     "projectile": "xyz",
     "source": "Objects/FireBall"
@@ -18,7 +18,8 @@
     "buildTerrain": true,
     "terrainType": "Wall",
     "terrainSize": 4,
-	"ap": 1,
+	"ap": 6,
+    "reach": 7,
 	"projectile": "terrain",
 	"mark": true,
     "source": "Objects/WallCube"
@@ -27,11 +28,11 @@
    "M1": {
 	"desc":"Cast a cosmic projectile that explodes on collision dealing great damage and destroying terrain",
 	"mark": false,
-    "dmg": 25,
+    "dmg": 20,
     "alterTerrain": true,
-    "reach": 15,
+    "reach": 12,
 	"hitRadius": 0.5,
-    "ap": 1,
+    "ap": 5,
     "explosive":true,
     "projectile": "xyz",
     "source": "Objects/CosmicProjectile"
@@ -40,11 +41,11 @@
   "P3": {
 	"mark": false,
 	"desc":"Throw a gyratory axe dealing some damage on collision target",
-    "dmg": 20,
+    "dmg": 15,
     "alterTerrain": false,
-    "reach": 10,
+    "reach": 5,
 	"hitRadius": 0.5,
-    "ap": 1,
+    "ap": 2,
     "explosive":false,
     "projectile": "xyz",
     "source": "Objects/AxeProjectile"
@@ -54,26 +55,27 @@
 	"desc":"Applies on himself a shield",
 	"mark": false,
     "shield": true,
-    "hpShield": 15,
-	"ap": 1,
+    "hpShield": 10,
+	"ap": 2,
 	"projectile": "autoApply",
     "source": "Objects/Shield"
   },
   
    "L0": {
   	"desc":"Generates a link between the tank and the target so that the tank absorbs half of the damage",
-		"ap": 1,
+		"ap": 6,
 		"projectile": "link",
-		"mark": true
+		"mark": true,
+        "reach": 10,        
   },
 
   "P0": {
 	"mark": false,
 	"desc":"Shoots a long range drill arrow that goes through the first collision target and deals some damage to collision targets",
-    "dmg": 5,
-    "reach": 20,
+    "dmg": 10,
+    "reach": 35,
 	"hitRadius": 0.5,
-	"ap":1,
+	"ap":2,
 	"projectile": "xyz",
 	"explosive":false,
 	"alterTerrain": false,
@@ -83,10 +85,10 @@
   "P1": {
 	"mark": false,
 	"desc":"Shoots a electric arrow that explodes and deals little damage in a small radius and cast 3 lightning bolt that apply the damage again to the 3 nearest sloths",
-    "dmg": 8,
-    "reach": 20,
+    "dmg": 5,
+    "reach": 30,
 	"hitRadius": 0.5,
-	"ap":1,
+	"ap":5,
 	"projectile": "xyz",
 	"explosive":true,
 	"alterTerrain": false,
@@ -96,14 +98,14 @@
   
   "V1": {
 	"desc":"Shoots a poisonous arrow that explodes on collision dealing great damage during next turns",
-    "dmgOnHit": 15,
-	"residual": 6,
-	"residualTurns": 6,
+    "dmgOnHit": 7,
+	"residual": 1,
+	"residualTurns": 3,
     "alterTerrain": false,
 	"mark": false,
-    "reach": 20,
+    "reach": 30,
 	"hitRadius": 0.5,
-    "ap": 1,
+    "ap": 3,
     "explosive":true,
     "projectile": "xyz",
     "source": "Objects/PoisonArrow"
@@ -111,10 +113,10 @@
 
   "H0": {
 	"desc":"Cast a heal ball that explodes and heals close sloths",
-    "healHp": 40,
+    "healHp": 15,
 	"hitRadius": 3,
-	"ap": 1,
-	"reach": 15,
+	"ap": 3,
+	"reach": 10,
 	"projectile": "xy",
 	"explosive":true,
 	"mark": false,
@@ -125,21 +127,21 @@
   
   "DH1": {
 	"desc":"Cast a heal/damage chain of size that extend through the target to three close sloths",
-    "dmg": 5,
+    "dmg": 10,
     "healHP": 5,
-	"ap": 1,
-	"reach": 15,
+	"ap": 5,
+	"reach": 8,
 	"mark": true,
 	"projectile": "targetChain"
 
   },
   
   "T3": {
-    	"desc":"Applies a shield to the target",
+    "desc":"Applies a shield to the target",
     "shield": true,
-    "hpShield": 20,
+    "hpShield": 5,
     "blockAb": false,
-	"ap": 1,
+	"ap": 2,
 	"projectile": "allyTarget",
 	"mark": true,
     "source": "Objects/Shield"
@@ -150,19 +152,20 @@
 	"desc":"Creates a terrain path through the selected terrain leaving a fruit that heals and increases the action points",
     "terrainType": "Wall",
 	"buildTerrain": true,
-	"fruitHeal": 10,
-	"fruitAp":5,
+	"fruitHeal": 5,
+	"fruitAp":4,
     "terrainSize": 4,
-	"ap": 1,
+	"ap": 8,
 	"projectile": "path",
 	"mark": true,
-    "source": "Objects/WallCube"
+    "source": "Objects/WallCube",
+    "reach": 8
 
   },
   
   "U2": {
 	"desc":"Teleports the target to selected location",
-	"ap": 1,
+	"ap": 10,
 	"projectile": "teleport",
 	"buildTerrain": false,
 	"mark": true,
@@ -170,10 +173,10 @@
   }
    "A0": {
 	"desc":"Deals damage to the target and decrease his action points",
-    "dmg": 5,
+    "dmg": 10,
 	"apDecrement": 2,
-	"ap": 1,
-	"reach": 15,
+	"ap": 6,
+	"reach": 10,
 	"projectile": "enemyTarget",
 	"mark": true,
   }

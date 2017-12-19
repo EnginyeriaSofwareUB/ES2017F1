@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ForceBarScript : MonoBehaviour {
-    public Image currentForce;
     private double ratio= 0f;
     private float stps = 0.4f;
     RectTransform rt;
     private bool up= true;
+    [SerializeField]
+    private Image currentForce;
+
 	// Initialization
 	void Start () {
-        rt = (RectTransform)GetComponent<RectTransform>();
-        rt.rotation = new Quaternion(0, 0, 0, 0);
-        rt = (RectTransform) rt.Find("currentForce");
     }
 	
 	// Increase/decrease bars size stps per second
@@ -36,7 +35,11 @@ public class ForceBarScript : MonoBehaviour {
                 up = true;
             }
         }
-        rt.localScale = new Vector3((float)ratio, 1, 1);
+        Debug.Log("update "+ ratio);
+        Debug.Log("fillAmount " + currentForce.fillAmount);
+        //rt.localScale = new Vector3((float)ratio, 1, 1);
+        currentForce.fillAmount = (float)ratio;
+
     }
     // Returns the force associated to the bar
     public float getForce()

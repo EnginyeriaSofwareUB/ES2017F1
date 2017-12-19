@@ -62,7 +62,7 @@ public class ShotScript : MonoBehaviour
     {
         if (!onloadAbility.GetMark())
         {
-            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(0, 0.8f, 0), gun.rotation);
+            GameObject bar = (GameObject)Instantiate(Resources.Load("Objects/ForceBar"), gun.position + new Vector3(-0.7f, 1.5f, -0.51f), gun.rotation);
             st = bar.GetComponent<ForceBarScript>();
         }
         shotLoad = true;

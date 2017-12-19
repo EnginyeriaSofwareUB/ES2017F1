@@ -115,9 +115,9 @@ public class UIController2 : MonoBehaviour {
 
     public void DisplaySlothStats(Sloth sloth,int currentAp)
     {
-        GameObject.Find("lifeSlothText").GetComponent<Text>().text = ((int)sloth.GetHp()).ToString();
-        GameObject.Find("attackSlothText").GetComponent<Text>().text = sloth.GetAttack().ToString();
-        GameObject.Find("shieldSlothText").GetComponent<Text>().text = sloth.GetDefense().ToString();
+        //GameObject.Find("lifeSlothText").GetComponent<Text>().text = ((int)sloth.GetHp()).ToString();
+       // GameObject.Find("attackSlothText").GetComponent<Text>().text = sloth.GetAttack().ToString();
+       // GameObject.Find("shieldSlothText").GetComponent<Text>().text = sloth.GetDefense().ToString();
         GameObject.Find("actionSlothText").GetComponent<Text>().text = currentAp.ToString();
         GameObject.Find("slothImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(sloth.GetSprite());
     }

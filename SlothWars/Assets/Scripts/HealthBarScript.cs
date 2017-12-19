@@ -22,9 +22,6 @@ public class HealthBarScript : MonoBehaviour
         rt = (RectTransform)rt.Find("currentHealth");
     }
 
-    void Update()
-    {
-    }
 
     // Destroys the game object associated to the script
     public void Destroy()

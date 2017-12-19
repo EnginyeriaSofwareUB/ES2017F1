@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour {
 
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarBlue"), logic.transform.position + new Vector3(0, 1, -0.51f), Quaternion.identity);
             healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(90, 0, 0);
             healthBar.transform.SetParent(logic.transform);
             health.SetHealthBar(healthBar);
@@ -174,7 +174,7 @@ public class GameController : MonoBehaviour {
             
             HealthScript health = logic.AddComponent<HealthScript>();
             health.enabled = true;
-            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject healthBar = (GameObject)Instantiate(Resources.Load("Prefabs/HealthBarRed"), logic.transform.position + new Vector3(0, 1, -0.51f), Quaternion.identity);
             healthBar.transform.SetParent(logic.transform);
 			//healthBar.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
             health.SetHealthBar(healthBar);

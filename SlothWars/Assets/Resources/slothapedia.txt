@@ -4,7 +4,7 @@
     "hp": 60,
     "att": 50,
     "def": 20,
-    "ap": 11,
+    "ap": 15,
     "photo": "HUD_Assets/slothWizard",
     "photoSlothapedia": "slothWizard",
     "idAb1": "V0",
@@ -18,7 +18,7 @@
     "hp": 120,
     "att": 20,
     "def": 60,
-    "ap": 7,
+    "ap": 8,
     "photo": "HUD_Assets/slothTank",
     "photoSlothapedia": "slothTank",
     "idAb1": "P3",
@@ -29,10 +29,10 @@
   
    "2": {
     "type": "Archer",
-    "hp": 50,
+    "hp": 80,
     "att": 120,
     "def": 20,
-    "ap": 11,
+    "ap": 12,
     "photo": "HUD_Assets/slothArcher",
     "photoSlothapedia": "slothArcher",
     "idAb1": "P0",
@@ -43,10 +43,10 @@
   
    "3": {
     "type": "Healer",
-    "hp": 60,
+    "hp": 50,
     "att": 20,
     "def": 50,
-    "ap": 9,
+    "ap": 10,
     "photo": "HUD_Assets/slothHealer",
     "photoSlothapedia": "slothHealer",
     "idAb1": "H0",
@@ -57,10 +57,10 @@
   
    "4": {
     "type": "Utility",
-    "hp": 60,
+    "hp": 50,
     "att": 10,
     "def": 50,
-    "ap": 13,
+    "ap": 18,
     "photo": "HUD_Assets/slothUtility",
     "photoSlothapedia": "slothUtility",
     "idAb1": "U1",

@@ -136,8 +136,8 @@ public class SlothapediaController : MonoBehaviour {
 
 		//Place the correct values on the stats icon
         GameObject.Find("health1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["hp"].ToString();
-        GameObject.Find("attack1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["att"].ToString();
-        GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
+        //GameObject.Find("attack1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["att"].ToString();
+        //GameObject.Find("deffence1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["def"].ToString();
         GameObject.Find("action1Value").GetComponent<Text>().text = n[currentSloth.ToString()]["ap"].ToString();
         Destroy(slothModel);
         GameObject kk = Resources.Load<GameObject>("Modelos/"+n[currentSloth.ToString()]["model"]);
