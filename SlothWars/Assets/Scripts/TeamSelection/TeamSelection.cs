@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class TeamSelection : MonoBehaviour
 {
-
     private static bool created = false;
 
     private const int maxTeamSloths = 4;
@@ -62,9 +61,6 @@ public class TeamSelection : MonoBehaviour
 
     void Awake()
     {
-
-
-
         // Dynamic elements
         StorePersistentVariables.Instance.slothTeam1.Clear();
         StorePersistentVariables.Instance.slothTeam2.Clear();
@@ -79,20 +75,14 @@ public class TeamSelection : MonoBehaviour
 
         slot1Type = GameObject.Find("type1Value").GetComponent<Text>();
         slot1Health = GameObject.Find("health1Value").GetComponent<Text>();
-        //slot1Attack = GameObject.Find("attack1Value").GetComponent<Text>();
-        //slot1Defense = GameObject.Find("deffence1Value").GetComponent<Text>();
         slot1Action = GameObject.Find("action1Value").GetComponent<Text>();
 
         slot2Type = GameObject.Find("type2Value").GetComponent<Text>();
         slot2Health = GameObject.Find("health2Value").GetComponent<Text>();
-        //slot2Attack = GameObject.Find("attack2Value").GetComponent<Text>();
-        //slot2Defense = GameObject.Find("deffence2Value").GetComponent<Text>();
         slot2Action = GameObject.Find("action2Value").GetComponent<Text>();
 
         slot3Type = GameObject.Find("type3Value").GetComponent<Text>();
         slot3Health = GameObject.Find("health3Value").GetComponent<Text>();
-        //slot3Attack = GameObject.Find("attack3Value").GetComponent<Text>();
-        //slot3Defense = GameObject.Find("deffence3Value").GetComponent<Text>();
         slot3Action = GameObject.Find("action3Value").GetComponent<Text>();
 
         team1Slot1Pic = GameObject.Find("team1Slot1Pic").GetComponent<Image>();
@@ -123,12 +113,9 @@ public class TeamSelection : MonoBehaviour
         slot3Pic.onClick.AddListener(delegate { SlothSelect("3"); });
 
         // Other
-
-        // GameControl.control.ClearData();
         string s = ((TextAsset)Resources.Load("slothapedia")).text;
         node = JSON.Parse(s);
         lenJson = node.Count;
-        // if lenJson==0 : System.Exit();
         slothPerPage = 3;
         int slothModule = (lenJson % slothPerPage);
         currentPage = 0;
@@ -194,8 +181,8 @@ public class TeamSelection : MonoBehaviour
 
     private IEnumerator WaitAndLoadScene()
     {
-        ScreenMessage.sm.ShowMessage("The game will begin in: 3", 1.5f);
-        yield return new WaitForSeconds(1.5f);
+        ScreenMessage.sm.ShowMessage("The game will begin in: 3", 1f);
+        yield return new WaitForSeconds(1f);
         ScreenMessage.sm.ShowMessage("The game will begin in: 2", 1f);
         yield return new WaitForSeconds(1f);
         ScreenMessage.sm.ShowMessage("The game will begin in: 1", 1f);
@@ -339,8 +326,6 @@ public class TeamSelection : MonoBehaviour
         slot1Type.text = node[i]["type"];
         slot1Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i]["photo"]);
         slot1Health.text = node[i]["hp"];
-        //slot1Attack.text = node[i]["att"];
-        //slot1Defense.text = node[i]["def"];
         slot1Action.text = node[i]["ap"];
 
         if (currentPage == lastPage && lastPageActiveSlot < 2)
@@ -352,8 +337,6 @@ public class TeamSelection : MonoBehaviour
             slot2Type.text = node[i + 1]["type"];
             slot2Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 1]["photo"]);
             slot2Health.text = node[i + 1]["hp"];
-           // slot2Attack.text = node[i + 1]["att"];
-           // slot2Defense.text = node[i + 1]["def"];
             slot2Action.text = node[i + 1]["ap"];
         }
 
@@ -368,8 +351,6 @@ public class TeamSelection : MonoBehaviour
                 slot3Type.text = node[i + 2]["type"];
                 slot3Pic.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(node[i + 2]["photo"]);
                 slot3Health.text = node[i + 2]["hp"];
-               // slot3Attack.text = node[i + 2]["att"];
-               // slot3Defense.text = node[i + 2]["def"];
                 slot3Action.text = node[i + 2]["ap"];
             }
             else
