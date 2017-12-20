@@ -24,6 +24,7 @@ public class FruitScript : MonoBehaviour {
         if (other.gameObject.tag == "sloth")
         {
             other.gameObject.GetComponent<Sloth>().Fruit(healFruit, apFruit);
+		Destroy(this.gameObject);	
         }
         else if (other.gameObject.tag == "DeathZone") { Destroy(this.gameObject); }
         else
