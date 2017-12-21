@@ -70,7 +70,7 @@ public class IATeamSelection : MonoBehaviour
 
         //IA team (Later it will be selected randomly)
         StorePersistentVariables.Instance.slothTeam2.Add("Wizard");
-        StorePersistentVariables.Instance.slothTeam2.Add("Tank");
+        StorePersistentVariables.Instance.slothTeam2.Add("Utility");
         StorePersistentVariables.Instance.slothTeam2.Add("Archer");
         StorePersistentVariables.Instance.slothTeam2.Add("Healer");
         
